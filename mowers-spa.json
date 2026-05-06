@@ -434,11 +434,11 @@
       ],
       "verdict": "The thinking person's alternative to a Honda HRX. Twin-clip blade actually does what Stiga claims and the rear roller stripes well. Fair value new, good value used.",
       "tip": "£240–340 is fair used. Twin-clip blade is the differentiator — make sure it is intact and not bent (a £35 part). Rear roller bearings should turn smoothly. Stiga share parts with Mountfield so service is straightforward at any Stiga or Mountfield dealer.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Stiga%20gressklippere.jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Stiga gressklippere.jpg",
+      "imgLicense": "CC BY-SA",
+      "imgNote": "Generic Stiga lineup photo"
     },
     {
       "id": "bosch-rotak-36-r",
@@ -1578,11 +1578,11 @@
       ],
       "verdict": "The right robot for a small flat suburban lawn. Quiet, neat, reliable, and Gardena have been making robots for years. If your lawn is under 250m², it is the safer choice over the new Mammotion or Segway entry models.",
       "tip": "£170–340 used. Boundary wire integrity check as always. Gardena dock contacts are gold-plated and rarely corrode — that is a quality marker. Confirm the seller has the original cutting blades stored (they wear and 4-pack costs £15). Reset the Gardena Smart app before purchase.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Gardena%20robot%20mower.jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Gardena robot mower.jpg",
+      "imgLicense": "CC BY-SA",
+      "imgNote": "Gardena robotic mower (family match for Sileno Minimo)"
     },
     {
       "id": "john-deere-x167r",
@@ -1622,11 +1622,11 @@
       ],
       "verdict": "The default sensible ride-on for 0.5–1 acre UK lawns. JD pedigree, parts everywhere, holds value remarkably well. Spend slightly more, save it back on resale.",
       "tip": "£1700–2500 used. Engine hours matter more than years — under 200 hours is excellent, over 600 means assume the worst. Test the PTO clutch — should engage smoothly. Hydrostatic transmission should pull cleanly forward and back with no jolts. JD service history adds £300 to fair value.",
-      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Deere%20lawn%20tractor.JPG?width=600",
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Hedge%20and%20ditch%20trimming%20with%20a%20John%20Deere%20X300R%20ride-on%20mower%20-%20geograph.org.uk%20-%207023613.jpg?width=600",
       "imgSrc": "Wikimedia Commons",
-      "imgFile": "Deere lawn tractor.JPG",
-      "imgLicense": "CC BY-SA",
-      "imgNote": null
+      "imgFile": "Hedge and ditch trimming with a John Deere X300R ride-on mower - geograph.org.uk - 7023613.jpg",
+      "imgLicense": "CC BY-SA 2.0",
+      "imgNote": "X300R — X-series sibling of X167R"
     },
     {
       "id": "john-deere-x354",
@@ -2987,11 +2987,11 @@
       ],
       "verdict": "A premium boundary-wire robot from a brand that knows engines but is newer to robotics. The Miimo line has caught up to Husqvarna on durability — pricing is the only concern.",
       "tip": "£900–1500 used. Honda Miimo serial-number checks confirm warranty transferability — do this on anything over £1100. Boundary wire integrity check as standard. Reset Miimo Live account before purchase.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20Miimo%20310%20-%201.jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Honda Miimo 310 - 1.jpg",
+      "imgLicense": "CC BY-SA",
+      "imgNote": "Miimo 310 — same Miimo family as HRM 70 Live"
     },
     {
       "id": "ryobi-ry36lmx51a-150",
