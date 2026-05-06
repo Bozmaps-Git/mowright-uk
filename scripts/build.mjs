@@ -838,6 +838,324 @@ ${siteFooter()}
 </html>`;
 }
 
+// ---------- Mower-vs-mower comparison ----------
+// Curated list of common UK buying-decision pairings. Each verdict is a short,
+// independent original paragraph (no copy from any source).
+const COMPARISONS = [
+  // Honda HRX core decisions
+  ['honda-hrx-476-vy', 'mountfield-sp46', 'On paper they look comparable on cut width, but the gap is the engine. Honda\'s GCVx 170 will outlast three SP46s and the resale stays strong because everyone knows it. Pay the premium new or, much smarter, find a used HRX with a clean deck — at £550 it costs about three SP46s and lasts about ten.'],
+  ['honda-hrx-476-vy', 'hayter-harrier-41-ad', 'The classic premium-roller decision. The Hayter is British-built and serviceable for 30 years; the Honda is heavier and wider but easier to find used. Stripers and traditionalists go Hayter; pragmatists who want one mower forever go Honda.'],
+  ['honda-hrx-476-vy', 'ego-lm2135e-sp', 'Petrol vs cordless at the premium end. The Honda will still be running in 2050; the EGO needs a £200 battery every 5–7 years. If you mow under 1500m² and value silence and zero fumes, the EGO has caught up. For everything bigger, petrol still wins.'],
+  ['honda-hrx-476-vy', 'mountfield-sp46h', 'Same Honda GCV engine, very different chassis. The SP46H is the value play — Honda longevity on a Mountfield body, used at half the price of the HRX. The HRX has the rear roller (stripes) and the variable-speed Versamow drive. If stripes don\'t matter, the SP46H is the smartest petrol mower in the UK.'],
+  ['honda-hrx-476-vy', 'honda-hrx-537-hx', 'Honda flagship sizing. The 476 is the Honda for typical UK gardens; the 537 is for lawns over 1500m² where the 476 starts feeling small. Same engine pedigree, 6cm more cut, twice the bag — finishes a half-acre lawn in one bag-empty rather than three.'],
+
+  // Mountfield internal sizing
+  ['mountfield-sp46', 'mountfield-sp41', 'The 5cm cut difference matters less than the used supply. SP41s are usually £20–40 cheaper but harder to find clean. SP46 is the volume seller; if you find a tidy SP46 at SP41 money, take the bigger one.'],
+  ['mountfield-sp46', 'mountfield-hp46', 'The push-only HP46 has the same engine and deck as the SP46 — just no self-propel. If you have a flat lawn and decent fitness, the HP46 saves £100 new and £50 used, with one fewer wear part (the drive cable). Smart choice for under 600m² flat lawns.'],
+  ['mountfield-sp46', 'mountfield-1530h', 'Walk-behind vs ride-on. The crossover happens around 1500m² lawns — past that, pushing an SP46 every weekend gets old fast. The 1530H is the cheapest credible UK ride-on and a smart choice once your lawn justifies it.'],
+  ['mountfield-sp46', 'cobra-mx46spb', 'Same cut width, same price band, similar build. Mountfield wins on parts availability and dealer network; Cobra wins on the rear roller (stripes) at this price. If stripes matter, take the Cobra; if not, the Mountfield is the safer used buy.'],
+  ['mountfield-sp46', 'hyundai-hym510sp', 'UK budget self-propelled rivals. The Hyundai cuts wider (51cm vs 46cm) and has a steel deck; the Mountfield has the better engine and stronger used-market supply. Hyundai for new-buying value, Mountfield for used-buying confidence.'],
+
+  // Honda IZY
+  ['honda-hrg-466-sk', 'honda-izy-hrg-416-pk', 'Same family, different cuts. The 416 is the lighter, simpler entry IZY for small lawns; the 466 adds 5cm of cut, 4kg of weight, and self-propel. For under 800m² lawns, save the £150 and take the 416. Bigger lawns or self-propel desire, take the 466.'],
+  ['honda-hrg-466-sk', 'honda-hrg-536-sk', 'IZY sizing. The 536 trades portability for cut width — 53cm vs 46cm, same simple format. If your lawn is under 1000m², stay with the 466; over 1200m², upgrade to the 536 and finish in fewer passes.'],
+  ['honda-hrg-466-sk', 'mountfield-sp46', 'The "do I really need a Honda?" question. Mountfield does the same job for half the price; Honda lasts twice as long. Honda only wins on long-term ownership cost — but for buyers cycling mowers every 5 years, the Mountfield is the smarter spend.'],
+
+  // Bosch corded
+  ['bosch-rotak-36-r', 'flymo-easimow-380r', 'The corded budget decision. Both have rear rollers; both are cheap. Bosch wins on motor longevity (the Rotak runs for 15 years if the cable survives) and brand reputation; Flymo wins on used-supply volume. £200 fresh from B&Q says Bosch; £40 from Marketplace says Flymo.'],
+  ['bosch-rotak-36-r', 'bosch-rotak-32', 'Bosch corded sizing. The 36 R has a rear roller for stripes; the 32 is smaller and lighter. For lawns under 200m² the 32 is plenty; for 200–500m² where stripes are nice, the 36 R is the right Bosch.'],
+  ['bosch-rotak-36-r', 'bosch-universalrotak-550', 'Roller vs roller-less. Same Bosch DNA, same motor longevity. The 36 R has the roller (stripes); the UniversalRotak 550 is slightly cheaper without one. Stripers take the 36 R; everyone else saves £20.'],
+
+  // Premium cordless
+  ['ego-lm2135e-sp', 'stihl-rma-448-tc', 'Premium cordless head-to-head. EGO has the better cut and longer runtime; Stihl has the rear roller (stripes) and dealer support. EGO wins for buyers without an existing Stihl tool ecosystem; Stihl wins for AP-platform owners.'],
+  ['ego-lm2135e-sp', 'greenworks-gd60lm46hpk', 'EGO 56V vs Greenworks 60V. EGO retains resale better; Greenworks is cheaper new and offers the rear roller. Both genuinely match petrol on cut quality. Greenworks for the up-front saving; EGO for the long-term battery resale.'],
+  ['ego-lm2135e-sp', 'ego-lm1900e-sp', 'EGO sizing. The 2135 has the wider cut (52cm vs 47cm) and bigger 5Ah battery; the 1900 is lighter and £150 cheaper used. For under 1000m² gardens, the 1900 is plenty.'],
+  ['ego-lm2135e-sp', 'ego-lmx5300sp-xp', 'Standard EGO vs the new XP series. The XP-line has more torque and a 7.5Ah battery — closer to a petrol in cut quality. Worth the £200 premium if you cut tall or wet grass; otherwise the 2135 still wins on price-performance.'],
+  ['ego-lm2135e-sp', 'honda-hrx-476-vy', 'Cordless vs petrol at the £900 mark. Honda will outlast EGO\'s third battery; EGO is silent, clean, and fume-free. For lawns under 1500m² where you can charge between sessions, EGO is the smarter modern buy.'],
+
+  // Robotic
+  ['husqvarna-automower-305', 'worx-landroid-m500', 'Boundary-wire robot rivals. Husqvarna lasts 15 years; Worx lasts 7. Husqvarna costs twice as much used. For users who plan to keep the robot for a decade, Husqvarna is cheaper per year. For trying out the category, Worx Landroid is the accessible entry.'],
+  ['husqvarna-automower-305', 'husqvarna-automower-430x-nera', 'Boundary wire vs EPOS no-wire. The 305 needs you to bury a wire around the perimeter; the 430X NERA uses satellite positioning instead. For owners installing fresh, NERA saves the wire-laying day; for owners with existing boundary wire in good condition, the 305 saves £900.'],
+  ['husqvarna-automower-305', 'mammotion-yuka-mini-600', 'Established boundary-wire vs new wire-free RTK. Husqvarna is proven for 15 years; Mammotion YUKA Mini is two years old. The YUKA is cheaper and skips the wire installation; the Husqvarna is the safer long-term investment until Mammotion\'s longevity is proven.'],
+  ['husqvarna-automower-430x-nera', 'mammotion-luba-2-awd-5000', 'Premium wire-free at the £2500–£3500 mark. Husqvarna is proven, dealer-supported, and reliable. Mammotion adds AWD for serious slopes (up to 75%) and bigger coverage (5000m²). For typical flat suburban lawns, Husqvarna; for hilly estates, Mammotion.'],
+  ['husqvarna-automower-430x-nera', 'stihl-imow-6-evo', 'EPOS vs Stihl\'s newer wire-free system. Husqvarna has the longer track record and broader dealer network; Stihl AP battery owners get cross-tool battery use. Husqvarna for the safe choice; Stihl if you already trust Stihl petrol kit.'],
+  ['mammotion-luba-2-awd-5000', 'mammotion-luba-2-mini-awd', 'Mammotion sizing. The full LUBA 2 AWD covers 5000m² with serious slope ability; the Mini covers 2000m² and costs less. For sub-acre lawns the Mini is plenty; for proper estate work, the full LUBA 2 is the answer.'],
+  ['worx-landroid-m500', 'worx-landroid-vision-m600', 'Worx boundary-wire vs camera-based. The Vision skips the wire entirely using onboard cameras — newer technology, occasional issues in dawn/dusk light. The M500 is proven and cheaper. Camera-based wire-free is the future; the M500 is the safer present.'],
+
+  // Ride-on
+  ['john-deere-x167r', 'john-deere-x354', 'JD X-series sizing. The X167R is the entry rear-collect tractor for 0.5–1 acre lawns; the X354 is the 4WS premium for half-acre+ with awkward shapes. The 4-wheel-steer on the X354 actually does help around obstacles; for straight rectangular lawns it\'s overkill.'],
+  ['john-deere-x167r', 'mountfield-1530h', 'Premium vs value entry ride-on. JD holds resale at 60% of new after 5 years; Mountfield depreciates faster. New, the JD is twice the price; used, JD costs about 30–40% more. Either is a credible first ride-on for a half-acre lawn.'],
+  ['john-deere-x167r', 'mountfield-tornado-2098h', 'Different categories at similar price. The Tornado is a wider 98cm deck Briggs Vanguard tractor; the X167R is narrower (102cm) but with proper JD pedigree. Tornado for cutting capacity; JD for resale and dealer support.'],
+  ['john-deere-x354', 'kubota-gr1600-ii', 'American premium vs Japanese premium. JD wins on dealer ubiquity and resale; Kubota wins on engine longevity (1500+ hours typical). Both will outlast the owner if maintained. Kubota for buyers who plan to keep the mower for 25 years.'],
+  ['john-deere-x354', 'honda-hf-2625-hm', 'Premium ride-on rivals. Honda V-twin is the most reliable engine in the category; JD has the better dealer network. Honda for engine longevity; JD for the badge value and broader UK service.'],
+  ['kubota-gr1600-ii', 'kubota-gr2120-ii', 'Kubota sizing. The GR2120 has 20cm more cut and a bigger 21HP V-twin. Worth the upgrade only if your lawn justifies the extra deck width — for most domestic buyers the GR1600 is plenty.'],
+  ['kubota-g23-ii-hd', 'kubota-g26-ii-ld', 'Kubota diesel generations. The G23 is the proven older diesel; the G26 has cleaner emissions and electronic dash. Same Kubota build quality. G26 for new buyers; G23 for used buyers with documented service history.'],
+  ['westwood-s150he', 'countax-b65-4wd', 'British-built rivals from the same AriensCo factory. Same engineering, slightly different badging. Westwood traditionally cheaper new; Countax has 4WD on the B65 series for serious slopes. Identical for flat lawns; Countax wins on hilly ones.'],
+  ['murray-11-30', 'mountfield-sp46', 'Vintage ride-on vs walk-behind. The Murray 11/30 is a 1990s heritage tractor with a Briggs 11HP — cheap on Marketplace but no collection bag. The SP46 is a fraction of the size and cost. Choose by lawn size: under 800m² SP46, over 1500m² Murray.'],
+
+  // Hayter
+  ['hayter-harrier-41-ad', 'hayter-harrier-56-ad', 'Hayter sizing. The 41 is for typical British gardens; the 56 is for serious estates and cricket-club groundsmen. The 41 is plenty for most owners; the 56 is overkill until you have over 2000m² of formal lawn.'],
+  ['hayter-harrier-41-ad', 'atco-liner-16s', 'Heritage British roller petrol comparison. Both have stripes, both have steel rollers. Hayter wins on engine pedigree (Honda GCV inside) and resale; Atco wins on used-market price. Hayter for ownership longevity; Atco for the bargain.'],
+  ['hayter-harrier-41-ad', 'mountfield-sp485-hw-v', 'Premium British roller vs value Mountfield. The Hayter will be running in 2050; the Mountfield will need replacing in 2035. Mountfield is half the new price and a third the used price. Hayter for one-mower-forever buyers; Mountfield for everyone else.'],
+
+  // Stihl
+  ['stihl-rm-448-t', 'stihl-rm-248', 'Stihl sizing. The 448 has self-propel and a more durable engine; the 248 is push-only and cheaper. For under 600m² lawns the 248 saves £150 and one wear part; for everything bigger, the 448 is the right Stihl.'],
+  ['stihl-rm-448-t', 'mountfield-sp46', 'Stihl vs Mountfield petrol mid-range. Stihl wins on dealer network and build quality; Mountfield wins on price and parts availability. Stihl only worth the premium if you have a Stihl dealer locally.'],
+
+  // Cobra
+  ['cobra-mx46spb', 'cobra-mx534spc', 'Cobra sizing. The MX534SPC has 7cm more cut, a rear roller, and a Briggs 750EX engine. Better in every spec dimension at £150 more. For under 800m² lawns the MX46SPB is plenty; otherwise upgrade.'],
+
+  // Hover
+  ['flymo-hover-vac-250', 'flymo-glider-330', 'Flymo hover sizing. The Hover Vac collects clippings; the Glider mulches. Both are sub-£100 used. Choose by whether you want to bag (Hover Vac) or accept mulched clippings on the lawn (Glider).'],
+
+  // Manual cylinder
+  ['webb-h18-push-cylinder', 'bosch-ahm-38-g', 'Manual push cylinder rivals. Webb has the rear roller (stripes); Bosch has the grass box (collection). Both are sub-£40 used. Choose by whether stripes (Webb) or collection (Bosch) matter more — you can\'t have both at this price.'],
+  ['qualcast-suffolk-punch-14s', 'allett-liberty-35', 'Cylinder mowers from different eras. Suffolk Punch is petrol cylinder, vintage British, only available used; Allett Liberty is modern cordless cylinder with interchangeable cassettes. Suffolk Punch for collectors; Allett Liberty for modern bowling-green users.'],
+  ['allett-liberty-35', 'atco-royale-30e-i-c', 'Premium cordless cylinder showdown. Both are British, both target ornamental-lawn obsessives. Allett has interchangeable cassettes (cylinder/scarifier/brush); Atco is simpler but slightly heavier. Allett for users who want the cassettes; Atco for users who don\'t.'],
+
+  // Stiga
+  ['stiga-twinclip-50-sq-b', 'mountfield-sp485-hw-v', 'Stiga vs Mountfield premium roller. They share an engine family (Stiga ST160) and similar specs. Stiga has the twin-clip blade for finer cut; Mountfield has slightly stronger UK dealer support. For most buyers either works — Stiga in white-and-blue, Mountfield in green.'],
+
+  // Toro
+  ['toro-21-recycler-60v', 'ego-lm2135e-sp', '60V cordless rivals. Toro has American pedigree and the SmartStow vertical storage; EGO has the more developed UK presence and stronger battery resale. EGO for UK buyers; Toro for owners building a Flex-Force tool ecosystem.'],
+
+  // AL-KO
+  ['al-ko-highline-5-2-sp-s', 'mountfield-sp485-hw-v', 'German engineering vs British value. AL-KO\'s Briggs 875EX is the engine to beat in this class; Mountfield has wider UK distribution. AL-KO for buyers in northern England with a local dealer; Mountfield for everyone else.'],
+
+  // Budget electric
+  ['black-plus-decker-bemw461bh', 'bosch-rotak-36-r', 'DIY corded budget mower decision. B+D is cheaper and has decent cut width; Bosch lasts twice as long and has the rear roller. For 5-year ownership, take the B+D and replace; for 15-year ownership, take the Bosch and never replace.'],
+
+  // Supermarket cordless
+  ['parkside-prma-20-li-a1', 'ferrex-40v-cordless-36cm', 'Lidl vs Aldi cordless. Parkside 20V is cheaper and has the bigger cordless ecosystem; Ferrex 40V has more torque and a wider cut. Parkside if you already own Parkside tools; Ferrex if you want the standalone better mower.'],
+
+  // Premium SP petrol
+  ['husqvarna-lc-247sp', 'honda-hrg-466-sk', 'Premium walk-behind petrol SPs. Honda wins on engine longevity (15+ years typical); Husqvarna wins on build quality outside the engine. Honda for one-mower-forever buyers; Husqvarna for buyers with a local Husqvarna dealer.']
+];
+
+const compSlug = (a, b) => `${a}-vs-${b}`;
+const compUrl = (a, b) => `/vs/${compSlug(a, b)}`;
+
+function renderComparisonPage(idA, idB, verdict) {
+  const a = mowers.find(m => m.id === idA);
+  const b = mowers.find(m => m.id === idB);
+  if (!a || !b) return null;
+
+  const winner = (av, bv, lower = false) => {
+    if (av === bv) return null;
+    return lower ? (av < bv ? 'a' : 'b') : (av > bv ? 'a' : 'b');
+  };
+  const cell = (v, w, side, suffix = '') => {
+    const isWin = w === side;
+    return `<td style="${isWin ? 'background:var(--accent-soft);font-weight:700;color:var(--accent-deep)' : ''}">${esc(v)}${suffix}</td>`;
+  };
+
+  const specRow = (label, av, bv, w, suffix = '') =>
+    `<tr><th>${esc(label)}</th>${cell(av, w, 'a', suffix)}${cell(bv, w, 'b', suffix)}</tr>`;
+
+  return `${head({
+    title: `${a.brand} ${a.model} vs ${b.brand} ${b.model} — UK comparison`,
+    description: `Side-by-side comparison: ${a.brand} ${a.model} vs ${b.brand} ${b.model}. UK prices, full specs, pros and cons of each, and a verdict on which to buy.`,
+    canonical: compUrl(idA, idB)
+  })}
+${siteHeader()}
+
+<div class="page">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Browse</a><span class="sep">›</span>
+    <span>Comparisons</span><span class="sep">›</span>
+    <span aria-current="page">${esc(a.brand + ' ' + a.model)} vs ${esc(b.brand + ' ' + b.model)}</span>
+  </nav>
+</div>
+
+<section class="section-hero">
+  <div class="page" style="padding:0">
+    <div class="brand-eyebrow">Head-to-head</div>
+    <h1 class="brand-h1" style="font-size:42px;line-height:1.1">${esc(a.brand)} ${esc(a.model)} <span style="color:var(--muted);font-weight:400">vs</span> ${esc(b.brand)} ${esc(b.model)}</h1>
+    <p class="brand-blurb" style="margin-top:18px">A side-by-side comparison of two mowers UK buyers commonly choose between. Prices, full specs, and a verdict on which one to buy.</p>
+  </div>
+</section>
+
+<main id="main" class="page page--main">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px">
+      ${heroIcon(a, 200)}
+      <div style="margin-top:14px">
+        <div class="hero-meta-brand">${esc(a.brand)}</div>
+        <h2 style="margin:4px 0 8px;font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(a.model)}</h2>
+        <p class="m-tagline" style="margin:0 0 14px">"${esc(a.tagline)}"</p>
+        ${threeUpPrice(a)}
+        <div style="margin-top:12px">${stars(a.rating, a.reviews)} <span style="color:var(--muted-soft)">·</span> <span style="font-size:13px;color:var(--muted)">Value <strong style="color:var(--accent)">${a.valueScore}/10</strong></span></div>
+        <a class="btn btn-secondary" href="${esc(mowerUrl(a))}" style="display:inline-block;margin-top:14px">Full ${esc(a.model)} review →</a>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px">
+      ${heroIcon(b, 200)}
+      <div style="margin-top:14px">
+        <div class="hero-meta-brand">${esc(b.brand)}</div>
+        <h2 style="margin:4px 0 8px;font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(b.model)}</h2>
+        <p class="m-tagline" style="margin:0 0 14px">"${esc(b.tagline)}"</p>
+        ${threeUpPrice(b)}
+        <div style="margin-top:12px">${stars(b.rating, b.reviews)} <span style="color:var(--muted-soft)">·</span> <span style="font-size:13px;color:var(--muted)">Value <strong style="color:var(--accent)">${b.valueScore}/10</strong></span></div>
+        <a class="btn btn-secondary" href="${esc(mowerUrl(b))}" style="display:inline-block;margin-top:14px">Full ${esc(b.model)} review →</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-h2" style="margin-top:36px">Verdict — which one to buy</h2>
+  <div class="prose-box">
+    <div class="pb-title">Our take</div>
+    <p>${esc(verdict)}</p>
+  </div>
+
+  <h2 class="section-h2" style="margin-top:36px">Spec-by-spec</h2>
+  <div class="specs-card">
+    <table class="specs-tbl">
+      <thead>
+        <tr><th></th><th>${esc(a.brand)} ${esc(a.model)}</th><th>${esc(b.brand)} ${esc(b.model)}</th></tr>
+      </thead>
+      <tbody>
+        ${specRow('RRP', a.rrp ? fmtGBP(a.rrp) : '—', b.rrp ? fmtGBP(b.rrp) : '—', winner(a.rrp || 1e9, b.rrp || 1e9, true))}
+        ${specRow('Buy now', fmtGBP(a.buyNow), fmtGBP(b.buyNow), winner(a.buyNow, b.buyNow, true))}
+        ${specRow('Used avg', fmtGBP(a.usedAvg), fmtGBP(b.usedAvg), winner(a.usedAvg, b.usedAvg, true))}
+        ${specRow('Type', a.type, b.type, null)}
+        ${specRow('Engine / Power', a.engine, b.engine, null)}
+        ${specRow('Cut width', a.cutWidth + ' cm', b.cutWidth + ' cm', winner(a.cutWidth, b.cutWidth))}
+        ${specRow('Weight', a.weight + ' kg', b.weight + ' kg', winner(a.weight, b.weight, true))}
+        ${specRow('Self-propelled', a.selfPropelled ? 'Yes' : 'No', b.selfPropelled ? 'Yes' : 'No', null)}
+        ${specRow('Rear roller (stripes)', a.roller ? 'Yes' : 'No', b.roller ? 'Yes' : 'No', null)}
+        ${specRow('Mulching', a.mulching ? 'Yes' : 'No', b.mulching ? 'Yes' : 'No', null)}
+        ${specRow('Bag capacity', a.bagCapacity > 0 ? a.bagCapacity + ' L' : '—', b.bagCapacity > 0 ? b.bagCapacity + ' L' : '—', winner(a.bagCapacity, b.bagCapacity))}
+        ${specRow('Suited to lawn', a.lawnSize, b.lawnSize, null)}
+        ${specRow('Noise', a.noiseDb > 0 ? a.noiseDb + ' dB' : 'Silent', b.noiseDb > 0 ? b.noiseDb + ' dB' : 'Silent', winner(a.noiseDb || 0, b.noiseDb || 0, true))}
+        ${specRow('Rating', a.rating + ' / 5', b.rating + ' / 5', winner(a.rating, b.rating))}
+        ${specRow('Value score', a.valueScore + ' / 10', b.valueScore + ' / 10', winner(a.valueScore, b.valueScore))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-h2" style="margin-top:36px">Pros &amp; cons of each</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px">
+      <div class="hero-meta-brand">${esc(a.brand)} ${esc(a.model)}</div>
+      ${prosCons(a)}
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px">
+      <div class="hero-meta-brand">${esc(b.brand)} ${esc(b.model)}</div>
+      ${prosCons(b)}
+    </div>
+  </div>
+
+  <div style="margin-top:36px">
+    ${ctaStrip("Want to compare more?", "Open the full compare tool, filter by brand or budget, and pick up to 4 mowers to view side-by-side.", 'Open the compare tool', '/')}
+  </div>
+</main>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Best-of landing pages ----------
+const BEST_OF = [
+  { slug: 'under-150', title: 'Best lawn mowers under £150',
+    intro: 'For tight budgets, small lawns, or first-time mower buyers. Cheap doesn\'t have to mean disposable — Bosch and Mountfield have entries that genuinely last 10 years if you store them properly.',
+    pick: m => m.buyNow > 0 && m.buyNow <= 150, sortBy: m => m.valueScore, take: 8 },
+  { slug: 'under-300', title: 'Best lawn mowers under £300',
+    intro: 'The price band where serious build quality starts to appear. Self-propelled petrol Mountfields, Bosch cordless, decent corded electrics — all under £300.',
+    pick: m => m.buyNow > 150 && m.buyNow <= 300, sortBy: m => m.valueScore, take: 8 },
+  { slug: 'quietest-robotic', title: 'Quietest robotic lawn mowers',
+    intro: 'Robotic mowers run while you\'re indoors, so noise matters more than for any other category. These are the quietest robots available in the UK in 2026.',
+    pick: m => m.type === 'Robotic', sortBy: m => -m.noiseDb, take: 6 },
+  { slug: 'for-slopes', title: 'Best lawn mowers for sloped lawns',
+    intro: 'Wheels need flat-ish ground. Hover mowers glide on a cushion of air, AWD robotic mowers grip up to 75% slopes, and certain hover-petrol models handle steep banks. Here are the right tools for sloped lawns.',
+    pick: m => m.type === 'Hover' || (m.type === 'Robotic' && (m.model.includes('AWD') || m.model.includes('LUBA'))), sortBy: m => m.valueScore, take: 8 },
+  { slug: 'striping', title: 'Best lawn mowers for stripes',
+    intro: 'Stripes come from a rear roller pressing the grass flat in alternate directions. These mowers all have rear rollers — from the cheapest electric Bosch to the British-built Hayter premiums.',
+    pick: m => m.roller, sortBy: m => m.valueScore, take: 10 },
+  { slug: 'cordless-2026', title: 'Best cordless lawn mowers 2026',
+    intro: 'Cordless has caught up with petrol on cut quality. EGO 56V, Stihl AP, and Husqvarna are now genuine petrol replacements for typical UK gardens. The picks below cover all budgets and lawn sizes.',
+    pick: m => m.type === 'Cordless', sortBy: m => m.valueScore, take: 10 },
+  { slug: 'petrol-2026', title: 'Best petrol lawn mowers 2026',
+    intro: 'Petrol still wins for lawns over 800m², long grass, and rough conditions. Honda dominates the premium end; Mountfield owns the value end; Hayter has the best stripes.',
+    pick: m => m.type === 'Petrol', sortBy: m => m.valueScore, take: 10 },
+  { slug: 'ride-on-large', title: 'Best ride-on mowers for large lawns',
+    intro: 'When pushing a 53cm petrol mower across half a tennis court every weekend gets old. Ride-ons and garden tractors for serious lawns over 2000m².',
+    pick: m => m.type === 'Ride-on', sortBy: m => m.valueScore, take: 10 },
+  { slug: 'small-lawns', title: 'Best lawn mowers for small lawns',
+    intro: 'For lawns under 300m² — typical urban gardens. Cordless, manual cylinder, and small electric mowers are the right answers; petrol is overkill.',
+    pick: m => m.lawnSize === 'Small', sortBy: m => m.valueScore, take: 10 },
+  { slug: 'lightest', title: 'Lightest lawn mowers',
+    intro: 'For lifting up steps, storing in tight spaces, or for users who can\'t push a heavy mower. These are all under 15kg.',
+    pick: m => m.weight > 0 && m.weight <= 15, sortBy: m => -m.weight, take: 8 },
+  { slug: 'used-bargain', title: 'Best used-market bargains',
+    intro: 'The mowers where used-market prices represent the strongest value vs new — typically because used supply is enormous, the mower is well-known, or depreciation has caught up with build quality.',
+    pick: m => m.rrp > 0 && m.usedAvg > 0 && (m.usedAvg / m.rrp) < 0.45, sortBy: m => -(m.usedAvg / m.rrp), take: 10 },
+  { slug: 'honda-engined', title: 'Mowers with Honda engines',
+    intro: 'Honda\'s GCV and GXV engines are the most reliable in residential mowing — fitted to the entire Honda range, the Hayter Harriers, and the Mountfield SP46H. If engine longevity is the priority, these are the mowers to consider.',
+    pick: m => m.engine && m.engine.toLowerCase().includes('honda'), sortBy: m => m.valueScore, take: 10 }
+];
+
+const bestOfUrl = slug => `/best/${slug}`;
+
+function renderBestOfPage(cfg) {
+  const list = mowers.filter(cfg.pick).sort((a, b) => cfg.sortBy(b) - cfg.sortBy(a)).slice(0, cfg.take);
+  return `${head({
+    title: `${cfg.title} — MowRight UK`,
+    description: `${cfg.title}, hand-picked from MowRight UK's catalogue of ${mowers.length} mowers. Independent picks with UK prices and second-hand averages.`,
+    canonical: bestOfUrl(cfg.slug)
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Browse</a><span class="sep">›</span>
+    <span>Best of</span><span class="sep">›</span>
+    <span aria-current="page">${esc(cfg.title)}</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 48px">
+  <div class="page page--narrow about" style="padding:0">
+    <div class="brand-eyebrow">Best of</div>
+    <h1 class="bg-h1">${esc(cfg.title)}</h1>
+    <p class="cat-lead" style="font-size:18px;max-width:680px;line-height:1.6">${esc(cfg.intro)}</p>
+  </div>
+</section>
+
+<main id="main" class="page page--main">
+  <h2 class="section-h2">${list.length} mower${list.length === 1 ? '' : 's'}, ranked</h2>
+  <div class="mlist">
+    ${list.map((m, i) => `
+    <a class="mcard row-3" href="${esc(mowerUrl(m))}">
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font-family:'JetBrains Mono', monospace; font-size:24px; font-weight:700; color:var(--muted)">${String(i + 1).padStart(2, '0')}</span>
+        ${heroIcon(m).replace('class="mh-icon ', 'class="mh-icon mh-photo ').replace('width:100%', 'width:80px;flex-shrink:0')}
+      </div>
+      <div>
+        <div class="m-brand">${esc(m.brand)}</div>
+        <h3 class="m-name">${esc(m.model)}</h3>
+        <div class="m-meta-line">${tbadge(m.type, 'sm')} ${stars(m.rating, m.reviews)}</div>
+        <p class="m-tagline">${esc(m.tagline)}</p>
+      </div>
+      <div class="col-price-side">
+        <span class="l">Used Avg</span>
+        <span class="v">${fmtGBP(m.usedAvg)}</span>
+        <span class="x">New: ${fmtGBP(m.buyNow)}</span>
+      </div>
+    </a>`).join('')}
+  </div>
+
+  <div style="margin-top:36px">
+    ${ctaStrip("See more lists", "Browse the full catalogue with filters and sort, or read the buying guide.", 'Open the buying guide', '/buying-guide')}
+  </div>
+</main>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
 // ---------- Engines page ----------
 function renderEnginesPage() {
   const engines = [
@@ -959,7 +1277,11 @@ function renderSitemap() {
     { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
     ...Object.keys(CATEGORIES).map(t => ({ loc: '/' + CATEGORIES[t].slug, priority: '0.8', changefreq: 'monthly' })),
     ...Object.keys(BRANDS).map(b => ({ loc: brandUrl(b), priority: '0.6', changefreq: 'monthly' })),
-    ...mowers.map(m => ({ loc: mowerUrl(m), priority: '0.7', changefreq: 'monthly' }))
+    ...mowers.map(m => ({ loc: mowerUrl(m), priority: '0.7', changefreq: 'monthly' })),
+    ...BEST_OF.map(cfg => ({ loc: bestOfUrl(cfg.slug), priority: '0.7', changefreq: 'monthly' })),
+    ...COMPARISONS
+      .filter(([a, b]) => mowers.find(m => m.id === a) && mowers.find(m => m.id === b))
+      .map(([a, b]) => ({ loc: compUrl(a, b), priority: '0.6', changefreq: 'monthly' }))
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1024,6 +1346,28 @@ writeFileSync(join(ROOT, 'about.html'), renderAboutPage()); written++;
 writeFileSync(join(ROOT, 'buying-guide.html'), renderGuideHub()); written++;
 writeFileSync(join(ROOT, 'credits.html'), renderCreditsPage()); written++;
 writeFileSync(join(ROOT, 'engines.html'), renderEnginesPage()); written++;
+
+clean(join(ROOT, 'vs'));
+clean(join(ROOT, 'best'));
+ensureDir(join(ROOT, 'vs'));
+ensureDir(join(ROOT, 'best'));
+
+let comparisonPagesWritten = 0;
+for (const [a, b, verdict] of COMPARISONS) {
+  const html = renderComparisonPage(a, b, verdict);
+  if (html) {
+    writeFileSync(join(ROOT, 'vs', `${compSlug(a, b)}.html`), html);
+    comparisonPagesWritten++; written++;
+  } else {
+    console.warn('Skipping comparison (id not found):', a, 'vs', b);
+  }
+}
+
+let bestOfPagesWritten = 0;
+for (const cfg of BEST_OF) {
+  writeFileSync(join(ROOT, 'best', `${cfg.slug}.html`), renderBestOfPage(cfg));
+  bestOfPagesWritten++; written++;
+}
 writeFileSync(join(ROOT, 'sitemap.xml'), renderSitemap()); written++;
 writeFileSync(join(ROOT, 'mowers-spa.json'), JSON.stringify(spaData(), null, 2)); written++;
 
@@ -1031,4 +1375,6 @@ console.log(`Built ${written} files.`);
 console.log(`  ${mowers.length} mower pages`);
 console.log(`  ${Object.keys(CATEGORIES).length} category pages`);
 console.log(`  ${Object.keys(BRANDS).length} brand pages`);
+console.log(`  ${comparisonPagesWritten} comparison pages`);
+console.log(`  ${bestOfPagesWritten} best-of pages`);
 console.log(`  6 misc (about, buying-guide, credits, engines, sitemap, mowers-spa.json)`);

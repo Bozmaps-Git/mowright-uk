@@ -167,6 +167,9 @@
         <option value="price-low">Price: low to high</option>
         <option value="price-high">Price: high to low</option>
         <option value="rating">Highest rated</option>
+        <option value="quietest">Quietest first</option>
+        <option value="lightest">Lightest first</option>
+        <option value="widest">Widest cut first</option>
       </select>
     </div>
   </div>
@@ -205,6 +208,33 @@
       <summary>Show all brands we cover</summary>
       <div class="pills" id="all-brands"></div>
     </details>
+  </section>
+
+  <section style="margin-top:48px">
+    <h2 class="section-h2">Best-of lists</h2>
+    <p style="margin:0 0 20px;font-size:14px;color:var(--ink-sub)">Hand-picked rankings for common buying situations — small lawns, sloped lawns, stripes, ride-on, used bargains.</p>
+    <div class="hp-brands">
+      <a class="hp-brand" href="/best/under-300"><h3>Under £300</h3><p>Where serious build quality starts. Self-propelled petrol, decent cordless, reliable corded electric — all under £300.</p><div class="ms">Read the list →</div></a>
+      <a class="hp-brand" href="/best/striping"><h3>Best for stripes</h3><p>Mowers with a rear roller — the only way to get proper alternating stripes from the cheapest electric to the British-built premiums.</p><div class="ms">Read the list →</div></a>
+      <a class="hp-brand" href="/best/cordless-2026"><h3>Best cordless 2026</h3><p>Cordless has caught up with petrol on cut quality. The right battery mowers for typical UK gardens.</p><div class="ms">Read the list →</div></a>
+      <a class="hp-brand" href="/best/quietest-robotic"><h3>Quietest robotic</h3><p>Robots run while you're indoors — noise matters more than for any other category.</p><div class="ms">Read the list →</div></a>
+      <a class="hp-brand" href="/best/for-slopes"><h3>For sloped lawns</h3><p>Hover mowers and AWD robotic mowers handle slopes that defeat wheeled rotaries.</p><div class="ms">Read the list →</div></a>
+      <a class="hp-brand" href="/best/used-bargain"><h3>Best used bargains</h3><p>The mowers where Marketplace prices represent the strongest value vs new.</p><div class="ms">Read the list →</div></a>
+    </div>
+    <p style="margin-top:14px;font-size:13px;color:var(--muted)"><a href="/best/petrol-2026" style="color:var(--accent);font-weight:600">Petrol</a> · <a href="/best/ride-on-large" style="color:var(--accent);font-weight:600">Ride-on</a> · <a href="/best/small-lawns" style="color:var(--accent);font-weight:600">Small lawns</a> · <a href="/best/lightest" style="color:var(--accent);font-weight:600">Lightest</a> · <a href="/best/honda-engined" style="color:var(--accent);font-weight:600">Honda-engined</a> · <a href="/best/under-150" style="color:var(--accent);font-weight:600">Under £150</a></p>
+  </section>
+
+  <section style="margin-top:48px">
+    <h2 class="section-h2">Common comparisons</h2>
+    <p style="margin:0 0 20px;font-size:14px;color:var(--ink-sub)">Side-by-side verdicts for the mowers people actually choose between. Specs, prices, pros and cons, and a clear "which one to buy" call.</p>
+    <div class="hp-brands">
+      <a class="hp-brand" href="/vs/honda-hrx-476-vy-vs-mountfield-sp46"><h3>Honda HRX 476 vs Mountfield SP46</h3><p>The premium-vs-value classic. Honda lasts twice as long; Mountfield costs half as much.</p><div class="ms">Read the comparison →</div></a>
+      <a class="hp-brand" href="/vs/honda-hrx-476-vy-vs-hayter-harrier-41-ad"><h3>Honda HRX 476 vs Hayter Harrier 41 AD</h3><p>The premium-roller decision. British vs Japanese, both legendary.</p><div class="ms">Read the comparison →</div></a>
+      <a class="hp-brand" href="/vs/ego-lm2135e-sp-vs-stihl-rma-448-tc"><h3>EGO LM2135 vs Stihl RMA 448</h3><p>Premium cordless head-to-head. Cut quality vs ecosystem fit.</p><div class="ms">Read the comparison →</div></a>
+      <a class="hp-brand" href="/vs/husqvarna-automower-305-vs-worx-landroid-m500"><h3>Husqvarna 305 vs Worx Landroid M500</h3><p>Robotic mower decision. 15-year build vs accessible entry.</p><div class="ms">Read the comparison →</div></a>
+      <a class="hp-brand" href="/vs/john-deere-x167r-vs-mountfield-1530h"><h3>John Deere X167R vs Mountfield 1530H</h3><p>Entry ride-on showdown. JD pedigree or the value pick?</p><div class="ms">Read the comparison →</div></a>
+      <a class="hp-brand" href="/vs/bosch-rotak-36-r-vs-flymo-easimow-380r"><h3>Bosch Rotak 36 R vs Flymo EasiMow 380R</h3><p>The corded budget rivals — both with rear rollers.</p><div class="ms">Read the comparison →</div></a>
+    </div>
   </section>
 </main>
 
@@ -427,7 +457,10 @@
       'value': (a, b) => b.valueScore - a.valueScore,
       'price-low': (a, b) => a.usedAvg - b.usedAvg,
       'price-high': (a, b) => b.usedAvg - a.usedAvg,
-      'rating': (a, b) => b.rating - a.rating
+      'rating': (a, b) => b.rating - a.rating,
+      'quietest': (a, b) => (a.noiseDb || 1e3) - (b.noiseDb || 1e3),
+      'lightest': (a, b) => (a.weight || 1e6) - (b.weight || 1e6),
+      'widest': (a, b) => (b.cutWidth || 0) - (a.cutWidth || 0)
     };
     return list.sort(sorts[STATE.sort] || sorts.value);
   }
