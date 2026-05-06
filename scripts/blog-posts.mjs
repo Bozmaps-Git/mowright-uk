@@ -480,5 +480,507 @@ export const BLOG_POSTS = [
       { q: 'Do I need to drain a petrol mower for winter?', a: "Yes, ideally. Run the carb dry by closing the fuel cap and running the engine until it stalls. Or add fuel stabiliser to the tank. Stale fuel is the cause of 50% of spring no-start problems on petrol mowers. Cordless requires no winter prep beyond storing the battery at 50% charge." },
       { q: 'Are cordless mowers safe to use in light rain?', a: "Most are rated IPX4 or higher (splash resistant) but should not be used on a wet lawn or in actual rain — water ingress damages the battery contacts. Petrol mowers tolerate damp grass slightly better but neither type should be used on a properly wet lawn (the cut suffers and the engine can hydrolock)." }
     ]
+  },
+
+  // ============================================================
+  {
+    slug: 'best-lawn-mower-under-200-uk',
+    title: 'Best lawn mower under £200 UK 2026 — corded, cordless, hover, used',
+    description: 'At £200 you can pick a Bosch Rotak with a rear roller, a Flymo hover, an entry-level cordless with a battery included, or a clean used Mountfield SP46. Here are the right picks for each option and what to avoid.',
+    keyword: 'best lawn mower under £200 UK',
+    date: '2026-05-07',
+    related: [11, 12, 25, 3, 56],
+    lead: "£200 is the budget where you stop choosing between bad mowers and start choosing between good ones. Below £150 you're in disposable territory; at £200 you can pick a Bosch Rotak with a roller, a Flymo Hover Vac, an entry cordless with battery included, or a clean used Mountfield SP46 with the same Stiga engine fitted to half the petrol mowers in Britain. Here are the right picks at this price, and what to ignore.",
+    sections: [
+      {
+        h: 'The £200 sweet spot — why it exists',
+        p: [
+          "£200 is a watershed for British lawn mowers. Below it, the only options are 30cm corded electric mowers from generic brands, 35cm push petrol from no-name OEMs, or shopping the bottom end of supermarket Specialbuy lines. Build quality is consistently flimsy and ownership horizons are five years.",
+          "At £200, you cross into territory where serious brand engineering applies. Bosch Rotak motors are designed to last 15 years. Flymo's hover platform is mature and well-supported. Cordless mowers from Bosch and Worx start arriving with batteries included. And the used market opens up to mid-range Mountfield, Honda IZY, and Hayter petrol mowers that retail at £400+ new.",
+          "The trick at this price is knowing where the £200 should go. Buy new electric or cordless from a reputable brand; buy used petrol if you want self-propel. Don't try to buy new petrol — at £200 you'll get a generic-engined disposable."
+        ]
+      },
+      {
+        h: 'Best corded electric — Bosch Rotak 36 R',
+        p: [
+          "The Bosch Rotak 36 R is the right corded mower under £200 for a 200–500m² lawn. £199 new from B&Q or Argos, often on offer at £179. 36cm cut, 1400W induction motor, rear roller for stripes, 40L grass box, weighs 12kg.",
+          "The case for it: Bosch's brushless induction motor genuinely runs for 15+ years. The rear roller (rare on corded electric at any price) means you get proper alternating stripes — most rivals at £200 don't have one. Build quality is German-engineered and parts are available 10 years after launch.",
+          "The case against: it's corded. Cable management on lawns over 400m² is fiddly and sloped lawns are out. The 12kg weight is fine but heavier than a Flymo. If your lawn is small enough that you can manage the cable, the Rotak is the answer.",
+          "Used market: 5-year-old Rotak 36 R units sell at £80–£120 on Marketplace. The motor is still good for another decade. A used one is the smartest sub-£100 mower you can buy."
+        ]
+      },
+      {
+        h: 'Best hover — Flymo Hover Vac 250 or Glider 330',
+        p: [
+          "Hovers solve problems wheeled mowers don't. They handle slopes, awkward shapes, banks, and corners that defeat rotary wheels. At £200 you can buy the best two Flymos new.",
+          "Flymo Hover Vac 250 (£79 new): 25cm cut, collects clippings, 6kg weight. The right pick for a small awkward lawn under 200m². Cheap enough to be near-disposable but generally lasts 7–10 years if stored indoors.",
+          "Flymo Glider 330 (£119 new): 33cm cut, mulch only, 7kg. Bigger and slightly more capable than the Hover Vac but no collection. The right hover for a sloped lawn over 200m² where mulching is acceptable.",
+          "Both fit comfortably under £200 with money to spare. If you have a sloped lawn, this category is the right answer regardless of budget — wheeled mowers genuinely don't work past about 15° gradient."
+        ]
+      },
+      {
+        h: 'Best entry cordless — Bosch CityMower 18 or Worx WG779E',
+        p: [
+          "Two cordless options sit comfortably under £200 with battery and charger included.",
+          "Bosch CityMower 18 (£179 new): 32cm cut, single 18V Bosch PowerForAll battery, 10kg weight. Push-only, mulch-and-collect, 31L bag. The right cordless for a small urban lawn under 100m². The PowerForAll battery is shared with Bosch home tools — drill, jigsaw, blower — so the battery investment compounds if you're already in the ecosystem.",
+          "Worx WG779E (£219 new, often on offer at £189): 34cm cut, twin 20V Worx PowerShare batteries, 15kg weight. Push-only, mulch plug. Battery and charger included. Worx PowerShare batteries cross to Worx 20V home tools.",
+          "Neither is a serious competitor to the £600 EGO LM1900E for a typical British garden — both are entry cordless with limited runtime. But for a tiny lawn where you mow weekly, both work and the silence is genuinely valuable."
+        ]
+      },
+      {
+        h: 'Best used petrol option — clean Mountfield SP46',
+        p: [
+          "If your budget is £200 and your lawn is over 600m², new mowers won't cut it — you need self-propel and you need petrol. The right move is shopping the used market.",
+          "A clean used Mountfield SP46 with engine hours under 200 sells for £140–£170 on Facebook Marketplace. That leaves £30 for fresh oil and a service. Total spend: £180. You get a 46cm self-propelled mulch-and-collect petrol mower with 10 years of service ahead of it.",
+          "The Stiga ST120 engine inside the SP46 is fitted to dozens of mower brands across the UK; parts are universally available; carbs and drive cables are £20 fixes; the chassis lasts decades. A clean SP46 is the smartest sub-£200 petrol you can buy.",
+          "Watch for: stretched drive cables (slipping under load), cracked plastic decks (impact damage), and stale fuel (varnished carbs). The Mountfield SP46 troubleshooting article on the blog covers this. Honda IZY HRG 416 PK at £180–£250 used is the next-best alternative if you want Honda longevity."
+        ]
+      },
+      {
+        h: 'Best manual cylinder — Webb H18 or Bosch AHM 38 G',
+        p: [
+          "For a small ornamental lawn under 200m² that gets cut every week, a manual cylinder mower is genuinely the right tool — silent, no fuel or battery, and the cut quality is finer than any rotary.",
+          "Webb H18 (£89 new, £35 used): 46cm cut, rear roller for stripes, 12kg. Old-school British engineering, easy to sharpen, lasts decades.",
+          "Bosch AHM 38 G (£99 new, £40 used): 38cm cut, no roller, 25L grass box, 8kg. Lighter and includes collection. Bosch reliability.",
+          "Both are under £100 even new, and the used market is plentiful. A clean cylinder mower with sharp blades will cut a small ornamental lawn better than any £500 rotary. The catch: cylinder mowers refuse to work on long or wet grass."
+        ]
+      },
+      {
+        h: 'What to avoid at this price',
+        p: [
+          "Generic-engined petrol mowers under £250 new. Webb WER41P, Hyundai HYM430SP, and various supermarket-exclusive offerings have generic Loncin or Chinese OEM engines. They run, but they don't last — five years is realistic. Buy a used Mountfield instead.",
+          "Supermarket-exclusive cordless from Parkside (Lidl) or Ferrex (Aldi) when out of warranty. New, they're decent value while warranty applies. Used, the batteries are non-replaceable in any meaningful sense — supermarket battery platforms have no parts continuity past the warranty window.",
+          "Anything from Yard Force, Spear & Jackson, Mac Allister, or Hyundai if the engine isn't specifically a Briggs & Stratton or Honda. Generic engines under £300 are a sign of corner-cutting elsewhere too — drive belts, deck plastics, and chassis assembly all reflect the price point.",
+          "Untested mowers from Marketplace at full asking price. Always negotiate. A £200 used petrol that won't fire on cold-start is worth £100, not £200."
+        ]
+      },
+      {
+        h: 'Specific recommendations by lawn size and need',
+        p: [
+          "Tiny urban lawn under 100m², no slopes: Bosch CityMower 18 (£179) for cordless convenience, or a used Bosch Rotak 32 (£25–£40) for cheaper-still corded reliability.",
+          "Small lawn 100–300m², flat: Bosch Rotak 36 R (£199 new) for stripes, or a used Mountfield HP46 (£70–£100 used) for simple petrol.",
+          "Medium lawn 300–600m², flat: used Mountfield SP46 (£140–£170) for self-propel petrol — the most-recommended sub-£200 buy.",
+          "Sloped lawn under 300m²: Flymo Glider 330 (£119) — wheeled mowers don't work, and the Glider is the best small hover.",
+          "Any lawn, weekly cut, formal finish: Webb H18 manual cylinder (£89 new). Silent, eco, surprisingly satisfying."
+        ]
+      },
+      {
+        h: 'Where to buy',
+        p: [
+          "New: B&Q for Mac Allister and budget Bosch; Argos and Robert Dyas for Flymo and entry Bosch; Mowdirect.co.uk for the full Bosch and Mountfield range with proper warranty support.",
+          "Used: Facebook Marketplace is 70% of UK supply, with prices typically 20% below eBay UK. Gumtree is shrinking but worth checking for older Mountfield and Honda. eBay UK Buy It Now listings are mostly dealer-flips at premium prices; the auction listings are where the bargains live.",
+          "Avoid: any third-party online retailer you haven't heard of. Lawn mower returns are expensive and disputed orders are difficult to resolve. Stick to Argos, B&Q, Amazon UK, or Mowdirect for new purchases."
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'Can I get a self-propelled mower under £200?', a: "Only used. New self-propelled petrol starts at £279 (Mountfield SP46). Used SP46 units in clean condition sit at £140–£170 on Marketplace, leaving budget for oil and a service. New self-propelled cordless starts at £400+." },
+      { q: 'Is it worth buying new or used at this price?', a: "Used is the smarter spend at £200 if you have time to inspect. A clean Mountfield SP46 used at £140 is a better mower than anything new at £200 except the Bosch Rotak 36 R. New only if you want immediate availability and warranty cover." },
+      { q: 'Will a £200 mower last 10 years?', a: "Bosch Rotak: yes, easily. Flymo: 7–9 years typical. Used Mountfield: 8 more years from a clean unit. New petrol under £250: probably not — five years is realistic. Pick the brand carefully and the price isn't the limitation." },
+      { q: 'What about supermarket-exclusive brands like Parkside or Ferrex?', a: "Fine new while warranty applies (3 years for both). Avoid used — battery platforms are unsupported beyond the warranty window and replacement batteries don't exist on the open market. Disposable but acceptable at the new price." },
+      { q: 'Should I save up for £300 instead?', a: "If you want self-propelled, yes. £300 buys a new Mountfield SP46 at full RRP, opening up self-propel on a fresh-warranty machine. £200 to £300 is the steepest value gradient in the entire mower market — 50% more spend gets you 100% more mower." }
+    ]
+  },
+
+  // ============================================================
+  {
+    slug: 'husqvarna-automower-305-troubleshooting',
+    title: 'Husqvarna Automower 305 troubleshooting — UK guide',
+    description: "The seven most common Husqvarna Automower 305 issues, ranked by frequency, with diagnosis and fix steps. Loop signal, charging, blade, stuck mower, app pairing, and end-of-life signs.",
+    keyword: 'Husqvarna Automower 305 troubleshooting',
+    date: '2026-05-07',
+    related: [29, 30, 107, 108],
+    lead: "The Husqvarna Automower 305 is the most-bought robotic mower in the UK and also the most-asked-about when it goes wrong. Husqvarna's reliability is excellent — these run for 15+ years if maintained — but a few specific faults come up repeatedly. Here are the seven most common 305 issues, ranked by frequency, with diagnosis and step-by-step fixes.",
+    sections: [
+      {
+        h: 'Before troubleshooting: what the 305 needs to work',
+        p: [
+          "Three things must be right for an Automower 305 to run: a continuous boundary wire loop, a working dock with mains power, and a healthy lithium battery. About 90% of all 305 faults trace back to one of these three.",
+          "The dock signal indicator tells you which: solid green means the loop is healthy and the dock is happy; flashing red means a wire fault; no light at all means a dock or transformer problem. Check this first before assuming the mower is at fault.",
+          "Most 'broken Automower' callouts to dealers are for issues the owner could have fixed in 20 minutes with the right diagnosis. Read the dock light first — it's the most useful piece of information you have."
+        ]
+      },
+      {
+        h: '1. "No loop signal" — boundary wire fault (50% of issues)',
+        p: [
+          "The 305 displays 'Loop signal missing' or 'No loop signal' when the perimeter wire is broken or shorted. This is by far the most common 305 fault and almost always a DIY fix.",
+          "Diagnosis: the dock light flashes red. Disconnect both wire ends from the dock, set a multimeter to continuity (£15 from Screwfix), and touch the probes to the two wire ends. A working loop reads 1–10 ohms; a broken loop reads infinite.",
+          "Fix: locate the break (visual inspection of the perimeter, or halve-the-loop method described in our boundary wire repair guide), splice with a gel-filled crimp connector (£2 from Toolstation), bury at 5cm depth, reconnect to dock. Total cost: under £10. Time: 30 minutes to 2 hours.",
+          "Common cause: lawn aeration tools or garden forks puncturing the wire. Burying at 10cm depth instead of 5cm prevents this — a one-day project that pays back forever."
+        ]
+      },
+      {
+        h: '2. Charging issues — mower returns to dock but never charges',
+        p: [
+          "The 305 returns to the dock as expected but the battery percentage doesn't increase, or the charging-contact light stays unlit. The mower either sits indefinitely or leaves at low charge and dies on the lawn.",
+          "Diagnosis: lift the mower off the dock, look at the four metal charging contacts on both the dock and the mower's underside. Corroded (green), dirty, or pitted contacts are the cause in 80% of cases.",
+          "Fix: unplug the dock from mains. Use fine-grit sandpaper or a brass wire brush to clean both sets of contacts until shiny. Wipe with a dry cloth. Reconnect. The mower should charge cleanly. Repeat every 6 months as part of routine maintenance.",
+          "Less common cause: failed transformer. The dock is powered by an external transformer (the brick on the mains lead). If the dock has no light at all and the contacts are clean, the transformer has failed. Replacement is £45 from any Husqvarna dealer."
+        ]
+      },
+      {
+        h: '3. Mower cuts unevenly or leaves uncut patches',
+        p: [
+          "The 305 has been running for years and the lawn quality is deteriorating — visible tracks, uneven cut, missed patches.",
+          "Diagnosis: dull or chipped blades. The 305 uses three small razor blades pinned to a rotating disc. They wear after 200 hours of cutting (about 4–6 weeks of summer use). When dull, the blades tear grass instead of slicing it.",
+          "Fix: replace the blades. £8 for a 9-pack of genuine Husqvarna blades (the pack lasts 3–5 changes). Three Torx screws hold each blade — total replacement time is 5 minutes.",
+          "Frequency: change every 8 weeks of summer use. Don't try to sharpen them — they're consumables and a sharp new blade is £1, less than the time it takes to sharpen one. Mark the calendar; the blades will fail silently otherwise."
+        ]
+      },
+      {
+        h: '4. Mower stuck mid-lawn — "Mower is stopped" or "Trapped"',
+        p: [
+          "The 305 was running fine and then stopped somewhere in the middle of the garden. The display shows 'Mower is stopped' or 'Mower trapped'.",
+          "Diagnosis: the mower has either physically stuck on something (long grass, a stone, a small obstacle) or one of the wheel motors has failed. Walk to the mower and inspect.",
+          "Fix if stuck: remove the obstacle, lift and replace the mower, press Start. Should resume immediately. If the mower is stuck repeatedly in the same area, the grass is too long for the 305 to handle (>10cm cuts) — mow with a regular mower first to bring the height down, then resume robot operation.",
+          "Fix if wheel motor failed: confirm by tilting the mower and listening — the failed motor will buzz or make no sound when commanded to rotate. Wheel motor replacement is £85 in parts, £180 with dealer fitting. Common after 5+ years of use."
+        ]
+      },
+      {
+        h: '5. App connection / pairing issues',
+        p: [
+          "Husqvarna Connect app fails to pair, drops connection, or displays 'Mower offline' constantly.",
+          "Diagnosis: the 305 uses Bluetooth (and Connect cellular on later units). If the phone is more than 10 metres from the mower, Bluetooth drops. Cellular connectivity requires the cellular module's subscription to be active.",
+          "Fix Bluetooth issues: stand within 5 metres of the dock, force-close the Husqvarna Connect app, reopen, and re-pair. Husqvarna Connect requires you to enter the 4-digit PIN that's set on the mower itself (Settings > Security > PIN code).",
+          "Fix cellular issues: Husqvarna Connect for cellular requires a subscription (free for the first year on most 305s, £39/year after). If the subscription has lapsed, the mower cannot phone home regardless of signal. Renew through the app or a Husqvarna dealer.",
+          "Forgotten PIN: dealer-only reset. £40 service charge. Husqvarna will not give the PIN over the phone — they require the chassis number and proof of ownership, then reset on-site or via service mode."
+        ]
+      },
+      {
+        h: '6. Dock-only error — mower in dock with red base light, no fault on mower',
+        p: [
+          "Dock shows red. Mower is parked. Both seem present and undamaged. No obvious wire fault on inspection.",
+          "Diagnosis: this is the dock's transformer or its internal electronics. The dock has a small circuit board that detects loop continuity and feeds current. If the transformer fails, the dock can't drive the loop and reports a fault even though the wire is fine.",
+          "Fix: confirm with a multimeter on the loop wire (continuity OK = wire is fine, fault is in the dock). Then test the transformer output — should be about 27V AC across the dock terminals. If reading is zero or low, transformer is dead. Replacement transformer is £45 dealer-stocked.",
+          "Less common: dock circuit board failure. £140 replacement, £200 with fitting. At this point the cost of repair approaches half a used 305 — consider whether to replace the whole mower."
+        ]
+      },
+      {
+        h: '7. End-of-life signs — when to retire a 305',
+        p: [
+          "Husqvarna Automower 305s typically run for 12–15 years. Past 10 years, several end-of-life signs appear together.",
+          "Battery life under 30 minutes per charge (was 70 minutes new). Lithium-ion ageing — replacement is £85 in parts, £130 with dealer fitting. Reasonable to do once on a 305 you intend to keep another 5 years.",
+          "Two or more wheel motors failed. £85 each. By the third motor failure the cumulative repair cost approaches half a used replacement.",
+          "Frame cracks or chassis deformation. Catastrophic — Husqvarna doesn't sell replacement chassis for the 305. End of the road.",
+          "Soft re-buy threshold: when total annual repair cost exceeds 25% of a used 305's value (~£500 used), replace rather than repair. The 305 is the entry Automower; the 415X NERA at £900–£1,500 used is the reasonable upgrade."
+        ]
+      },
+      {
+        h: 'DIY vs dealer cost summary',
+        p: [
+          "Boundary wire repair: £8 DIY, £80–£150 dealer call-out.",
+          "Charging contact clean: free DIY, £40 dealer.",
+          "Blade replacement: £8 in parts, 5 minutes DIY, or £25 at a dealer.",
+          "Wheel motor replacement: £85 in parts, 30 minutes DIY (one Torx screw per wheel), £180 at a dealer.",
+          "Transformer replacement: £45 in parts, 2 minutes DIY (plug-in only), £90 at a dealer.",
+          "Battery replacement: £85 in parts, £130 at a dealer.",
+          "PIN reset: £40 dealer (no DIY option).",
+          "About 80% of 305 repairs are DIY-friendly with basic tools and a multimeter. Dealer service is overpriced for routine fixes; book the dealer only for software issues, PIN resets, or full diagnostic work."
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'How long should an Automower 305 last?', a: "12–15 years residential with routine maintenance. The chassis and motor are the limiting factors; battery and blades are scheduled-replacement consumables. Husqvarna's 30-year track record on the Automower line means even early-2010s units are still running with replacement parts." },
+      { q: 'Can I upgrade my 305 to a NERA model later?', a: "No, they're different chassis. The NERA models (410, 430X) use EPOS satellite positioning and don't need boundary wire; the 305 is wire-only. Selling the 305 used and buying NERA is the path." },
+      { q: 'Do I need a Husqvarna dealer for service?', a: "Most routine work is DIY. Dealers are needed only for: PIN resets, software updates that require service mode, warranty claims, and complex diagnostic work. For blades, contacts, batteries, and wire repairs, you don't need a dealer." },
+      { q: "What's the most common Automower 305 failure?", a: "Boundary wire breaks, by a wide margin. About half of 'mower stopped' calls are wire faults caused by garden forks, lawn aeration, or natural wire degradation. Burying the wire deeper (10cm) cuts this to almost zero." },
+      { q: 'Is it worth buying a used 305 with no service history?', a: "Yes if priced accordingly. £350–£450 used for a 5–8-year-old 305 with ambient battery condition is reasonable. Budget £100–£150 for replacement battery and blades to bring it back to factory condition. Avoid units with visible chassis damage or modifications." }
+    ]
+  },
+
+  // ============================================================
+  {
+    slug: 'bosch-rotak-vs-flymo-corded',
+    title: 'Bosch Rotak vs Flymo EasiMow — which corded electric should you buy?',
+    description: 'Two mowers dominate the sub-£200 corded electric market in Britain. Bosch lasts longer, Flymo is cheaper used. The honest comparison: build, cut, longevity, used market, and verdict by lawn size.',
+    keyword: 'Bosch Rotak vs Flymo',
+    date: '2026-05-07',
+    related: [11, 12, 14, 57, 96],
+    lead: "Two mowers dominate the sub-£200 corded electric market in Britain — the Bosch Rotak and the Flymo EasiMow. They look superficially similar (cable-fed motor, 36–38cm cut, plastic deck, around 13kg) but their engineering, build longevity, and used-market behaviour differ in ways that matter over a 10-year ownership cycle. Here's how to choose.",
+    sections: [
+      {
+        h: 'The two mowers at a glance',
+        p: [
+          "Bosch Rotak 36 R: £199 new, 1400W induction motor, 36cm cut, 40L grass box, rear roller for stripes, 12kg. The flagship corded Rotak. Bosch UniversalRotak 550 is the roller-less version of the same chassis.",
+          "Flymo EasiMow 380R: £119 new, 1600W motor, 38cm cut, 45L grass box, rear roller, 13kg. The flagship EasiMow. The Hover Vac and Glider are different (hover-class) Flymos; this comparison is the wheeled rotary EasiMow.",
+          "Both target the same buyer: someone with a flat 200–500m² lawn near a power point who wants stripes from a corded electric for under £200. The price difference (£80) and the ownership trajectory (15-year Bosch, 8-year Flymo typical) are where they diverge."
+        ]
+      },
+      {
+        h: 'Build quality — where the £80 price gap goes',
+        p: [
+          "The Bosch Rotak uses an induction motor with sealed bearings, a glass-filled polypropylene deck, and a steel-reinforced handle pivot. The Flymo uses a brushed motor (cheaper, shorter-lived), a softer-grade plastic deck, and a plastic handle pivot.",
+          "In practice this means: Bosch motors typically run for 15+ years before failing; Flymo motors fail at 7–10 years. Bosch decks tolerate hitting stones with surface marks; Flymo decks crack under the same impacts. The handle pivot is a known Flymo failure point — search Marketplace for 'Flymo broken handle' and you'll see hundreds of listings.",
+          "The £80 price gap is largely the motor and the deck plastic. Bosch is paying for the longer life span; Flymo is paying for the lower price. Both are honest products at their price points — neither is bad."
+        ]
+      },
+      {
+        h: 'Cut quality and grass collection',
+        p: [
+          "Both produce a clean cut on healthy domestic grass under 8cm height. Both have rear rollers that produce decent (not exceptional) stripes. The Bosch's roller is steel-reinforced; the Flymo's is plastic — Bosch stripes are slightly sharper.",
+          "Grass collection: Flymo's 45L bag holds more than Bosch's 40L. In practice this is one less empty per mowing cycle on a 400m² lawn. Bosch's bag has a fuller-indicator (handy); Flymo doesn't. Trade-off favours Flymo on capacity, Bosch on UX.",
+          "Both struggle on grass over 12cm. Both refuse to work on wet grass — water gets into the motor housing and trips the safety cut-out. This is universal for corded electric mowers; not a Bosch-vs-Flymo issue."
+        ]
+      },
+      {
+        h: 'Cable management — Flymo wins',
+        p: [
+          "The Flymo EasiMow has a slightly better-thought-out cable strain relief — the cable feeds out of the rear-top of the handle rather than the front-side, which keeps it out of the cutting path. Bosch's cable management is competent but less refined.",
+          "Both come with 10-metre cables; both require an outdoor extension lead (RCD-protected) for any lawn over about 50m². For lawns over 200m², cable management is a real friction in itself — both manufacturers have approached this as well as anyone can with a corded design."
+        ]
+      },
+      {
+        h: 'Motor longevity — Bosch wins by a clear margin',
+        p: [
+          "This is the biggest practical difference. The Bosch Rotak's induction motor has no brushes to wear, no commutator to arc, and sealed bearings rated for 15,000 hours. Real-world UK use sees Rotak motors running 15+ years before failing.",
+          "The Flymo EasiMow uses a brushed motor with a plastic-bodied housing. The brushes wear at about 1,000 hours of cumulative use (8–10 years of weekly mowing). When the brushes finally fail, the motor either smokes, smells of burning, or simply stops. Replacement brushes are not stocked by Flymo and the typical fix is to replace the mower.",
+          "Over 15 years, you'll likely buy two Flymos to one Bosch. The Bosch's £80 premium amortises within 8 years."
+        ]
+      },
+      {
+        h: 'Used market behaviour',
+        p: [
+          "Used Bosch Rotak 36 R: £80–£120 on Marketplace for a 5-year-old unit. Strong demand because Bosch motors are known to last; sellers ask reasonable prices.",
+          "Used Flymo EasiMow 380R: £30–£60 for a 5-year-old unit. Massive supply (Flymo is the volume seller in this category). Prices reflect the shorter expected remaining life.",
+          "The math at the used end: a 5-year-old Bosch at £100 has another 10 years in it = £10/year. A 5-year-old Flymo at £40 has another 4 years in it = £10/year. Used cost-per-year is similar; the gap closes when you buy used. The argument for Bosch is strongest at full retail price.",
+          "Flymo wins on supply. There are roughly 10 Flymos for every Bosch on UK Marketplace. Buying used is faster on Flymo; you'll wait longer for a clean Bosch."
+        ]
+      },
+      {
+        h: 'The roller question — both have one',
+        p: [
+          "Both the Bosch Rotak 36 R and the Flymo EasiMow 380R have a rear roller. Stripes from both are decent — not Hayter Harrier territory, but recognisable alternating bands.",
+          "Bosch's roller is steel-reinforced and slightly heavier — produces sharper stripes. Flymo's is lighter plastic — softer stripes, and the roller develops play after 5 years (cheap fix at £15 if you can find the part).",
+          "If you specifically want stripes from a corded mower, Bosch is the better long-term choice. If stripes are nice-to-have rather than must-have, both work and Flymo is cheaper."
+        ]
+      },
+      {
+        h: 'Price-per-year of ownership',
+        p: [
+          "New Bosch Rotak 36 R at £199, expected 15 years residential = £13.30/year.",
+          "New Flymo EasiMow 380R at £119, expected 8 years residential = £14.90/year.",
+          "Bosch is marginally cheaper per year of ownership at full retail. The gap widens if you consider replacement cost: when a Flymo fails at year 8, you pay another £119 (plus inflation). When a Bosch fails at year 15, you've used the mower for nearly twice as long.",
+          "Used market changes the math. Used Bosch at £100 over remaining 10 years = £10/year. Used Flymo at £40 over remaining 4 years = £10/year. Equivalent — pick by which you can find."
+        ]
+      },
+      {
+        h: 'Verdict by lawn size and need',
+        p: [
+          "Lawn under 200m², stripes wanted: Bosch Rotak 36 R. The combination of stripes and Bosch motor longevity at £199 is the best corded electric value in the UK.",
+          "Lawn under 200m², stripes don't matter, budget tight: Flymo EasiMow 380R at £119, or used Bosch UniversalRotak 550 (no roller variant of the same chassis) at £60–£80.",
+          "Lawn 200–400m², frequent use: Bosch Rotak 36 R. The motor longevity matters when you mow 30 times a year.",
+          "Lawn 400m²+: at this size cable management becomes a real friction. Consider a cordless instead — Bosch CityMower 18 at £179 if budget is tight, EGO LM1700E at £400 if not.",
+          "Tight budget, accept disposability: Flymo EasiMow. Cheap to buy new, cheap to buy used, gets the job done for a few years."
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'Are Bosch Rotak parts still available for older models?', a: "Yes, for 10+ years after launch. The blade hub, drive pulley, grass box clip, and rear roller bearings are all available through Bosch authorised parts suppliers. Genuine Bosch blades are £15; aftermarket equivalents are £8 and identical." },
+      { q: 'Why does Flymo do so well on Marketplace despite shorter motor life?', a: "Flymo is the most-bought UK domestic mower brand by volume — millions of units sold over 30+ years. Used supply is huge, prices stay low, and replacement is cheap when one fails. The category is genuinely disposable at the price." },
+      { q: "What's the difference between Bosch Rotak and UniversalRotak?", a: "Naming. Bosch rebranded the Rotak line as UniversalRotak around 2019. Older models are Rotak; newer models are UniversalRotak. Functionally identical. The UniversalRotak 550 is the roller-less version; the Rotak 36 R is the roller version. Don't overthink the naming — same engineering." },
+      { q: 'Does Flymo make a roller version?', a: "Yes — the EasiMow 380R has a rear roller (the R suffix). The standard EasiMow 380 doesn't. If stripes matter, look for the R model specifically." },
+      { q: 'Should I consider cordless instead at this price?', a: "If your budget stretches to £179, the Bosch CityMower 18 cordless is competitive with the Bosch Rotak corded for tiny lawns. For 200m²+ lawns, corded still wins on cost-per-year because batteries don't last 15 years. Cordless makes sense for sloped or far-from-power lawns specifically." }
+    ]
+  },
+
+  // ============================================================
+  {
+    slug: 'how-often-sharpen-mower-blade',
+    title: 'How often should you sharpen a lawn mower blade — UK guide',
+    description: "Most British gardeners go years without sharpening. Here's how often a blade actually needs sharpening, signs of a dull blade, DIY method, dealer cost, and when to replace instead.",
+    keyword: 'how often sharpen lawn mower blade',
+    date: '2026-05-07',
+    related: [1, 3, 11, 29, 41],
+    lead: "A dull blade tears grass instead of cutting it, leaving the lawn yellow-tipped and stressed. Most British gardeners go years without sharpening — often the entire life of the mower — and accept the patchy finish as normal. It isn't. Here's how often a blade actually needs sharpening, how to spot a dull one, and whether to do it yourself or pay a dealer.",
+    sections: [
+      {
+        h: "Why blade sharpness matters more than people think",
+        p: [
+          "A sharp blade severs grass cleanly with one strike. A dull blade pummels the grass tip, fraying the cut surface. Within 24 hours the fraying turns brown, giving the lawn an ill, dusty cast. Within a week the damaged tips dry out and the lawn loses water faster — the same lawn needs noticeably more watering.",
+          "Sharp blades also cut faster. A petrol mower with a dull blade burns 15–20% more fuel for the same area because the engine is doing the cutting work the blade should be doing. A cordless mower runs out of battery 15–20% sooner. This isn't theoretical — it's measurable.",
+          "Lawn quality is the most visible benefit. Brown-tipped grass means insufficient blade. Dense green grass with a crisp cut means a sharp blade. The difference is more striking than the difference between two mower brands."
+        ]
+      },
+      {
+        h: "Signs your blade needs sharpening",
+        p: [
+          "Visible test: lift the mower, shine a torch on the blade edge. A sharp blade has a defined, narrow edge; a dull blade has a rounded, wider edge with visible nicks and burrs.",
+          "Lawn-quality test: walk across the lawn 24 hours after mowing. If grass tips are brown or yellowing, the blade is dull. Healthy cut grass stays green at the tips for 3+ days.",
+          "Cut height test: a dull blade leaves uneven heights — clumps and tufts at slightly different heights. A sharp blade produces uniform height across the lawn.",
+          "Mower performance test: a dull blade makes the mower work harder. Petrol RPM dips noticeably when entering thick grass; cordless mowers cut their cutting time. Both are signs the blade is dragging through grass rather than slicing it."
+        ]
+      },
+      {
+        h: "Frequency: how often by mower type",
+        p: [
+          "Petrol rotary (Honda, Mountfield, Hayter): once a year minimum, twice a year for heavy users. Most domestic owners get away with one annual sharpen at end of season; serious gardeners do mid-season too.",
+          "Cordless rotary (EGO, Stihl, Husqvarna): same as petrol — once a year minimum. Cordless owners often forget because the mower starts cleanly regardless of blade condition. Don't.",
+          "Corded electric rotary (Bosch, Flymo): once a year. Smaller motors are more sensitive to blade dullness — the cutting deficit shows up faster.",
+          "Robotic mower: every 6–8 weeks of summer use. Robotic blades are tiny consumables — replaced rather than sharpened.",
+          "Cylinder mower (manual or petrol): once a year for cylinder; the bottom blade also needs adjustment yearly."
+        ]
+      },
+      {
+        h: "DIY sharpening — tools and method",
+        p: [
+          "Tools: 8mm or 10mm spanner (size depends on the mower; check the bolt under the deck), a basic file or angle grinder, a vice or G-clamp to hold the blade, work gloves, and safety glasses.",
+          "Step 1 — disconnect. Petrol: remove the spark plug cap. Cordless: remove the battery. Electric corded: unplug. Don't skip this — a blade that spins unexpectedly with your fingers near it is exactly how mower fingers come off.",
+          "Step 2 — remove the blade. Tip the mower onto its side (carb up if petrol — to keep oil out of the air filter). Use the spanner on the central blade bolt. Mark the up-side of the blade with a permanent marker before removing — you must reinstall the same way up.",
+          "Step 3 — clamp the blade. Use a vice or G-clamp on a sturdy bench. The cutting edge should be exposed and approachable.",
+          "Step 4 — file or grind. Original factory angle is 30–35 degrees on the cutting edge. Match it. File only on the existing bevel; don't try to grind a new bevel from a flat. 6–8 strokes with a coarse file usually restores a domestic blade.",
+          "Step 5 — balance. A sharpened blade can be unbalanced — one side heavier than the other. Hang the blade horizontally on a screwdriver through the centre hole. The heavier side will dip; file material off the heavy side until the blade hangs level. An unbalanced blade vibrates the mower and damages the spindle bearings.",
+          "Step 6 — reinstall. Spec torque is typically 50 Nm — about as tight as you can get with a normal spanner. Marker-side up. Total time for the whole job: 30 minutes."
+        ]
+      },
+      {
+        h: "Dealer sharpening — cost and turnaround",
+        p: [
+          "Most UK garden machinery dealers will sharpen a mower blade for £15–£25 while you wait, or £10 if you leave it for the next morning. Mowers Online, Mowdirect, and most regional dealers offer this.",
+          "Honda dealers typically charge £20 for a Honda blade sharpen and balance. Mountfield dealers £15. Stihl dealers £20. Most blades sharpen identically regardless of manufacturer; the dealer's job is repeated and quick.",
+          "Worth the £20 if: you don't have a vice or files, you're nervous about the disconnect step, or you're already at the dealer for an annual service. DIY makes more sense if you have basic hand tools and you'll do this 3–4 times over the mower's life."
+        ]
+      },
+      {
+        h: "When to replace instead of sharpen",
+        p: [
+          "Visible nicks deeper than 3mm. The blade has hit a stone or tree root; sharpening can't restore the missing material.",
+          "Blade thickness reduced by more than 30% from new. Multiple sharpen cycles wear the blade thinner; below a critical thickness the blade can break under load. Compare to a new blade with calipers.",
+          "Bent blade. Visible curve along the cutting edge or the wing. Bent blades must be replaced — straightening is unreliable and creates safety risks.",
+          "Cracks. Any visible crack — even hairline — means immediate replacement. Cracks propagate under spinning load.",
+          "Replacement cost: Honda HRX blade £45, Mountfield SP46 blade £15, Bosch Rotak blade £15, Flymo £10. All available from any garden machinery dealer or online."
+        ]
+      },
+      {
+        h: "Brand-specific sharpening notes",
+        p: [
+          "Honda HRX 476: the genuine Honda blade has 'Honda' stamped into the steel — aftermarket blades work but Honda's spec is heavier-grade and stays sharp longer. Worth the £45 every time.",
+          "Mountfield SP46: shared blade with most Stiga-engined Mountfield walk-behinds. £15 for a generic blade; bolt is 14mm. One of the easiest blades to sharpen — flat, straightforward bevel.",
+          "Bosch Rotak: blade is glued/clipped to a hub; remove the whole assembly together. £15 replacement is so cheap that DIY sharpening rarely makes economic sense — just replace.",
+          "Flymo Hover: the disc with the cutter blades is replaced as a unit (£8) rather than sharpened. The plastic cutter blades are razor-thin and not designed for resharpening.",
+          "Husqvarna Automower: nine-pack of robotic blades £8. Replace every 8 weeks. Don't try to sharpen — the cost-time math doesn't work.",
+          "Hayter Harrier: heavy steel blade, £25. Hayter's bolt is 17mm. Sharpen at end of season; the blade stays sharp for ~80 hours of cutting."
+        ]
+      },
+      {
+        h: "10-year cost of blade maintenance",
+        p: [
+          "Petrol mower (Mountfield SP46): one DIY sharpen per year (£0 in tools, 30 minutes), one replacement at year 6 (£15). 10-year total: £15 + your time.",
+          "Petrol mower with dealer service: £20/year sharpen, one replacement at year 6 (£15). 10-year total: £215.",
+          "Cordless mower: same as petrol — annual sharpen, one replacement mid-life.",
+          "Robotic mower (Husqvarna 305): 6 blade-pack changes per year × £8 × 10 years = £480 over 10 years. Robotic blades are the most expensive consumable in the category.",
+          "DIY saves around £200 over 10 years for a single mower. Worth learning if you mow weekly; worth paying a dealer if you mow occasionally and don't have basic hand tools."
+        ]
+      }
+    ],
+    faqs: [
+      { q: "How sharp is 'sharp enough'?", a: "Drag the blade lengthways across newspaper. A sharp blade slices a clean line; a dull blade tears or won't cut at all. Razor-sharp is overkill — mower blades work at high speed, not edge pressure." },
+      { q: "Can I sharpen a mulching blade?", a: "Yes, though the angle is different. Mulching blades have curved cutting surfaces and additional secondary edges; match the original angles. If you're not confident, a £20 dealer sharpen is the safer move on mulching blades." },
+      { q: "Will a sharpened blade affect cutting height?", a: "Marginally. Removing material from the cutting edge lowers the effective cut height by 1–2mm. Imperceptible on most lawns; matters only on bowling-green-style ornamental lawns." },
+      { q: "What's the right angle for a mower blade?", a: "30–35 degrees on the bevel. Honda spec is 30; Mountfield and Stiga 32; Hayter 35. The original bevel is the correct angle for that blade — match it; don't change it." },
+      { q: "How do I know when to replace?", a: "Three rules: blade thickness reduced 30% from new, visible nicks deeper than 3mm, or any crack at all. Otherwise sharpen and reuse." }
+    ]
+  },
+
+  // ============================================================
+  {
+    slug: 'lawn-mower-winter-storage-uk',
+    title: 'Lawn mower winter storage checklist — UK guide',
+    description: '50% of British lawn mowers refuse to start in spring because of poor winter storage. Step-by-step checklist by mower type — petrol, cordless, electric, robotic — plus common mistakes that ruin mowers over winter.',
+    keyword: 'lawn mower winter storage UK',
+    date: '2026-05-07',
+    related: [1, 3, 15, 29, 11],
+    lead: "About half of all British lawn mowers refuse to start in spring. The faults are predictable and avoidable — stale fuel, varnished carbs, dead batteries, mouse damage to the wiring. A 30-minute end-of-season routine saves you from a £100 carb service in March. Here's the full checklist by mower type.",
+    sections: [
+      {
+        h: "When to do it (October-November in the UK)",
+        p: [
+          "The right time is after the last cut of the year — usually late October to mid-November in southern England, late September to October in Scotland. Stop mowing once grass growth slows below about 1cm per week.",
+          "Don't store with grass clippings in the deck or bag. Wet clippings rot and corrode the blade and deck through the winter. The first task in any winter prep is a deep clean.",
+          "Don't put it off. By December, frost reaches the inside of the carb on a stored petrol mower and any moisture in the fuel system starts rusting metal parts. The 30 minutes you spend in November saves the cost of a service in March."
+        ]
+      },
+      {
+        h: "Petrol mower checklist (the most failure-prone)",
+        p: [
+          "1. Drain or stabilise the fuel. Two options:",
+          "Option A — Drain: run the engine until it stalls from fuel starvation, then drain any remaining petrol from the tank into a metal container. Discard the old fuel responsibly. The carb is now dry and won't varnish.",
+          "Option B — Stabilise: add fuel stabiliser (Briggs & Stratton, Stihl, or generic — £6, treats 20+ tanks) to the last fill of the season. Run the engine for 5 minutes to circulate stabilised fuel through the carb. Stabilised petrol stays viable for 12 months instead of 4.",
+          "2. Change the engine oil. Fresh oil contains corrosion inhibitors; used oil is acidic and pits internal engine surfaces over winter. Honda spec: 10W-30 SAE. Mountfield/Stiga: 10W-30 or 10W-40. Capacity is typically 0.6L. Drain the warm oil after a final run, refill, run briefly, check level.",
+          "3. Remove and clean the spark plug. Apply a single drop of oil into the cylinder via the plug hole; pull the rope twice to coat the cylinder walls. Replace the plug fingers-tight (don't fully torque — the cylinder is now coated and the engine shouldn't be cranked).",
+          "4. Clean the deck and underside. Scrape grass clippings from the underdeck; rinse with a hose; dry thoroughly. Wet grass left on metal corrodes through winter.",
+          "5. Sharpen the blade or schedule it. End-of-season sharpening means a clean start in spring. £20 at a dealer or 30 minutes DIY.",
+          "6. Store somewhere dry. A shed, garage, or covered porch is fine. Never under an outdoor tarpaulin — condensation under the tarp causes rust. If you have to leave it outside, leave the tarp loose enough for air circulation."
+        ]
+      },
+      {
+        h: "Cordless mower checklist",
+        p: [
+          "1. Charge the battery to 50%, not 100% or 0%. Lithium-ion batteries store best at half charge — full or empty accelerates degradation. Check the LED indicator and charge or discharge to roughly half.",
+          "2. Remove the battery from the mower. Store the battery indoors at room temperature. A cold garage drops battery temperature below 0°C, which permanently reduces capacity. The mower itself can stay in the shed; the battery comes inside.",
+          "3. Clean the deck and underside as for petrol. Cordless mowers have the same grass-and-water corrosion vulnerability.",
+          "4. Sharpen or schedule a sharpen. Same logic as petrol.",
+          "5. Don't leave the battery on the charger continuously. Trickle-charging at 100% degrades the cells. Charge to 50%, remove from charger, store cool.",
+          "6. Note the manufacture date or first-use date. Lithium batteries lose capacity over time regardless of use. Tracking the date helps you predict when replacement is due (typically year 5–7 for EGO/Bosch/Stihl batteries)."
+        ]
+      },
+      {
+        h: "Electric corded mower checklist",
+        p: [
+          "1. Inspect the cable. Look for cuts, abrasion, taped repairs, and exposed copper. Replace any damaged cable before storage — a damaged cable left over winter is fine; a damaged cable used in spring is a shock hazard.",
+          "2. Clean the deck and underside.",
+          "3. Coil the cable loosely and store with the mower. Tight coils cause cable damage; loose coils don't.",
+          "4. Sharpen the blade.",
+          "5. Store dry. Corded mowers are simpler to overwinter than petrol or cordless — no fuel, no battery — but the cable and motor are still vulnerable to moisture. A dry shed or garage is fine."
+        ]
+      },
+      {
+        h: "Robotic mower checklist (different rules)",
+        p: [
+          "1. Bring the mower indoors. Robotic mowers are not designed for sustained subzero temperatures — the lithium battery and the wheel motors both suffer. Lift the mower from the dock and store indoors at room temperature.",
+          "2. Charge to 50% before storage. Same lithium-ion logic as cordless mowers.",
+          "3. The dock can stay outside but the transformer should come in. The dock itself is rated for outdoor weather; the transformer (the brick on the mains lead) is not. Disconnect the transformer at both ends and bring it indoors.",
+          "4. Disconnect the boundary wire from the dock. This protects the dock electronics from any voltage spikes from frost-induced wire shifts.",
+          "5. Clean the chassis and blade disc. Wipe down with a damp cloth; remove any grass debris. Don't pressure-wash.",
+          "6. Update the firmware before storage. A current-firmware mower starts cleanly in spring; a year-old firmware version may have known bugs that have been fixed. Husqvarna Connect, Worx Landroid, and Bosch Indego apps all manage this."
+        ]
+      },
+      {
+        h: "Where to store: shed vs garage vs outside",
+        p: [
+          "Garage (best): dry, temperature-stable, secure. Even an unheated garage stays above 5°C and below 25°C — within the safe range for batteries and engines.",
+          "Shed (good): dry and ventilated is the requirement. A leaky shed with damp floor is worse than the garage but better than under a tarp. If your shed has condensation issues, raise the mower onto a wooden pallet to keep it off the floor.",
+          "Conservatory or porch (acceptable): dry and warm. Sometimes the only option for flat-dwellers without a garage. Be aware of fumes from any residual fuel — petrol mowers shouldn't be stored in living spaces with closed doors.",
+          "Outside under tarp (worst): condensation under the tarp causes rust on metal parts. If unavoidable, use a vented mower cover (Honda and Stihl both sell these) instead of a generic tarp."
+        ]
+      },
+      {
+        h: "Common mistakes that ruin mowers over winter",
+        p: [
+          "Leaving fuel in the tank without stabiliser. Stale petrol degrades into varnish that blocks carb passages — the cause of 50% of all spring no-start problems. Either drain or stabilise.",
+          "Storing the battery on the charger continuously. Trickle-charging at 100% degrades lithium cells. Charge to 50% and remove from charger.",
+          "Storing in a damp shed without raising the mower. Condensation pools on the floor; metal parts in contact rust through. Use a wooden pallet or shelving.",
+          "Forgetting to disconnect mower from electric. Some shed installations leave the mower plugged into a switched socket — a power surge over winter can damage the motor. Unplug.",
+          "Mice and rats. A petrol mower with residual fuel in the tank attracts rodents; they chew wiring and nest in the air filter housing. A few mothballs around the mower prevents this.",
+          "Storing with a dirty deck. Grass and soil clinging to the underdeck holds moisture and corrodes metal through the winter. Clean before storage every time."
+        ]
+      },
+      {
+        h: "Spring restart — what to check before first cut",
+        p: [
+          "Petrol: connect spark plug, fill with fresh petrol, prime the carb 3 times, pull the rope. Should fire on first or second pull. If not, refer to our SP46 troubleshooting article — almost always varnished carb or stale fuel from incomplete winter prep.",
+          "Cordless: charge battery to full, install in mower, run for 5 minutes to verify motor and cutting deck are fine. Cordless mowers almost never have spring problems if stored correctly.",
+          "Electric corded: inspect cable for damage incurred during storage (mice can chew). Plug in, check the RCD trips correctly, and test cut.",
+          "Robotic: replace transformer, reconnect to dock, charge to full. Run a perimeter test (most apps offer this) before the first full cut. If 'No loop signal' appears, see the boundary wire repair article — winter frost can shift soil and break buried wires.",
+          "Sharpen the blade if you didn't at end of season. Final step before mowing season."
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'Is it OK to store a mower outside under a tarpaulin?', a: "Not recommended. Condensation pools under tarps and corrodes metal parts. Better than nothing, but a vented mower cover (Honda, Stihl, generic) is much better. A dry shed beats both." },
+      { q: 'Should I drain the fuel or stabilise it?', a: "Either works. Stabilising is faster (just add to the last tank); draining is more thorough (no residue to varnish). Stabilising is the right answer for most domestic users — easier and almost as effective." },
+      { q: 'What about robotic mowers — does the dock need to come in?', a: "Dock can stay outside (it's weather-rated); the transformer should come in (it's not). The mower itself should always come in over winter — lithium batteries don't tolerate sustained subzero temperatures." },
+      { q: 'Cordless: should I leave the battery charging all winter?', a: "No. Trickle-charging at 100% degrades lithium cells. Charge to 50%, disconnect from charger, store at room temperature. Check once or twice over winter and top up if needed (some cells self-discharge)." },
+      { q: 'Does Honda need different winter prep than Briggs?', a: "Same approach — drain or stabilise fuel, oil change, store dry. Honda engines tolerate winter slightly better because of build quality, but the routine is identical. The only Honda-specific note: use Honda 10W-30 oil if you're going to leave the engine over winter (it has slightly better corrosion inhibitors)." }
+    ]
   }
 ];
