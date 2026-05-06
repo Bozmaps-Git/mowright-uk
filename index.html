@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0f0f0f" />
 <title>MowRight UK — Lawnmower Price Guide & Comparison</title>
-<meta name="description" content="UK lawnmower price guide. Compare 47 popular models from petrol to robotic. Check Facebook Marketplace and eBay used prices before you buy." />
+<meta name="description" content="UK lawnmower price guide. Compare 72 popular models from petrol to robotic. Check Facebook Marketplace and eBay used prices before you buy." />
 <link rel="canonical" href="https://mowright.co.uk/" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="author" content="MowRight UK" />
@@ -26,7 +26,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="MowRight UK — Lawnmower Price Guide" />
-<meta name="twitter:description" content="Compare 47 UK lawnmowers. Used vs new prices, expert verdicts, marketplace tips." />
+<meta name="twitter:description" content="Compare 72 UK lawnmowers. Used vs new prices, expert verdicts, marketplace tips." />
 <meta name="twitter:image" content="https://mowright.co.uk/og.png" />
 
 <!-- Favicons -->
@@ -722,6 +722,15 @@ function panelBody(m){
   cons.appendChild(ulc);
   pc.append(pros,cons);
   f.appendChild(pc);
+
+  // Link to full standalone page (better SEO than a panel-only flow)
+  const slugify=s=>s.toString().toLowerCase().replace(/\+/g,'-plus-').replace(/&/g,'-and-').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  const fullPage=document.createElement('a');
+  fullPage.href='/mower/'+slugify(m.b)+'-'+slugify(m.n);
+  fullPage.className='full-page-link';
+  fullPage.textContent='Open full details page →';
+  fullPage.style.cssText='display:block;text-align:center;margin:18px 0;padding:12px;background:var(--bg3);border:1px solid var(--bd);border-radius:6px;color:var(--gn);text-decoration:none;font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:13px';
+  f.appendChild(fullPage);
 
   const ad=document.createElement('div');
   ad.className='ad-zone ad-zone--panel-footer';

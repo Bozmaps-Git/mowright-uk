@@ -1,0 +1,164 @@
+/* MowRight UK shared stylesheet — used by all generated content pages.
+   Index.html still ships its own inline styles for the SPA. */
+
+:root {
+  --bg: #0f0f0f;
+  --bg2: #1a1a1a;
+  --bg3: #242424;
+  --bg4: #2e2e2e;
+  --bd: #333;
+  --bd2: #444;
+  --tx: #f0f0f0;
+  --tx2: #b0b0b0;
+  --tx3: #888;
+  --gn: #22c55e;
+  --gnd: #16a34a;
+  --gnb: rgba(34, 197, 94, .08);
+  --am: #f59e0b;
+  --amb: rgba(245, 158, 11, .10);
+  --rd: #ef4444;
+  --bl: #3b82f6;
+  --blb: rgba(59, 130, 246, .08);
+  --pp: #c084fc;
+  --ppb: rgba(192, 132, 252, .10);
+  --cy: #22d3ee;
+  --cyb: rgba(34, 211, 238, .10);
+  --gy: #9ca3af;
+  --gyb: rgba(156, 163, 175, .10);
+}
+
+* { box-sizing: border-box }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font-family: 'Barlow', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block }
+a { color: var(--gn); text-decoration: none }
+a:hover { text-decoration: underline }
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0 }
+.skip { position: absolute; left: -9999px; top: 0; background: var(--gn); color: #000; padding: 8px 14px; font-weight: 700; z-index: 1000 }
+.skip:focus { left: 8px; top: 8px; outline: none }
+:focus-visible { outline: 2px solid var(--gn); outline-offset: 2px; border-radius: 2px }
+
+/* Site header */
+.top { position: sticky; top: 0; z-index: 50; background: #000; border-bottom: 2px solid var(--gn) }
+.top-in { max-width: 1200px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 18px }
+.brand { display: flex; align-items: baseline; gap: 8px }
+.brand .lo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 26px; letter-spacing: -.5px; color: #fff }
+.brand .lo span { color: var(--gn) }
+.brand .tg { font-size: 11px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600 }
+.top-nav { margin-left: auto; display: flex; gap: 18px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px }
+.top-nav a { color: var(--tx2) }
+.top-nav a:hover, .top-nav a[aria-current="page"] { color: var(--gn); text-decoration: none }
+@media (max-width: 720px) {
+  .brand .tg { display: none }
+  .top-nav { gap: 12px; font-size: 12px }
+}
+
+/* Generic page containers */
+.page { max-width: 920px; margin: 0 auto; padding: 32px 16px 80px }
+.page--wide { max-width: 1200px }
+.crumbs { font-size: 12px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px }
+.crumbs a { color: var(--tx2); font-weight: 600 }
+.crumbs span[aria-current] { color: var(--gn) }
+.crumbs .sep { margin: 0 8px; color: var(--tx3) }
+
+h1, h2, h3, h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; letter-spacing: -.3px; line-height: 1.15; color: var(--tx) }
+h1 { font-size: 40px; margin: 0 0 12px }
+h2 { font-size: 28px; margin: 36px 0 14px }
+h3 { font-size: 20px; margin: 24px 0 10px }
+h4 { font-size: 14px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--tx2) }
+.lead { font-size: 17px; color: var(--tx2); margin: 0 0 24px; line-height: 1.5 }
+
+/* Type badge */
+.tbadge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; vertical-align: middle }
+.t-Petrol { background: var(--amb); color: var(--am) }
+.t-Electric { background: var(--blb); color: var(--bl) }
+.t-Cordless { background: var(--ppb); color: var(--pp) }
+.t-Robotic { background: var(--gnb); color: var(--gn) }
+.t-Ride-on { background: rgba(239, 68, 68, .12); color: var(--rd) }
+.t-Push { background: var(--gyb); color: var(--gy) }
+.t-Hover { background: var(--cyb); color: var(--cy) }
+
+/* Hero block */
+.hero { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: center; padding: 24px; background: var(--bg2); border: 1px solid var(--bd); border-radius: 10px; margin-bottom: 28px }
+.hero-logo { width: 96px; height: 96px; background: var(--bg3); border-radius: 8px; display: grid; place-items: center; padding: 12px }
+.hero-logo img { max-width: 72px; max-height: 72px; object-fit: contain }
+.hero-logo .fb { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 28px; color: var(--tx2) }
+.hero-meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 6px; font-size: 12px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1px; font-weight: 600 }
+.hero h1 { margin: 0; font-size: 32px }
+.hero .b-name { font-size: 12px; color: var(--gn); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 4px }
+.hero .tag { color: var(--tx2); margin-top: 6px; font-size: 15px }
+@media (max-width: 600px) {
+  .hero { grid-template-columns: 1fr; padding: 18px }
+  .hero-logo { width: 72px; height: 72px }
+  .hero h1 { font-size: 26px }
+}
+
+/* Price block */
+.prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 }
+.pp { background: var(--bg2); border: 1px solid var(--bd); border-radius: 8px; padding: 14px }
+.pp .l { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--tx3); font-weight: 700 }
+.pp .v { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 26px; color: var(--tx); margin-top: 4px }
+.pp.use .v { color: var(--gn) }
+.pp .x { font-size: 11px; color: var(--tx3); margin-top: 4px }
+@media (max-width: 600px) { .prices { grid-template-columns: 1fr } }
+
+/* Content boxes */
+.box { background: var(--bg2); border: 1px solid var(--bd); border-radius: 8px; padding: 18px 20px; margin: 16px 0 }
+.box.ver { border-left: 3px solid var(--gn) }
+.box.tip { border-left: 3px solid var(--am) }
+.box p { margin: 0; color: var(--tx); line-height: 1.6 }
+.box p + p { margin-top: 10px }
+
+/* Pros / cons */
+.pcs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 }
+.pcs ul { list-style: none; padding: 0; margin: 0 }
+.pcs li { padding: 6px 0 6px 22px; position: relative; color: var(--tx2); line-height: 1.5; font-size: 14px }
+.pcs .pros li::before { content: '✓'; position: absolute; left: 0; color: var(--gn); font-weight: 700 }
+.pcs .cons li::before { content: '✕'; position: absolute; left: 0; color: var(--rd); font-weight: 700 }
+@media (max-width: 600px) { .pcs { grid-template-columns: 1fr } }
+
+/* Spec grid */
+.specs-tbl { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px }
+.specs-tbl th, .specs-tbl td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--bd) }
+.specs-tbl th { color: var(--tx3); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; width: 38% }
+.specs-tbl td { color: var(--tx) }
+
+/* Mower card grid (lists) */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 22px }
+.card { display: block; background: var(--bg2); border: 1px solid var(--bd); border-radius: 8px; padding: 16px; text-decoration: none; color: var(--tx); transition: border-color .15s, transform .15s }
+.card:hover { border-color: var(--gn); transform: translateY(-1px); text-decoration: none }
+.card .b-name { font-size: 11px; color: var(--gn); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 4px }
+.card .m-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; color: var(--tx); margin: 0 0 6px }
+.card .c-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 6px 0 }
+.card .c-tag { color: var(--tx2); font-size: 13px; line-height: 1.4; margin: 6px 0 12px }
+.card .c-foot { display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; border-top: 1px solid var(--bd); font-size: 12px; color: var(--tx3) }
+.card .c-foot b { color: var(--gn); font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900 }
+
+/* Inline list / category buttons */
+.ilist { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px }
+.ilist a { background: var(--bg3); border: 1px solid var(--bd); padding: 6px 12px; border-radius: 6px; color: var(--tx2); font-size: 13px; font-weight: 600 }
+.ilist a:hover { border-color: var(--gn); color: var(--tx); text-decoration: none }
+
+/* CTA strip */
+.cta { background: var(--bg2); border: 1px solid var(--bd); border-left: 3px solid var(--gn); border-radius: 8px; padding: 20px; margin: 36px 0; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; justify-content: space-between }
+.cta h3 { margin: 0 0 4px }
+.cta p { margin: 0; color: var(--tx2); font-size: 14px }
+.cta .btn { background: var(--gn); color: #000; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px }
+.cta .btn:hover { background: var(--gnd); text-decoration: none }
+
+/* Footer */
+footer { max-width: 1100px; margin: 0 auto; padding: 30px 16px 80px; border-top: 1px solid var(--bd); font-size: 12px; color: var(--tx3); text-align: center; line-height: 1.7 }
+footer b { color: var(--tx2) }
+footer .fnav { margin-bottom: 12px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap }
+footer .fnav a { color: var(--tx2); font-weight: 600 }
+
+/* Stars */
+.stars { color: var(--am); font-size: 13px; letter-spacing: 1px }
+.stars b { color: var(--tx); font-weight: 700; margin-left: 6px }

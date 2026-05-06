@@ -1,0 +1,11 @@
+{
+  "name": "mowright-uk",
+  "version": "1.0.0",
+  "description": "UK lawnmower price guide and comparison tool.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "rebuild": "node scripts/build.mjs"
+  }
+}
