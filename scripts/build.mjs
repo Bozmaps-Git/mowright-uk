@@ -6,6 +6,8 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { BLOG_POSTS } from './blog-posts.mjs';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mowright.co.uk';
 
@@ -333,6 +335,7 @@ const siteFooter = () => `
   <div class="inner">
     <nav>
       <a href="/">Browse</a>
+      <a href="/blog">Blog</a>
       <a href="/buying-guide">Buying Guide</a>
       <a href="/engines">Engines</a>
       <a href="/about">About</a>
@@ -1156,6 +1159,135 @@ ${siteFooter()}
 </html>`;
 }
 
+// ---------- Blog ----------
+const blogUrl = slug => `/blog/${slug}`;
+
+function renderBlogIndex() {
+  const sorted = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
+  return `${head({
+    title: 'MowRight UK Blog — independent lawn mower advice and how-tos',
+    description: 'Long-form guides on UK lawn mower buying, maintenance, troubleshooting, and brand-specific advice. No affiliate fluff.',
+    canonical: '/blog'
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Browse</a><span class="sep">›</span>
+    <span aria-current="page">Blog</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 56px">
+  <div class="page page--narrow about" style="padding:0">
+    <div class="brand-eyebrow">Blog</div>
+    <h1 class="bg-h1">Long-form mower advice.</h1>
+    <p class="cat-lead" style="font-size:18px;max-width:680px;line-height:1.6">Practical, independent guides on buying, troubleshooting, and choosing UK lawn mowers. Written for adults; no affiliate fluff.</p>
+
+    <div style="display:flex;flex-direction:column;gap:18px;margin-top:32px">
+      ${sorted.map(post => `
+      <a href="${esc(blogUrl(post.slug))}" style="display:block;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .15s">
+        <div style="font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">${esc(post.date)}</div>
+        <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(post.title)}</h2>
+        <p style="margin:0;font-size:15px;color:var(--ink-sub);line-height:1.55">${esc(post.lead.slice(0, 220))}${post.lead.length > 220 ? '…' : ''}</p>
+        <div style="margin-top:14px;font-size:13px;color:var(--accent);font-weight:600">Read article →</div>
+      </a>`).join('')}
+    </div>
+  </div>
+</section>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+function renderBlogPost(post) {
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { '@type': 'Organization', name: 'MowRight UK', url: SITE },
+    publisher: { '@type': 'Organization', name: 'MowRight UK', logo: { '@type': 'ImageObject', url: SITE + '/og.png' } },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': SITE + blogUrl(post.slug) }
+  };
+
+  const faqSchema = post.faqs && post.faqs.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: post.faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  } : null;
+
+  const ld = faqSchema ? [articleSchema, faqSchema] : articleSchema;
+
+  // Internal-link mowers from related[]
+  const related = (post.related || []).map(id => mowers.find(m => m.id === id)).filter(Boolean);
+
+  return `${head({
+    title: post.title,
+    description: post.description,
+    canonical: blogUrl(post.slug),
+    ldjson: ld
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/blog">Blog</a><span class="sep">›</span>
+    <span aria-current="page">${esc(post.title.length > 60 ? post.title.slice(0, 60) + '…' : post.title)}</span>
+  </nav>
+</div>
+
+<article style="padding:32px 32px 56px">
+  <div class="page page--narrow" style="padding:0">
+    <div style="font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Published ${esc(post.date)}</div>
+    <h1 style="margin:0;font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-1.6px;line-height:1.1">${esc(post.title)}</h1>
+    <p style="margin:22px 0 0;font-size:19px;line-height:1.6;color:var(--ink-sub);font-weight:500">${esc(post.lead)}</p>
+
+    <div style="height:1px;background:var(--border);margin:36px 0"></div>
+
+    <div style="display:flex;flex-direction:column;gap:32px">
+      ${post.sections.map(section => `
+      <section>
+        <h2 style="margin:0 0 14px;font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(section.h)}</h2>
+        ${section.p.map(para => `<p style="margin:0 0 14px;font-size:16px;line-height:1.7;color:var(--ink)">${esc(para)}</p>`).join('')}
+      </section>`).join('')}
+    </div>
+
+    ${post.faqs && post.faqs.length ? `
+    <div style="height:1px;background:var(--border);margin:48px 0 32px"></div>
+    <h2 style="margin:0 0 18px;font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">FAQs</h2>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      ${post.faqs.map(faq => `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px">
+        <h3 style="margin:0 0 8px;font-size:16px;font-weight:700;color:var(--ink)">${esc(faq.q)}</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--ink-sub)">${esc(faq.a)}</p>
+      </div>`).join('')}
+    </div>` : ''}
+
+    ${related.length ? `
+    <div style="height:1px;background:var(--border);margin:48px 0 24px"></div>
+    <h2 style="margin:0 0 18px;font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">Mowers mentioned in this article</h2>
+    <div class="cards">${related.map(categoryListCard).join('')}</div>` : ''}
+
+    <div style="margin-top:48px">
+      ${ctaStrip("Browse the full catalogue", `${mowers.length} mowers across ${Object.keys(BRANDS).length} UK brands, with new and used prices.`, 'Open the compare tool', '/')}
+    </div>
+  </div>
+</article>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
 // ---------- Engines page ----------
 function renderEnginesPage() {
   const engines = [
@@ -1273,6 +1405,7 @@ function renderSitemap() {
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
     { loc: '/engines', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/blog', priority: '0.9', changefreq: 'weekly' },
     { loc: '/credits', priority: '0.2', changefreq: 'monthly' },
     { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
     ...Object.keys(CATEGORIES).map(t => ({ loc: '/' + CATEGORIES[t].slug, priority: '0.8', changefreq: 'monthly' })),
@@ -1281,7 +1414,8 @@ function renderSitemap() {
     ...BEST_OF.map(cfg => ({ loc: bestOfUrl(cfg.slug), priority: '0.7', changefreq: 'monthly' })),
     ...COMPARISONS
       .filter(([a, b]) => mowers.find(m => m.id === a) && mowers.find(m => m.id === b))
-      .map(([a, b]) => ({ loc: compUrl(a, b), priority: '0.6', changefreq: 'monthly' }))
+      .map(([a, b]) => ({ loc: compUrl(a, b), priority: '0.6', changefreq: 'monthly' })),
+    ...BLOG_POSTS.map(post => ({ loc: blogUrl(post.slug), priority: '0.8', changefreq: 'monthly' }))
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1346,11 +1480,20 @@ writeFileSync(join(ROOT, 'about.html'), renderAboutPage()); written++;
 writeFileSync(join(ROOT, 'buying-guide.html'), renderGuideHub()); written++;
 writeFileSync(join(ROOT, 'credits.html'), renderCreditsPage()); written++;
 writeFileSync(join(ROOT, 'engines.html'), renderEnginesPage()); written++;
+writeFileSync(join(ROOT, 'blog.html'), renderBlogIndex()); written++;
 
 clean(join(ROOT, 'vs'));
 clean(join(ROOT, 'best'));
+clean(join(ROOT, 'blog'));
 ensureDir(join(ROOT, 'vs'));
 ensureDir(join(ROOT, 'best'));
+ensureDir(join(ROOT, 'blog'));
+
+let blogPostsWritten = 0;
+for (const post of BLOG_POSTS) {
+  writeFileSync(join(ROOT, 'blog', `${post.slug}.html`), renderBlogPost(post));
+  blogPostsWritten++; written++;
+}
 
 let comparisonPagesWritten = 0;
 for (const [a, b, verdict] of COMPARISONS) {
@@ -1377,4 +1520,5 @@ console.log(`  ${Object.keys(CATEGORIES).length} category pages`);
 console.log(`  ${Object.keys(BRANDS).length} brand pages`);
 console.log(`  ${comparisonPagesWritten} comparison pages`);
 console.log(`  ${bestOfPagesWritten} best-of pages`);
+console.log(`  ${blogPostsWritten} blog posts + 1 index`);
 console.log(`  6 misc (about, buying-guide, credits, engines, sitemap, mowers-spa.json)`);
