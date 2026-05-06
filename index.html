@@ -213,6 +213,7 @@
     <nav>
       <a href="/">Browse</a>
       <a href="/buying-guide">Buying Guide</a>
+      <a href="/engines">Engines</a>
       <a href="/about">About</a>
       <a href="/credits">Image Credits</a>
       <a href="/privacy">Privacy</a>
@@ -611,14 +612,20 @@
       .filter(Boolean);
     featured.forEach(b => {
       const count = STATE.data.mowers.filter(m => m.brandSlug === b.slug).length;
-      const card = el('a', { class: 'hp-brand', href: '/brand/' + b.slug }, [
+      const children = [];
+      if (b.logo) {
+        children.push(el('div', { class: 'b-logo' }, [
+          el('img', { src: b.logo, alt: b.name + ' logo', loading: 'lazy', decoding: 'async' })
+        ]));
+      }
+      children.push(
         el('h3', null, b.name),
         el('div', { class: 'parent' }, b.parent),
         el('p', null, b.focus),
         el('div', { class: 'pillset' }, b.categories ? b.categories.map(c => el('span', null, c)) : []),
         el('div', { class: 'ms' }, count + ' models reviewed →')
-      ]);
-      grid.append(card);
+      );
+      grid.append(el('a', { class: 'hp-brand', href: '/brand/' + b.slug }, children));
     });
 
     const allWrap = $('#all-brands');
