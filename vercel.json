@@ -31,7 +31,7 @@
     {
       "source": "/:path*\\.(css|js)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300, must-revalidate" }
       ]
     },
     {
@@ -43,6 +43,13 @@
     },
     {
       "source": "/mowers.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300" },
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/mowers-spa.json",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300" },
         { "key": "Content-Type", "value": "application/json; charset=utf-8" }

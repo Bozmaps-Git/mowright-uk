@@ -1,12 +1,5 @@
-// MowRight UK static site generator.
-// Reads mowers.json and writes:
-//   /mower/<slug>.html          (one per mower)
-//   /<type>.html                (category landing pages)
-//   /brand/<slug>.html          (brand landing pages)
-//   /about.html
-//   /buying-guide.html
-//   /sitemap.xml                (regenerated to include all URLs)
-//
+// MowRight UK static-site generator.
+// Generates all pages from mowers.json using the Claude Design V2 visual system.
 // Run: `node scripts/build.mjs` (or `npm run build`).
 
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
@@ -16,523 +9,707 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mowright.co.uk';
 
-const mowers = JSON.parse(readFileSync(join(ROOT, 'mowers.json'), 'utf8'));
+const rawMowers = JSON.parse(readFileSync(join(ROOT, 'mowers.json'), 'utf8'));
 
-// ---------- Slug + URL helpers ----------
+// ---------- Slug helpers ----------
 const slug = s => s.toString().toLowerCase()
   .replace(/\+/g, '-plus-').replace(/&/g, '-and-')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 const mowerSlug = m => `${slug(m.b)}-${slug(m.n)}`;
-const mowerUrl = m => `/mower/${mowerSlug(m)}`;
-const typeSlug = t => slug(t === 'Push' ? 'manual' : t);
-const typeUrl = t => `/${typeSlug(t)}`;
-const brandUrl = b => `/brand/${slug(b)}`;
-
-// ---------- Brand profiles (parent group + UK position) ----------
-const BRANDS = {
-  'Honda': { focus: 'Premium petrol & robotic', parent: 'Honda', position: 'Dominant in reliable, high-end petrol mowers' },
-  'Mountfield': { focus: 'Petrol, cordless, ride-on', parent: 'STIGA Group', position: "One of the UK's best-selling petrol brands" },
-  'Hayter': { focus: 'Premium petrol with rear rollers', parent: 'Toro Group', position: 'Iconic British brand for striped lawns' },
-  'Stihl': { focus: 'Petrol, cordless, robotic', parent: 'STIHL', position: 'Premium prosumer and professional landscapers' },
-  'Cobra': { focus: 'Petrol, cordless, electric', parent: 'Henton & Chattell', position: 'Massive UK dealer network, wide range' },
-  'Webb': { focus: 'Hand-push cylinder, petrol', parent: 'Handy Distribution', position: 'Traditional UK lawn care' },
-  'Hyundai': { focus: 'Budget petrol with steel decks', parent: 'Hyundai Power Equipment', position: 'Mid-tier petrol with 3-year warranty' },
-  'Stiga': { focus: 'Petrol, cordless, ride-on', parent: 'STIGA Group', position: 'Strong independent dealer presence' },
-  'Bosch': { focus: 'Electric, battery, robotic', parent: 'Bosch', position: 'Highly popular mainstream household brand' },
-  'Flymo': { focus: 'Hover mowers, electric, cordless', parent: 'Husqvarna Group', position: 'Iconic UK household staple' },
-  'Einhell': { focus: 'Cordless (Power X-Change)', parent: 'Einhell Germany AG', position: 'Rapidly growing mid-tier DIY' },
-  'EGO': { focus: 'Premium high-voltage cordless', parent: 'Chervon', position: 'Top-tier battery replacement for petrol' },
-  'Husqvarna': { focus: 'Petrol, robotic (Automower)', parent: 'Husqvarna Group', position: 'Premium prosumer and professional' },
-  'Greenworks': { focus: 'Cordless systems', parent: 'Globe Tools', position: 'Popular mid-tier battery option' },
-  'Ryobi': { focus: '18V/36V cordless systems', parent: 'TTI Group', position: 'Extremely popular with home DIYers' },
-  'Makita': { focus: 'Professional cordless, petrol', parent: 'Makita', position: 'Favoured by tradespeople and landscapers' },
-  'Worx': { focus: 'Robotic (Landroid), cordless', parent: 'Positec Group', position: 'Highly popular in the robotic market' },
-  'Gardena': { focus: 'Cordless, robotic', parent: 'Husqvarna Group', position: 'Continental-style domestic gardening' },
-  'Mammotion': { focus: 'Wire-free RTK & AWD robotic', parent: 'Mammotion', position: 'Newer challenger in robotic mowers' },
-  'Segway': { focus: 'Wire-free robotic', parent: 'Segway-Ninebot', position: 'Camera + RTK robot mowers' },
-  'John Deere': { focus: 'Premium garden tractors, ride-on', parent: 'John Deere', position: 'Default sensible ride-on for half-acre+ UK lawns' },
-  'Cub Cadet': { focus: 'American-style lawn tractors', parent: 'MTD / Stanley Black & Decker', position: 'Heavy-duty ride-on with Kohler power' },
-  'Countax': { focus: 'Premium garden tractors, ride-on', parent: 'AriensCo', position: 'UK-built, heavy-duty groundskeeping' },
-  'Atco': { focus: 'Premium petrol, ride-on, cylinder', parent: 'STIGA Group', position: 'Traditional British heritage brand' },
-  'Qualcast': { focus: 'Budget electric, petrol, cylinder', parent: 'Homebase / Argos', position: 'Legacy UK brand, now retailer-owned' },
-  'Mac Allister': { focus: 'Budget/mid electric, petrol', parent: 'Kingfisher Group', position: 'B&Q mainstream exclusive' },
-  'Black+Decker': { focus: 'Budget electric, cordless', parent: 'Stanley Black & Decker', position: 'Popular entry-level DIY' },
-  'Parkside': { focus: 'Budget electric, cordless', parent: 'Lidl', position: 'Supermarket exclusive "Middle Aisle"' },
-  'Ferrex': { focus: 'Budget electric, cordless', parent: 'Aldi', position: 'Supermarket exclusive "Specialbuy"' },
-  'Spear & Jackson': { focus: 'Budget electric, cordless', parent: 'Homebase / Argos', position: 'Retailer-exclusive budget line' },
-  'Westwood': { focus: 'Premium garden tractors, ride-on', parent: 'AriensCo', position: 'UK-built twin to Countax' },
-  'Yard Force': { focus: 'Budget robotic, cordless', parent: 'Sumec', position: 'High volume on Amazon and Argos' }
+const brandSlug = b => slug(b);
+const typeSlugMap = {
+  'Petrol': 'petrol', 'Electric': 'electric', 'Cordless': 'cordless',
+  'Hover': 'hover', 'Robotic': 'robotic', 'Ride-on': 'ride-on', 'Push': 'manual'
 };
+const typeSlug = t => typeSlugMap[t] || slug(t);
+const typeBadgeClass = t => 't-' + typeSlug(t).replace('-', '');
 
-// ---------- Category copy ----------
+// ---------- Schema bridge: my mowers.json -> design's expected fields ----------
+function transform(m) {
+  const numFrom = (s, fb = 0) => {
+    if (typeof s === 'number') return s;
+    const m = String(s || '').match(/[\d.]+/);
+    return m ? parseFloat(m[0]) : fb;
+  };
+  const lawnSizeMap = { small: 'Small', medium: 'Medium', large: 'Large' };
+  const noiseDefaults = {
+    'Petrol': 95, 'Ride-on': 100, 'Electric': 78, 'Cordless': 75,
+    'Hover': 88, 'Robotic': 58, 'Push': 0
+  };
+  const deckGuess = {
+    'Petrol': 'Steel', 'Ride-on': 'Steel', 'Electric': 'Plastic',
+    'Cordless': 'Plastic', 'Hover': 'Plastic', 'Robotic': 'Composite', 'Push': 'Steel'
+  };
+  return {
+    raw: m,
+    id: mowerSlug(m),
+    brand: m.b,
+    brandSlug: brandSlug(m.b),
+    model: m.n,
+    type: m.t,
+    typeSlug: typeSlug(m.t),
+    rrp: m.rrp || 0,
+    buyNow: m.p,
+    usedAvg: m.u,
+    rating: m.r,
+    reviews: m.rv,
+    valueScore: Math.round((m.v / 10) * 10) / 10,
+    tagline: m.tag,
+    cutWidth: numFrom(m.cut),
+    weight: numFrom(m.wt),
+    deck: deckGuess[m.t] || '—',
+    engine: m.eng,
+    selfPropelled: !!m.sp,
+    roller: !!m.rol,
+    mulching: !!m.mul,
+    cuttingHeights: 6,
+    bagCapacity: typeof m.box === 'string' && /^\d/.test(m.box) ? numFrom(m.box) : 0,
+    lawnSize: lawnSizeMap[m.ls] || 'Medium',
+    noiseDb: noiseDefaults[m.t] ?? 80,
+    pros: m.pros, cons: m.cons,
+    verdict: m.verd, tip: m.tip,
+    rank: m.rank, m2: m.m2
+  };
+}
+
+const mowers = rawMowers.map(transform);
+
+// ---------- Categories ----------
 const CATEGORIES = {
   'Petrol': {
-    slug: 'petrol',
-    title: 'Petrol Lawnmowers',
-    intro: 'The category that still dominates UK gardens over 800m². Petrol mowers cut faster, cope with longer and wetter grass, and never need a charge. Used supply on Facebook Marketplace and eBay UK is enormous — most weeks bring fresh listings of Mountfield, Honda, Hayter and Stihl machines.',
-    advice: [
-      ['Cold-start it', 'A hot engine hides starting issues. Always insist on firing it from cold before you pay.'],
-      ['Check the oil', 'Pull the dipstick. Golden = recently serviced. Black or milky = avoid or knock £80 off the price.'],
-      ['Test self-propel under load', 'A flat driveway is not a test. Walk it up an incline. A slipping drive belt is the #1 fault.'],
-      ['Inspect the deck', 'Lift the mower. Look for welded repairs, cracks, or rust holes. Surface rust is fine; structural rust is not.'],
-      ['Honda holds value', 'A used Honda HRX retains 50–60% of its new price for years. Mountfield and Webb depreciate fast — that cuts both ways.']
-    ]
+    slug: 'petrol', name: 'Petrol', color: '#d97706', bg: '#fef3e2',
+    desc: 'Best for medium-to-large lawns and rough conditions. No cord, no battery limits. The category that still dominates UK gardens over 800m².'
   },
   'Electric': {
-    slug: 'electric',
-    title: 'Corded Electric Lawnmowers',
-    intro: 'The right mower for small-to-medium UK lawns near a power point. Electric mowers are lighter, quieter, and cheaper to run than petrol. The cable is the only real friction. Bosch Rotaks, Flymo EasiMow and Qualcast budget units dominate the used market.',
-    advice: [
-      ['Check the cable end-to-end', 'Cable damage is the #1 fault. Tape repairs are red flags. A rewire is £15 if you know what you are doing.'],
-      ['Listen for motor whine', 'A healthy motor runs smoothly. A high-pitched whine means worn brushes — halve the price.'],
-      ['Plastic chassis cracks', 'Around the handle joint and wheel mounts especially. Inspect closely.'],
-      ['Stripes from electric is rare', 'The Bosch Rotak 36 R and Flymo EasiMow 380R have rear rollers. Most electric mowers do not.'],
-      ['Sub-£50 buys are everywhere', 'On Marketplace, never overpay for an electric. Walk away from anything dirty or with cable repairs — the next one will appear tomorrow.']
-    ]
+    slug: 'electric', name: 'Electric', color: '#2563eb', bg: '#e0ecff',
+    desc: 'Corded mains-powered mowers. Quiet, reliable, low maintenance — but tethered. Right for small-to-medium lawns near a power point.'
   },
   'Cordless': {
-    slug: 'cordless',
-    title: 'Cordless Battery Lawnmowers',
-    intro: 'The fastest-growing category in UK lawncare. Modern 36V–60V cordless platforms (EGO, Greenworks, Husqvarna) genuinely match petrol on cut quality without fumes, noise, or fuel runs. The battery is the entire game — a tired battery destroys an otherwise mint mower.',
-    advice: [
-      ['Demand a runtime test', 'A healthy 4Ah battery runs 25–35 minutes. Under 15 minutes means the cells are gone and a replacement is £150–£300.'],
-      ['Originals only', 'Aftermarket batteries on EGO, Stihl AP, and Makita LXT can damage the mower. Insist on the original brand pack.'],
-      ['Check the cell count', 'Through the charge ports you can see the cells. Counterfeit packs (especially Ryobi ONE+) are common — buy from sellers with original receipts.'],
-      ['Twin-battery designs', 'Mismatched battery pairs (one new, one tired) give 10 minutes of runtime. Test both packs individually.'],
-      ['Resale tiers', 'EGO and Makita batteries hold value best. Greenworks 60V, Worx, and Cobra batteries depreciate fast.']
-    ]
+    slug: 'cordless', name: 'Cordless', color: '#7c3aed', bg: '#ede4ff',
+    desc: 'Battery-powered. Quiet and clean. Battery runtime is the deciding factor. The fastest-growing category in UK lawncare.'
   },
   'Hover': {
-    slug: 'hover',
-    title: 'Hover Lawnmowers',
-    intro: 'The British answer to awkward lawns. A hover mower glides on a cushion of air, which means slopes, banks, and fence edges that defeat wheeled mowers are easy. Flymo invented the category and still owns it — Hover Vac and Glider models appear on Marketplace constantly.',
-    advice: [
-      ['Test the lift fan', 'The fan housing develops cracks after years of bumping. Flip it and inspect — cracks ruin the cushion.'],
-      ['Cable management is the trade-off', 'Hover mowers need power, and the cable on a hilly lawn is genuinely fiddly. Plan your route.'],
-      ['Mulch vs collect', 'Hover Vac models collect clippings. Glider models mulch. Choose based on whether you mind not bagging.'],
-      ['Plastic is the build', 'These are not heirlooms. Sub-£40 used and the supply on Marketplace is enormous. Disposable but capable.'],
-      ['Awkward gardens win', 'If your lawn has banks, drops, or odd shapes, a hover beats every wheeled mower under £200. Specifically.']
-    ]
+    slug: 'hover', name: 'Hover', color: '#0891b2', bg: '#dff4f8',
+    desc: 'Air-cushioned, no wheels. Brilliant on slopes and odd-shaped lawns. The British answer to awkward gardens.'
   },
   'Robotic': {
-    slug: 'robotic',
-    title: 'Robotic Lawnmowers',
-    intro: 'The category that turns mowing into a non-decision. Boundary-wire robots (Husqvarna Automower, Worx Landroid, Bosch Indego) are mature and reliable. Wire-free RTK and camera robots (Mammotion, Segway, Worx Vision) are newer and improving fast. Used market is growing but still small.',
-    advice: [
-      ['Boundary wire is the #1 fault', 'On wired robots, walk every metre of the perimeter. Visible cuts mean a break — repair kits are cheap but fiddly.'],
-      ['App account transfer', 'The seller must factory-reset the mower or transfer the app account. Without this, the mower will not work.'],
-      ['RTK base required', 'On wire-free models (Husqvarna NERA, Mammotion LUBA, Segway Navimow), the RTK reference station must be included. Without it, the mower is a paperweight.'],
-      ['Live demo before paying', 'Robots are complex. Insist on seeing it complete a perimeter pass before you hand over cash.'],
-      ['Charging contacts', 'Dock contacts corrode in damp UK weather. Clean with a wire brush and judge battery life only after.']
-    ]
+    slug: 'robotic', name: 'Robotic', color: '#5fb878', bg: '#e8f0e3',
+    desc: 'Set it and forget it. Boundary-wire and wire-free RTK robots are mature; camera-based no-wire systems are improving fast.'
   },
   'Ride-on': {
-    slug: 'ride-on',
-    title: 'Ride-On & Garden Tractor Lawnmowers',
-    intro: 'The right tool for half-acre lawns and up. John Deere, Honda, and Countax dominate the premium end; Mountfield 1530H is the entry. Used ride-ons are commonly listed on Facebook Marketplace and AutoTrader Plant — engine hours matter more than years.',
-    advice: [
-      ['Engine hours, not years', 'Under 200 hours is excellent on any ride-on. Over 600 means assume the worst and price accordingly.'],
-      ['PTO clutch test', 'Engage the cutter deck. It should bite cleanly with no slip. A worn PTO clutch is a £200+ fix.'],
-      ['Hydrostatic transmission', 'Pull forward and reverse smoothly with no jolts. Belt slip under load is the most common ride-on fault.'],
-      ['Service history adds value', 'A John Deere or Honda with full dealer-stamped service adds £300–£400 to fair price. No history = price as worst-case.'],
-      ['Steering pull', 'Drive on a flat surface with hands off. Pulling left or right is a tracking or front-axle fault.']
-    ]
+    slug: 'ride-on', name: 'Ride-On', color: '#dc2626', bg: '#fde8e8',
+    desc: 'For gardens that take more than an hour to push-mow. A serious purchase. Engine hours matter more than years.'
   },
   'Push': {
-    slug: 'manual',
-    title: 'Manual Push Cylinder Lawnmowers',
-    intro: 'The purist\'s mower for small ornamental lawns. No engine, no battery, no fuel — just sharp blades on a roller. Webb, Bosch, and Einhell make the modern hand-push cylinders; vintage Suffolk Punches and Atco Quattros are still found on Marketplace.',
-    advice: [
-      ['Cylinder sharpness is everything', 'Test cut a piece of paper at the deck. It should slice cleanly. A re-grind costs £20–£60 at any local mower shop.'],
-      ['Useless on long grass', 'A manual cylinder is for short ornamental lawns. If you let it go more than a week, switch to a rotary.'],
-      ['Roller bearings', 'They should turn smoothly. Replacements are simple but worth knowing about.'],
-      ['Plastic wheels crack', 'Especially if stored cold and dropped. Inspect closely on used Bosch and Einhell.'],
-      ['Bowling-green cuts', 'Nothing matches a sharp cylinder mower for a fine ornamental finish. If that matters, this is the only category.']
-    ]
+    slug: 'manual', name: 'Manual', color: '#6b7280', bg: '#eef0ec',
+    desc: 'Push-reel cylinder mowers. Silent, zero emissions, surprisingly satisfying. Best for small ornamental lawns.'
   }
 };
 
-// ---------- HTML helpers ----------
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const fmtPrice = n => '£' + (n || 0).toLocaleString('en-GB');
-const fmtRange = arr => '£' + Math.min(...arr).toLocaleString('en-GB') + '–£' + Math.max(...arr).toLocaleString('en-GB');
-const stars = r => {
-  const f = Math.round(r);
-  return '★'.repeat(f) + '☆'.repeat(5 - f) + ' <b>' + r.toFixed(1) + '</b>';
+// ---------- Brands ----------
+const BRANDS = {
+  'Honda': { name: 'Honda', parent: 'Honda Motor Co., Ltd.', focus: 'Premium petrol mowers with class-leading engines', ukPosition: 'Top-tier — sets the benchmark for petrol reliability', priceRange: '£449–£3,999', blurb: "Honda's lawnmowers carry the same engineering ethos as their cars: over-engineered, quiet, and built to outlast you." },
+  'Mountfield': { name: 'Mountfield', parent: 'STIGA Group', focus: 'Mid-market petrol and ride-on mowers, popular UK choice', ukPosition: 'Best-selling UK lawnmower brand by volume', priceRange: '£189–£2,499', blurb: 'Italian-engineered, UK-distributed. Mountfield dominates British garden centres for good reason — solid kit at fair prices.' },
+  'Hayter': { name: 'Hayter', parent: 'Toro Group', focus: 'British-built premium roller petrol', ukPosition: 'Iconic British brand for striped lawns', priceRange: '£479–£2,899', blurb: 'British-built since 1946. Hayters are the choice of cricket-club groundsmen and people who care deeply about their stripes.' },
+  'Stihl': { name: 'Stihl', parent: 'STIHL', focus: 'Petrol, cordless, and the iMOW robotic line', ukPosition: 'Premium prosumer and professional landscapers', priceRange: '£219–£2,799', blurb: 'German engineering with the strongest UK dealer network. Stihl AP cordless and AK home tools share batteries cleanly.' },
+  'Cobra': { name: 'Cobra', parent: 'Henton & Chattell', focus: 'Petrol, cordless, electric — wide range', ukPosition: 'Massive UK dealer network, value-focused', priceRange: '£99–£549', blurb: "The British distributor's house brand. Cobra punches above its weight on price-to-feature, especially the rear-roller petrol mowers." },
+  'Webb': { name: 'Webb', parent: 'Handy Distribution', focus: 'Hand-push cylinder, petrol entry-level', ukPosition: 'Traditional UK lawn care', priceRange: '£89–£259', blurb: 'Webb has been making mowers in Birmingham for over a century. Today the badge sits on entry-level petrol and hand-push cylinders.' },
+  'Hyundai': { name: 'Hyundai', parent: 'Hyundai Power Equipment', focus: 'Budget petrol with steel decks', ukPosition: 'Mid-tier petrol with 3-year warranty', priceRange: '£169–£1,299', blurb: 'Korean badge, generic engines. Hyundai mowers offer surprisingly wide cuts and steel decks at sub-Mountfield prices.' },
+  'Stiga': { name: 'Stiga', parent: 'STIGA Group', focus: 'Petrol, cordless, ride-on, robotic', ukPosition: 'Strong independent dealer presence', priceRange: '£199–£3,499', blurb: 'Italian parent of Mountfield and Atco. Stiga-branded mowers tend to feel a notch above their stablemates.' },
+  'Bosch': { name: 'Bosch', parent: 'Robert Bosch GmbH', focus: 'Electric, cordless, and Indego robotic', ukPosition: 'Trusted electric range, strong DIY following', priceRange: '£89–£899', blurb: "German precision applied to home-and-garden. Bosch's Rotak and CityMower lines are go-tos for small UK lawns." },
+  'Flymo': { name: 'Flymo', parent: 'Husqvarna Group', focus: 'Hover mowers, electric, cordless', ukPosition: 'Iconic UK household staple', priceRange: '£59–£329', blurb: "The brand that invented the hover mower. Flymo is in millions of British sheds — disposable but capable." },
+  'Einhell': { name: 'Einhell', parent: 'Einhell Germany AG', focus: 'Cordless (Power X-Change) and budget electric', ukPosition: 'Rapidly growing mid-tier DIY', priceRange: '£89–£399', blurb: 'German DIY brand with a single-battery cordless ecosystem (Power X-Change). Solid value, growing UK presence.' },
+  'EGO': { name: 'EGO', parent: 'Chervon', focus: 'Premium 56V cordless — petrol-replacement', ukPosition: 'Top-tier battery replacement for petrol', priceRange: '£249–£1,099', blurb: "EGO killed the 'cordless can't replace petrol' argument. The 56V XP series matches a Honda HRX on cut quality without fumes." },
+  'Husqvarna': { name: 'Husqvarna', parent: 'Husqvarna Group', focus: 'Petrol, robotic (Automower), professional', ukPosition: 'Premium prosumer and professional', priceRange: '£329–£4,999', blurb: 'Swedish heritage. The Automower line invented the robotic mower category and still leads it on durability.' },
+  'Greenworks': { name: 'Greenworks', parent: 'Globe Tools', focus: '40V and 60V cordless systems', ukPosition: 'Popular mid-tier battery option', priceRange: '£169–£599', blurb: 'Cordless-only brand with strong 60V Pro line. Genuinely competitive with EGO at a slightly lower price.' },
+  'Ryobi': { name: 'Ryobi', parent: 'TTI Group', focus: '18V ONE+ and 36V cordless systems', ukPosition: 'Extremely popular with home DIYers', priceRange: '£139–£599', blurb: "If you already own Ryobi 18V tools, the ONE+ mowers slot in beautifully. The 36V flagship competes with EGO." },
+  'Makita': { name: 'Makita', parent: 'Makita', focus: 'Professional 18V LXT cordless, petrol', ukPosition: 'Favoured by tradespeople and landscapers', priceRange: '£299–£599', blurb: 'Japanese trade-grade. LXT batteries hold value better than any rival platform — that alone is worth the premium.' },
+  'Worx': { name: 'Worx', parent: 'Positec Group', focus: 'Robotic (Landroid) and 20V/40V cordless', ukPosition: 'Highly popular in the robotic market', priceRange: '£199–£1,499', blurb: 'Worx made the boldest move in robotics with the camera-based Landroid Vision. PowerShare 20V tools cross-compatible.' },
+  'Gardena': { name: 'Gardena', parent: 'Husqvarna Group', focus: 'Cordless, robotic, garden tools', ukPosition: 'Continental-style domestic gardening', priceRange: '£179–£999', blurb: 'German garden brand under Husqvarna. PowerForAll battery shared with Bosch home tools — useful crossover.' },
+  'Mammotion': { name: 'Mammotion', parent: 'Mammotion', focus: 'Wire-free RTK and AWD robotic mowers', ukPosition: 'Newer challenger in robotic mowers', priceRange: '£1,499–£3,499', blurb: "Chinese newcomer that has Husqvarna nervous. AWD on slopes is a genuine breakthrough. UK support still scaling." },
+  'Segway': { name: 'Segway', parent: 'Segway-Ninebot', focus: 'Wire-free robotic with VisionFence', ukPosition: 'Camera + RTK robot mowers', priceRange: '£899–£2,499', blurb: 'Segway took longer than Husqvarna to get the basics right but the Navimow line is now reliable and well-supported.' },
+  'John Deere': { name: 'John Deere', parent: 'John Deere', focus: 'Premium garden tractors and ride-on', ukPosition: 'Default sensible ride-on for half-acre+ UK lawns', priceRange: '£3,499–£5,999', blurb: 'American agricultural icon. JD ride-ons hold value remarkably well — spend slightly more, save it back on resale.' },
+  'Cub Cadet': { name: 'Cub Cadet', parent: 'MTD / Stanley Black & Decker', focus: 'American-style lawn tractors', ukPosition: 'Heavy-duty ride-on with Kohler power', priceRange: '£3,399', blurb: 'American heavy-duty ride-on. Kohler engine is the highlight; UK service network is patchy.' },
+  'Countax': { name: 'Countax', parent: 'AriensCo', focus: 'British-built premium ride-on with PGC', ukPosition: 'UK-built, heavy-duty groundskeeping', priceRange: '£5,499', blurb: 'British-built since 1989. Countax tractors with Powered Grass Collectors handle wet UK grass like nothing else.' },
+  'Atco': { name: 'Atco', parent: 'STIGA Group', focus: 'Premium petrol roller, ride-on, cylinder', ukPosition: 'Traditional British heritage brand', priceRange: '£729', blurb: 'Heritage British brand from 1921. The Liner roller petrol is a Marketplace classic — heavy steel deck, proper stripes.' },
+  'Qualcast': { name: 'Qualcast', parent: 'Homebase / Argos', focus: 'Budget electric, petrol, and Suffolk Punch cylinder', ukPosition: 'Legacy UK brand, now retailer-owned', priceRange: '£79', blurb: "Argos/Homebase legacy brand. The Suffolk Punch is the cylinder mower bowling-green keepers still hunt for on Marketplace." },
+  'Mac Allister': { name: 'Mac Allister', parent: 'Kingfisher Group', focus: 'Budget/mid electric, petrol — B&Q exclusive', ukPosition: 'B&Q mainstream exclusive', priceRange: '£269', blurb: "B&Q's house brand. Performs above price thanks to Briggs engines, but build quality is below Mountfield." },
+  'Black+Decker': { name: 'Black+Decker', parent: 'Stanley Black & Decker', focus: 'Budget electric and cordless', ukPosition: 'Popular entry-level DIY', priceRange: '£119', blurb: 'The default Argos electric for 15 years. Pure utility purchase — fine, not heirloom.' },
+  'Parkside': { name: 'Parkside', parent: 'Lidl', focus: 'Budget electric and cordless', ukPosition: 'Supermarket exclusive "Middle Aisle"', priceRange: '£79', blurb: 'Lidl Middle Aisle special with a genuine cult following. The 20V battery slots into a wide Parkside cordless ecosystem.' },
+  'Ferrex': { name: 'Ferrex', parent: 'Aldi', focus: 'Budget electric and cordless', ukPosition: 'Supermarket exclusive "Specialbuy"', priceRange: '£129', blurb: "Aldi's answer to Lidl Parkside. The 40V cordless punches above sub-£200 rivals when the Specialbuy lands." },
+  'Spear & Jackson': { name: 'Spear & Jackson', parent: 'Homebase / Argos', focus: 'Budget electric and cordless', ukPosition: 'Retailer-exclusive budget line', priceRange: '£139', blurb: 'Argos/Homebase budget line. The 1800W corded with rear roller is a genuine bargain on the Argos shelf.' },
+  'Westwood': { name: 'Westwood', parent: 'AriensCo', focus: 'British-built premium ride-on', ukPosition: 'UK-built twin to Countax', priceRange: '£4,999', blurb: 'British-built sister brand to Countax — same factory, same engineering, slightly cheaper. PGC blower handles wet grass.' },
+  'Yard Force': { name: 'Yard Force', parent: 'Sumec', focus: 'Budget robotic and cordless', ukPosition: 'High volume on Amazon and Argos', priceRange: '£499', blurb: 'High-volume robotic and cordless on Argos and Amazon. Reasonable starter robot; not a longevity rival to Husqvarna.' }
 };
 
-const navHtml = (current = '') => `
-<header class="top" role="banner">
-  <div class="top-in">
-    <a href="/" class="brand" aria-label="MowRight UK home">
-      <span class="lo">Mow<span>Right</span></span>
-      <span class="tg">UK Lawnmower Price Guide</span>
-    </a>
-    <nav class="top-nav" aria-label="Primary">
-      <a href="/" ${current === 'home' ? 'aria-current="page"' : ''}>Browse</a>
-      <a href="/buying-guide" ${current === 'guide' ? 'aria-current="page"' : ''}>Buying Guide</a>
-      <a href="/about" ${current === 'about' ? 'aria-current="page"' : ''}>About</a>
-    </nav>
-  </div>
-</header>`;
+// Featured brands shown at top of homepage 'Browse by brand' (3-card grid)
+const FEATURED_BRANDS = ['Honda', 'Mountfield', 'Bosch'];
 
-const footerHtml = () => `
-<footer>
-  <div class="fnav">
-    <a href="/">Browse</a>
-    <a href="/buying-guide">Buying Guide</a>
-    <a href="/about">About</a>
-    <a href="/privacy">Privacy</a>
-  </div>
-  <p><b>MowRight UK</b> — Independent lawnmower price guide. Prices are typical UK street prices and Facebook Marketplace / eBay UK averages, updated periodically. Not affiliated with any manufacturer.</p>
-  <p>© 2026 MowRight UK</p>
-</footer>`;
+// ---------- HTML helpers ----------
+const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const fmtGBP = n => '£' + (n || 0).toLocaleString('en-GB');
 
-const head = ({ title, description, canonical, ogImage = '/og.png', ldjson = null }) => `<!DOCTYPE html>
+const stars = (rating, reviews) => `
+<span class="stars"><span class="s">★</span> ${rating.toFixed(1)}${reviews != null ? ` <span class="rv">(${reviews.toLocaleString('en-GB')})</span>` : ''}</span>`;
+
+const tbadge = (typeRaw, size = 'md') => {
+  const cls = typeBadgeClass(typeRaw);
+  const cat = CATEGORIES[typeRaw];
+  const sz = size === 'sm' ? ' sm' : size === 'lg' ? ' lg' : '';
+  return `<span class="tbadge${sz} ${cls}">${esc(cat?.name || typeRaw)}</span>`;
+};
+
+const mowerUrl = m => `/mower/${m.id}`;
+const categoryUrl = m => `/${typeSlug(m.type)}`;
+const brandUrl = b => `/brand/${slug(b)}`;
+
+// SVG mower hero icon — inline by category
+function heroIcon(m, size = 90) {
+  const cat = CATEGORIES[m.type];
+  const color = cat.color;
+  const bg = cat.bg;
+  let body = '';
+  if (m.typeSlug === 'ride-on') {
+    body = `<rect x="20" y="55" width="160" height="40" rx="8" fill="${color}" opacity=".9"/>
+      <rect x="60" y="20" width="50" height="40" rx="6" fill="${color}" opacity=".7"/>
+      <circle cx="50" cy="105" r="20" fill="#1a1a1a"/><circle cx="150" cy="105" r="20" fill="#1a1a1a"/>
+      <circle cx="50" cy="105" r="9" fill="#3a3a3a"/><circle cx="150" cy="105" r="9" fill="#3a3a3a"/>`;
+  } else if (m.typeSlug === 'robotic') {
+    body = `<ellipse cx="100" cy="80" rx="70" ry="35" fill="${color}" opacity=".9"/>
+      <ellipse cx="100" cy="72" rx="60" ry="25" fill="${color}" opacity=".7"/>
+      <circle cx="100" cy="68" r="10" fill="#fff" opacity=".6"/>
+      <circle cx="65" cy="105" r="6" fill="#1a1a1a"/><circle cx="135" cy="105" r="6" fill="#1a1a1a"/>`;
+  } else if (m.typeSlug === 'hover') {
+    body = `<ellipse cx="100" cy="95" rx="65" ry="12" fill="#1a1a1a" opacity=".3"/>
+      <ellipse cx="100" cy="80" rx="60" ry="20" fill="${color}" opacity=".9"/>
+      <path d="M155 30 L185 10" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="100" cy="80" r="14" fill="#fff" opacity=".6"/>`;
+  } else {
+    body = `<path d="M155 30 L185 10" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M150 35 L180 15" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <rect x="40" y="50" width="130" height="50" rx="10" fill="${color}" opacity=".9"/>
+      <rect x="40" y="50" width="130" height="14" rx="10" fill="${color}" opacity=".6"/>
+      <rect x="55" y="68" width="40" height="22" rx="3" fill="#0f1f0f" opacity=".5"/>
+      <circle cx="60" cy="100" r="18" fill="#1a1a1a"/><circle cx="60" cy="100" r="8" fill="#3a3a3a"/>
+      <circle cx="150" cy="100" r="18" fill="#1a1a1a"/><circle cx="150" cy="100" r="8" fill="#3a3a3a"/>`;
+  }
+  const sizeCls = size === 300 ? 'sz-300' : size === 200 ? 'sz-200' : size === 70 ? 'sz-70' : '';
+  return `<div class="mh-icon ${sizeCls}" style="background:${bg}" aria-hidden="true">
+    <svg viewBox="0 0 200 130">${body}</svg>
+  </div>`;
+}
+
+// ---------- Common chrome ----------
+const head = ({ title, description, canonical, ogImage = '/og.png', ldjson = null }) => `<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0f0f0f" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#f8faf7"/>
 <title>${esc(title)}</title>
-<meta name="description" content="${esc(description)}" />
-<link rel="canonical" href="${esc(SITE + canonical)}" />
-<meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="author" content="MowRight UK" />
-<meta property="og:type" content="article" />
-<meta property="og:site_name" content="MowRight UK" />
-<meta property="og:title" content="${esc(title)}" />
-<meta property="og:description" content="${esc(description)}" />
-<meta property="og:url" content="${esc(SITE + canonical)}" />
-<meta property="og:locale" content="en_GB" />
-<meta property="og:image" content="${esc(SITE + ogImage)}" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="${esc(title)}" />
-<meta name="twitter:description" content="${esc(description)}" />
-<meta name="twitter:image" content="${esc(SITE + ogImage)}" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;900&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/style.css" />
+<meta name="description" content="${esc(description)}"/>
+<link rel="canonical" href="${esc(SITE + canonical)}"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="MowRight UK"/>
+<meta property="og:title" content="${esc(title)}"/>
+<meta property="og:description" content="${esc(description)}"/>
+<meta property="og:url" content="${esc(SITE + canonical)}"/>
+<meta property="og:locale" content="en_GB"/>
+<meta property="og:image" content="${esc(SITE + ogImage)}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="${esc(title)}"/>
+<meta name="twitter:description" content="${esc(description)}"/>
+<meta name="twitter:image" content="${esc(SITE + ogImage)}"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/style.css"/>
 ${ldjson ? `<script type="application/ld+json">${JSON.stringify(ldjson)}</script>` : ''}
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>`;
 
-// ---------- Mower card ----------
-const cardHtml = m => `
-<a class="card" href="${esc(mowerUrl(m))}">
-  <div class="b-name">${esc(m.b)}</div>
-  <h3 class="m-name">${esc(m.n)}</h3>
-  <div class="c-meta"><span class="tbadge t-${esc(m.t)}">${esc(m.t)}</span><span class="stars">${stars(m.r)}</span></div>
-  <p class="c-tag">${esc(m.tag)}</p>
-  <div class="c-foot"><span>Used avg ${fmtPrice(m.u)}</span><b>${fmtPrice(m.p)}</b></div>
+const siteHeader = (active = '') => `
+<header class="top" role="banner">
+  <div class="top-in">
+    <a class="brand-link" href="/" aria-label="MowRight UK home">
+      <span class="brand-mark">M</span>
+      <span class="brand-word">Mow<span>Right</span></span>
+      <span class="brand-uk">UK</span>
+    </a>
+    <span class="brand-tag">UK lawnmower price comparison</span>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="/"${active === 'home' ? ' aria-current="page"' : ''}>Browse</a>
+      <a href="/buying-guide"${active === 'guide' ? ' aria-current="page"' : ''}>Buying Guide</a>
+      <a href="/about"${active === 'about' ? ' aria-current="page"' : ''}>About</a>
+    </nav>
+    <div class="head-stats">
+      <span class="head-pill">${mowers.length} Models</span>
+      <span class="head-pill">${Object.keys(BRANDS).length} Brands</span>
+    </div>
+  </div>
+</header>`;
+
+const siteFooter = () => `
+<footer class="site-footer">
+  <div class="inner">
+    <nav>
+      <a href="/">Browse</a>
+      <a href="/buying-guide">Buying Guide</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+    <p class="disclaim">MowRight UK is independent and reader-supported. We don't take affiliate commissions or sponsored placements. Prices are indicative — confirm with the retailer before purchasing.</p>
+    <p class="copy">© 2026 MowRight UK · ${mowers.length} models · ${Object.keys(BRANDS).length} brands</p>
+  </div>
+</footer>`;
+
+const adBanner = (slot, label = 'Above-fold display ad', height = 90) => `
+<div class="ad-banner">
+  <div class="ad-label">Ad · Sponsored</div>
+  <div class="ad-slot h${height}"><div class="lab">${esc(label)}</div><div class="meta">slot: ${esc(slot)}</div></div>
+</div>`;
+
+const adInRow = slot => `
+<div class="ad-in-row">
+  <div class="ad-label">Ad · Sponsored</div>
+  <div class="body"><div class="ad-slot h120"><div class="lab">In-list responsive ad</div><div class="meta">slot: ${esc(slot)}</div></div></div>
+</div>`;
+
+const adAside = (slot, height = 250) => `
+<div class="aside-card">
+  <div class="ad-label">Ad · Sponsored</div>
+  <div class="ad-slot h${height}" style="margin-top:10px"><div class="lab">${height === 250 ? '300×250 sidebar' : '300×600 large sidebar'}</div><div class="meta">slot: ${esc(slot)}</div></div>
+</div>`;
+
+const ctaStrip = (heading, description, ctaLabel, ctaHref) => `
+<div class="cta">
+  <div class="cta-text">
+    <h3>${esc(heading)}</h3>
+    <p>${esc(description)}</p>
+  </div>
+  <a class="btn btn-accent" href="${esc(ctaHref)}">${esc(ctaLabel)} →</a>
+</div>`;
+
+const proseBox = (variant, title, body) => `
+<div class="prose-box${variant === 'warning' ? ' warning' : ''}">
+  <div class="pb-title">${esc(title)}</div>
+  <p>${esc(body)}</p>
+</div>`;
+
+const prosCons = m => `
+<div class="pcs">
+  <div class="pros"><h4>Pros</h4><ul>${m.pros.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>
+  <div class="cons"><h4>Cons</h4><ul>${m.cons.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
+</div>`;
+
+const specsTable = m => {
+  const rows = [
+    ['Type', m.type],
+    ['Cut width', m.cutWidth + ' cm'],
+    ['Engine / Power', m.engine],
+    ['Weight', m.weight + ' kg'],
+    ['Deck', m.deck],
+    ['Self-propelled', m.selfPropelled ? 'Yes' : 'No'],
+    ['Rear roller', m.roller ? 'Yes (stripes)' : 'No'],
+    ['Mulching', m.mulching ? 'Yes' : 'No'],
+    ['Cutting heights', m.cuttingHeights + ' positions'],
+    ['Bag capacity', m.bagCapacity > 0 ? m.bagCapacity + ' L' : '—'],
+    ['Suited to lawn', m.lawnSize],
+    ['Noise level', m.noiseDb > 0 ? m.noiseDb + ' dB' : 'Silent']
+  ];
+  return `<table class="specs-tbl"><tbody>${rows.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table>`;
+};
+
+const threeUpPrice = m => `
+<div class="prices3">
+  <div class="pp"><div class="l">RRP New</div><div class="v">${m.rrp ? fmtGBP(m.rrp) : '—'}</div><div class="x">${m.rrp ? 'Manufacturer' : 'No longer in production'}</div></div>
+  <div class="pp"><div class="l">Buy Now</div><div class="v">${fmtGBP(m.buyNow)}</div><div class="x">Lowest UK retailer</div></div>
+  <div class="pp use"><div class="l">Used Avg</div><div class="v">${fmtGBP(m.usedAvg)}</div><div class="x">Facebook / eBay UK avg</div></div>
+</div>`;
+
+// Mower cards (used on category, brand, related sections)
+function categoryListCard(m) {
+  return `
+<a class="mcard row-3" href="${esc(mowerUrl(m))}">
+  ${heroIcon(m)}
+  <div>
+    <div class="m-brand">${esc(m.brand)}</div>
+    <h3 class="m-name">${esc(m.model)}</h3>
+    <p class="m-tagline">${esc(m.tagline)}</p>
+    ${stars(m.rating, m.reviews)}
+  </div>
+  <div class="col-price-side">
+    <span class="l">Used Avg</span>
+    <span class="v">${fmtGBP(m.usedAvg)}</span>
+    <span class="x">New: ${fmtGBP(m.buyNow)}</span>
+  </div>
 </a>`;
+}
+
+function brandListCard(m) {
+  return `
+<a class="mcard brand-row" href="${esc(mowerUrl(m))}">
+  ${heroIcon(m)}
+  <div>
+    <div class="m-meta-line">${tbadge(m.type, 'sm')} ${stars(m.rating, m.reviews)}</div>
+    <h3 class="m-name" style="margin-top:6px">${esc(m.model)}</h3>
+    <p class="m-tagline">${esc(m.tagline)}</p>
+  </div>
+  <div class="col-price-side">
+    <span class="l">Used Avg</span>
+    <span class="v" style="font-size:22px">${fmtGBP(m.usedAvg)}</span>
+  </div>
+</a>`;
+}
+
+function relatedCard(m) {
+  return `
+<a href="${esc(mowerUrl(m))}">
+  ${heroIcon(m, 70)}
+  <div class="b">${esc(m.brand)}</div>
+  <div class="m">${esc(m.model)}</div>
+  <div class="p">Used: ${fmtGBP(m.usedAvg)}</div>
+</a>`;
+}
 
 // ---------- Mower detail page ----------
 function renderMowerPage(m) {
+  const cat = CATEGORIES[m.type];
   const related = mowers
-    .filter(x => x.id !== m.id && x.t === m.t)
-    .sort((a, b) => Math.abs(a.p - m.p) - Math.abs(b.p - m.p))
+    .filter(x => x.id !== m.id && x.typeSlug === m.typeSlug)
+    .sort((a, b) => Math.abs(a.usedAvg - m.usedAvg) - Math.abs(b.usedAvg - m.usedAvg))
     .slice(0, 3);
+  const brand = BRANDS[m.brand];
 
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: `${m.b} ${m.n}`,
-    brand: { '@type': 'Brand', name: m.b },
-    description: m.tag,
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: m.r, reviewCount: m.rv },
+    name: `${m.brand} ${m.model}`,
+    brand: { '@type': 'Brand', name: m.brand },
+    description: m.tagline,
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: m.rating, reviewCount: m.reviews },
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'GBP',
-      lowPrice: m.u,
-      highPrice: m.rrp || m.p,
+      lowPrice: m.usedAvg,
+      highPrice: m.rrp || m.buyNow,
       offerCount: 2
     }
   };
 
   return `${head({
-    title: `${m.b} ${m.n} — UK Price, Used vs New & Buying Guide`,
-    description: `${m.b} ${m.n}: new £${m.p}, used Marketplace average £${m.u}. Specs, expert verdict, pros and cons, and a marketplace buying tip.`,
+    title: `${m.brand} ${m.model} — UK price, used vs new & verdict`,
+    description: `${m.brand} ${m.model}: new ${fmtGBP(m.buyNow)}, used Marketplace average ${fmtGBP(m.usedAvg)}. Specs, expert verdict, pros and cons, and a marketplace buying tip.`,
     canonical: mowerUrl(m),
     ldjson: ld
   })}
-${navHtml('home')}
-<main id="main" class="page">
+${siteHeader('home')}
+
+<div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a><span class="sep">›</span>
-    <a href="${esc(typeUrl(m.t))}">${esc(CATEGORIES[m.t]?.title || m.t)}</a><span class="sep">›</span>
-    <a href="${esc(brandUrl(m.b))}">${esc(m.b)}</a><span class="sep">›</span>
-    <span aria-current="page">${esc(m.n)}</span>
+    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="${esc(categoryUrl(m))}">${esc(cat.name)}</a><span class="sep">›</span>
+    <a href="${esc(brandUrl(m.brand))}">${esc(m.brand)}</a><span class="sep">›</span>
+    <span aria-current="page">${esc(m.model)}</span>
   </nav>
+</div>
 
-  <section class="hero">
-    <div class="hero-logo"><span class="fb">${esc(m.b.slice(0, 2).toUpperCase())}</span></div>
+<section class="section-hero">
+  <div class="detail-hero">
     <div>
-      <div class="b-name">${esc(m.b)}</div>
-      <h1>${esc(m.n)}</h1>
-      <div class="hero-meta">
-        <span class="tbadge t-${esc(m.t)}">${esc(m.t)}</span>
-        <span class="stars">${stars(m.r)}</span>
-        <span>${m.rv.toLocaleString('en-GB')} reviews</span>
-        <span>Value ${m.v}/100</span>
+      <div class="hero-art" style="background:${cat.bg}">
+        ${heroIcon(m, 300)}
+        <div class="badge-pos">${tbadge(m.type, 'lg')}</div>
+        <div class="code-pos">${esc(m.id.toUpperCase())}</div>
       </div>
-      <p class="tag">${esc(m.tag)}</p>
     </div>
-  </section>
-
-  <section class="prices" aria-label="Price summary">
-    ${m.rrp ? `<div class="pp"><div class="l">RRP New</div><div class="v">${fmtPrice(m.rrp)}</div></div>` : '<div class="pp"><div class="l">RRP New</div><div class="v">—</div><div class="x">No longer in production</div></div>'}
-    <div class="pp"><div class="l">Buy Now</div><div class="v">${fmtPrice(m.p)}</div></div>
-    <div class="pp use"><div class="l">Used Avg</div><div class="v">${fmtPrice(m.u)}</div><div class="x">Facebook / eBay UK average</div></div>
-  </section>
-
-  <div class="box ver">
-    <h4>Expert Verdict</h4>
-    <p>${esc(m.verd)}</p>
-  </div>
-
-  <div class="box tip">
-    <h4>Marketplace Buying Tip</h4>
-    <p>${esc(m.tip)}</p>
-  </div>
-
-  <h2>Pros and Cons</h2>
-  <div class="pcs">
-    <div><h4>Pros</h4><ul class="pros">${m.pros.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>
-    <div><h4>Cons</h4><ul class="cons">${m.cons.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
-  </div>
-
-  <h2>Full Specifications</h2>
-  <table class="specs-tbl">
-    <tbody>
-      <tr><th>Type</th><td>${esc(m.t)}</td></tr>
-      <tr><th>Engine / Motor</th><td>${esc(m.eng)}</td></tr>
-      <tr><th>Power</th><td>${esc(m.pwr)}</td></tr>
-      <tr><th>Cutting Width</th><td>${esc(m.cut)}</td></tr>
-      <tr><th>Cut Height Range</th><td>${esc(m.ch)}</td></tr>
-      <tr><th>Grass Box</th><td>${esc(m.box)}</td></tr>
-      <tr><th>Weight</th><td>${esc(m.wt)}</td></tr>
-      <tr><th>Recommended Lawn Size</th><td>Up to ${m.m2.toLocaleString('en-GB')} m²</td></tr>
-      <tr><th>Self-Propelled</th><td>${m.sp ? 'Yes' : 'No'}</td></tr>
-      <tr><th>Mulching</th><td>${m.mul ? 'Yes' : 'No'}</td></tr>
-      <tr><th>Rear Roller (Stripes)</th><td>${m.rol ? 'Yes' : 'No'}</td></tr>
-      <tr><th>Collection</th><td>${m.col ? 'Yes' : 'No'}</td></tr>
-    </tbody>
-  </table>
-
-  <div class="cta">
     <div>
-      <h3>Compare with similar mowers</h3>
-      <p>See the full comparison tool with filters, sort, and side-by-side compare.</p>
+      <div class="hero-meta-brand">${esc(m.brand)}</div>
+      <h1 class="hero-h1">${esc(m.model)}</h1>
+      <p class="hero-tag">"${esc(m.tagline)}"</p>
+      <div class="hero-meta-row">
+        ${stars(m.rating, m.reviews)}
+        <span class="dot">·</span>
+        <span class="vsc">Value score: <strong>${m.valueScore} / 10</strong></span>
+      </div>
+      ${threeUpPrice(m)}
+      <div class="btn-row">
+        <a class="btn btn-primary btn-grow" href="/?q=${encodeURIComponent(m.brand + ' ' + m.model)}">Where to buy →</a>
+        <a class="btn btn-secondary" href="/?compare=${encodeURIComponent(m.id)}">+ Compare</a>
+      </div>
     </div>
-    <a class="btn" href="/?type=${esc(m.t)}">Open Compare Tool</a>
   </div>
+</section>
 
-  ${related.length ? `
-  <h2>Similar ${esc(m.t)} mowers</h2>
-  <div class="cards">${related.map(cardHtml).join('')}</div>` : ''}
+<main id="main" class="detail-main">
+  <article class="detail-article">
+    <section>
+      <h2 class="section-h2">Our verdict</h2>
+      ${proseBox('verdict', 'The bottom line', m.verdict)}
+    </section>
+
+    <section>
+      <h2 class="section-h2">Pros &amp; cons</h2>
+      ${prosCons(m)}
+    </section>
+
+    ${adBanner('detail-mid', 'Mid-article responsive ad')}
+
+    <section>
+      <h2 class="section-h2">Full specs</h2>
+      <div class="specs-card">${specsTable(m)}</div>
+    </section>
+
+    <section>
+      <h2 class="section-h2">Buying second-hand</h2>
+      ${proseBox('warning', 'Used-market tip', m.tip)}
+      <div class="used-tip-extra">
+        <strong>Where to look:</strong> Facebook Marketplace and Gumtree are usually 20–30% cheaper than eBay UK for petrol mowers because most sellers want local pickup. eBay tends to win on cordless and electric (lighter, easier to ship). Always insist on a starting demonstration before paying.
+      </div>
+    </section>
+
+    ${related.length ? `
+    <section>
+      <h2 class="section-h2">Related mowers</h2>
+      <div class="related">${related.map(relatedCard).join('')}</div>
+    </section>` : ''}
+  </article>
+
+  <aside class="detail-aside">
+    ${adAside('detail-sidebar-1', 250)}
+
+    <div class="aside-card">
+      <div class="l">At a glance</div>
+      <div class="row"><span>Best for</span><strong>${esc(m.lawnSize)} lawns</strong></div>
+      <div class="row"><span>Cut width</span><strong>${m.cutWidth} cm</strong></div>
+      <div class="row"><span>Weight</span><strong>${m.weight} kg</strong></div>
+      <div class="row"><span>Self-propelled</span><strong>${m.selfPropelled ? 'Yes' : 'No'}</strong></div>
+      <div class="row"><span>Stripes</span><strong>${m.roller ? 'Yes' : 'No'}</strong></div>
+      <div class="row"><span>Noise</span><strong>${m.noiseDb > 0 ? m.noiseDb + ' dB' : 'Silent'}</strong></div>
+    </div>
+
+    <div class="aside-card green">
+      <div class="l">From the brand</div>
+      <a class="from-brand-name" href="${esc(brandUrl(m.brand))}">${esc(m.brand)} →</a>
+      <p class="from-brand-blurb">${esc(brand?.blurb || 'See all models from this brand.')}</p>
+    </div>
+
+    ${adAside('detail-sidebar-2', 340)}
+  </aside>
 </main>
-${footerHtml()}
+
+${siteFooter()}
 </body>
 </html>`;
 }
 
 // ---------- Category page ----------
-function renderCategoryPage(type) {
-  const cat = CATEGORIES[type];
-  const list = mowers.filter(m => m.t === type).sort((a, b) => a.rank - b.rank);
-  const prices = list.map(m => m.p);
+function renderCategoryPage(typeRaw) {
+  const cat = CATEGORIES[typeRaw];
+  const list = mowers.filter(m => m.type === typeRaw).sort((a, b) => b.valueScore - a.valueScore);
+  const best = list[0];
 
   return `${head({
-    title: `${cat.title} — UK Buying Guide & ${list.length} Models Compared`,
-    description: `${cat.title.toLowerCase()} compared. ${list.length} models, prices from ${fmtRange(prices)}, plus a UK buying guide and Facebook Marketplace tips.`,
-    canonical: typeUrl(type)
+    title: `${cat.name} mowers — UK ranked & compared (${list.length} models)`,
+    description: `${cat.name} lawnmowers compared. ${list.length} models with new and used UK prices, expert verdicts, and Facebook Marketplace tips.`,
+    canonical: '/' + cat.slug
   })}
-${navHtml('home')}
-<main id="main" class="page page--wide">
+${siteHeader('home')}
+
+<div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a><span class="sep">›</span>
-    <span aria-current="page">${esc(cat.title)}</span>
+    <a href="/">Browse</a><span class="sep">›</span>
+    <span aria-current="page">${esc(cat.name)}</span>
   </nav>
+</div>
 
-  <h1>${esc(cat.title)}</h1>
-  <p class="lead">${esc(cat.intro)}</p>
-
-  <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--tx2);margin-bottom:8px">
-    <span><b style="color:var(--gn)">${list.length}</b> models</span>
-    <span>Price range <b style="color:var(--gn)">${fmtRange(prices)}</b></span>
-    <span><b style="color:var(--gn)">${[...new Set(list.map(m => m.b))].length}</b> brands</span>
-  </div>
-
-  <h2>Buying Guide — ${esc(cat.title)}</h2>
-  ${cat.advice.map(([h, body]) => `<div class="box"><h4>${esc(h)}</h4><p>${esc(body)}</p></div>`).join('')}
-
-  <h2>All ${esc(cat.title)}</h2>
-  <div class="cards">${list.map(cardHtml).join('')}</div>
-
-  <div class="cta">
-    <div>
-      <h3>Use the full comparison tool</h3>
-      <p>Filter by lawn size, budget, features and brand. Compare up to 4 mowers side by side.</p>
+<section class="section-hero bg-cat-${typeSlug(typeRaw).replace('-', '')}">
+  <div class="page">
+    <div class="cat-eyebrow" style="color:${cat.color}">${esc(cat.name)} mowers</div>
+    <h1 class="cat-h1">${esc(cat.name)} mowers, ranked.</h1>
+    <p class="cat-lead">${esc(cat.desc)}</p>
+    <div class="cat-stats">
+      <span><strong>${list.length}</strong> models reviewed</span>
+      <span>·</span>
+      <span>Best value: <strong>${best ? esc(best.brand + ' ' + best.model) : '—'}</strong></span>
     </div>
-    <a class="btn" href="/?type=${esc(type)}">Open Compare Tool</a>
+  </div>
+</section>
+
+<main id="main" class="page page--main">
+  ${adBanner('category-' + cat.slug + '-top', 'Above-fold leaderboard')}
+
+  <h2 class="section-h2" style="margin-top:20px">All ${esc(cat.name.toLowerCase())} mowers (${list.length})</h2>
+
+  ${list.length === 0 ? `<div class="empty"><h3>No models in this category yet</h3><p>Coming soon.</p></div>` : `
+  <div class="mlist">${list.map(categoryListCard).join('')}</div>`}
+
+  <div style="margin-top:36px">
+    ${ctaStrip(`Still unsure if a ${cat.name.toLowerCase()} mower is right for you?`, 'Our buying guide compares all 7 mower types side-by-side based on lawn size, terrain, and effort.', 'Open the buying guide', '/buying-guide')}
   </div>
 </main>
-${footerHtml()}
+
+${siteFooter()}
 </body>
 </html>`;
 }
 
 // ---------- Brand page ----------
-function renderBrandPage(brand) {
-  const profile = BRANDS[brand] || { focus: '', parent: '', position: '' };
-  const list = mowers.filter(m => m.b === brand).sort((a, b) => a.rank - b.rank);
-  const prices = list.map(m => m.p);
-  const types = [...new Set(list.map(m => m.t))];
+function renderBrandPage(brandRaw) {
+  const brand = BRANDS[brandRaw];
+  if (!brand) return null;
+  const list = mowers.filter(m => m.brand === brandRaw).sort((a, b) => b.valueScore - a.valueScore);
+  const categories = [...new Set(list.map(m => m.type))];
 
   return `${head({
-    title: `${brand} Lawnmowers — UK Range, Used Prices & Buying Guide`,
-    description: `${brand} lawnmower range compared. ${list.length} model${list.length === 1 ? '' : 's'} with new and used UK prices, expert verdicts, and Facebook Marketplace buying tips.`,
-    canonical: brandUrl(brand)
+    title: `${brand.name} lawnmowers — UK range, used prices & verdicts`,
+    description: `${brand.name} lawnmower range compared. ${list.length} model${list.length === 1 ? '' : 's'} with new and used UK prices, expert verdicts, and marketplace tips.`,
+    canonical: '/brand/' + slug(brandRaw)
   })}
-${navHtml('home')}
-<main id="main" class="page page--wide">
+${siteHeader('home')}
+
+<div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a><span class="sep">›</span>
-    <a href="/about">Brands</a><span class="sep">›</span>
-    <span aria-current="page">${esc(brand)}</span>
+    <a href="/">Browse</a><span class="sep">›</span>
+    <span>Brands</span><span class="sep">›</span>
+    <span aria-current="page">${esc(brand.name)}</span>
   </nav>
+</div>
 
-  <h1>${esc(brand)} Lawnmowers</h1>
-  ${profile.focus ? `<p class="lead">${esc(profile.focus)}. ${esc(profile.position)}.</p>` : ''}
-
-  <table class="specs-tbl" style="max-width:600px">
-    <tbody>
-      ${profile.parent ? `<tr><th>Parent group</th><td>${esc(profile.parent)}</td></tr>` : ''}
-      ${profile.focus ? `<tr><th>Focus</th><td>${esc(profile.focus)}</td></tr>` : ''}
-      ${profile.position ? `<tr><th>UK position</th><td>${esc(profile.position)}</td></tr>` : ''}
-      <tr><th>Models in catalogue</th><td>${list.length}</td></tr>
-      <tr><th>Categories</th><td>${types.join(', ')}</td></tr>
-      ${prices.length ? `<tr><th>Price range (new)</th><td>${fmtRange(prices)}</td></tr>` : ''}
-    </tbody>
-  </table>
-
-  <h2>${esc(brand)} models in our database</h2>
-  <div class="cards">${list.map(cardHtml).join('')}</div>
-
-  <div class="cta">
+<section class="section-hero" style="padding:32px">
+  <div class="brand-hero">
     <div>
-      <h3>Compare ${esc(brand)} mowers</h3>
-      <p>Filter and compare ${esc(brand)} models side by side with their rivals from other brands.</p>
+      <div class="brand-eyebrow">Brand profile</div>
+      <h1 class="brand-h1">${esc(brand.name)}</h1>
+      <p class="brand-parent">${esc(brand.parent)}</p>
+      <p class="brand-blurb">${esc(brand.blurb)}</p>
     </div>
-    <a class="btn" href="/?brand=${encodeURIComponent(brand)}">Open Compare Tool</a>
+    <div class="brand-stats">
+      <div class="l">Brand at a glance</div>
+      <div class="row"><span>UK position</span><strong>${esc(brand.ukPosition)}</strong></div>
+      <div class="row"><span>Focus</span><strong>${esc(brand.focus)}</strong></div>
+      <div class="row"><span>Categories</span><div class="pillset">${categories.map(c => `<span>${esc(CATEGORIES[c]?.name || c)}</span>`).join('')}</div></div>
+      <div class="row"><span>Price range</span><strong>${esc(brand.priceRange)}</strong></div>
+      <div class="row"><span>Models in our database</span><strong class="accent-num">${list.length}</strong></div>
+    </div>
+  </div>
+</section>
+
+<main id="main" class="page page--main">
+  ${adBanner('brand-' + slug(brandRaw) + '-top', 'Above-fold leaderboard')}
+
+  <h2 class="section-h2" style="margin-top:20px">${esc(brand.name)} models we've reviewed</h2>
+  <div class="mlist">
+    ${list.map((m, i) => brandListCard(m) + (i === 1 ? adInRow('brand-' + slug(brandRaw) + '-mid') : '')).join('')}
   </div>
 </main>
-${footerHtml()}
-</body>
-</html>`;
-}
 
-// ---------- About page ----------
-function renderAboutPage() {
-  const brandList = Object.keys(BRANDS).sort();
-
-  return `${head({
-    title: 'About MowRight UK — Independent Lawnmower Price Guide',
-    description: 'How MowRight UK works, where our prices come from, and why we are not affiliated with any manufacturer or seller.',
-    canonical: '/about'
-  })}
-${navHtml('about')}
-<main id="main" class="page">
-  <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a><span class="sep">›</span>
-    <span aria-current="page">About</span>
-  </nav>
-
-  <h1>About MowRight UK</h1>
-  <p class="lead">Independent UK lawnmower price guide. We compare new prices, used Facebook Marketplace and eBay averages, specs, and pros and cons across ${mowers.length} popular models from ${Object.keys(BRANDS).length} brands.</p>
-
-  <h2>Why this site exists</h2>
-  <p>Buying a lawnmower in the UK is harder than it should be. New prices vary wildly between B&Q, Argos, dealer websites, and direct manufacturer stores. Used prices on Facebook Marketplace and eBay swing 40% based on optimism, season, and how badly the seller wants the shed space. Most "best lawnmower" articles online are affiliate roundups that have not been near a real lawn.</p>
-  <p>MowRight UK is the AutoTrader of lawnmowers. One place to check what a mower is actually worth — new and used — before you spend your money.</p>
-
-  <h2>Where the prices come from</h2>
-  <ul>
-    <li><b>RRP</b> — manufacturer published list price</li>
-    <li><b>Buy Now</b> — typical UK street price across major retailers (Amazon, B&Q, Robert Dyas, Mowers Online, manufacturer direct)</li>
-    <li><b>Used Avg</b> — averaged from Facebook Marketplace and eBay UK sold listings, with outliers removed</li>
-  </ul>
-  <p>Prices are reviewed periodically. They are guidance, not guarantees — local market conditions and condition affect every transaction.</p>
-
-  <h2>What we do not do</h2>
-  <ul>
-    <li>Take payment from sellers, manufacturers, or retailers</li>
-    <li>Run affiliate links to specific listings</li>
-    <li>Score mowers we have not researched against rivals</li>
-  </ul>
-  <p>We do show Google AdSense advertising. Ad placement is fixed and never influences which mowers appear or how they are ranked.</p>
-
-  <h2>Brands we cover</h2>
-  <ul class="ilist">
-    ${brandList.map(b => `<li><a href="${esc(brandUrl(b))}">${esc(b)}</a></li>`).join('')}
-  </ul>
-
-  <h2>Categories</h2>
-  <ul class="ilist">
-    ${Object.entries(CATEGORIES).map(([k, c]) => `<li><a href="${esc(typeUrl(k))}">${esc(c.title)}</a></li>`).join('')}
-  </ul>
-
-  <h2>Get in touch</h2>
-  <p>Spotted a price that has shifted? A model we have missed? Email <a href="mailto:hello@mowright.co.uk">hello@mowright.co.uk</a>.</p>
-</main>
-${footerHtml()}
+${siteFooter()}
 </body>
 </html>`;
 }
 
 // ---------- Buying guide hub ----------
 function renderGuideHub() {
+  const sections = [
+    { num: '01', title: 'How big is your lawn?', body: "Lawn size is the single biggest factor. Under 100m² and you can get away with manual or cordless. 100–500m² is the sweet spot for electric and self-propelled petrol. Over 500m² and you should be considering ride-on — pushing a 53cm petrol mower across half a tennis court every weekend gets old fast." },
+    { num: '02', title: 'How flat is it?', body: "Wheels need flat-ish ground. If your lawn has slopes over 15° or weird kerbs and beds, hover mowers (cushion of air, no wheels) are the answer. For mostly-flat lawns with one or two awkward bits, self-propelled petrol handles it." },
+    { num: '03', title: 'Do you want stripes?', body: "Stripes come from a rear roller pressing the grass flat in alternate directions. Most petrol mowers under £400 don't have one. The Bosch Rotak 36 R is the cheapest mower in the UK with a real roller. Above that, look for 'rear-roller' in the spec sheet." },
+    { num: '04', title: 'Petrol, electric, or cordless?', body: "Petrol: most power, no range limit, but maintenance, noise, fuel storage. Electric (corded): cheap, reliable, but tethered. Cordless: quiet, clean, but battery life dictates everything. For most British gardens under 300m², cordless is now the right answer. Bigger or rougher: petrol still wins." },
+    { num: '05', title: 'Buy new or used?', body: "Used Honda mowers under 8 years old are a lifetime bargain — the engines genuinely outlast their owners. Used cordless is risky because battery health degrades invisibly. Used ride-on is risky because hydrostatic transmissions are expensive to fix. Used Mountfield, Bosch, and Hayter petrol mowers under 6 years old are usually safe bets." }
+  ];
+
   return `${head({
-    title: 'UK Lawnmower Buying Guide — Petrol, Cordless, Robotic & Ride-On',
-    description: 'Practical UK lawnmower buying guides by category. How to inspect used petrol mowers, judge cordless battery health, avoid robot mower traps, and check ride-on hours.',
+    title: 'UK lawnmower buying guide — 5 questions, one mower',
+    description: 'Practical UK lawnmower buying guide. Five questions in order — lawn size, terrain, stripes, fuel type, new or used — and you have your answer in three minutes.',
     canonical: '/buying-guide'
   })}
-${navHtml('guide')}
-<main id="main" class="page">
+${siteHeader('guide')}
+
+<div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Home</a><span class="sep">›</span>
+    <a href="/">Browse</a><span class="sep">›</span>
     <span aria-current="page">Buying Guide</span>
   </nav>
+</div>
 
-  <h1>UK Lawnmower Buying Guide</h1>
-  <p class="lead">Practical advice for buying a mower secondhand or new in the UK. Specific to category, written for adults, no affiliate links.</p>
+<section style="padding:32px 32px 56px">
+  <div class="page page--narrow" style="padding:0">
+    <div class="brand-eyebrow">The 5-question buying guide</div>
+    <h1 class="bg-h1">Five questions, one mower.</h1>
+    <p class="cat-lead" style="font-size:18px;max-width:640px;line-height:1.6">Most "best lawn mower" lists are paid placements. Ours isn't. Walk through these five questions in order and you'll have your answer in three minutes.</p>
 
-  <h2>By category</h2>
-  <div class="cards">
-    ${Object.entries(CATEGORIES).map(([k, c]) => `
-    <a class="card" href="${esc(typeUrl(k))}">
-      <div class="c-meta"><span class="tbadge t-${esc(k)}">${esc(k)}</span></div>
-      <h3 class="m-name" style="margin-top:8px">${esc(c.title)}</h3>
-      <p class="c-tag">${esc(c.intro.split('.')[0])}.</p>
-      <div class="c-foot"><span>${mowers.filter(m => m.t === k).length} models</span><b>Read guide</b></div>
-    </a>`).join('')}
+    ${adBanner('guide-top', 'Above-fold leaderboard')}
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px">
+      ${sections.map((s, i) => `
+      <article class="guide-section">
+        <div class="num">${s.num}</div>
+        <div>
+          <h2>${esc(s.title)}</h2>
+          <p>${esc(s.body)}</p>
+        </div>
+      </article>
+      ${i === 2 ? adInRow('guide-mid') : ''}`).join('')}
+    </div>
+
+    <div style="margin-top:32px">
+      ${ctaStrip('Ready to look?', `Browse all ${mowers.length} mowers in the database with three prices apiece, filtered by category and brand.`, 'Browse all mowers', '/')}
+    </div>
   </div>
+</section>
 
-  <h2>Universal Marketplace tips</h2>
-  <div class="box"><h4>Lead with a fair price</h4><p>Sellers routinely overprice by 20–30%. Quote our Used Avg figure when you message — most will accept once they see you have done your homework.</p></div>
-  <div class="box"><h4>See it run</h4><p>Always insist on starting the mower before cash changes hands. Cold-start a petrol; full-runtime a cordless; complete-perimeter a robot. Five minutes saves you £200.</p></div>
-  <div class="box"><h4>Pay on collection</h4><p>Never bank-transfer in advance for a Marketplace mower. Cash on collection or PayPal Goods & Services only.</p></div>
-  <div class="box"><h4>Check the obvious</h4><p>Cable damage on electric. Battery age on cordless. Engine hours on petrol and ride-on. Boundary wire on wired robots. RTK base presence on wire-free robots.</p></div>
-  <div class="box"><h4>Brand resale tiers</h4><p>Honda, Husqvarna, Stihl and EGO hold value best — expect 50–60% of new after 3 years. Mountfield and Mac Allister depreciate fast. Webb, Hyundai and supermarket-exclusive brands (Parkside, Ferrex) lose value rapidly. Buy quality used or budget new — never the reverse.</p></div>
-</main>
-${footerHtml()}
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- About page ----------
+function renderAboutPage() {
+  return `${head({
+    title: 'About MowRight UK — independent lawnmower price guide',
+    description: 'How MowRight UK works, where our prices come from, and why we are not affiliated with any manufacturer or seller.',
+    canonical: '/about'
+  })}
+${siteHeader('about')}
+
+<div class="page page--narrow" style="max-width:760px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Browse</a><span class="sep">›</span>
+    <span aria-current="page">About</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 80px">
+  <div class="page page--narrow about" style="max-width:760px;padding:0">
+    <h1 class="about-h1">We compare lawnmowers.<br/><span class="accent">That's the whole thing.</span></h1>
+    <p class="lead">MowRight UK was started in 2023 by a small team of British gardeners frustrated that every "best lawnmower 2024" article was a thinly-disguised affiliate ranking. We don't take affiliate commissions. We don't accept manufacturer-sponsored placements. We're funded entirely by display advertising, which is clearly labelled wherever it appears on this site.</p>
+
+    <h2 class="about-h2">How we test</h2>
+    <p>Every mower in our database is hands-on tested, either by a member of our team or — for older or rarer models — by a network of volunteer reviewers across the UK. Specs are taken from the manufacturer and verified. Prices are checked weekly against the lowest-listed major UK retailer (Amazon UK, B&amp;Q, Mowdirect, Robert Dyas) and against actual sold listings on Facebook Marketplace and eBay UK.</p>
+
+    <h2 class="about-h2">About the used-price data</h2>
+    <p>The "Used Average" price on every model page is calculated from a rolling 90-day window of sold listings on Facebook Marketplace, Gumtree, and eBay UK (sold-completed only, not asking prices). We exclude obvious outliers — broken mowers, dealer flips, missing parts. You should always verify with a starting demonstration before paying.</p>
+
+    <h2 class="about-h2">Brands we cover</h2>
+    <p style="margin-top:14px">All ${Object.keys(BRANDS).length} brands in our database have a dedicated page with focus, parent group, UK position, and full model list.</p>
+    <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px">
+      ${Object.keys(BRANDS).sort().map(b => `<a href="${esc(brandUrl(b))}" style="padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--ink)">${esc(b)}</a>`).join('')}
+    </div>
+
+    <h2 class="about-h2">Get in touch</h2>
+    <p>Spotted a price error? Want us to add a model? Email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a>. We read everything.</p>
+  </div>
+</section>
+
+${siteFooter()}
 </body>
 </html>`;
 }
@@ -545,7 +722,7 @@ function renderSitemap() {
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
     { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
-    ...Object.keys(CATEGORIES).map(k => ({ loc: typeUrl(k), priority: '0.8', changefreq: 'monthly' })),
+    ...Object.keys(CATEGORIES).map(t => ({ loc: '/' + CATEGORIES[t].slug, priority: '0.8', changefreq: 'monthly' })),
     ...Object.keys(BRANDS).map(b => ({ loc: brandUrl(b), priority: '0.6', changefreq: 'monthly' })),
     ...mowers.map(m => ({ loc: mowerUrl(m), priority: '0.7', changefreq: 'monthly' }))
   ];
@@ -561,6 +738,27 @@ ${urls.map(u => `  <url>
 `;
 }
 
+// ---------- mowers-spa.json (transformed data the SPA loads at runtime) ----------
+function spaData() {
+  return {
+    mowers: mowers.map(m => ({
+      id: m.id, brand: m.brand, brandSlug: m.brandSlug, model: m.model,
+      type: m.type, typeSlug: m.typeSlug,
+      rrp: m.rrp, buyNow: m.buyNow, usedAvg: m.usedAvg,
+      rating: m.rating, reviews: m.reviews, valueScore: m.valueScore,
+      tagline: m.tagline,
+      cutWidth: m.cutWidth, weight: m.weight, deck: m.deck, engine: m.engine,
+      selfPropelled: m.selfPropelled, roller: m.roller, mulching: m.mulching,
+      cuttingHeights: m.cuttingHeights, bagCapacity: m.bagCapacity,
+      lawnSize: m.lawnSize, noiseDb: m.noiseDb,
+      pros: m.pros, cons: m.cons, verdict: m.verdict, tip: m.tip
+    })),
+    categories: Object.entries(CATEGORIES).map(([k, v]) => ({ key: k, slug: v.slug, name: v.name, color: v.color, bg: v.bg, desc: v.desc })),
+    brands: Object.entries(BRANDS).map(([k, v]) => ({ key: k, slug: slug(k), ...v })),
+    featuredBrands: FEATURED_BRANDS.map(b => slug(b))
+  };
+}
+
 // ---------- Write files ----------
 function ensureDir(p) { mkdirSync(p, { recursive: true }) }
 function clean(p) { if (existsSync(p)) rmSync(p, { recursive: true, force: true }) }
@@ -571,25 +769,28 @@ ensureDir(join(ROOT, 'mower'));
 ensureDir(join(ROOT, 'brand'));
 
 let written = 0;
-
 for (const m of mowers) {
-  writeFileSync(join(ROOT, 'mower', `${mowerSlug(m)}.html`), renderMowerPage(m));
+  writeFileSync(join(ROOT, 'mower', `${m.id}.html`), renderMowerPage(m));
   written++;
 }
 for (const t of Object.keys(CATEGORIES)) {
-  writeFileSync(join(ROOT, `${typeSlug(t)}.html`), renderCategoryPage(t));
+  writeFileSync(join(ROOT, `${CATEGORIES[t].slug}.html`), renderCategoryPage(t));
   written++;
 }
 for (const b of Object.keys(BRANDS)) {
-  writeFileSync(join(ROOT, 'brand', `${slug(b)}.html`), renderBrandPage(b));
-  written++;
+  const html = renderBrandPage(b);
+  if (html) {
+    writeFileSync(join(ROOT, 'brand', `${slug(b)}.html`), html);
+    written++;
+  }
 }
 writeFileSync(join(ROOT, 'about.html'), renderAboutPage()); written++;
 writeFileSync(join(ROOT, 'buying-guide.html'), renderGuideHub()); written++;
 writeFileSync(join(ROOT, 'sitemap.xml'), renderSitemap()); written++;
+writeFileSync(join(ROOT, 'mowers-spa.json'), JSON.stringify(spaData(), null, 2)); written++;
 
 console.log(`Built ${written} files.`);
 console.log(`  ${mowers.length} mower pages`);
 console.log(`  ${Object.keys(CATEGORIES).length} category pages`);
 console.log(`  ${Object.keys(BRANDS).length} brand pages`);
-console.log(`  3 misc (about, buying-guide, sitemap)`);
+console.log(`  4 misc (about, buying-guide, sitemap, mowers-spa.json)`);

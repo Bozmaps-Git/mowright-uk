@@ -16,13 +16,15 @@ Single-page web app for buyers checking secondhand lawnmower listings on Faceboo
 
 ## Tech
 
-Pure static site — HTML, CSS, vanilla JS. No frameworks, no npm dependencies at runtime, no build step on Vercel.
+Pure static site — HTML, CSS, vanilla JS. No frameworks, no npm dependencies at runtime, no build step on Vercel. Visual design adapted from Claude Design's V2 prototype (light theme, sage-green accent, Inter + JetBrains Mono).
 
-- **`index.html`** is the SPA browse tool. It fetches `mowers.json` on load.
+- **`index.html`** is the SPA browse tool — vanilla JS, fetches `mowers-spa.json` on load.
 - **`mower/`, `brand/`, `petrol.html`, etc.** are static HTML files generated from `mowers.json` by `scripts/build.mjs`. They are committed to the repo and served directly by Vercel.
-- **`style.css`** is the shared stylesheet for all generated content pages.
+- **`style.css`** is the shared stylesheet for the SPA and every generated page.
+- **`mowers.json`** is the authoritative dataset (one record per mower, original schema).
+- **`mowers-spa.json`** is generated from `mowers.json` at build time, with the design's expected fields (brandSlug, typeSlug, valueScore /10, lawnSize as title-case, cutWidth/weight as numbers, etc).
 
-Loads Barlow + Barlow Condensed from Google Fonts. Brand logos from `cdn.worldvectorlogo.com`.
+Loads Inter and JetBrains Mono from Google Fonts. SVG mower illustrations are generated inline (one per category).
 
 ## Editing mower data
 
