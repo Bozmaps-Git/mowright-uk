@@ -69,7 +69,12 @@ function transform(m) {
     noiseDb: noiseDefaults[m.t] ?? 80,
     pros: m.pros, cons: m.cons,
     verdict: m.verd, tip: m.tip,
-    rank: m.rank, m2: m.m2
+    rank: m.rank, m2: m.m2,
+    img: m.img || null,
+    imgSrc: m.imgSrc || null,
+    imgFile: m.imgFile || null,
+    imgLicense: m.imgLicense || null,
+    imgNote: m.imgNote || null
   };
 }
 
@@ -164,11 +169,17 @@ const mowerUrl = m => `/mower/${m.id}`;
 const categoryUrl = m => `/${typeSlug(m.type)}`;
 const brandUrl = b => `/brand/${slug(b)}`;
 
-// SVG mower hero icon — inline by category
+// Mower hero — uses real photo when m.img is set, SVG illustration otherwise.
 function heroIcon(m, size = 90) {
   const cat = CATEGORIES[m.type];
   const color = cat.color;
   const bg = cat.bg;
+  const sizeCls = size === 300 ? 'sz-300' : size === 200 ? 'sz-200' : size === 70 ? 'sz-70' : '';
+  if (m.img) {
+    return `<div class="mh-icon mh-photo ${sizeCls}" style="background:${bg}">
+      <img src="${esc(m.img)}" alt="${esc(m.brand + ' ' + m.model + (m.imgNote ? ' (representative photo)' : ''))}" loading="lazy" decoding="async"/>
+    </div>`;
+  }
   let body = '';
   if (m.typeSlug === 'ride-on') {
     body = `<rect x="20" y="55" width="160" height="40" rx="8" fill="${color}" opacity=".9"/>
@@ -194,10 +205,16 @@ function heroIcon(m, size = 90) {
       <circle cx="60" cy="100" r="18" fill="#1a1a1a"/><circle cx="60" cy="100" r="8" fill="#3a3a3a"/>
       <circle cx="150" cy="100" r="18" fill="#1a1a1a"/><circle cx="150" cy="100" r="8" fill="#3a3a3a"/>`;
   }
-  const sizeCls = size === 300 ? 'sz-300' : size === 200 ? 'sz-200' : size === 70 ? 'sz-70' : '';
   return `<div class="mh-icon ${sizeCls}" style="background:${bg}" aria-hidden="true">
     <svg viewBox="0 0 200 130">${body}</svg>
   </div>`;
+}
+
+// Small photo credit (only on mower detail page; CC BY-SA needs attribution)
+function photoCredit(m) {
+  if (!m.img) return '';
+  const fileUrl = 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent((m.imgFile || '').replace(/ /g, '_'));
+  return `<p class="photo-credit">Photo: <a href="${esc(fileUrl)}" rel="nofollow noopener" target="_blank">${esc(m.imgSrc || 'Wikimedia Commons')}</a> (${esc(m.imgLicense || 'CC')})${m.imgNote ? ' — ' + esc(m.imgNote) : ''}</p>`;
 }
 
 // ---------- Common chrome ----------
@@ -265,6 +282,7 @@ const siteFooter = () => `
       <a href="/">Browse</a>
       <a href="/buying-guide">Buying Guide</a>
       <a href="/about">About</a>
+      <a href="/credits">Image Credits</a>
       <a href="/privacy">Privacy</a>
     </nav>
     <p class="disclaim">MowRight UK is independent and reader-supported. We don't take affiliate commissions or sponsored placements. Prices are indicative — confirm with the retailer before purchasing.</p>
@@ -431,6 +449,7 @@ ${siteHeader('home')}
         <div class="badge-pos">${tbadge(m.type, 'lg')}</div>
         <div class="code-pos">${esc(m.id.toUpperCase())}</div>
       </div>
+      ${photoCredit(m)}
     </div>
     <div>
       <div class="hero-meta-brand">${esc(m.brand)}</div>
@@ -716,6 +735,54 @@ ${siteFooter()}
 </html>`;
 }
 
+// ---------- Credits page ----------
+function renderCreditsPage() {
+  const withImg = mowers.filter(m => m.img);
+  return `${head({
+    title: 'Image credits — MowRight UK',
+    description: 'Photo attributions for product images shown on MowRight UK. All Wikimedia Commons photos are CC BY-SA.',
+    canonical: '/credits'
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/about">About</a><span class="sep">›</span>
+    <span aria-current="page">Image credits</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 80px">
+  <div class="page page--narrow about" style="padding:0">
+    <h1 class="about-h1">Image credits</h1>
+    <p class="lead">Mower photos shown on MowRight UK are sourced from Wikimedia Commons and used under their respective licences (typically Creative Commons Attribution-ShareAlike). Where a model-specific photo is not available, a category-specific illustration is shown instead.</p>
+
+    <h2 class="about-h2">Photos used</h2>
+    ${withImg.length === 0 ? '<p>No product photos in use yet.</p>' : `
+    <table class="specs-tbl" style="margin-top:14px">
+      <tbody>
+        ${withImg.map(m => `
+        <tr>
+          <th style="width:auto"><a href="${esc(mowerUrl(m))}">${esc(m.brand + ' ' + m.model)}</a></th>
+          <td><a href="${esc('https://commons.wikimedia.org/wiki/File:' + encodeURIComponent((m.imgFile || '').replace(/ /g, '_')))}" rel="nofollow noopener" target="_blank">${esc(m.imgFile)}</a><br><span style="font-size:12px;color:var(--muted)">${esc(m.imgSrc || 'Wikimedia Commons')} · ${esc(m.imgLicense || 'CC')}${m.imgNote ? ' · ' + esc(m.imgNote) : ''}</span></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`}
+
+    <h2 class="about-h2">Why some photos are family-similar instead of exact</h2>
+    <p>Wikimedia Commons does not have a model-specific photo for every UK lawnmower in our catalogue. Where the exact model is unavailable but a visually identical sibling model exists (same chassis, same colour scheme, same form factor), we use that photo and mark it as "representative". The chassis differences within a family — for example, between a Husqvarna Automower 410 XE NERA and a 430X — are typically electronic (sensors, GPS) rather than visual.</p>
+
+    <h2 class="about-h2">A note for photographers</h2>
+    <p>If you are the photographer of an image used here and would prefer different attribution, or if your file is mislabelled, please email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a> and we will correct it within 24 hours.</p>
+  </div>
+</section>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
 // ---------- Sitemap ----------
 function renderSitemap() {
   const today = new Date().toISOString().split('T')[0];
@@ -723,6 +790,7 @@ function renderSitemap() {
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/credits', priority: '0.2', changefreq: 'monthly' },
     { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
     ...Object.keys(CATEGORIES).map(t => ({ loc: '/' + CATEGORIES[t].slug, priority: '0.8', changefreq: 'monthly' })),
     ...Object.keys(BRANDS).map(b => ({ loc: brandUrl(b), priority: '0.6', changefreq: 'monthly' })),
@@ -753,7 +821,8 @@ function spaData() {
       selfPropelled: m.selfPropelled, roller: m.roller, mulching: m.mulching,
       cuttingHeights: m.cuttingHeights, bagCapacity: m.bagCapacity,
       lawnSize: m.lawnSize, noiseDb: m.noiseDb,
-      pros: m.pros, cons: m.cons, verdict: m.verdict, tip: m.tip
+      pros: m.pros, cons: m.cons, verdict: m.verdict, tip: m.tip,
+      img: m.img, imgSrc: m.imgSrc, imgFile: m.imgFile, imgLicense: m.imgLicense, imgNote: m.imgNote
     })),
     categories: Object.entries(CATEGORIES).map(([k, v]) => ({ key: k, slug: v.slug, name: v.name, color: v.color, bg: v.bg, desc: v.desc })),
     brands: Object.entries(BRANDS).map(([k, v]) => ({ key: k, slug: slug(k), ...v })),
@@ -788,6 +857,7 @@ for (const b of Object.keys(BRANDS)) {
 }
 writeFileSync(join(ROOT, 'about.html'), renderAboutPage()); written++;
 writeFileSync(join(ROOT, 'buying-guide.html'), renderGuideHub()); written++;
+writeFileSync(join(ROOT, 'credits.html'), renderCreditsPage()); written++;
 writeFileSync(join(ROOT, 'sitemap.xml'), renderSitemap()); written++;
 writeFileSync(join(ROOT, 'mowers-spa.json'), JSON.stringify(spaData(), null, 2)); written++;
 
@@ -795,4 +865,4 @@ console.log(`Built ${written} files.`);
 console.log(`  ${mowers.length} mower pages`);
 console.log(`  ${Object.keys(CATEGORIES).length} category pages`);
 console.log(`  ${Object.keys(BRANDS).length} brand pages`);
-console.log(`  4 misc (about, buying-guide, sitemap, mowers-spa.json)`);
+console.log(`  5 misc (about, buying-guide, credits, sitemap, mowers-spa.json)`);

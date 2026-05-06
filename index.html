@@ -214,6 +214,7 @@
       <a href="/">Browse</a>
       <a href="/buying-guide">Buying Guide</a>
       <a href="/about">About</a>
+      <a href="/credits">Image Credits</a>
       <a href="/privacy">Privacy</a>
     </nav>
     <p class="disclaim">MowRight UK is independent and reader-supported. We don't take affiliate commissions or sponsored placements. Prices are indicative — confirm with the retailer before purchasing.</p>
@@ -317,6 +318,11 @@
 
   function heroIcon(m, sizeClass = '') {
     const cat = STATE.data.categories.find(c => c.slug === m.typeSlug);
+    if (m.img) {
+      return el('div', { class: 'mh-icon mh-photo ' + sizeClass, style: 'background:' + cat.bg }, [
+        el('img', { src: m.img, alt: m.brand + ' ' + m.model + (m.imgNote ? ' (representative photo)' : ''), loading: 'lazy', decoding: 'async' })
+      ]);
+    }
     return el('div', { class: 'mh-icon ' + sizeClass, style: 'background:' + cat.bg }, [
       Object.assign(document.createElement('div'), { innerHTML: heroIconSVG(m, cat) }).firstChild
     ]);

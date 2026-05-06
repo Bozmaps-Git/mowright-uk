@@ -1188,7 +1188,11 @@
       "GPS not standard"
     ],
     "verd": "The robot lawnmower that proved the category. Handles UK weather, easy parts supply, dealer-serviceable. The 305 is the entry — fine for under 600m² lawns with simple shapes.",
-    "tip": "£300–550 used. Boundary wire integrity is everything — walk the perimeter and check for breaks (visible cuts in the wire). Confirm app account is transferable or factory-reset performed before purchase. Charging contacts on the dock corrode — clean them with a wire brush before judging battery life."
+    "tip": "£300–550 used. Boundary wire integrity is everything — walk the perimeter and check for breaks (visible cuts in the wire). Confirm app account is transferable or factory-reset performed before purchase. Charging contacts on the dock corrode — clean them with a wire brush before judging battery life.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20Automower%20308%20with%20track%20marks%20in%20lawn.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Husqvarna Automower 308 with track marks in lawn.jpg",
+    "imgLicense": "CC BY-SA"
   },
   {
     "id": 30,
@@ -1230,7 +1234,11 @@
       "Setup is professional-only effectively"
     ],
     "verd": "The robot lawnmower people who own estates buy. EPOS is genuinely transformative — no boundary wire, you draw zones in an app. Worth every penny if your lawn justifies it.",
-    "tip": "£1100–1800 used is realistic. EPOS reference station MUST be included — without it, this robot is a paperweight. Confirm satellite lock at the property before buying. Husqvarna serial number checks confirm warranty transferability — do this on any used purchase over £1500."
+    "tip": "£1100–1800 used is realistic. EPOS reference station MUST be included — without it, this robot is a paperweight. Confirm satellite lock at the property before buying. Husqvarna serial number checks confirm warranty transferability — do this on any used purchase over £1500.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20automower%20430X.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Husqvarna automower 430X.jpg",
+    "imgLicense": "CC BY-SA"
   },
   {
     "id": 31,
@@ -1517,7 +1525,11 @@
       "New price not cheap"
     ],
     "verd": "The default sensible ride-on for 0.5–1 acre UK lawns. JD pedigree, parts everywhere, holds value remarkably well. Spend slightly more, save it back on resale.",
-    "tip": "£1700–2500 used. Engine hours matter more than years — under 200 hours is excellent, over 600 means assume the worst. Test the PTO clutch — should engage smoothly. Hydrostatic transmission should pull cleanly forward and back with no jolts. JD service history adds £300 to fair value."
+    "tip": "£1700–2500 used. Engine hours matter more than years — under 200 hours is excellent, over 600 means assume the worst. Test the PTO clutch — should engage smoothly. Hydrostatic transmission should pull cleanly forward and back with no jolts. JD service history adds £300 to fair value.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Deere%20lawn%20tractor.JPG?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Deere lawn tractor.JPG",
+    "imgLicense": "CC BY-SA"
   },
   {
     "id": 38,
@@ -1559,7 +1571,11 @@
       "Service is dealer-only realistically"
     ],
     "verd": "For estate-size lawns and people who want the best mid-size ride-on you can buy. The 4-wheel steering really does help around obstacles. Pricey but earns it back in time saved.",
-    "tip": "£2800–4200 used. Engine hours under 400 is excellent. 4WS linkage components wear — check tracking on a flat surface for pull. Insist on full JD service history. Anti-scalp wheels on the deck show heavy use; replacements are £30 each."
+    "tip": "£2800–4200 used. Engine hours under 400 is excellent. 4WS linkage components wear — check tracking on a flat surface for pull. Insist on full JD service history. Anti-scalp wheels on the deck show heavy use; replacements are £30 each.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/John%20Deere%20lawn%20mower.JPG?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "John Deere lawn mower.JPG",
+    "imgLicense": "CC BY-SA"
   },
   {
     "id": 39,
@@ -1641,7 +1657,12 @@
       "Steering is heavier than JD"
     ],
     "verd": "A solid heavy-duty alternative to JD that punches above its price. The Kohler engine is a real plus. Just be aware UK service is patchy.",
-    "tip": "£1300–2200 used. Kohler engine hours under 400 is good. Cub Cadet steering box wears — check for play. PTO clutch must engage cleanly without slip. Service history is harder to verify (smaller dealer network) so weight that into the price."
+    "tip": "£1300–2200 used. Kohler engine hours under 400 is good. Cub Cadet steering box wears — check for play. PTO clutch must engage cleanly without slip. Service history is harder to verify (smaller dealer network) so weight that into the price.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Cub%20Cadet%20XT1.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Cub Cadet XT1.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "XT1 — same family as XT2"
   },
   {
     "id": 41,
@@ -2567,7 +2588,11 @@
       "Stihl premium pricing"
     ],
     "verd": "Stihl arrived late to robotics but the iMOW 6 is genuinely competitive with the Husqvarna 410 NERA. Worth considering if you already trust Stihl petrol kit and have a Stihl dealer nearby.",
-    "tip": "£1300–1900 used (rare on Marketplace yet — most are still under warranty). RTK reference station must be included. Verify dealer warranty transfer — Stihl handles this cleanly via chassis number. Reset the iMOW Cloud account before purchase."
+    "tip": "£1300–1900 used (rare on Marketplace yet — most are still under warranty). RTK reference station must be included. Verify dealer warranty transfer — Stihl handles this cleanly via chassis number. Reset the iMOW Cloud account before purchase.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Stihl%20robot%20mower.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Stihl robot mower.jpg",
+    "imgLicense": "CC BY-SA"
   },
   {
     "id": 63,
@@ -2610,7 +2635,12 @@
       "22cm cut means slow on biggest lawns"
     ],
     "verd": "The Husqvarna sweet-spot for 2024. Smaller and cheaper than the 430X NERA, EPOS-enabled (unlike the 305), and right for 1000–1500m² gardens. Likely to be the best-selling robot of the year.",
-    "tip": "£900–1500 used (still rare). EPOS reference station is mandatory and must be included. Confirm satellite lock at the buyer’s property before payment. Husqvarna serial-number warranty checks confirm transferability."
+    "tip": "£900–1500 used (still rare). EPOS reference station is mandatory and must be included. Confirm satellite lock at the buyer’s property before payment. Husqvarna serial-number warranty checks confirm transferability.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20automower%20430X.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Husqvarna automower 430X.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Same chassis family (430X / 410 XE)"
   },
   {
     "id": 64,
@@ -2896,7 +2926,12 @@
       "New product"
     ],
     "verd": "Stiga’s answer to the Husqvarna 410 NERA at a lower price. Build quality is solid (it shares engineering with Mountfield). Worth checking if you have a Stiga or Mountfield dealer locally.",
-    "tip": "£600–1000 used. RTK base required. Confirm satellite lock at the property. Stiga dealer network is patchy on robotics — verify local support before buying. Reset Stiga Smart account before purchase."
+    "tip": "£600–1000 used. RTK base required. Confirm satellite lock at the property. Stiga dealer network is patchy on robotics — verify local support before buying. Reset Stiga Smart account before purchase.",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Stiga%20AutoClip%20140.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Stiga AutoClip 140.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "AutoClip 140 — same family"
   },
   {
     "id": 71,
