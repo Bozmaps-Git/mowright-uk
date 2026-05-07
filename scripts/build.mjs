@@ -776,12 +776,16 @@ ${siteHeader('about')}
 
     <h2 class="about-h2">Brands we cover</h2>
     <p style="margin-top:14px">All ${Object.keys(BRANDS).length} brands in our database have a dedicated page with focus, parent group, UK position, and full model list.</p>
-    <div class="brand-logo-grid">
-      ${Object.keys(BRANDS).sort().map(b => `
-      <a class="brand-logo-tile" href="${esc(brandUrl(b))}" aria-label="${esc(b)} — view brand page">
-        <div class="b-logo">${LOGOS[b] ? `<img src="${esc(LOGOS[b])}" alt="${esc(b)} logo" loading="lazy" decoding="async"/>` : `<span class="b-fb">${esc(b.slice(0, 2).toUpperCase())}</span>`}</div>
+    <div class="brand-grid">
+      ${Object.keys(BRANDS).sort().map(b => {
+        const count = mowers.filter(m => m.brand === b).length;
+        const types = [...new Set(mowers.filter(m => m.brand === b).map(m => m.type))];
+        return `
+      <a class="brand-tile" href="${esc(brandUrl(b))}">
         <div class="b-name">${esc(b)}</div>
-      </a>`).join('')}
+        <div class="b-meta">${count} model${count === 1 ? '' : 's'} · ${esc(types[0] || '')}${types.length > 1 ? ' +' + (types.length - 1) : ''}</div>
+      </a>`;
+      }).join('')}
     </div>
 
     <h2 class="about-h2">Get in touch</h2>
