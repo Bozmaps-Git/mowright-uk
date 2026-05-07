@@ -321,12 +321,9 @@ const siteHeader = (active = '') => `
     <nav class="top-nav" aria-label="Primary">
       <a href="/"${active === 'home' ? ' aria-current="page"' : ''}>Browse</a>
       <a href="/buying-guide"${active === 'guide' ? ' aria-current="page"' : ''}>Buying Guide</a>
+      <a href="/blog"${active === 'blog' ? ' aria-current="page"' : ''}>Blog</a>
       <a href="/about"${active === 'about' ? ' aria-current="page"' : ''}>About</a>
     </nav>
-    <div class="head-stats">
-      <span class="head-pill">${mowers.length} Models</span>
-      <span class="head-pill">${Object.keys(BRANDS).length} Brands</span>
-    </div>
   </div>
 </header>`;
 
@@ -1169,7 +1166,7 @@ function renderBlogIndex() {
     description: 'Long-form guides on UK lawn mower buying, maintenance, troubleshooting, and brand-specific advice. No affiliate fluff.',
     canonical: '/blog'
   })}
-${siteHeader()}
+${siteHeader('blog')}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
@@ -1235,7 +1232,7 @@ function renderBlogPost(post) {
     canonical: blogUrl(post.slug),
     ldjson: ld
   })}
-${siteHeader()}
+${siteHeader('blog')}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">

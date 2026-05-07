@@ -81,16 +81,13 @@
     <nav class="top-nav" aria-label="Primary">
       <a href="/" aria-current="page">Browse</a>
       <a href="/buying-guide">Buying Guide</a>
+      <a href="/blog">Blog</a>
       <a href="/about">About</a>
     </nav>
     <div class="head-search" role="search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <label for="head-q" class="sr">Search mowers</label>
       <input id="head-q" type="search" placeholder="Search brand, model, type..." autocomplete="off"/>
-    </div>
-    <div class="head-stats">
-      <span class="head-pill"><b id="stat-models">72</b> Models</span>
-      <span class="head-pill"><b id="stat-brands">32</b> Brands</span>
     </div>
   </div>
 </header>
@@ -733,8 +730,6 @@
     .then(r => { if (!r.ok) throw new Error('Failed to load mowers data: ' + r.status); return r.json() })
     .then(data => {
       STATE.data = data;
-      $('#stat-models').textContent = data.mowers.length;
-      $('#stat-brands').textContent = data.brands.length;
       wireSearch();
       wireCompareUI();
       renderPills();
