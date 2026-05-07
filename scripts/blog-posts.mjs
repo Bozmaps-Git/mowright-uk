@@ -5,6 +5,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'inspect-used-honda-hrx',
+    image: 'https://images.unsplash.com/photo-1458245201577-fc8a130b8829?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Lawn mower close-up on freshly cut grass",
+    imageCredit: 'Unsplash',
+
     title: 'How to inspect a used Honda HRX before buying — UK guide',
     description: 'A 10-minute pre-purchase inspection for a used Honda HRX 476 VY or HRX 537. Cold-start, Roto-Stop, Versamow, deck and roller checks. What to walk away from and what to pay in 2026.',
     keyword: 'used Honda HRX inspection',
@@ -106,6 +110,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'mountfield-sp46-wont-start',
+    image: 'https://images.unsplash.com/photo-1590820292118-e256c3ac2676?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Push lawn mower stationary on grass",
+    imageCredit: 'Unsplash',
+
     title: "Mountfield SP46 won't start: troubleshooting guide (UK)",
     description: "Mountfield SP46 won't start? The five most common causes ranked by likelihood, with diagnosis and DIY fixes. Stale fuel, varnished carb, fouled plug, blocked air filter — and what to do about each.",
     keyword: "Mountfield SP46 won't start",
@@ -205,6 +213,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'best-lawn-mower-sloped-lawn-uk',
+    image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Sloped grass field viewed from a low angle",
+    imageCredit: 'Unsplash',
+
     title: 'Best lawn mower for a sloped lawn — UK guide 2026',
     description: 'Wheels need flat ground; banks and slopes break wheeled mowers. Hover, AWD robotic, and lightweight self-propel — which is right for your slope angle and budget. UK picks ranked.',
     keyword: 'best lawn mower for sloped lawn UK',
@@ -286,6 +298,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'robotic-mower-boundary-wire-repair',
+    image: 'https://images.unsplash.com/photo-1741326757602-186060c5d5b5?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Robotic lawn mower cutting through grass",
+    imageCredit: 'Unsplash',
+
     title: 'Robotic mower boundary wire repair — diagnose and fix a broken loop',
     description: 'Your robotic mower has stopped because the boundary wire is broken. How to find the break, splice the wire, waterproof the joint, and test. Tools, cost, and brand-specific tips for Husqvarna, Worx, Bosch.',
     keyword: 'robotic mower boundary wire repair',
@@ -386,6 +402,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'petrol-vs-cordless-lawn-mower-2026',
+    image: 'https://images.unsplash.com/photo-1689728318937-17d24bc0a65c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Person mowing a lawn — hero image",
+    imageCredit: 'Unsplash',
+
     title: 'Petrol vs cordless lawn mower in 2026 — which is right for your UK garden',
     description: "Cordless mowers have caught up with petrol on cut quality and surpassed them on noise and emissions. Petrol still wins for big and rough lawns. The 2026 picture, with cost-of-ownership numbers and specific UK picks for each lawn size.",
     keyword: 'petrol vs cordless lawn mower 2026',
@@ -485,6 +505,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'best-lawn-mower-under-200-uk',
+    image: 'https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Bright green grass field on a sunny day",
+    imageCredit: 'Unsplash',
+
     title: 'Best lawn mower under £200 UK 2026 — corded, cordless, hover, used',
     description: 'At £200 you can pick a Bosch Rotak with a rear roller, a Flymo hover, an entry-level cordless with a battery included, or a clean used Mountfield SP46. Here are the right picks for each option and what to avoid.',
     keyword: 'best lawn mower under £200 UK',
@@ -585,6 +609,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'husqvarna-automower-305-troubleshooting',
+    image: 'https://images.unsplash.com/photo-1533195374643-6bf5271da610?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Robotic mower on a manicured lawn",
+    imageCredit: 'Unsplash',
+
     title: 'Husqvarna Automower 305 troubleshooting — UK guide',
     description: "The seven most common Husqvarna Automower 305 issues, ranked by frequency, with diagnosis and fix steps. Loop signal, charging, blade, stuck mower, app pairing, and end-of-life signs.",
     keyword: 'Husqvarna Automower 305 troubleshooting',
@@ -691,6 +719,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'bosch-rotak-vs-flymo-corded',
+    image: 'https://images.unsplash.com/photo-1690068023694-053da714f95f?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Person actively mowing a lawn",
+    imageCredit: 'Unsplash',
+
     title: 'Bosch Rotak vs Flymo EasiMow — which corded electric should you buy?',
     description: 'Two mowers dominate the sub-£200 corded electric market in Britain. Bosch lasts longer, Flymo is cheaper used. The honest comparison: build, cut, longevity, used market, and verdict by lawn size.',
     keyword: 'Bosch Rotak vs Flymo',
@@ -786,6 +818,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'how-often-sharpen-mower-blade',
+    image: 'https://images.unsplash.com/photo-1773917735999-2a89191afc55?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Manicured lawn with crisp mowing stripes",
+    imageCredit: 'Unsplash',
+
     title: 'How often should you sharpen a lawn mower blade — UK guide',
     description: "Most British gardeners go years without sharpening. Here's how often a blade actually needs sharpening, signs of a dull blade, DIY method, dealer cost, and when to replace instead.",
     keyword: 'how often sharpen lawn mower blade',
@@ -884,6 +920,10 @@ export const BLOG_POSTS = [
   // ============================================================
   {
     slug: 'lawn-mower-winter-storage-uk',
+    image: 'https://images.unsplash.com/photo-1608101854678-b45ad1d25556?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Red and black ride-on lawn mower",
+    imageCredit: 'Unsplash',
+
     title: 'Lawn mower winter storage checklist — UK guide',
     description: '50% of British lawn mowers refuse to start in spring because of poor winter storage. Step-by-step checklist by mower type — petrol, cordless, electric, robotic — plus common mistakes that ruin mowers over winter.',
     keyword: 'lawn mower winter storage UK',

@@ -1181,13 +1181,16 @@ ${siteHeader('blog')}
     <h1 class="bg-h1">Long-form mower advice.</h1>
     <p class="cat-lead" style="font-size:18px;max-width:680px;line-height:1.6">Practical, independent guides on buying, troubleshooting, and choosing UK lawn mowers. Written for adults; no affiliate fluff.</p>
 
-    <div style="display:flex;flex-direction:column;gap:18px;margin-top:32px">
+    <div class="blog-list" style="display:grid;grid-template-columns:1fr;gap:18px;margin-top:32px">
       ${sorted.map(post => `
-      <a href="${esc(blogUrl(post.slug))}" style="display:block;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .15s">
-        <div style="font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">${esc(post.date)}</div>
-        <h2 style="margin:0 0 8px;font-size:24px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(post.title)}</h2>
-        <p style="margin:0;font-size:15px;color:var(--ink-sub);line-height:1.55">${esc(post.lead.slice(0, 220))}${post.lead.length > 220 ? '…' : ''}</p>
-        <div style="margin-top:14px;font-size:13px;color:var(--accent);font-weight:600">Read article →</div>
+      <a class="blog-card" href="${esc(blogUrl(post.slug))}">
+        ${post.image ? `<div class="blog-card-img"><img src="${esc(post.image)}" alt="${esc(post.imageAlt || '')}" loading="lazy" decoding="async"/></div>` : ''}
+        <div class="blog-card-body">
+          <div class="blog-card-date">${esc(post.date)}</div>
+          <h2 class="blog-card-title">${esc(post.title)}</h2>
+          <p class="blog-card-lead">${esc(post.lead.slice(0, 220))}${post.lead.length > 220 ? '…' : ''}</p>
+          <div class="blog-card-cta">Read article →</div>
+        </div>
       </a>`).join('')}
     </div>
   </div>
@@ -1248,7 +1251,11 @@ ${siteHeader('blog')}
     <h1 style="margin:0;font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-1.6px;line-height:1.1">${esc(post.title)}</h1>
     <p style="margin:22px 0 0;font-size:19px;line-height:1.6;color:var(--ink-sub);font-weight:500">${esc(post.lead)}</p>
 
-    <div style="height:1px;background:var(--border);margin:36px 0"></div>
+    ${post.image ? `
+    <figure class="blog-hero-img">
+      <img src="${esc(post.image)}" alt="${esc(post.imageAlt || '')}" loading="lazy" decoding="async"/>
+      <figcaption>Photo: <a href="https://unsplash.com" rel="nofollow noopener" target="_blank">${esc(post.imageCredit || 'Unsplash')}</a></figcaption>
+    </figure>` : `<div style="height:1px;background:var(--border);margin:36px 0"></div>`}
 
     <div style="display:flex;flex-direction:column;gap:32px">
       ${post.sections.map(section => `
