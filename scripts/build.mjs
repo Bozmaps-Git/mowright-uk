@@ -776,8 +776,12 @@ ${siteHeader('about')}
 
     <h2 class="about-h2">Brands we cover</h2>
     <p style="margin-top:14px">All ${Object.keys(BRANDS).length} brands in our database have a dedicated page with focus, parent group, UK position, and full model list.</p>
-    <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px">
-      ${Object.keys(BRANDS).sort().map(b => `<a href="${esc(brandUrl(b))}" style="padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--ink)">${esc(b)}</a>`).join('')}
+    <div class="brand-logo-grid">
+      ${Object.keys(BRANDS).sort().map(b => `
+      <a class="brand-logo-tile" href="${esc(brandUrl(b))}" aria-label="${esc(b)} — view brand page">
+        <div class="b-logo">${LOGOS[b] ? `<img src="${esc(LOGOS[b])}" alt="${esc(b)} logo" loading="lazy" decoding="async"/>` : `<span class="b-fb">${esc(b.slice(0, 2).toUpperCase())}</span>`}</div>
+        <div class="b-name">${esc(b)}</div>
+      </a>`).join('')}
     </div>
 
     <h2 class="about-h2">Get in touch</h2>
