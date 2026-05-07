@@ -440,19 +440,54 @@
     return row;
   }
 
+  // ----- Search normalisation + synonyms -----
+  // Strips spaces, hyphens, punctuation. Lower-cases. So "ride on", "Ride-On", "RIDEON" all collapse to "rideon".
+  const norm = s => (s || '').toLowerCase().replace(/[\s\-_,/&+.()]+/g, '').replace(/[^a-z0-9]/g, '');
+
+  // Common typos and synonyms — the corpus is expanded with these so a search like "electrik" or "robot" or "huskvarna" still matches.
+  const SYNONYMS_BY_TYPE = {
+    'Petrol':   ' petrol gas gasoline 4stroke twostroke combustion fuel',
+    'Electric': ' electric electrik elektrik elektric corded mains plugin lectric',
+    'Cordless': ' cordless cordles batterypowered battery lithium rechargeable wireless',
+    'Hover':    ' hover hovering cushion airglide',
+    'Robotic':  ' robotic robot automower autonomous robo automatic auto',
+    'Ride-on':  ' rideon ride on riding rider tractor siton sit on ridemower',
+    'Push':     ' push manual cylinder reel handpush hand'
+  };
+  const BRAND_TYPOS = {
+    'mountfield':  ' mountfeild mownfield muntfield',
+    'husqvarna':   ' huskvarna husquvarna husqavarna huskquarna huskvana',
+    'flymo':       ' flymow',
+    'stihl':       ' stihl steel stihel',
+    'bosch':       ' bosh bosche',
+    'honda':       ' hondah',
+    'mac allister':' macallister macalister',
+    'qualcast':    ' qaulcast qualast',
+    'briggs':      ' briggsandstratton briggs stratton bs',
+    'kubota':      ' kabota',
+    'allett':      ' alett'
+  };
+
+  function buildHaystack(m) {
+    const synonyms = SYNONYMS_BY_TYPE[m.type] || '';
+    const brandTypos = BRAND_TYPOS[m.brand.toLowerCase()] || '';
+    return norm(
+      m.brand + ' ' + m.model + ' ' + m.type + ' ' + (m.tagline || '') + ' ' +
+      (m.engine || '') + synonyms + brandTypos +
+      (m.selfPropelled ? ' selfpropelled self propelled' : '') +
+      (m.roller ? ' roller stripes striped striping' : '') +
+      (m.mulching ? ' mulching mulch' : '') +
+      (m.lawnSize ? ' ' + m.lawnSize : '')
+    );
+  }
+
   // ----- Filtering & sorting -----
   function getFiltered() {
     let list = STATE.data.mowers.slice();
     if (STATE.category) list = list.filter(m => m.typeSlug === STATE.category);
     if (STATE.search.trim()) {
-      const q = STATE.search.toLowerCase();
-      list = list.filter(m =>
-        m.brand.toLowerCase().includes(q) ||
-        m.model.toLowerCase().includes(q) ||
-        m.type.toLowerCase().includes(q) ||
-        (m.tagline || '').toLowerCase().includes(q) ||
-        (m.engine || '').toLowerCase().includes(q)
-      );
+      const nq = norm(STATE.search);
+      if (nq) list = list.filter(m => buildHaystack(m).includes(nq));
     }
     const sorts = {
       'value': (a, b) => b.valueScore - a.valueScore,
