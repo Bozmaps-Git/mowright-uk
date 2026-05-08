@@ -208,6 +208,11 @@ const FEATURED_BRANDS = ['Honda', 'Mountfield', 'Bosch'];
 
 // ---------- HTML helpers ----------
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// Inline-markdown: escape HTML first, then convert **bold** and *italic*. Safe for blog body text.
+const inlineMd = s => esc(s)
+  .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;!?]|$)/g, '$1<em>$2</em>');
 const fmtGBP = n => '£' + (n || 0).toLocaleString('en-GB');
 
 const stars = (rating, reviews) => `
@@ -1255,9 +1260,9 @@ ${siteHeader('blog')}
 
 <article style="padding:32px 32px 56px">
   <div class="page page--narrow" style="padding:0">
-    <div style="font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Published ${esc(post.date)}</div>
+    <div style="font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Published ${esc(post.date)}</div>
     <h1 style="margin:0;font-size:48px;font-weight:700;color:var(--ink);letter-spacing:-1.6px;line-height:1.1">${esc(post.title)}</h1>
-    <p style="margin:22px 0 0;font-size:19px;line-height:1.6;color:var(--ink-sub);font-weight:500">${esc(post.lead)}</p>
+    <p style="margin:24px 0 0;font-size:22px;line-height:1.55;color:var(--ink);font-weight:500">${esc(post.lead)}</p>
 
     ${post.image ? `
     <figure class="blog-hero-img">
@@ -1265,22 +1270,22 @@ ${siteHeader('blog')}
       <figcaption>Photo: <a href="https://unsplash.com" rel="nofollow noopener" target="_blank">${esc(post.imageCredit || 'Unsplash')}</a></figcaption>
     </figure>` : `<div style="height:1px;background:var(--border);margin:36px 0"></div>`}
 
-    <div style="display:flex;flex-direction:column;gap:32px">
+    <div class="blog-body" style="display:flex;flex-direction:column;gap:40px;font-size:19px;line-height:1.75;color:var(--ink)">
       ${post.sections.map(section => `
       <section>
-        <h2 style="margin:0 0 14px;font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(section.h)}</h2>
-        ${section.p.map(para => `<p style="margin:0 0 14px;font-size:16px;line-height:1.7;color:var(--ink)">${esc(para)}</p>`).join('')}
+        <h2 style="margin:0 0 18px;font-size:30px;font-weight:700;color:var(--ink);letter-spacing:-0.6px;line-height:1.2">${esc(section.h)}</h2>
+        ${section.p.map(para => `<p style="margin:0 0 18px;font-size:19px;line-height:1.75;color:var(--ink)">${inlineMd(para)}</p>`).join('')}
       </section>`).join('')}
     </div>
 
     ${post.faqs && post.faqs.length ? `
-    <div style="height:1px;background:var(--border);margin:48px 0 32px"></div>
-    <h2 style="margin:0 0 18px;font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">FAQs</h2>
-    <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="height:1px;background:var(--border);margin:56px 0 32px"></div>
+    <h2 style="margin:0 0 22px;font-size:30px;font-weight:700;color:var(--ink);letter-spacing:-0.6px">FAQs</h2>
+    <div style="display:flex;flex-direction:column;gap:20px">
       ${post.faqs.map(faq => `
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px">
-        <h3 style="margin:0 0 8px;font-size:16px;font-weight:700;color:var(--ink)">${esc(faq.q)}</h3>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--ink-sub)">${esc(faq.a)}</p>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 26px">
+        <h3 style="margin:0 0 10px;font-size:19px;font-weight:700;color:var(--ink);line-height:1.35">${esc(faq.q)}</h3>
+        <p style="margin:0;font-size:18px;line-height:1.7;color:var(--ink-sub)">${inlineMd(faq.a)}</p>
       </div>`).join('')}
     </div>` : ''}
 
