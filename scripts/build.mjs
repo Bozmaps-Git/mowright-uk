@@ -76,8 +76,17 @@ function transform(m) {
     imgSrc: m.imgSrc || null,
     imgFile: m.imgFile || null,
     imgLicense: m.imgLicense || null,
-    imgNote: m.imgNote || null
+    imgNote: m.imgNote || null,
+    lastReviewed: m.lastReviewed || null
   };
+}
+
+// Format ISO date "2026-05-09" → "9 May 2026" (UK convention).
+function formatDate(iso) {
+  if (!iso) return '';
+  const [y, mo, d] = iso.split('-').map(Number);
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return `${d} ${months[mo - 1]} ${y}`;
 }
 
 const mowers = rawMowers.map(transform);
@@ -313,6 +322,36 @@ function heroIcon(m, size = 90) {
   </div>`;
 }
 
+// Where to buy — retailer search-link buttons. No affiliate. Six retailers
+// covering both new (Amazon, B&Q, Mowers Online) and used (eBay, Marketplace,
+// Gumtree) markets. Each link runs the user's search on that retailer.
+function whereToBuySection(m) {
+  const q = encodeURIComponent(`${m.brand} ${m.model}`);
+  const qFull = encodeURIComponent(`${m.brand} ${m.model} lawnmower`);
+  const retailers = [
+    { name: 'Amazon UK',    label: 'New',  url: `https://www.amazon.co.uk/s?k=${qFull}` },
+    { name: 'eBay UK',      label: 'Used', url: `https://www.ebay.co.uk/sch/i.html?_nkw=${q}&_sacat=0` },
+    { name: 'Facebook Marketplace', label: 'Used', url: `https://www.facebook.com/marketplace/search/?query=${q}` },
+    { name: 'Gumtree',      label: 'Used', url: `https://www.gumtree.com/search?search_category=lawn-mowers&q=${q}` },
+    { name: 'Mowers Online', label: 'New', url: `https://www.mowersonline.co.uk/search?search_query=${q}` },
+    { name: 'B&Q',          label: 'New',  url: `https://www.diy.com/search?term=${q}` }
+  ];
+  return `
+  <section id="where-to-buy" class="wtb-section">
+    <h2 class="section-h2">Where to buy the ${esc(m.brand)} ${esc(m.model)}</h2>
+    <p class="wtb-lead">We don't take affiliate commissions. These are direct retailer searches you'd type into Google anyway.</p>
+    <div class="wtb-grid">
+      ${retailers.map(r => `
+      <a class="wtb-card" href="${esc(r.url)}" rel="nofollow noopener" target="_blank">
+        <span class="wtb-name">${esc(r.name)}</span>
+        <span class="wtb-tag wtb-tag-${r.label.toLowerCase()}">${esc(r.label)}</span>
+        <span class="wtb-cta">Search →</span>
+      </a>`).join('')}
+    </div>
+    <p class="wtb-note">External links open in a new tab. We don't track clicks or take commission. Prices and availability change — verify on the retailer site before buying.</p>
+  </section>`;
+}
+
 // Small photo credit (only on mower detail page; CC BY-SA needs attribution)
 function photoCredit(m) {
   if (!m.img) return '';
@@ -351,9 +390,9 @@ const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'ar
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
 <link rel="manifest" href="/site.webmanifest"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/fonts/jetbrainsmono-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/fonts/fonts.css"/>
 <link rel="stylesheet" href="/style.css"/>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6052985070008267" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
@@ -581,9 +620,10 @@ ${siteHeader('home')}
       </div>
       ${threeUpPrice(m)}
       <div class="btn-row">
-        <a class="btn btn-primary btn-grow" href="/?q=${encodeURIComponent(m.brand + ' ' + m.model)}">Where to buy →</a>
+        <a class="btn btn-primary btn-grow" href="#where-to-buy">Where to buy →</a>
         <a class="btn btn-secondary" href="/?compare=${encodeURIComponent(m.id)}">+ Compare</a>
       </div>
+      ${m.lastReviewed ? `<div class="last-reviewed">Prices last reviewed <time datetime="${esc(m.lastReviewed)}">${esc(formatDate(m.lastReviewed))}</time></div>` : ''}
     </div>
   </div>
 </section>
@@ -614,6 +654,8 @@ ${siteHeader('home')}
         <strong>Where to look:</strong> Facebook Marketplace and Gumtree are usually 20–30% cheaper than eBay UK for petrol mowers because most sellers want local pickup. eBay tends to win on cordless and electric (lighter, easier to ship). Always insist on a starting demonstration before paying.
       </div>
     </section>
+
+    ${whereToBuySection(m)}
 
     ${related.length ? `
     <section>

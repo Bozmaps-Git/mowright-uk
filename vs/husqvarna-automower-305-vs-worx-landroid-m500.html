@@ -23,9 +23,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
 <link rel="manifest" href="/site.webmanifest"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/fonts/jetbrainsmono-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/fonts/fonts.css"/>
 <link rel="stylesheet" href="/style.css"/>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6052985070008267" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
@@ -90,9 +90,12 @@
     </div>
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px">
-      <div class="mh-icon mh-photo sz-200" style="background:#e8f0e3">
-      <img src="https://images.unsplash.com/photo-1608101854678-b45ad1d25556?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=1200" alt="Worx Landroid M500 (representative photo)" loading="lazy" decoding="async"/>
-    </div>
+      <div class="mh-icon sz-200" style="background:#e8f0e3" aria-hidden="true">
+    <svg viewBox="0 0 200 130"><ellipse cx="100" cy="80" rx="70" ry="35" fill="#5fb878" opacity=".9"/>
+      <ellipse cx="100" cy="72" rx="60" ry="25" fill="#5fb878" opacity=".7"/>
+      <circle cx="100" cy="68" r="10" fill="#fff" opacity=".6"/>
+      <circle cx="65" cy="105" r="6" fill="#1a1a1a"/><circle cx="135" cy="105" r="6" fill="#1a1a1a"/></svg>
+  </div>
       <div style="margin-top:14px">
         <div class="hero-meta-brand">Worx</div>
         <h2 style="margin:4px 0 8px;font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">Landroid M500</h2>
