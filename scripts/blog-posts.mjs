@@ -1022,5 +1022,131 @@ export const BLOG_POSTS = [
       { q: 'Cordless: should I leave the battery charging all winter?', a: "No. Trickle-charging at 100% degrades lithium cells. Charge to 50%, disconnect from charger, store at room temperature. Check once or twice over winter and top up if needed (some cells self-discharge)." },
       { q: 'Does Honda need different winter prep than Briggs?', a: "Same approach — drain or stabilise fuel, oil change, store dry. Honda engines tolerate winter slightly better because of build quality, but the routine is identical. The only Honda-specific note: use Honda 10W-30 oil if you're going to leave the engine over winter (it has slightly better corrosion inhibitors)." }
     ]
+  },
+
+  // ============================================================
+  {
+    slug: 'briggs-and-stratton-engine-codes-explained',
+    image: 'https://images.unsplash.com/photo-1590820292118-e256c3ac2676?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: "Petrol lawn mower with Briggs & Stratton engine on grass",
+    imageCredit: 'Unsplash',
+
+    title: "Briggs & Stratton mower engine codes explained — UK buyer's guide",
+    description: "What does B&S 575EX, 675iS, Intek 7180 or Vanguard actually mean on a UK mower? A plain-English guide to every Briggs & Stratton engine series fitted to walk-behinds and ride-ons, what each is worth on a used mower, and which faults are series-specific.",
+    keyword: "briggs and stratton engine series",
+    date: '2026-05-08',
+    related: [147, 6, 71, 149],
+    lead: "About one in three petrol mowers sold in the UK has a Briggs & Stratton engine bolted to the top. Mountfield, Cobra, Hayter, Atco, Mac Allister, Lawnflite, Murray, Westwood, AL-KO and many more all rebadge B&S engines under their own deck. That's good news for parts and service — every B&S engine in the UK is supported by the same nationwide dealer network — but bad news if you're trying to compare two used mowers and the listings just say \"Briggs 575EX\" or \"B&S Vanguard V-twin\" with no other context. This guide decodes every series you'll see on a UK mower, what each one is worth, and the faults that are specific to each.",
+    sections: [
+      {
+        h: 'Why the engine series matters more than the mower brand',
+        p: [
+          "On any walk-behind petrol mower, the engine accounts for about 60% of the resale value. The deck is a steel pressing — cheap to make, cheap to replace, and broadly interchangeable across brands. The engine is the expensive bit, the part with serial numbers, the part with parts continuity into the 30-year range. A Mountfield SP46 with a worn deck and a healthy Stiga ST120 engine is worth more than the same mower with a new deck and a knackered engine.",
+          "Briggs & Stratton makes the engine fitted to about a third of the petrol mowers on UK shop floors. They sell engines, not mowers — Mountfield, Cobra, Hayter, Atco, Mac Allister, Murray, Lawnflite, AL-KO, and Westwood all buy from B&S and bolt the engine onto their own decks. So a Cobra MX46SPB and a Mac Allister MPRM46SP and a Hayter Spirit 41 can all share the exact same Briggs 450E or 500E engine — and that engine is the part that determines long-term reliability, parts availability, and used value.",
+          "The trouble is the naming. B&S has used at least four naming systems over the years — horsepower (11HP, 13HP), cubic-centimetre (125cc, 140cc, 163cc), 'Series' codes (450, 500, 575, 625, 675, 750, 850, 875), and family names (Classic, Sprint, Quattro, Quantum, Intek, Vanguard, Professional). And they often appear in combination: \"B&S 575EX 140cc 5.75ft-lb torque\" all describe the same engine."
+        ]
+      },
+      {
+        h: 'How the modern naming system works',
+        p: [
+          "The current Briggs naming convention, used on every walk-behind engine sold in the UK since around 2008, is based on a torque rating multiplied by 100. \"500E\" means 5.00 ft-lb of gross torque. \"575EX\" means 5.75 ft-lb. \"675EX\" means 6.75 ft-lb. \"850 Professional\" means 8.50 ft-lb. The bigger the number, the more torque the engine produces — which on a mower translates directly to how thick a patch of grass it can clear without bogging down.",
+          "The letters after the number indicate the consumer-friendly features fitted: 'E' is the basic series, 'EX' adds ReadyStart auto-choke, 'iS' adds InStart push-button electric start. So \"675EX\" is a 6.75 ft-lb engine with auto-choke; \"675iS\" is the same block with electric start instead.",
+          "Engine displacement (125cc, 140cc, 163cc, 190cc) tracks the torque rating loosely — a 575EX is always 140cc, a 675EX is always 163cc, an 850 Professional is always 190cc. If a listing claims \"B&S 575EX 163cc\" the seller has misread the cowling or the engine has been swapped. Treat both as red flags.",
+          "Older engines — anything pre-2008 — use horsepower or family names instead: 'Quattro 4HP', 'Sprint 5HP', 'Quantum 6.5HP', 'Intek 13HP'. These are the engines you'll see on Murray 11/30s and Hayter Heritages from the 1990s and 2000s. They're still well-supported and easy to source parts for."
+        ]
+      },
+      {
+        h: 'Walk-behind engines: 450E to 875EX',
+        p: [
+          "These are the engines fitted to almost every petrol push and self-propelled mower in the UK. Listed from smallest to largest:",
+          "**450E (125cc, 4.50 ft-lb)** — the entry-level Briggs walk-behind engine. Side-valve design, no overhead cam. Fitted to the Hayter Spirit 41, Hayter Hawk 41, Murray EQ400X, and a long list of supermarket-tier mowers. Reliable but unrefined — runs noisier than equivalent overhead-valve engines and consumes slightly more fuel per hour. Worth £40-60 used as a bare engine. Parts are universal and sub-£10 for service items.",
+          "**500E / 500E Series (140cc, 5.00 ft-lb)** — the workhorse. Fitted to the Cobra MX46SPB, Mac Allister MPRM46SP, Atco Liner 16S, and dozens of other 41-46cm decks. Same side-valve architecture as the 450E with a slightly bigger bore. The most-fitted Briggs engine in the UK by volume. If a used mower has a Briggs and you don't know what series, it's probably a 500E. Worth £60-90 used.",
+          "**575EX (140cc, 5.75 ft-lb)** — the 500E with ReadyStart auto-choke and a slightly hotter cam. Fitted to the Murray EQ500X. ReadyStart eliminates the priming bulb (which is the part that fails first on a 500E). If you're choosing between a 500E and a 575EX in the same price bracket, the 575EX is the better buy for the auto-choke alone. Worth £80-120 used.",
+          "**625EX / 675EX (163cc, 6.25-6.75 ft-lb)** — the next size up, fitted to mowers with 48-53cm decks. The Cobra MX534SPC and Atco Quattro 19S both use the 750EX (slightly hotter spec of the same block). Overhead-valve design — quieter, cleaner-burning, and longer-lived than the side-valve 500E series. The sweet spot of the Briggs walk-behind range. Worth £120-180 used.",
+          "**750EX (161cc, 7.50 ft-lb)** — the 675EX with another power bump. Fitted to commercial-grade walk-behinds and the larger consumer mowers. Same engine block as the 675EX, different cam and valve timing. Worth £150-200 used.",
+          "**875EX (190cc, 8.75 ft-lb)** — the biggest walk-behind Briggs. Fitted to the AL-KO Highline 5.2 SP-S and to several 53cm mulching mowers. This is the engine you want on a heavy-cut, large-lawn walk-behind. Pulls long grass without slowing. Worth £180-250 used.",
+          "**iS variants (450iS / 575iS / 675iS)** — same blocks as above, with InStart push-button electric start instead of pull-cord. The Murray EQ700X uses the 675iS. The InStart battery is a wear part; budget £40-50 every 4 years for replacement. Worth the same as the EX equivalent if the InStart battery is healthy, £40 less if it's dead."
+        ]
+      },
+      {
+        h: 'Ride-on engines: Intek single, Intek V-twin, Vanguard',
+        p: [
+          "Ride-on mowers use bigger Briggs engines from two main families:",
+          "**Intek single-cylinder** — the entry ride-on engine, 344-500cc, 11-17.5HP. Fitted to the Hayter Heritage 11/30 (Intek 344cc) and to most consumer-grade ride-ons. Single cylinder is cheaper and lighter than V-twin but vibrates more and runs louder. Reliable for residential use; budget for an oil change every 50 hours and a valve adjustment every 200 hours. Worth £200-400 used as a bare engine.",
+          "**Intek V-twin (7180, 8240 series)** — the upgraded ride-on engine, 656-724cc, 17-25HP. Fitted to the Murray MX175-107, the Cub Cadet XT2, and most premium consumer lawn tractors. V-twin is dramatically smoother than single-cylinder and lasts longer between rebuilds. The Intek 7180 V-twin in the Murray MX175-107 is the same engine fitted to John Deere E-series tractors at twice the price. Worth £400-700 used.",
+          "**Vanguard single (165-205cc)** — the commercial-spec walk-behind/two-stroke equivalent. Less common in domestic mowers but you'll see it on commercial-grade pedestrian mowers. Roller bearings throughout, full-pressure lubrication, twice the service interval of an Intek. Worth £250-400 used.",
+          "**Vanguard V-twin (479-895cc, 14-31HP)** — the commercial ride-on engine. Fitted to the Westwood S150HE (Vanguard 14HP), the Westwood T1600HE (Vanguard V-twin 16HP), and the Mountfield Tornado 2098H (Vanguard V-twin 18HP). Engineered for 1500+ hours of use; many fitted to professional landscaping fleets see 3000+ hours before a rebuild. The headline feature on any used ride-on listing — a Vanguard adds £400-800 over an equivalent Intek-engined machine of the same age. Worth £600-1200 used."
+        ]
+      },
+      {
+        h: 'I/C — what "Industrial / Commercial" actually means',
+        p: [
+          "Older Briggs engines (mostly pre-2010) were sold in two grades: standard and I/C (Industrial/Commercial). The I/C variant of any given engine has uprated bearings, a cast-iron cylinder sleeve, and a full-pressure lubrication system instead of the standard splash design. They were specced for hire-fleet and commercial use and are dramatically more durable than the standard variant.",
+          "The Murray 14.5/38 in our catalogue uses a Briggs 14.5HP I/C — the engine has cast-iron sleeves and runs an oil bath air filter. These engines routinely hit 2000+ hours before a top-end rebuild, vs. 600-800 for the standard variant. On the used market the I/C badge is worth £80-150 over the standard equivalent.",
+          "The modern equivalent of I/C is the 'Professional' suffix on the EX series (e.g. '850 Professional'). Same idea — same block as the consumer 850EX with uprated internals for commercial use."
+        ]
+      },
+      {
+        h: 'ReadyStart, InStart, idle-stop ("iS") — what each feature does',
+        p: [
+          "**ReadyStart** is Briggs' auto-choke system — there's no choke lever and no priming bulb. The engine reads its own temperature on first crank and adjusts the fuel mixture automatically. You just pull the cord. Works brilliantly when it's working, but the temperature sensor and the autochoke butterfly are both wear parts that fail at 8-10 years. When ReadyStart fails, the mower won't start when cold — diagnosed by the symptom of \"works fine warm but won't start in the morning.\" Replacement of the autochoke unit is £45 in parts and a 30-minute job.",
+          "**InStart (iS)** is the push-button electric start system, fitted to 450iS, 575iS, and 675iS engines. A small lithium battery in the engine cowling spins the starter motor. The battery itself is consumable — Briggs claims 5+ years but real-world is 3-4 years before noticeably weaker starts. Replacement battery is £40-50 from a Briggs dealer; aftermarket alternatives are £25 and work fine. The InStart engines also have a fallback pull-cord, so a dead battery doesn't immobilise the mower.",
+          "**Idle stop** — also confusingly abbreviated 'iS' in some marketing material — is a feature on the latest 675iS and 850iS engines that automatically drops the engine to idle when you release the operator presence bar, then back to full revs when you re-engage. Saves fuel and noise during bag-empty pauses. Has no separate hardware to fail — it's a calibration of the throttle control."
+        ]
+      },
+      {
+        h: 'Series-specific common faults',
+        p: [
+          "Each Briggs series has a predictable failure mode that shows up at age 5-10 years. Knowing which one to look for on a used mower saves money and walk-aways.",
+          "**450E / 500E** — the priming bulb hardens and cracks at 5-7 years. Symptom: the bulb stays squashed when you press it instead of springing back. £4 part, 5-minute fix, but a useful negotiation lever. Also the foam air filter degrades faster than the rest of the engine; check it's still resilient and not crumbling.",
+          "**575EX / 675EX** — the ReadyStart autochoke butterfly sticks at 8+ years. Symptom: hard cold-start, runs fine when warm. £45 part. Less commonly the carb gasket weeps fuel — visible as a wet patch on the engine cowling.",
+          "**Intek single-cylinder** — head gasket failure at 800-1000 hours, especially on the larger 14HP+ variants. Symptom: white smoke, oil contamination of coolant (no, there's no coolant — the symptom is oil in unusual places), or coolant drops in cylinder. Head gasket replacement is £150 in parts and a half-day job.",
+          "**Intek V-twin (7180)** — flywheel key shears if the engine ever ingests a stone or hard object. Symptom: engine cranks but won't start, no spark. £8 part, 1-hour DIY job. Also the smaller Intek V-twins occasionally suffer rocker arm wear; check for valve clatter at idle.",
+          "**Vanguard V-twin** — almost no characteristic fault. Most failures are owner-induced (running low on oil, ingesting water, fuel starvation from a clogged tank vent). A used Vanguard with documented oil changes and under 1500 hours is the safest used engine on the UK market.",
+          "**iS variants** — InStart battery dies at 3-5 years (£40 fix). Less commonly the starter motor gear strips if the engine has been kicked back repeatedly (£60 fix)."
+        ]
+      },
+      {
+        h: 'Where to find the engine code on a used mower',
+        p: [
+          "Every Briggs engine has a model number, type number, and code stamped or printed somewhere on the cowling or block. The format is three numbers separated by spaces or dashes — for example \"126M02-0011-F1\". The first number identifies the basic engine family, the middle number the variant, and the last the production code (year/week).",
+          "On modern walk-behind engines (450E onwards), the engine series name is printed in large letters on the top cowling — you'll see \"500E SERIES\" or \"575EX\" or \"675EX\" at a glance. Take a photo. Plug the model number into the Briggs UK parts lookup at briggsandstratton.com to get a full parts diagram and service manual.",
+          "On older Intek and Vanguard engines, the model code is on a silver sticker on the engine cowling near the fuel tank. The sticker is sometimes rubbed off after 15+ years — in that case, look for the stamped numbers on the OHV valve cover or on the block itself near the spark plug.",
+          "If the engine has been swapped — visible as a different paint colour to the rest of the cowling, or a non-matching serial number to the chassis — that's not necessarily a deal-breaker, but it tells you the original engine failed and was replaced. Treat the mower as having the age of its newer engine, not its chassis."
+        ]
+      },
+      {
+        h: 'What each Briggs engine is worth on a used mower (2026 UK)',
+        p: [
+          "Engine condition adds or subtracts from the asking price as follows. These are deltas from a base value (the deck, drive system, condition).",
+          "450E / Sprint 4HP / Classic 3.5HP — adds £40-60 to mower value if healthy. Add nothing for the engine if it has starting issues; cost of fixing equals fix value.",
+          "500E / 575EX / Quantum 6.5HP — adds £60-100. ReadyStart in working order adds another £30. Working priming bulb (on 500E) adds £15.",
+          "625EX / 675EX / 750EX — adds £120-180. Working ReadyStart adds £40. Quiet idle and clean exhaust at full throttle add £50.",
+          "875EX / 850 Professional — adds £180-250. The 'Professional' designation specifically (not just 'EX') adds another £80.",
+          "Intek single-cylinder 11-17.5HP — adds £200-400 to a ride-on. Hours under 200 add £100; hours over 800 subtract £150.",
+          "Intek V-twin 7180 — adds £400-700. Hours under 200 add £150; quiet running adds £100.",
+          "Vanguard single — adds £250-400. The Vanguard badge specifically adds £100 over an equivalent Intek of the same age and hours.",
+          "Vanguard V-twin — adds £600-1200. The biggest swing in used mower pricing. A documented service history doubles the engine premium."
+        ]
+      },
+      {
+        h: 'When a Briggs is the wrong answer — what to buy instead',
+        p: [
+          "Briggs is the right engine for most domestic UK mowers most of the time. The dealer network is unrivalled, parts cost half as much as Honda equivalents, and the 500E-series engines run forever with basic care. But there are situations where a different engine is the smarter buy.",
+          "If you want absolute longevity and don't care about the cost premium, buy Honda — the GCV170 in a Honda HRX or HRG outlasts a Briggs 575EX by 30-40%, holds its used value better, and starts cleaner after winter storage. Worth the £100-150 new-price premium if the mower is going to live in your shed for 15+ years.",
+          "If you're buying a commercial walk-behind for hire-fleet or contractor use, Honda GXV or Kawasaki FJ-series are the right answer over a B&S Professional. The Honda runs cleaner; the Kawasaki has tougher internals. The B&S Professional is fine but it's the third choice in this category, not the first.",
+          "If you're buying a top-spec ride-on (£3000+) and the lawn is over an acre, Kawasaki FR or FX V-twin is preferable to the Briggs Vanguard V-twin. The Kawasaki holds tune better and runs slightly more efficiently. But a Vanguard is 80% as good for 70% of the price, so the Briggs is rarely a wrong answer here.",
+          "For everything else — walk-behinds under £500, ride-ons under £2500 — a Briggs engine in any current series is the safe buy. Nationwide parts, service network, and the cheapest cost of ownership over a 10-year horizon."
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'What is the difference between a 500E and a 575EX?', a: "Same engine block, different specification. The 575EX adds Briggs' ReadyStart auto-choke (no priming bulb, no choke lever) and a slightly hotter cam profile that pushes the torque rating from 5.00 to 5.75 ft-lb. In practice the 575EX starts more reliably from cold and pulls slightly harder through long grass. Worth about £30 extra on a used mower." },
+      { q: 'Is a Briggs Intek as good as a Honda GCV?', a: "Close, not quite. The Briggs Intek is reliable to about 600-800 hours with basic care (oil changes, air filter, spark plug). The Honda GCV is reliable to 1000-1500 hours with the same care. For a domestic mower used 30-40 hours per year, both will last 15-20 years before any major engine work is needed. The Briggs costs less new, the Honda holds its used value better — net cost over 15 years is similar." },
+      { q: 'Can I rebuild a Briggs engine myself?', a: "The smaller walk-behind engines (450E, 500E, 575EX, 675EX) are genuinely rebuildable at home with a Haynes manual and a torque wrench. Top-end rebuild (head gasket, valves, rings) is a 6-hour job and around £80 in parts. Bottom-end work (rod bearings, crankshaft) is harder and usually not worth the trouble — buy a replacement engine for £100-150 from a breaker. Larger Intek and Vanguard engines are best left to a Briggs service centre." },
+      { q: 'Where do I buy genuine Briggs parts in the UK?', a: "Briggs and Stratton runs a network of about 200 authorised service dealers across the UK — find your nearest at briggsandstratton.com. For DIY parts, GardenLines, Mowers Online, and Garden Machinery Direct all stock genuine Briggs filters, plugs, gaskets, and carb kits. Online prices are usually 20-30% cheaper than dealer counter prices. NGK plugs and Champion equivalents (used in most B&S engines) are also available at any Halfords or motor factor." },
+      { q: 'How do I know if a used mower has had its Briggs engine swapped?', a: "Compare the paint colour and finish of the engine cowling to the rest of the mower. Briggs cowlings are matte black; if it's been wire-brushed and repainted it's been off the mower. Check the model number sticker for damage — sellers sometimes peel it off if the swap engine doesn't match the original spec. Cross-reference the engine model number with what the mower originally came with (Mountfield, Cobra, Hayter etc. service manuals list the original Briggs spec). A swap isn't always bad — the original engine failed and was replaced — but it tells you the mower has been through a major repair already." },
+      { q: 'Why are some old Briggs engines marked in HP and others in cc?', a: "Briggs phased out horsepower ratings in 2007-2008 after a US class-action lawsuit alleging the HP figures were overstated. Modern engines are rated in either gross torque (ft-lb) or displacement (cc). When you see an old mower listed as 'B&S 6.5HP', it's probably a Quantum 190cc engine. 'B&S 11HP' is usually an Intek 344cc. The old HP and modern cc figures don't translate cleanly — different engines, different test methodologies — so don't try to convert between them." }
+    ]
   }
 ];
