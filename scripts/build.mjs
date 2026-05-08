@@ -83,34 +83,50 @@ function transform(m) {
 const mowers = rawMowers.map(transform);
 
 // ---------- Categories ----------
+// heroImg: Unsplash photo URL for the category page hero. Already-used images on existing
+// blog posts are reused where they fit; new ones are picked from the Unsplash editorial pool.
 const CATEGORIES = {
   'Petrol': {
     slug: 'petrol', name: 'Petrol', color: '#d97706', bg: '#fef3e2',
-    desc: 'Best for medium-to-large lawns and rough conditions. No cord, no battery limits. The category that still dominates UK gardens over 800m².'
+    desc: 'Best for medium-to-large lawns and rough conditions. No cord, no battery limits. The category that still dominates UK gardens over 800m².',
+    heroImg: 'https://images.unsplash.com/photo-1590820292118-e256c3ac2676?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Petrol push lawnmower stationary on cut grass'
   },
   'Electric': {
     slug: 'electric', name: 'Electric', color: '#2563eb', bg: '#e0ecff',
-    desc: 'Corded mains-powered mowers. Quiet, reliable, low maintenance — but tethered. Right for small-to-medium lawns near a power point.'
+    desc: 'Corded mains-powered mowers. Quiet, reliable, low maintenance — but tethered. Right for small-to-medium lawns near a power point.',
+    heroImg: 'https://images.unsplash.com/photo-1690068023694-053da714f95f?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Corded electric lawnmower on a small UK lawn'
   },
   'Cordless': {
     slug: 'cordless', name: 'Cordless', color: '#7c3aed', bg: '#ede4ff',
-    desc: 'Battery-powered. Quiet and clean. Battery runtime is the deciding factor. The fastest-growing category in UK lawncare.'
+    desc: 'Battery-powered. Quiet and clean. Battery runtime is the deciding factor. The fastest-growing category in UK lawncare.',
+    heroImg: 'https://images.unsplash.com/photo-1689728318937-17d24bc0a65c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Cordless battery lawnmower mid-cut on green grass'
   },
   'Hover': {
     slug: 'hover', name: 'Hover', color: '#0891b2', bg: '#dff4f8',
-    desc: 'Air-cushioned, no wheels. Brilliant on slopes and odd-shaped lawns. The British answer to awkward gardens.'
+    desc: 'Air-cushioned, no wheels. Brilliant on slopes and odd-shaped lawns. The British answer to awkward gardens.',
+    heroImg: 'https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Hover-style mower on a sloped grass area'
   },
   'Robotic': {
     slug: 'robotic', name: 'Robotic', color: '#5fb878', bg: '#e8f0e3',
-    desc: 'Set it and forget it. Boundary-wire and wire-free RTK robots are mature; camera-based no-wire systems are improving fast.'
+    desc: 'Set it and forget it. Boundary-wire and wire-free RTK robots are mature; camera-based no-wire systems are improving fast.',
+    heroImg: 'https://images.unsplash.com/photo-1741326757602-186060c5d5b5?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Robotic lawn mower on a manicured garden lawn'
   },
   'Ride-on': {
     slug: 'ride-on', name: 'Ride-On', color: '#dc2626', bg: '#fde8e8',
-    desc: 'For gardens that take more than an hour to push-mow. A serious purchase. Engine hours matter more than years.'
+    desc: 'For gardens that take more than an hour to push-mow. A serious purchase. Engine hours matter more than years.',
+    heroImg: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Ride-on lawn tractor cutting a large open lawn'
   },
   'Push': {
     slug: 'manual', name: 'Manual', color: '#6b7280', bg: '#eef0ec',
-    desc: 'Push-reel cylinder mowers. Silent, zero emissions, surprisingly satisfying. Best for small ornamental lawns.'
+    desc: 'Push-reel cylinder mowers. Silent, zero emissions, surprisingly satisfying. Best for small ornamental lawns.',
+    heroImg: 'https://images.unsplash.com/photo-1773917735999-2a89191afc55?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    heroAlt: 'Push cylinder lawnmower on a small striped ornamental lawn'
   }
 };
 
@@ -213,6 +229,33 @@ const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g,
 const inlineMd = s => esc(s)
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;!?]|$)/g, '$1<em>$2</em>');
+
+// JSON-LD helpers — return raw objects to be combined by callers.
+// crumbs: array of [name, urlPath] tuples ordered root → leaf. Last item omits url (current page).
+const crumbsLD = crumbs => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c[0],
+    ...(c[1] ? { item: c[1].startsWith('http') ? c[1] : (SITE + c[1]) } : {})
+  }))
+});
+
+// itemList: array of {name, url, image?} — used for category/brand/best-of pages.
+const itemListLD = (name, items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name,
+  numberOfItems: items.length,
+  itemListElement: items.map((it, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: it.url.startsWith('http') ? it.url : (SITE + it.url),
+    name: it.name
+  }))
+});
 const fmtGBP = n => '£' + (n || 0).toLocaleString('en-GB');
 
 const stars = (rating, reviews) => `
@@ -273,12 +316,17 @@ function heroIcon(m, size = 90) {
 // Small photo credit (only on mower detail page; CC BY-SA needs attribution)
 function photoCredit(m) {
   if (!m.img) return '';
-  const fileUrl = 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent((m.imgFile || '').replace(/ /g, '_'));
-  return `<p class="photo-credit">Photo: <a href="${esc(fileUrl)}" rel="nofollow noopener" target="_blank">${esc(m.imgSrc || 'Wikimedia Commons')}</a> (${esc(m.imgLicense || 'CC')})${m.imgNote ? ' — ' + esc(m.imgNote) : ''}</p>`;
+  const isUnsplash = (m.imgSrc || '').toLowerCase().includes('unsplash') || /unsplash\.com/.test(m.img || '');
+  const fileUrl = isUnsplash
+    ? 'https://unsplash.com'
+    : 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent((m.imgFile || '').replace(/ /g, '_'));
+  return `<p class="photo-credit">Photo: <a href="${esc(fileUrl)}" rel="nofollow noopener" target="_blank">${esc(m.imgSrc || 'Wikimedia Commons')}</a>${m.imgLicense ? ` (${esc(m.imgLicense)})` : ''}${m.imgNote ? ' — ' + esc(m.imgNote) : ''}</p>`;
 }
 
 // ---------- Common chrome ----------
-const head = ({ title, description, canonical, ogImage = '/og.png', ldjson = null }) => `<!doctype html>
+// ogImage may be an absolute URL (e.g. blog hero) or a site-relative path like '/og.png'.
+const absUrl = u => /^https?:\/\//.test(u) ? u : (SITE + u);
+const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'article', ldjson = null }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -288,17 +336,17 @@ const head = ({ title, description, canonical, ogImage = '/og.png', ldjson = nul
 <meta name="description" content="${esc(description)}"/>
 <link rel="canonical" href="${esc(SITE + canonical)}"/>
 <meta name="robots" content="index, follow, max-image-preview:large"/>
-<meta property="og:type" content="article"/>
+<meta property="og:type" content="${esc(ogType)}"/>
 <meta property="og:site_name" content="MowRight UK"/>
 <meta property="og:title" content="${esc(title)}"/>
 <meta property="og:description" content="${esc(description)}"/>
 <meta property="og:url" content="${esc(SITE + canonical)}"/>
 <meta property="og:locale" content="en_GB"/>
-<meta property="og:image" content="${esc(SITE + ogImage)}"/>
+<meta property="og:image" content="${esc(absUrl(ogImage))}"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="${esc(title)}"/>
 <meta name="twitter:description" content="${esc(description)}"/>
-<meta name="twitter:image" content="${esc(SITE + ogImage)}"/>
+<meta name="twitter:image" content="${esc(absUrl(ogImage))}"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
@@ -309,7 +357,7 @@ const head = ({ title, description, canonical, ogImage = '/og.png', ldjson = nul
 <link rel="stylesheet" href="/style.css"/>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6052985070008267" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
-${ldjson ? `<script type="application/ld+json">${JSON.stringify(ldjson)}</script>` : ''}
+${ldjson ? (Array.isArray(ldjson) ? ldjson : [ldjson]).map(j => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n') : ''}
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>`;
@@ -467,27 +515,39 @@ function renderMowerPage(m) {
     .slice(0, 3);
   const brand = BRANDS[m.brand];
 
-  const ld = {
+  const productLD = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: `${m.brand} ${m.model}`,
     brand: { '@type': 'Brand', name: m.brand },
     description: m.tagline,
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: m.rating, reviewCount: m.reviews },
+    category: cat.name + ' lawnmower',
+    sku: m.id,
+    ...(m.img ? { image: m.img } : {}),
+    ...(m.reviews > 0 ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: m.rating, reviewCount: m.reviews, bestRating: 5, worstRating: 1 } } : {}),
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'GBP',
       lowPrice: m.usedAvg,
       highPrice: m.rrp || m.buyNow,
-      offerCount: 2
+      offerCount: 2,
+      availability: 'https://schema.org/InStock'
     }
   };
+  const breadcrumbLD = crumbsLD([
+    ['Browse', '/'],
+    [cat.name, categoryUrl(m)],
+    [m.brand, brandUrl(m.brand)],
+    [m.model, null]
+  ]);
 
   return `${head({
     title: `${m.brand} ${m.model} — UK price, used vs new & verdict`,
     description: `${m.brand} ${m.model}: new ${fmtGBP(m.buyNow)}, used Marketplace average ${fmtGBP(m.usedAvg)}. Specs, expert verdict, pros and cons, and a marketplace buying tip.`,
     canonical: mowerUrl(m),
-    ldjson: ld
+    ogImage: m.img || '/og.png',
+    ogType: 'product',
+    ldjson: [productLD, breadcrumbLD]
   })}
 ${siteHeader('home')}
 
@@ -595,11 +655,15 @@ function renderCategoryPage(typeRaw) {
   const cat = CATEGORIES[typeRaw];
   const list = mowers.filter(m => m.type === typeRaw).sort((a, b) => b.valueScore - a.valueScore);
   const best = list[0];
+  const breadcrumbLD = crumbsLD([['Browse', '/'], [cat.name + ' mowers', null]]);
+  const listLD = itemListLD(`${cat.name} lawnmowers`, list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
 
   return `${head({
     title: `${cat.name} mowers — UK ranked & compared (${list.length} models)`,
     description: `${cat.name} lawnmowers compared. ${list.length} models with new and used UK prices, expert verdicts, and Facebook Marketplace tips.`,
-    canonical: '/' + cat.slug
+    canonical: '/' + cat.slug,
+    ogImage: cat.heroImg || '/og.png',
+    ldjson: [breadcrumbLD, listLD]
   })}
 ${siteHeader('home')}
 
@@ -610,8 +674,9 @@ ${siteHeader('home')}
   </nav>
 </div>
 
-<section class="section-hero bg-cat-${typeSlug(typeRaw).replace('-', '')}">
-  <div class="page">
+<section class="section-hero bg-cat-${typeSlug(typeRaw).replace('-', '')}" style="position:relative;overflow:hidden">
+  ${cat.heroImg ? `<img src="${esc(cat.heroImg)}" alt="${esc(cat.heroAlt || cat.name + ' lawnmower')}" loading="eager" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.18;z-index:0"/>` : ''}
+  <div class="page" style="position:relative;z-index:1">
     <div class="cat-eyebrow" style="color:${cat.color}">${esc(cat.name)} mowers</div>
     <h1 class="cat-h1">${esc(cat.name)} mowers, ranked.</h1>
     <p class="cat-lead">${esc(cat.desc)}</p>
@@ -647,11 +712,23 @@ function renderBrandPage(brandRaw) {
   if (!brand) return null;
   const list = mowers.filter(m => m.brand === brandRaw).sort((a, b) => b.valueScore - a.valueScore);
   const categories = [...new Set(list.map(m => m.type))];
+  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Brands', '/'], [brand.name, null]]);
+  const listLD = itemListLD(`${brand.name} lawnmowers`, list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
+  const orgLD = {
+    '@context': 'https://schema.org',
+    '@type': 'Brand',
+    name: brand.name,
+    description: brand.blurb,
+    parentOrganization: brand.parent ? { '@type': 'Organization', name: brand.parent } : undefined,
+    url: SITE + '/brand/' + slug(brandRaw),
+    ...(LOGOS[brandRaw] ? { logo: LOGOS[brandRaw] } : {})
+  };
 
   return `${head({
     title: `${brand.name} lawnmowers — UK range, used prices & verdicts`,
     description: `${brand.name} lawnmower range compared. ${list.length} model${list.length === 1 ? '' : 's'} with new and used UK prices, expert verdicts, and marketplace tips.`,
-    canonical: '/brand/' + slug(brandRaw)
+    canonical: '/brand/' + slug(brandRaw),
+    ldjson: [breadcrumbLD, listLD, orgLD]
   })}
 ${siteHeader('home')}
 
@@ -965,10 +1042,17 @@ function renderComparisonPage(idA, idB, verdict) {
   const specRow = (label, av, bv, w, suffix = '') =>
     `<tr><th>${esc(label)}</th>${cell(av, w, 'a', suffix)}${cell(bv, w, 'b', suffix)}</tr>`;
 
+  const breadcrumbLD = crumbsLD([
+    ['Browse', '/'],
+    ['Comparisons', null],
+    [`${a.brand} ${a.model} vs ${b.brand} ${b.model}`, null]
+  ]);
   return `${head({
     title: `${a.brand} ${a.model} vs ${b.brand} ${b.model} — UK comparison`,
     description: `Side-by-side comparison: ${a.brand} ${a.model} vs ${b.brand} ${b.model}. UK prices, full specs, pros and cons of each, and a verdict on which to buy.`,
-    canonical: compUrl(idA, idB)
+    canonical: compUrl(idA, idB),
+    ogImage: a.img || b.img || '/og.png',
+    ldjson: breadcrumbLD
   })}
 ${siteHeader()}
 
@@ -1113,10 +1197,13 @@ const bestOfUrl = slug => `/best/${slug}`;
 
 function renderBestOfPage(cfg) {
   const list = mowers.filter(cfg.pick).sort((a, b) => cfg.sortBy(b) - cfg.sortBy(a)).slice(0, cfg.take);
+  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Best of', null], [cfg.title, null]]);
+  const listLD = itemListLD(cfg.title, list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
   return `${head({
     title: `${cfg.title} — MowRight UK`,
     description: `${cfg.title}, hand-picked from MowRight UK's catalogue of ${mowers.length} mowers. Independent picks with UK prices and second-hand averages.`,
-    canonical: bestOfUrl(cfg.slug)
+    canonical: bestOfUrl(cfg.slug),
+    ldjson: [breadcrumbLD, listLD]
   })}
 ${siteHeader()}
 
@@ -1174,10 +1261,26 @@ const blogUrl = slug => `/blog/${slug}`;
 
 function renderBlogIndex() {
   const sorted = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
+  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Blog', null]]);
+  const blogLD = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'MowRight UK Blog',
+    url: SITE + '/blog',
+    description: 'Independent UK lawn mower advice and how-tos.',
+    blogPost: sorted.map(p => ({
+      '@type': 'BlogPosting',
+      headline: p.title,
+      url: SITE + blogUrl(p.slug),
+      datePublished: p.date,
+      ...(p.image ? { image: p.image } : {})
+    }))
+  };
   return `${head({
     title: 'MowRight UK Blog — independent lawn mower advice and how-tos',
     description: 'Long-form guides on UK lawn mower buying, maintenance, troubleshooting, and brand-specific advice. No affiliate fluff.',
-    canonical: '/blog'
+    canonical: '/blog',
+    ldjson: [breadcrumbLD, blogLD]
   })}
 ${siteHeader('blog')}
 
@@ -1224,7 +1327,9 @@ function renderBlogPost(post) {
     dateModified: post.date,
     author: { '@type': 'Organization', name: 'MowRight UK', url: SITE },
     publisher: { '@type': 'Organization', name: 'MowRight UK', logo: { '@type': 'ImageObject', url: SITE + '/og.png' } },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': SITE + blogUrl(post.slug) }
+    mainEntityOfPage: { '@type': 'WebPage', '@id': SITE + blogUrl(post.slug) },
+    ...(post.image ? { image: post.image } : {}),
+    ...(post.keyword ? { keywords: post.keyword } : {})
   };
 
   const faqSchema = post.faqs && post.faqs.length ? {
@@ -1237,7 +1342,8 @@ function renderBlogPost(post) {
     }))
   } : null;
 
-  const ld = faqSchema ? [articleSchema, faqSchema] : articleSchema;
+  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Blog', '/blog'], [post.title, null]]);
+  const ld = [articleSchema, breadcrumbLD, ...(faqSchema ? [faqSchema] : [])];
 
   // Internal-link mowers from related[]
   const related = (post.related || []).map(id => mowers.find(m => m.id === id)).filter(Boolean);
@@ -1246,6 +1352,7 @@ function renderBlogPost(post) {
     title: post.title,
     description: post.description,
     canonical: blogUrl(post.slug),
+    ogImage: post.image || '/og.png',
     ldjson: ld
   })}
 ${siteHeader('blog')}

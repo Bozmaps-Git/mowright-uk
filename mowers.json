@@ -39,7 +39,11 @@
       "Versamow lever can stiffen with age"
     ],
     "verd": "The benchmark petrol roller and the mower most lawn-care professionals secretly own. The Honda engine is the reason — it will outlast three cheaper machines and resale stays strong because everyone knows it. Worth the premium new and easily worth the premium used.",
-    "tip": "Used HRX 476s rarely drop below £450 — anything under £400 with a clean deck is a buy. Check the Roto-Stop blade-brake clutch engages cleanly (it should freewheel when released). Look at the rear roller bearings for play. If the seller says \"needs a service,\" knock £80 off — that is fair. Avoid any with welded deck repairs."
+    "tip": "Used HRX 476s rarely drop below £450 — anything under £400 with a clean deck is a buy. Check the Roto-Stop blade-brake clutch engages cleanly (it should freewheel when released). Look at the rear roller bearings for play. If the seller says \"needs a service,\" knock £80 off — that is fair. Avoid any with welded deck repairs.",
+    "img": "https://images.unsplash.com/photo-1458245201577-fc8a130b8829?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative petrol mower photo"
   },
   {
     "id": 2,
@@ -124,7 +128,11 @@
       "Rear flap hinge a known weak point"
     ],
     "verd": "The mower nearly every UK garden has had at some point. Cheap new, cheap used, easy to repair. Not glamorous, but it does the job for years if you change the oil.",
-    "tip": "Used SP46s should be £100–160 — never pay more than £180. Massive supply on Marketplace. Look for visible engine oil leaks around the dipstick (a common fault). The plastic rear flap hinge cracks — check it pivots freely. If the drive cable feels loose, factor £15 for a replacement."
+    "tip": "Used SP46s should be £100–160 — never pay more than £180. Massive supply on Marketplace. Look for visible engine oil leaks around the dipstick (a common fault). The plastic rear flap hinge cracks — check it pivots freely. If the drive cable feels loose, factor £15 for a replacement.",
+    "img": "https://images.unsplash.com/photo-1590820292118-e256c3ac2676?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative petrol push mower photo"
   },
   {
     "id": 4,
@@ -248,7 +256,11 @@
       "Roller bearings degrade quicker than premium brands"
     ],
     "verd": "The smart-money budget choice if you want stripes without paying Hayter or Honda money. Briggs engines are easy to service. Performs above its price.",
-    "tip": "£140–220 is the used range — anything under £150 is excellent if it runs cleanly. Check the rear roller for play — a worn bearing is £20 to replace yourself. Briggs engines are easy to spot-service: change oil and air filter and most issues vanish. Avoid if rust on the deck looks structural rather than surface."
+    "tip": "£140–220 is the used range — anything under £150 is excellent if it runs cleanly. Check the rear roller for play — a worn bearing is £20 to replace yourself. Briggs engines are easy to spot-service: change oil and air filter and most issues vanish. Avoid if rust on the deck looks structural rather than surface.",
+    "img": "https://images.unsplash.com/photo-1590820292118-e256c3ac2676?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative self-propelled petrol photo"
   },
   {
     "id": 7,
@@ -747,7 +759,11 @@
       "Battery extra in some configurations"
     ],
     "verd": "A Husqvarna badge on a small mower aimed at urban gardens. Useful if you already own PowerForAll tools. Otherwise the Bosch CityMower 18 is the same idea for less.",
-    "tip": "£120–200 used. Confirm the PowerForAll battery is included — without it, this mower is worthless. The motor is shared across Bosch and Husqvarna so spares are easy. New is £329; pay no more than £200 used."
+    "tip": "£120–200 used. Confirm the PowerForAll battery is included — without it, this mower is worthless. The motor is shared across Bosch and Husqvarna so spares are easy. New is £329; pay no more than £200 used.",
+    "img": "https://images.unsplash.com/photo-1690068023694-053da714f95f?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative corded electric photo"
   },
   {
     "id": 19,
@@ -949,7 +965,11 @@
       "Twin 18V drains fast on big lawns"
     ],
     "verd": "A surprising performer — the 53cm cut and decent runtime make this a real petrol alternative for a Makita owner. Outsider buys should still pick EGO; the battery-platform lock-in matters.",
-    "tip": "£250–400 with batteries is fair used. Self-propel cable is the wear point — check it adjusts smoothly. As with the DLM382, batteries are 90% of the value. A bare body-only DLM539Z is worth £150 max."
+    "tip": "£250–400 with batteries is fair used. Self-propel cable is the wear point — check it adjusts smoothly. As with the DLM382, batteries are 90% of the value. A bare body-only DLM539Z is worth £150 max.",
+    "img": "https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative hover mower photo"
   },
   {
     "id": 24,
@@ -1285,7 +1305,11 @@
       "RTK base station setup is complex"
     ],
     "verd": "The robot that has Husqvarna nervous. AWD on slopes is a genuine breakthrough and the cut width of 40cm shrinks mowing time dramatically. Buy with caution — Mammotion is new in the UK and parts/service are still scaling.",
-    "tip": "£1700–2400 used. Confirm the RTK base station and antenna are both present. Demand a live cut demo before paying — these are still rare so verify it actually works on the user's lawn. Reset the Mammotion account before buyer takes ownership."
+    "tip": "£1700–2400 used. Confirm the RTK base station and antenna are both present. Demand a live cut demo before paying — these are still rare so verify it actually works on the user's lawn. Reset the Mammotion account before buyer takes ownership.",
+    "img": "https://images.unsplash.com/photo-1741326757602-186060c5d5b5?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative robotic mower photo"
   },
   {
     "id": 32,
@@ -1628,7 +1652,11 @@
       "Hydrostatic needs careful warm-up"
     ],
     "verd": "The JD X167R's direct rival at a lower price. Cuts as well, holds value less. Buy if budget is tight, JD if you can stretch.",
-    "tip": "£900–1500 used. Stiga engine hours easier to ignore than JD because spare parts cost less — but still ask. Hydrostatic drive belt is the wear point — slipping under load means £80 belt and dealer fitting. Anti-scalp wheels and deck wash port are check items."
+    "tip": "£900–1500 used. Stiga engine hours easier to ignore than JD because spare parts cost less — but still ask. Hydrostatic drive belt is the wear point — slipping under load means £80 belt and dealer fitting. Anti-scalp wheels and deck wash port are check items.",
+    "img": "https://images.unsplash.com/photo-1558904541-efa843a96f01?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative ride-on tractor photo"
   },
   {
     "id": 40,
@@ -1840,7 +1868,11 @@
       "Hayter parts costlier than Mountfield"
     ],
     "verd": "The right ride-on for a medium suburban lawn that will not fit anything bigger. Hayter quality means it lasts. Outclassed on price by Mountfield 1530H but the build is noticeably better.",
-    "tip": "£900–1700 used. Engine hours under 400 is good. Hayter parts are still made in Britain so old machines remain serviceable — that supports value. Test the gear-change linkage; it should be precise. Rear collection chute kinks are a common fault — flex it during inspection."
+    "tip": "£900–1700 used. Engine hours under 400 is good. Hayter parts are still made in Britain so old machines remain serviceable — that supports value. Test the gear-change linkage; it should be precise. Rear collection chute kinks are a common fault — flex it during inspection.",
+    "img": "https://images.unsplash.com/photo-1458245201577-fc8a130b8829?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative roller petrol photo"
   },
   {
     "id": 45,
@@ -1920,7 +1952,11 @@
       "No roller — no stripes"
     ],
     "verd": "Compact and well-engineered for very small ornamental lawns. The grass box is the differentiator — most manual cylinders mulch only. Disappointingly small cut though.",
-    "tip": "£20–45 used. Bosch builds to last so even old units are fine. Check the cylinder blades for nicks (re-sharpening £20). Grass box hinges are plastic and crack — inspect them. Bosch parts are rare but rarely needed."
+    "tip": "£20–45 used. Bosch builds to last so even old units are fine. Check the cylinder blades for nicks (re-sharpening £20). Grass box hinges are plastic and crack — inspect them. Bosch parts are rare but rarely needed.",
+    "img": "https://images.unsplash.com/photo-1689728318937-17d24bc0a65c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative cordless mower photo"
   },
   {
     "id": 47,
@@ -2216,7 +2252,11 @@
       "Useless on long or wet grass"
     ],
     "verd": "Not made any more, but the Suffolk Punch is the mower bowling-green keepers and ornamental-lawn obsessives still hunt for. If you have a flat formal lawn, nothing beats the cut and the stripes. Marketplace is the only way to buy one.",
-    "tip": "£150–400 used depending on condition and age. Cylinder sharpness is the entire game — test cut on a piece of paper at the deck (it should slice cleanly). Re-grind is £40–60. Avoid welded frame repairs. Original Qualcast/Suffolk decals add £30 for collectors."
+    "tip": "£150–400 used depending on condition and age. Cylinder sharpness is the entire game — test cut on a piece of paper at the deck (it should slice cleanly). Re-grind is £40–60. Avoid welded frame repairs. Original Qualcast/Suffolk decals add £30 for collectors.",
+    "img": "https://images.unsplash.com/photo-1773917735999-2a89191afc55?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative push cylinder photo"
   },
   {
     "id": 54,
@@ -5146,7 +5186,11 @@
       "Drive belt and steering linkage wear with age"
     ],
     "verd": "The Murray 11/30 was a budget garden tractor sold widely in the UK during the 1990s. Mostly red with a distinctive orange/yellow stripe across the bonnet. Out of production for years but the Briggs engine and simple gear-drive transmission make these easy to keep running. A perfectly fine first ride-on if you find a clean one.",
-    "tip": "£300–650 used depending on condition. Briggs 11HP engine should fire on first or second crank — sluggish start is varnished carb (£40 fix). Test the gear-change linkage; vintage Murrays develop play in the steering box. Avoid any with welded chassis repairs or non-original wheel sizes."
+    "tip": "£300–650 used depending on condition. Briggs 11HP engine should fire on first or second crank — sluggish start is varnished carb (£40 fix). Test the gear-change linkage; vintage Murrays develop play in the steering box. Avoid any with welded chassis repairs or non-original wheel sizes.",
+    "img": "https://images.unsplash.com/photo-1558904541-efa843a96f01?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative vintage ride-on photo"
   },
   {
     "id": 124,
@@ -5768,7 +5812,11 @@
     ],
     "verd": "If you already own Stihl AP-system tools, this is the obvious cordless mower — one battery range, one charger, one shelf in the shed. Build quality is a step above the Bosch and Ryobi rivals at the same price, and the dealer support is what you actually pay extra for. Skip it if you're starting fresh on cordless; the EGO platform gives you more mower for the money.",
     "tip": "Skin price is £549 but you need the AP 300 S batteries (£189 each) and AL 301 charger (£89). Used kit-form RMA 443 TCs land at £280-350 with two used batteries — that is the buy. Check the battery cells: open Stihl service mode, and any cell pack reading under 80% capacity is worth £40 less.",
-    "rank": 138
+    "rank": 138,
+    "img": "https://images.unsplash.com/photo-1689728318937-17d24bc0a65c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative cordless mower photo"
   },
   {
     "id": 139,
@@ -5895,7 +5943,11 @@
     ],
     "verd": "MTD-built but specced like a small commercial mower — Honda GXV up top, alloy frame, BBC clutch, the lot. If you'd otherwise be eyeing a Hayter Harrier 56 or a Honda HRH 536, the Lawnflite Pro 553HRS comes in £400 cheaper and cuts the same width. The trade-off is resale value — Lawnflites don't hold money like Hondas or Hayters do.",
     "tip": "Used Pro 553HRSs are scarce because landscapers run them into the ground, but ex-demo and one-season returns occasionally appear at £550-700. The GXV engine has 1500+ hours in it before a top-end rebuild — buy on engine compression, not appearance. Anything with a deck rust spot is fine; that's just paint, not the alloy frame.",
-    "rank": 141
+    "rank": 141,
+    "img": "https://images.unsplash.com/photo-1458245201577-fc8a130b8829?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative pro-grade petrol photo"
   },
   {
     "id": 142,
@@ -5937,7 +5989,11 @@
     ],
     "verd": "The 320 NERA is the Husqvarna model where wireless EPOS boundary actually starts to make sense — the smaller 305/310 NERA can do EPOS too but the lawn area is too small to justify the £900 reference station. For 1500-2200m² lawns with awkward shapes that you don't want to dig a wire into, this is the right Automower. For everything else the 305 NERA is two-thirds the price.",
     "tip": "Used 320 NERAs are starting to appear at £1300-1600 from people who downsized. NERA platform launched 2023 so battery health is still strong. Confirm the EPOS antenna is intact under the bonnet — replacement is £180 from Husqvarna. Always demand the original charging station; aftermarket ones don't trigger NERA's encrypted handshake.",
-    "rank": 142
+    "rank": 142,
+    "img": "https://images.unsplash.com/photo-1741326757602-186060c5d5b5?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative robotic mower photo"
   },
   {
     "id": 143,
@@ -6269,7 +6325,11 @@
     ],
     "verd": "If you want a V-twin lawn tractor and the Mountfield 1530H is £400 out of budget, the Murray MX175-107 is the obvious answer. Same Briggs Intek 7180 engine you'd find on a John Deere E120 at twice the price. The trade-off is the transaxle and the dealer network — both are below Mountfield/John Deere standard, and you'll feel that at the 5-year mark when something breaks.",
     "tip": "Used MX175-107s land at £950-1500 depending on hours. Intek 7180s are durable but expensive to rebuild; under 200 hours is the safe buy. Test the hydrostatic in both directions and check for jerky engagement (fluid change due, £35 fix). Confirm the catcher bag is included — replacement is £180 from B&S spares.",
-    "rank": 150
+    "rank": 150,
+    "img": "https://images.unsplash.com/photo-1558904541-efa843a96f01?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200",
+    "imgSrc": "Unsplash",
+    "imgLicense": "Unsplash License",
+    "imgNote": "Representative lawn tractor photo"
   },
   {
     "id": 151,
