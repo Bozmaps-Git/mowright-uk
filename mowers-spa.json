@@ -126,11 +126,11 @@
       ],
       "verdict": "The mower nearly every UK garden has had at some point. Cheap new, cheap used, easy to repair. Not glamorous, but it does the job for years if you change the oil.",
       "tip": "Used SP46s should be £100–160 — never pay more than £180. Massive supply on Marketplace. Look for visible engine oil leaks around the dipstick (a common fault). The plastic rear flap hinge cracks — check it pivots freely. If the drive cable feels loose, factor £15 for a replacement.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Mountfield%20725M.jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Mountfield 725M.jpg",
+      "imgLicense": "CC BY-SA 4.0",
+      "imgNote": "Mountfield 725M — same brand, similar walk-behind class"
     },
     {
       "id": "hayter-harrier-41-ad",
@@ -170,11 +170,11 @@
       ],
       "verdict": "A connoisseur's mower. If you care about a perfect striped lawn and want a machine your grandchild could rebuild, the Harrier is the answer. Overkill for casual gardens.",
       "tip": "£380–500 is realistic for a tidy used Harrier 41. Hayter parts are still made in Britain so even old ones are repairable — that adds value. Test the variable speed lever travels through full range. Check the rear roller turns true and bearings are silent. Original Hayter spec sticker on the deck adds £40 to the price.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HR%202160.jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Honda HR 2160.jpg",
+      "imgLicense": "CC BY-SA 4.0",
+      "imgNote": "Honda HR 2160 — same Honda GCV engine that powers the Harrier"
     },
     {
       "id": "stihl-rm-448-t",
@@ -478,11 +478,11 @@
       ],
       "verdict": "The best corded mower you can buy and a quiet legend on UK lawns. If your lawn is small-to-medium and near a power point, this beats every cordless rival on cost-per-year. Stripes on a £200 mower is genuinely unusual.",
       "tip": "£60–100 is fair used — enormous supply. Check the cord for tape repairs (rewire £15 if needed). Roller should turn smoothly. The motor is brushless and rarely fails — most Rotaks die from cable damage, not motor wear. A cheap one with a dodgy cable is still a bargain.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HRE%20410%2C%20Oude%20Pekela%20(2020)%2012.jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Honda HRE 410, Oude Pekela (2020) 12.jpg",
+      "imgLicense": "CC BY-SA 4.0",
+      "imgNote": "Representative corded walk-behind — same class"
     },
     {
       "id": "flymo-easimow-380r",
@@ -654,11 +654,11 @@
       ],
       "verdict": "The cordless that finally killed the \"cordless cannot replace petrol\" argument. If your lawn is up to 1500m² and you can charge between sessions, this is the smartest mower on the market right now.",
       "tip": "£380–520 used. Always insist on the original EGO battery (count the cells through the charge ports). Aftermarket batteries break this mower. Test runtime — a healthy 5Ah does 35–45 minutes; anything under 25 minutes means battery is gone (£200 to replace). EGO retain value better than any other cordless brand.",
-      "img": null,
-      "imgSrc": null,
-      "imgFile": null,
-      "imgLicense": null,
-      "imgNote": null
+      "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Ego%2C%20Agritechnica%202023%2C%20Hanover%20(P1160031).jpg?width=600",
+      "imgSrc": "Wikimedia Commons",
+      "imgFile": "Ego, Agritechnica 2023, Hanover (P1160031).jpg",
+      "imgLicense": "CC BY-SA 4.0",
+      "imgNote": "EGO outdoor power equipment — same brand"
     },
     {
       "id": "ego-lm1900e-sp",
