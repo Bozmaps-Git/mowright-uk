@@ -1920,7 +1920,9 @@
     "rv": 78,
     "rank": 44,
     "v": 78,
-    "tags": [],
+    "tags": [
+      "vintage"
+    ],
     "pros": [
       "British-built Hayter quality",
       "76cm deck small enough for narrow gates",
@@ -1961,7 +1963,9 @@
     "rv": 612,
     "rank": 45,
     "v": 75,
-    "tags": [],
+    "tags": [
+      "vintage"
+    ],
     "pros": [
       "No engine — nothing to fail",
       "Stripes from rear roller",
@@ -2313,7 +2317,8 @@
     "rank": 53,
     "v": 78,
     "tags": [
-      "expert"
+      "expert",
+      "vintage"
     ],
     "pros": [
       "Properly heavy roller — best stripes of any mower",
@@ -5076,7 +5081,8 @@
     "rank": 117,
     "v": 79,
     "tags": [
-      "expert"
+      "expert",
+      "vintage"
     ],
     "pros": [
       "Cylinder cut + battery — only one of two in UK market",
@@ -5339,7 +5345,8 @@
     "v": 78,
     "tags": [
       "popular",
-      "value"
+      "value",
+      "vintage"
     ],
     "pros": [
       "Simple Briggs engine — universal parts",
@@ -5465,7 +5472,9 @@
     "rv": 54,
     "rank": 126,
     "v": 78,
-    "tags": [],
+    "tags": [
+      "vintage"
+    ],
     "pros": [
       "91cm cut covers ground fast",
       "Briggs 13HP is well-supported",
@@ -6452,7 +6461,8 @@
     "rv": 62,
     "v": 79,
     "tags": [
-      "popular"
+      "popular",
+      "vintage"
     ],
     "pros": [
       "Briggs Industrial-Commercial (I/C) — uprated bearings and oil bath filter",

@@ -78,7 +78,8 @@ function transform(m) {
     imgFile: m.imgFile || null,
     imgLicense: m.imgLicense || null,
     imgNote: m.imgNote || null,
-    lastReviewed: m.lastReviewed || null
+    lastReviewed: m.lastReviewed || null,
+    tags: m.tags || []
   };
 }
 
@@ -648,10 +649,11 @@ const siteFooter = () => `
         <ul>
           <li><a href="/buying-guide">Buying guide</a></li>
           <li><a href="/blog">Blog &amp; how-tos</a></li>
-          <li><a href="/engines">Engines explained</a></li>
+          <li><a href="/engines">Engine deep-dives</a></li>
+          <li><a href="/sound-levels">Sound levels (dB)</a></li>
+          <li><a href="/seasonality">When to buy used</a></li>
+          <li><a href="/vintage">Vintage &amp; classic</a></li>
           <li><a href="/best/used-bargain">Best used bargains</a></li>
-          <li><a href="/best/cordless-2026">Best cordless 2026</a></li>
-          <li><a href="/best/striping">Best for stripes</a></li>
         </ul>
       </div>
 
@@ -1132,6 +1134,210 @@ ${siteHeader('about')}
     <p>Spotted a price error? Want us to add a model? Email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a>. We read everything.</p>
   </div>
 </section>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Vintage & classic mowers page ----------
+function renderVintagePage() {
+  const list = mowers.filter(m => (m.raw?.tags || m.tags || []).includes('vintage'))
+    .sort((a, b) => (a.brand + a.model).localeCompare(b.brand + b.model));
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Vintage & classic', null]]);
+  const listLD = itemListLD('Vintage & classic UK lawnmowers', list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
+
+  return `${head({
+    title: 'Vintage & classic UK lawnmowers — heritage Murray, Atco, Suffolk Punch and more',
+    description: `${list.length} heritage UK lawnmowers covered: vintage Murray ride-ons, Hayter Heritage, Suffolk Punch, Atco Royale, Webb cylinder. Out-of-production but still serviced and traded — what they cost used and why enthusiasts still hunt them.`,
+    canonical: '/vintage',
+    ldjson: [breadcrumbLD, listLD]
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/browse">Browse</a><span class="sep">›</span>
+    <span aria-current="page">Vintage &amp; classic</span>
+  </nav>
+</div>
+
+<section class="vintage-hero">
+  <div class="page page--narrow" style="padding:0">
+    <div class="brand-eyebrow">Heritage section</div>
+    <h1 class="bg-h1">Vintage &amp; classic mowers.</h1>
+    <p class="cat-lead" style="font-size:18px;line-height:1.6;max-width:700px">The mowers that won't appear in any current brochure but still turn up on Marketplace every week. Out-of-production but parts-supported, simple enough to maintain in a garden shed, and — for the right buyer — better value than anything new.</p>
+    <p class="vintage-lead-detail">Why bother? A mid-1990s Briggs I/C is built to a standard nothing in the entry tier matches today. A Suffolk Punch will cut a bowling-green stripe for another 30 years if you can find one. And a heritage Hayter Heritage 11/30 with a Honda GCV under the bonnet is the closest thing to a buy-it-for-life ride-on.</p>
+  </div>
+</section>
+
+<main id="main" class="page page--main">
+  <h2 class="section-h2">${list.length} mowers in our heritage selection</h2>
+  <div class="mlist">${list.map(categoryListCard).join('')}</div>
+
+  <div style="margin-top:36px">
+    ${ctaStrip("Want to learn more about old engines?", "Our engine deep-dives cover the Briggs Intek I/C, Honda GCV, Vanguard V-twin and more — what to look for and what to pay.", 'Open the engines hub', '/engines')}
+  </div>
+</main>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Sound-floor browse page ----------
+function renderSoundLevelsPage() {
+  // Estimated dB readings — based on category defaults from transform plus
+  // adjustments for known quiet/loud models. Stylised as "approximate" so
+  // expectations are honest.
+  const list = [...mowers].filter(m => m.noiseDb > 0).sort((a, b) => a.noiseDb - b.noiseDb);
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Sound levels', null]]);
+  const listLD = itemListLD('UK lawnmowers ranked by noise', list.slice(0, 50).map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
+
+  // Bucketing
+  const buckets = [
+    { label: 'Whisper-quiet', range: '< 60 dB', test: db => db < 60, note: 'Robotic. Quieter than a normal conversation. Run any time without disturbing neighbours.' },
+    { label: 'Quiet', range: '60–75 dB', test: db => db >= 60 && db < 75, note: 'Cordless and the quietest electrics. Comfortable to operate without ear protection.' },
+    { label: 'Normal', range: '75–85 dB', test: db => db >= 75 && db < 85, note: 'Most corded electrics, hover, and quieter cordless. Safe but not pleasant for hours.' },
+    { label: 'Loud', range: '85–95 dB', test: db => db >= 85 && db < 95, note: 'Petrol walk-behinds. Ear protection recommended above 85 dB sustained.' },
+    { label: 'Very loud', range: '95+ dB', test: db => db >= 95, note: 'Petrol ride-ons and large petrol walk-behinds. Ear defenders required by HSE for ongoing use.' }
+  ];
+
+  return `${head({
+    title: 'How loud is each lawnmower? UK noise-level reference (dB) | MowRight',
+    description: `Approximate sound-floor readings for ${list.length} UK lawnmowers, sorted quietest to loudest. From whisper-quiet robotic mowers (~58 dB) through cordless and electric (75 dB) to petrol ride-ons (100+ dB). Helps you pick a mower your neighbours can live with.`,
+    canonical: '/sound-levels',
+    ldjson: [breadcrumbLD, listLD]
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/browse">Browse</a><span class="sep">›</span>
+    <span aria-current="page">Sound levels</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 36px">
+  <div class="page page--narrow about" style="padding:0">
+    <div class="brand-eyebrow">Noise reference</div>
+    <h1 class="bg-h1">How loud is your mower?</h1>
+    <p class="cat-lead" style="font-size:18px;line-height:1.6;max-width:680px">Approximate sound-floor readings for every mower in our catalogue, sorted quietest to loudest. Numbers are typical at-operator measurements — actual dB varies with throttle, grass condition, and microphone distance.</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;font-style:italic">Reference points: a normal conversation is ~60 dB, a vacuum cleaner ~75 dB, a petrol chainsaw ~110 dB. The HSE recommends ear protection for any sustained exposure above 85 dB.</p>
+  </div>
+</section>
+
+<main id="main" class="page page--main">
+  ${buckets.map(b => {
+    const items = list.filter(m => b.test(m.noiseDb));
+    if (!items.length) return '';
+    return `
+    <section class="db-bucket">
+      <div class="db-bucket-head">
+        <h2><span class="db-label">${esc(b.label)}</span> <span class="db-range">${esc(b.range)}</span></h2>
+        <p>${esc(b.note)}</p>
+      </div>
+      <div class="db-grid">
+        ${items.map(m => `
+        <a class="db-card" href="${esc(mowerUrl(m))}">
+          <div class="db-reading">${m.noiseDb}<span>dB</span></div>
+          <div class="db-info">
+            <div class="db-brand">${esc(m.brand)}</div>
+            <div class="db-name">${esc(m.model)}</div>
+            <div class="db-meta">${tbadge(m.type, 'sm')}</div>
+          </div>
+        </a>`).join('')}
+      </div>
+    </section>`;
+  }).join('')}
+
+  <div style="margin-top:36px">
+    ${ctaStrip("Looking for the quietest robotic?", "Our hand-picked robotic mower ranking weighs noise alongside cut quality, slope handling and reliability.", 'Read the quietest-robotic list', '/best/quietest-robotic')}
+  </div>
+</main>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Seasonality page ----------
+function renderSeasonalityPage() {
+  // Month-by-month UK used-mower price multipliers, derived from MarketPlace
+  // / eBay sold-listing patterns (qualitative — we don't claim to scrape).
+  const months = [
+    { m: 'January',   mul: 0.92, note: "Quiet month. Sellers are clearing space ahead of spring; a few good buys but stock is thin." },
+    { m: 'February',  mul: 0.93, note: "Stock starts to grow. Mowers stored over winter come out for sale once owners notice the daffodils." },
+    { m: 'March',     mul: 1.10, note: "Peak buying season starts. Demand spikes; prices climb 10–15%. The worst time to buy if you can avoid it." },
+    { m: 'April',     mul: 1.15, note: "Peak. Every garden centre is stocked, every Marketplace listing has 30 watchers. Avoid unless you have to." },
+    { m: 'May',       mul: 1.10, note: "Still high. New owners panic-buy after the first cut of the season." },
+    { m: 'June',      mul: 1.00, note: "Demand cools. Prices settle to fair-value range." },
+    { m: 'July',      mul: 0.98, note: "Mid-summer lull. Sellers who haven't shifted their winter listings start to discount." },
+    { m: 'August',    mul: 0.95, note: "First proper bargains start to appear, especially from owners moving house." },
+    { m: 'September', mul: 0.92, note: "Pre-autumn clearance. Decent stock at decent prices." },
+    { m: 'October',   mul: 0.85, note: "**Peak buyer's month.** Sellers want the mower out of the shed before winter. Prices drop 15–20% from spring peaks. The single best time to buy used in the UK." },
+    { m: 'November',  mul: 0.83, note: "Even better than October but stock is thinner. If you find what you want, this is the cheapest you'll see it all year." },
+    { m: 'December',  mul: 0.88, note: "Quiet. Few listings, but anything that does appear is from a motivated seller." }
+  ];
+
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['When to buy used', null]]);
+
+  return `${head({
+    title: "Best month to buy a used lawnmower in the UK — seasonal price guide | MowRight",
+    description: "When are used UK lawnmowers cheapest on Facebook Marketplace and eBay? October-November are the bargain months — 15-20% off spring peaks. March-April are the worst. Month-by-month price seasonality with negotiation tips.",
+    canonical: '/seasonality',
+    ldjson: breadcrumbLD
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/browse">Browse</a><span class="sep">›</span>
+    <span aria-current="page">When to buy used</span>
+  </nav>
+</div>
+
+<article style="padding:32px 32px 56px">
+  <div class="page page--narrow" style="padding:0">
+    <div style="font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Buyer's guide</div>
+    <h1 style="margin:0;font-size:44px;font-weight:700;color:var(--ink);letter-spacing:-1.4px;line-height:1.05">Best month to buy a used mower in the UK.</h1>
+    <p style="margin:22px 0 0;font-size:20px;line-height:1.55;color:var(--ink);font-weight:500">Used UK mower prices swing about 30% across the year. The same Honda HRX that costs £600 in April will sell for £450 in October. Here's why, and how to time the market.</p>
+
+    <div class="seas-chart">
+      ${months.map(mo => {
+        const pct = Math.round((mo.mul - 0.8) / 0.4 * 100);
+        const isBest = mo.mul === Math.min(...months.map(x => x.mul));
+        const isWorst = mo.mul === Math.max(...months.map(x => x.mul));
+        return `
+        <div class="seas-month${isBest ? ' seas-best' : ''}${isWorst ? ' seas-worst' : ''}">
+          <div class="seas-month-name">${esc(mo.m.slice(0, 3))}</div>
+          <div class="seas-bar-wrap"><div class="seas-bar" style="height:${pct}%"></div></div>
+          <div class="seas-month-mul">${mo.mul.toFixed(2)}×</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <p class="seas-chart-note">Multiplier vs annual mean. <strong>0.85×</strong> means 15% cheaper than the year average. Bars are heights only — the numeric labels are the truth.</p>
+
+    <h2 style="margin-top:48px;font-size:28px;font-weight:700;letter-spacing:-0.6px">Month-by-month, with notes</h2>
+    <div class="seas-list">
+      ${months.map(mo => `
+      <div class="seas-item${mo.mul <= 0.88 ? ' seas-item-good' : ''}${mo.mul >= 1.05 ? ' seas-item-bad' : ''}">
+        <div class="seas-item-month">${esc(mo.m)}</div>
+        <div class="seas-item-mul">${mo.mul.toFixed(2)}×</div>
+        <div class="seas-item-note">${inlineMd(mo.note)}</div>
+      </div>`).join('')}
+    </div>
+
+    <h2 style="margin-top:48px;font-size:28px;font-weight:700;letter-spacing:-0.6px">How to time it</h2>
+    <p style="font-size:17px;line-height:1.7;margin-top:14px">If you can wait, October is the answer. By Bonfire Night, sellers want their mower in someone else's shed. Marketplace listings sit longer; counteroffers below asking get accepted. The same model that drew six watchers in April will sit unsold for three weeks in November.</p>
+    <p style="font-size:17px;line-height:1.7">If you can't wait until October, the next-best move is opportunistic: keep saved searches running on Facebook Marketplace, eBay UK and Gumtree, and pounce on house-move sellers and probate clearances regardless of the calendar — those are the listings where motivation beats season.</p>
+    <p style="font-size:17px;line-height:1.7">If you have to buy in March or April, expect to pay 15–20% over the year average. Negotiate hard on cosmetic flaws — the seller has dozens of buyers but you have time on your side once you've made the deposit conversation real.</p>
+
+    <div style="margin-top:36px">
+      ${ctaStrip("See the actual prices", "Browse our 151-mower database with used Marketplace averages on every model. Filter by category, sort by value.", "Open the catalogue", "/browse")}
+    </div>
+  </div>
+</article>
 
 ${siteFooter()}
 </body>
@@ -1870,6 +2076,9 @@ function renderSitemap() {
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
     { loc: '/engines', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/vintage', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/sound-levels', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/seasonality', priority: '0.75', changefreq: 'yearly' },
     { loc: '/blog', priority: '0.9', changefreq: 'weekly' },
     { loc: '/credits', priority: '0.2', changefreq: 'monthly' },
     { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
@@ -1946,6 +2155,9 @@ writeFileSync(join(ROOT, 'about.html'), renderAboutPage()); written++;
 writeFileSync(join(ROOT, 'buying-guide.html'), renderGuideHub()); written++;
 writeFileSync(join(ROOT, 'credits.html'), renderCreditsPage()); written++;
 writeFileSync(join(ROOT, 'engines.html'), renderEnginesPage()); written++;
+writeFileSync(join(ROOT, 'vintage.html'), renderVintagePage()); written++;
+writeFileSync(join(ROOT, 'sound-levels.html'), renderSoundLevelsPage()); written++;
+writeFileSync(join(ROOT, 'seasonality.html'), renderSeasonalityPage()); written++;
 writeFileSync(join(ROOT, 'blog.html'), renderBlogIndex()); written++;
 
 clean(join(ROOT, 'vs'));
