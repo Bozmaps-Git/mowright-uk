@@ -1674,4 +1674,52 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/briggs-500e</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/briggs-675ex</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/briggs-intek-vtwin</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/briggs-vanguard</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/honda-gcv</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/kawasaki-fr-fx</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/stiga-st-series</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://mowright.co.uk/engine/loncin-budget</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 </urlset>

@@ -7,6 +7,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { BLOG_POSTS } from './blog-posts.mjs';
+import { ENGINES } from './engines.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mowright.co.uk';
@@ -1471,61 +1472,148 @@ ${siteFooter()}
 </html>`;
 }
 
-// ---------- Engines page ----------
-function renderEnginesPage() {
-  const engines = [
-    { name: 'Briggs & Stratton', country: 'USA', headline: 'The most-fitted engine in domestic mowing',
-      focus: 'Single-cylinder OHV petrol — 100cc to 700cc',
-      profile: "B&S engines turn up everywhere. The 450E, 500E, 750EX and 875EX series are fitted to roughly half the petrol mowers sold new in the UK — Mountfield, Cobra, Hyundai, Hayter, AL-KO, Murray, Cub Cadet and many more all use them. Parts are available at every garden machinery dealer and most online suppliers within 24 hours. Reliability is good but not exceptional — expect 8 to 12 years on a domestic mower.",
-      notes: 'B&S filed for bankruptcy in 2020 and was acquired by KPS Capital Partners. The brand and parts supply continue. Most B&S issues are stale fuel and varnished carbs from winter storage; both are cheap to fix.',
-      brands: ['Mountfield', 'Cobra', 'Hyundai', 'AL-KO', 'Hayter', 'Murray', 'Cub Cadet', 'Westwood'] },
+// ---------- Engine deep-dive page ----------
+const engineUrl = e => `/engine/${e.slug}`;
 
-    { name: 'Honda', country: 'Japan', headline: 'The benchmark for domestic petrol reliability',
-      focus: 'GCV (residential) and GXV (industrial) OHC/OHV petrol',
-      profile: "Honda's GCV series — particularly the GCV145, GCV170 and GCV200 — is the engine that defines premium walk-behind petrol mowers in the UK. Fitted to the entire Honda HRG and HRX range, plus the Hayter Harrier (which uses a Honda GCV under the deck), and offered as an upgrade option on the Mountfield SP46H. The GXV is the heavy-duty industrial sibling used on professional and ride-on equipment.",
-      notes: "Honda engines genuinely outlast their host machines. A 15-year-old GCV145 will start on the second pull if it has been serviced. Honda owners rarely sell because the engines refuse to die — that's why used Hondas hold value better than any rival.",
-      brands: ['Honda', 'Hayter (selected)', 'Mountfield (SP46H)', 'Countax (selected)'] },
+function renderEnginePage(engine) {
+  const using = mowers.filter(m => engine.match.test(m.engine || ''));
 
-    { name: 'Kawasaki', country: 'Japan', headline: 'Pro-grade engine of choice for commercial mowers',
-      focus: 'FJ, FR, FS and FX series V-twin and single-cylinder',
-      profile: "Kawasaki engines are what professional landscapers and commercial groundsmen run on. The FJ180V single is fitted to walk-behind commercial mowers (Stihl RM 4 RTP and similar); the FR and FS V-twins power most American zero-turn ride-ons sold in Europe. Built to run 8 hours a day for 2000+ hours.",
-      notes: 'You won\'t see Kawasaki on a domestic Mountfield or Cobra — they\'re reserved for premium and commercial machinery. If a mower lists a Kawasaki engine, the price will reflect it. Worth the premium for buyers cutting more than two acres.',
-      brands: ['Stihl (commercial)', 'John Deere (selected ride-on)', 'Toro (commercial)'] },
-
-    { name: 'Kohler', country: 'USA', headline: 'American premium for ride-on tractors',
-      focus: '7000 Series, Command Pro, Confidant V-twin petrol',
-      profile: "Kohler engines power the higher-end American ride-ons sold in the UK — particularly the Cub Cadet XT2/XT3 series. The Command Pro and 7000 Series are robust V-twins designed for 500-plus annual hours; the Confidant is the entry residential V-twin. Build quality is closer to Kawasaki than to Briggs.",
-      notes: 'Parts in the UK come through Cub Cadet dealers and a handful of specialist suppliers. Costlier per part than B&S, faster to source than the rarer Kawasaki components.',
-      brands: ['Cub Cadet', 'John Deere (selected)', 'Husqvarna (selected ride-on)'] },
-
-    { name: 'Stiga (ST series)', country: 'Italy', headline: 'The engine inside almost every Mountfield',
-      focus: 'ST120, ST140, ST160, RV150, RV170 OHV petrol singles',
-      profile: "Stiga's in-house engine division builds the engines fitted to nearly every Mountfield, Stiga and Atco walk-behind petrol mower sold in Britain. The ST120 and ST160 are the workhorses — reliable for 6 to 10 years of typical UK use. Parts are available at any Stiga or Mountfield dealer.",
-      notes: "Not as robust as a Honda GCV but considerably cheaper to buy and to repair. Most ST-series faults are fuel-related and resolved with a £35 carb clean.",
-      brands: ['Mountfield', 'Stiga', 'Atco (selected)'] },
-
-    { name: 'Stihl EVC / Kohler EVC', country: 'Germany / USA', headline: 'Stihl-branded petrol engines for the RM range',
-      focus: 'EVC 200, EVC 300 OHV petrol singles',
-      profile: "Stihl badges its own petrol engines on the RM 248, RM 253, RM 448 series. Some are Stihl-built; others are sourced from Kohler in the US under a Stihl part number. Either way, dealer-only parts and a slightly higher service cost than Briggs or Stiga.",
-      notes: 'Stihl chassis numbers tie into their dealer network for service history. A Stihl-serviced mower carries a £50–£80 used premium over an undocumented one — worth confirming before paying.',
-      brands: ['Stihl'] },
-
-    { name: 'Husqvarna HQ', country: 'Sweden', headline: 'In-house engines for Husqvarna walk-behind petrol',
-      focus: 'HQ745, HQ800 OHV singles',
-      profile: "Husqvarna's HQ-series engines power the LC-range walk-behind petrol mowers (LC 247SP, LC 348V, etc.). Designed in Sweden, manufactured in China, badged Husqvarna. Performance is on par with a Stiga or B&S; parts come through Husqvarna dealers only.",
-      notes: 'Husqvarna engines come with chassis-locked warranty. Out of warranty, parts are dealer-priced — typically 30 to 50 percent more than the Briggs equivalent.',
-      brands: ['Husqvarna'] },
-
-    { name: 'Loncin', country: 'China', headline: 'Generic OEM behind dozens of UK budget brands',
-      focus: 'Loncin G-series 99cc to 200cc OHV singles',
-      profile: "Loncin manufactures the engines fitted to most sub-£300 petrol mowers sold under brand badges like Webb, Hyundai, Mac Allister, and many supermarket-exclusive lines. Capable but disposable — five to eight years of typical use is realistic.",
-      notes: 'Parts are available online through generic small-engine suppliers, not always through the host brand\'s dealer network. The Loncin name is rarely on the engine — you have to look for the GX-style code on the side cover to identify it.',
-      brands: ['Webb', 'Hyundai', 'Mac Allister', 'Hyundai-badged budget'] }
-  ];
+  const breadcrumbLD = crumbsLD([
+    ['Browse', '/browse'],
+    ['Engines', '/engines'],
+    [engine.name, null]
+  ]);
+  const articleLD = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: `${engine.name} — UK service guide, common faults, parts costs`,
+    description: `${engine.headline}. Spec sheet, service intervals, fault timeline by year, parts cost reference, and every UK mower this engine powers.`,
+    author: { '@type': 'Organization', name: 'MowRight UK', url: SITE },
+    publisher: { '@type': 'Organization', name: 'MowRight UK', logo: { '@type': 'ImageObject', url: SITE + '/og.png' } }
+  };
 
   return `${head({
-    title: 'Mower engine manufacturers — UK guide to who makes the engine in your mower',
-    description: 'Plain-language guide to the engine makers behind UK lawnmowers — Briggs & Stratton, Honda, Kawasaki, Kohler, Stiga, Stihl EVC, Husqvarna HQ, Loncin. What goes in what, and what to expect on reliability and parts.',
+    title: `${engine.name} — UK service guide, common faults & parts | MowRight`,
+    description: `${engine.headline}. ${engine.architecture}, ${engine.displacement}. Service intervals, fault timeline by age, parts cost reference, and the ${using.length} UK mower${using.length === 1 ? '' : 's'} this engine powers.`,
+    canonical: engineUrl(engine),
+    ldjson: [breadcrumbLD, articleLD]
+  })}
+${siteHeader()}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/browse">Browse</a><span class="sep">›</span>
+    <a href="/engines">Engines</a><span class="sep">›</span>
+    <span aria-current="page">${esc(engine.name)}</span>
+  </nav>
+</div>
+
+<article class="engine-article">
+  <header class="engine-hero">
+    <div class="engine-eyebrow">Engine deep-dive · ${esc(engine.country)}</div>
+    <h1 class="engine-h1">${esc(engine.name)}</h1>
+    <p class="engine-headline">${esc(engine.headline)}</p>
+
+    <div class="engine-spec-strip">
+      <div class="es-cell"><span class="l">Family</span><span class="v">${esc(engine.family)}</span></div>
+      <div class="es-cell"><span class="l">Displacement</span><span class="v">${esc(engine.displacement)}</span></div>
+      <div class="es-cell"><span class="l">Torque</span><span class="v">${esc(engine.torque)}</span></div>
+      <div class="es-cell"><span class="l">Architecture</span><span class="v">${esc(engine.architecture)}</span></div>
+      <div class="es-cell"><span class="l">Typical life</span><span class="v">${esc(engine.typicalLife)}</span></div>
+    </div>
+  </header>
+
+  <section class="engine-section">
+    <h2>The story of this engine</h2>
+    <p>${esc(engine.profile)}</p>
+  </section>
+
+  <div class="engine-pros-cons">
+    <section>
+      <h3>Why owners like it</h3>
+      <ul class="prosul">${engine.pros.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+    </section>
+    <section>
+      <h3>Where it falls short</h3>
+      <ul class="consul">${engine.cons.map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+    </section>
+  </div>
+
+  <section class="engine-section">
+    <h2>Service intervals & costs</h2>
+    <p class="engine-section-lead">What this engine actually needs every year, and what it costs to keep alive.</p>
+    <div class="engine-table-wrap">
+      <table class="engine-table">
+        <thead><tr><th>Interval</th><th>Task</th><th>Cost</th></tr></thead>
+        <tbody>
+          ${engine.serviceIntervals.map(s => `<tr><td><strong>${esc(s.interval)}</strong></td><td>${esc(s.task)}</td><td>${esc(s.cost)}</td></tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="engine-section">
+    <h2>What goes wrong, and when</h2>
+    <p class="engine-section-lead">Every engine family has predictable failures by age. Knowing what's coming saves money on used buys and makes negotiation easier.</p>
+    <div class="engine-faults">
+      ${engine.faultsTimeline.map(f => `
+      <div class="engine-fault">
+        <div class="engine-fault-age">${esc(f.age)}</div>
+        <div class="engine-fault-body">${esc(f.fault)}</div>
+      </div>`).join('')}
+    </div>
+  </section>
+
+  <section class="engine-section">
+    <h2>Parts cost reference</h2>
+    <p class="engine-section-lead">UK 2026 prices — OEM (genuine) vs aftermarket. Generic parts work fine on consumables; stick to OEM on anything that affects timing or tolerance.</p>
+    <div class="engine-table-wrap">
+      <table class="engine-table">
+        <thead><tr><th>Part</th><th>OEM</th><th>Aftermarket</th></tr></thead>
+        <tbody>
+          ${engine.partsCosts.map(p => `<tr><td>${esc(p.part)}</td><td><strong>${esc(p.oem)}</strong></td><td>${esc(p.generic)}</td></tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="engine-section">
+    <div class="engine-verdict">
+      <div class="engine-verdict-eyebrow">The verdict</div>
+      <p>${esc(engine.verdict)}</p>
+      ${engine.altLink ? `<a class="engine-verdict-link" href="${esc(engine.altLink)}">Related reading →</a>` : ''}
+    </div>
+  </section>
+
+  <section class="engine-section">
+    <h2>Mowers in our catalogue with this engine <span class="engine-section-count">(${using.length})</span></h2>
+    ${using.length === 0 ? '<p class="engine-section-lead">No mowers in the catalogue currently use this engine. Check back as we add models.</p>' : `
+    <div class="engine-using-grid">
+      ${using.map(m => `
+      <a class="engine-using-card" href="${esc(mowerUrl(m))}">
+        <div class="eu-brand">${esc(m.brand)}</div>
+        <div class="eu-name">${esc(m.model)}</div>
+        <div class="eu-meta">${tbadge(m.type, 'sm')} <span class="eu-eng">${esc(m.engine)}</span></div>
+        <div class="eu-price">£${m.usedAvg} used <span class="dot">·</span> £${m.buyNow} new</div>
+      </a>`).join('')}
+    </div>`}
+  </section>
+
+  <div style="margin-top:48px">
+    ${ctaStrip("See every engine family", "Side-by-side hub of all the engines we cover — Briggs, Honda, Kawasaki, Stiga, Loncin and more.", "Open the engines hub", "/engines")}
+  </div>
+</article>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Engines hub ----------
+function renderEnginesPage() {
+  return `${head({
+    title: 'Mower engine families — UK service guides, faults & costs | MowRight',
+    description: `Deep-dive guides to ${ENGINES.length} engine families fitted to UK lawnmowers — Briggs 500E and 675EX, Briggs Intek and Vanguard V-twin, Honda GCV, Kawasaki FR/FX, Stiga ST series, Loncin. Service intervals, fault timelines, parts costs, and which mowers use each.`,
     canonical: '/engines'
   })}
 ${siteHeader()}
@@ -1544,33 +1632,28 @@ ${siteHeader()}
     <h1 class="bg-h1">The engine matters more than the badge.</h1>
     <p class="cat-lead" style="font-size:18px;max-width:680px;line-height:1.6">A Mountfield with a Honda engine, a Cobra with a Briggs, a Stihl with a Kawasaki — the engine maker is often a different company to the brand on the deck. Here's a plain-language guide to who makes the engine inside your mower, and what that means for reliability and parts.</p>
 
-    <div style="display:flex;flex-direction:column;gap:18px;margin-top:28px">
-      ${engines.map((e, i) => `
-      <article class="guide-section" style="grid-template-columns:120px 1fr">
-        <div>
-          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px">No. ${String(i + 1).padStart(2, '0')}</div>
-          <div style="font-family:'Barlow Condensed', sans-serif; font-size:14px; color:var(--accent-deep); font-weight:700">${esc(e.country)}</div>
+    <div class="engines-hub-grid">
+      ${ENGINES.map(e => {
+        const using = mowers.filter(m => e.match.test(m.engine || ''));
+        return `
+      <a class="engine-hub-card" href="${esc(engineUrl(e))}">
+        <div class="ehc-head">
+          <div class="ehc-country">${esc(e.country)}</div>
+          <div class="ehc-life">${esc(e.typicalLife.split('(')[0].trim())}</div>
         </div>
-        <div>
-          <h2 style="margin:0 0 4px;font-size:24px;font-weight:700;color:var(--ink);letter-spacing:-0.5px">${esc(e.name)}</h2>
-          <div style="font-size:14px; color:var(--accent); font-weight:600; margin-bottom:12px">${esc(e.headline)}</div>
-          <div style="font-size:12px; color:var(--muted); font-weight:600; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:6px">Focus</div>
-          <p style="margin:0 0 14px; font-size:14px; color:var(--ink-sub); font-weight:500">${esc(e.focus)}</p>
-          <p style="margin:0 0 14px; font-size:15px; color:var(--ink-sub); line-height:1.65">${esc(e.profile)}</p>
-          <div style="background:var(--accent-soft); border-left:3px solid var(--accent); padding:12px 16px; border-radius:6px; margin:14px 0">
-            <div style="font-size:10px; color:var(--accent-deep); font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:4px">What buyers should know</div>
-            <p style="margin:0; font-size:13px; color:var(--ink); line-height:1.55">${esc(e.notes)}</p>
-          </div>
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:12px">
-            <span style="font-size:11px; color:var(--muted); font-weight:600; margin-right:4px">Fitted to:</span>
-            ${e.brands.map(b => `<span style="font-size:11px; padding:3px 8px; background:var(--bg); border:1px solid var(--border); color:var(--ink); border-radius:999px; font-weight:500">${esc(b)}</span>`).join('')}
-          </div>
-        </div>
-      </article>`).join('')}
+        <h2 class="ehc-name">${esc(e.name)}</h2>
+        <p class="ehc-headline">${esc(e.headline)}</p>
+        <div class="ehc-meta">${esc(e.architecture)} · ${esc(e.displacement)}</div>
+        <div class="ehc-using">${using.length} mower${using.length === 1 ? '' : 's'} in catalogue</div>
+        <div class="ehc-cta">Read deep-dive →</div>
+      </a>`;
+      }).join('')}
     </div>
 
+    <p style="margin-top:32px;font-size:13px;color:var(--muted);font-style:italic">Heritage families also covered in passing on individual mower pages: Stihl EVC, Husqvarna HQ, Kohler 7000-series. Dedicated pages added as the catalogue grows.</p>
+
     <div style="margin-top:36px">
-      ${ctaStrip("Now you know the engine — find the mower.", `Browse all ${mowers.length} mowers and filter by brand, type, or budget.`, 'Browse all mowers', '/')}
+      ${ctaStrip("Now you know the engine — find the mower.", `Browse all ${mowers.length} mowers and filter by brand, type, or budget.`, 'Browse all mowers', '/browse')}
     </div>
   </div>
 </section>
@@ -1599,7 +1682,8 @@ function renderSitemap() {
     ...COMPARISONS
       .filter(([a, b]) => mowers.find(m => m.id === a) && mowers.find(m => m.id === b))
       .map(([a, b]) => ({ loc: compUrl(a, b), priority: '0.6', changefreq: 'monthly' })),
-    ...BLOG_POSTS.map(post => ({ loc: blogUrl(post.slug), priority: '0.8', changefreq: 'monthly' }))
+    ...BLOG_POSTS.map(post => ({ loc: blogUrl(post.slug), priority: '0.8', changefreq: 'monthly' })),
+    ...ENGINES.map(e => ({ loc: engineUrl(e), priority: '0.75', changefreq: 'monthly' }))
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1669,9 +1753,17 @@ writeFileSync(join(ROOT, 'blog.html'), renderBlogIndex()); written++;
 clean(join(ROOT, 'vs'));
 clean(join(ROOT, 'best'));
 clean(join(ROOT, 'blog'));
+clean(join(ROOT, 'engine'));
 ensureDir(join(ROOT, 'vs'));
 ensureDir(join(ROOT, 'best'));
 ensureDir(join(ROOT, 'blog'));
+ensureDir(join(ROOT, 'engine'));
+
+let enginePagesWritten = 0;
+for (const e of ENGINES) {
+  writeFileSync(join(ROOT, 'engine', `${e.slug}.html`), renderEnginePage(e));
+  enginePagesWritten++; written++;
+}
 
 let blogPostsWritten = 0;
 for (const post of BLOG_POSTS) {
@@ -1705,4 +1797,5 @@ console.log(`  ${Object.keys(BRANDS).length} brand pages`);
 console.log(`  ${comparisonPagesWritten} comparison pages`);
 console.log(`  ${bestOfPagesWritten} best-of pages`);
 console.log(`  ${blogPostsWritten} blog posts + 1 index`);
-console.log(`  6 misc (about, buying-guide, credits, engines, sitemap, mowers-spa.json)`);
+console.log(`  ${enginePagesWritten} engine deep-dives + 1 hub`);
+console.log(`  6 misc (about, buying-guide, credits, sitemap, mowers-spa.json, robots.txt)`);

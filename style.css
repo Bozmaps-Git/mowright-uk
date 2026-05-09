@@ -1131,3 +1131,208 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .browse-h1 { font-size: 32px; letter-spacing: -1px }
   .browse-lead { font-size: 15px }
 }
+
+/* ===== Engines hub grid ===== */
+.engines-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+.engine-hub-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.engine-hub-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.ehc-head {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+}
+.ehc-country { color: var(--accent-deep); font-weight: 700 }
+.ehc-life    { color: var(--muted) }
+.ehc-name {
+  margin: 0; font-size: 19px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.4px; line-height: 1.2;
+}
+.ehc-headline { margin: 0; font-size: 14px; color: var(--accent-deep); font-weight: 600 }
+.ehc-meta { font-size: 13px; color: var(--ink-sub) }
+.ehc-using {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted); letter-spacing: 0.6px;
+  padding-top: 8px; border-top: 1px dashed var(--border);
+}
+.ehc-cta { font-size: 13px; color: var(--accent-deep); font-weight: 600; margin-top: 4px }
+
+/* ===== Engine detail page ===== */
+.engine-article { max-width: 880px; margin: 0 auto; padding: 32px 32px 64px }
+.engine-hero { margin-bottom: 40px }
+.engine-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent-deep);
+  letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600;
+  margin-bottom: 16px;
+}
+.engine-h1 {
+  margin: 0; font-size: 44px; font-weight: 700;
+  color: var(--ink); letter-spacing: -1.4px; line-height: 1.05;
+}
+.engine-headline {
+  margin: 16px 0 28px;
+  font-size: 20px; line-height: 1.5; color: var(--ink-sub); font-weight: 500;
+}
+.engine-spec-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.es-cell {
+  padding: 14px 18px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.es-cell:last-child { border-right: none }
+.es-cell .l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase; font-weight: 600;
+}
+.es-cell .v { font-size: 14px; color: var(--ink); font-weight: 600; line-height: 1.3 }
+
+.engine-section { margin-top: 44px }
+.engine-section h2 {
+  margin: 0 0 14px;
+  font-size: 28px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.6px; line-height: 1.2;
+}
+.engine-section-count { font-size: 18px; color: var(--muted); font-weight: 500 }
+.engine-section p {
+  font-size: 17px; line-height: 1.7; color: var(--ink); margin: 0 0 14px;
+}
+.engine-section-lead { font-size: 15px !important; color: var(--ink-sub) !important; margin-bottom: 18px !important }
+
+.engine-pros-cons {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 32px;
+}
+@media (max-width: 600px) { .engine-pros-cons { grid-template-columns: 1fr } }
+.engine-pros-cons section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+.engine-pros-cons h3 {
+  margin: 0 0 14px;
+  font-size: 13px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--muted);
+}
+.engine-pros-cons ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px }
+.engine-pros-cons li { padding-left: 22px; position: relative; font-size: 14px; line-height: 1.55; color: var(--ink) }
+.prosul li::before { content: '+'; position: absolute; left: 0; color: var(--accent-deep); font-weight: 700 }
+.consul li::before { content: '−'; position: absolute; left: 0; color: #b45309; font-weight: 700 }
+
+/* Tables */
+.engine-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px }
+.engine-table {
+  width: 100%; border-collapse: collapse; font-size: 14px;
+}
+.engine-table thead th {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  text-align: left; padding: 12px 16px;
+  border-bottom: 1px solid #c8d8b8;
+}
+.engine-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  vertical-align: top;
+}
+.engine-table tr:last-child td { border-bottom: none }
+.engine-table td:first-child { width: 30% }
+
+/* Faults timeline */
+.engine-faults { display: flex; flex-direction: column; gap: 12px }
+.engine-fault {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 18px;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 14px 18px;
+}
+@media (max-width: 600px) { .engine-fault { grid-template-columns: 1fr; gap: 6px } }
+.engine-fault-age {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  color: var(--accent-deep);
+  letter-spacing: 0.5px;
+}
+.engine-fault-body { font-size: 14px; line-height: 1.55; color: var(--ink) }
+
+/* Verdict box */
+.engine-verdict {
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface));
+  border: 1px solid #c8d8b8;
+  border-radius: 14px;
+  padding: 28px 32px;
+}
+.engine-verdict-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--accent-deep);
+  letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+  margin-bottom: 10px;
+}
+.engine-verdict p {
+  margin: 0; font-size: 18px !important; line-height: 1.6 !important;
+  color: var(--ink) !important; font-weight: 500;
+}
+.engine-verdict-link {
+  display: inline-block; margin-top: 14px;
+  font-size: 14px; font-weight: 600; color: var(--accent-deep);
+}
+
+/* Mowers using this engine */
+.engine-using-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px; margin-top: 18px;
+}
+.engine-using-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-decoration: none;
+  display: flex; flex-direction: column; gap: 4px;
+  transition: border-color 0.15s;
+}
+.engine-using-card:hover { border-color: var(--accent); text-decoration: none }
+.eu-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted); font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.eu-name { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px }
+.eu-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted) }
+.eu-eng { font-family: 'JetBrains Mono', monospace; font-size: 10px }
+.eu-price { font-size: 13px; color: var(--ink-sub); margin-top: 4px }
+.eu-price .dot { color: var(--muted-soft); margin: 0 4px }
+
