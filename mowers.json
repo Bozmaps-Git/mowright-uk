@@ -83,7 +83,12 @@
     ],
     "verd": "The default \"I want a Honda but the HRX is too much\" choice. Same engine pedigree, simpler deck, much better value used. If stripes do not matter to you, this is the smarter buy.",
     "tip": "£300–380 is the fair zone for a clean used HRG 466. Test the self-propel on an incline — slipping drive belt is the most common fault. Pull start should fire on the first or second pull when warm. Check oil colour through the dipstick — golden good, black means no service history.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HR%202160.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Honda HR 2160.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Sibling Honda walk-behind (HR 2160)"
   },
   {
     "id": 3,
@@ -131,8 +136,8 @@
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Mountfield%20725M.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Mountfield 725M.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Mountfield 725M — same brand, similar walk-behind class"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Mountfield 725M — same brand walk-behind"
   },
   {
     "id": 4,
@@ -179,7 +184,7 @@
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HR%202160.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Honda HR 2160.jpg",
-    "imgLicense": "CC BY-SA 4.0",
+    "imgLicense": "CC BY-SA",
     "imgNote": "Honda HR 2160 — same Honda GCV engine that powers the Harrier"
   },
   {
@@ -392,11 +397,6 @@
     ],
     "verd": "Punches above its weight on cut width and deck quality. The engine is the weak link — capable but not premium. Good value new, fair value used.",
     "tip": "£130–200 is realistic used. Steel deck means rust is the killer — flip it and inspect the underside thoroughly. Engine starts can degrade over winter; ask the seller to fire it from cold. The 51cm blade is unusual so spares cost more than 46cm rivals — factor that in.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HR%202160.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Honda HR 2160.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Sibling Honda walk-behind chassis (HR 2160)",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -438,12 +438,12 @@
     ],
     "verd": "The thinking person's alternative to a Honda HRX. Twin-clip blade actually does what Stiga claims and the rear roller stripes well. Fair value new, good value used.",
     "tip": "£240–340 is fair used. Twin-clip blade is the differentiator — make sure it is intact and not bent (a £35 part). Rear roller bearings should turn smoothly. Stiga share parts with Mountfield so service is straightforward at any Stiga or Mountfield dealer.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Stiga%20gressklippere.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Stiga gressklippere.jpg",
     "imgLicense": "CC BY-SA",
-    "imgNote": "Generic Stiga lineup photo",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Generic Stiga lineup photo"
   },
   {
     "id": 11,
@@ -491,8 +491,8 @@
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HRE%20410%2C%20Oude%20Pekela%20(2020)%2012.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Honda HRE 410, Oude Pekela (2020) 12.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Representative corded walk-behind — same class"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Representative corded walk-behind"
   },
   {
     "id": 12,
@@ -618,11 +618,6 @@
     ],
     "verd": "The roller-less variant of the Rotak 36 R. Same Bosch DNA, slightly cheaper but you lose the stripes. If stripes are not a priority, it is the smarter buy.",
     "tip": "£55–90 used. Same checks as Rotak 36 R — cable condition, motor noise. The lack of rear roller actually means fewer parts to fail; in practice these last longer than the rollered version.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Mountfield%20725M.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Mountfield 725M.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Mountfield ride-on (725M) — same brand, similar class",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -671,7 +666,7 @@
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Ego%2C%20Agritechnica%202023%2C%20Hanover%20(P1160031).jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Ego, Agritechnica 2023, Hanover (P1160031).jpg",
-    "imgLicense": "CC BY-SA 4.0",
+    "imgLicense": "CC BY-SA",
     "imgNote": "EGO outdoor power equipment — same brand"
   },
   {
@@ -838,7 +833,12 @@
     ],
     "verd": "A solid budget cordless if you want a complete kit and do not mind pushing. The 40V Greenworks platform is decent but locks you in. Fair value new, good value used.",
     "tip": "£90–160 used. Battery health is everything — demand a runtime test. A healthy 4Ah does 30 minutes; under 15 minutes means dead and replacement batteries are £80+. Avoid any with chewed cable insulation around the battery contacts (overheating sign).",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/2022-06-08%2008%2038%2058%20A%20Greenworks%2040V%2021-Inch%20Brushless%20Self-Propelled%20Mower%20(6AH%20Battery%20and%20Charger%20Included%2C%20M-210-SP)%20along%20Aquetong%20Lane%20in%20the%20Mountainview%20section%20of%20Ewing%20Township%2C%20Mercer%20County%2C%20New%20Jersey.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "2022-06-08 08 38 58 A Greenworks 40V 21-Inch Brushless Self-Propelled Mower (6AH Battery and Charger Included, M-210-SP) along Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Greenworks 40V self-propelled — same brand and class"
   },
   {
     "id": 20,
@@ -1002,11 +1002,6 @@
     ],
     "verd": "A surprising performer — the 53cm cut and decent runtime make this a real petrol alternative for a Makita owner. Outsider buys should still pick EGO; the battery-platform lock-in matters.",
     "tip": "£250–400 with batteries is fair used. Self-propel cable is the wear point — check it adjusts smoothly. As with the DLM382, batteries are 90% of the value. A bare body-only DLM539Z is worth £150 max.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Flymo-e25.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Flymo-e25.jpg",
-    "imgLicense": "CC BY-SA 3.0",
-    "imgNote": "Flymo E25 hover mower — same family",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1050,11 +1045,6 @@
     ],
     "verd": "The smart budget cordless. Genuinely usable for small lawns and the included batteries cross to Worx tools you may already own. Outclassed at £400+ but unbeatable value at £200 new.",
     "tip": "£60–130 used. Check both batteries individually as with any twin-battery design. The plastic deck cracks if used on uneven ground — flip it and look for hairlines around the blade mount. Worx batteries are heavily counterfeited — only buy from sellers with original receipts.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Flymo%201500.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Flymo 1500.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Flymo 1500 hover mower — same family",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1096,11 +1086,6 @@
     ],
     "verd": "The right tool for a postage-stamp lawn. Do not buy if your lawn is bigger than 100m². Bosch makes them durable — a fair urban mower.",
     "tip": "£50–110 used. PowerForAll battery is £40+ secondhand, so a battery-included sale is the only one worth doing. Check the battery cells via runtime — a healthy 4Ah does 25 mins; under 12 mins is a dead pack. Bosch motor is brushless and rarely fails.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Flymo%20H40%20push%20mower.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Flymo H40 push mower.jpg",
-    "imgLicense": "CC BY-SA 2.0",
-    "imgNote": "Flymo H40 push hover — same family",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1183,11 +1168,6 @@
     ],
     "verd": "The Stihl entry-point. Build quality is genuinely Stihl, but the AK platform is intentionally limited to small jobs. Buy only if you already own Stihl AK tools.",
     "tip": "£70–150 used. Confirm AK battery is included with the sale. Stihl AK batteries have a 5-pin lock that can wear — check the battery clips firmly into place. Stihl chassis number checks add £30 to fair value if dealer-verified.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HRE%20410%2C%20Oude%20Pekela%20(2020)%2012.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Honda HRE 410, Oude Pekela (2020) 12.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Sibling Honda HRE 410 walk-behind",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1272,11 +1252,12 @@
     ],
     "verd": "The robot lawnmower that proved the category. Handles UK weather, easy parts supply, dealer-serviceable. The 305 is the entry — fine for under 600m² lawns with simple shapes.",
     "tip": "£300–550 used. Boundary wire integrity is everything — walk the perimeter and check for breaks (visible cuts in the wire). Confirm app account is transferable or factory-reset performed before purchase. Charging contacts on the dock corrode — clean them with a wire brush before judging battery life.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20Automower%20308%20with%20track%20marks%20in%20lawn.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Husqvarna Automower 308 with track marks in lawn.jpg",
     "imgLicense": "CC BY-SA",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Husqvarna Automower 308 — close sibling of 305"
   },
   {
     "id": 30,
@@ -1319,11 +1300,12 @@
     ],
     "verd": "The robot lawnmower people who own estates buy. EPOS is genuinely transformative — no boundary wire, you draw zones in an app. Worth every penny if your lawn justifies it.",
     "tip": "£1100–1800 used is realistic. EPOS reference station MUST be included — without it, this robot is a paperweight. Confirm satellite lock at the property before buying. Husqvarna serial number checks confirm warranty transferability — do this on any used purchase over £1500.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20automower%20430X.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Husqvarna automower 430X.jpg",
     "imgLicense": "CC BY-SA",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Husqvarna Automower 430X — exact model"
   },
   {
     "id": 31,
@@ -1407,11 +1389,6 @@
     ],
     "verd": "A genuinely interesting alternative to the Husqvarna 305 if you do not want to lay boundary wire. RTK works well in open suburban gardens; less reliable near trees or fences.",
     "tip": "£800–1200 used. Most YUKA Mini units are still under warranty — confirm purchase date with the seller. RTK base station must be included. Test it cuts a full perimeter before paying — RTK setup can be fragile. Mammotion accounts must be reset by seller.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Viking%20lawn%20mower.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Viking lawn mower.jpg",
-    "imgLicense": "CC BY-SA 3.0",
-    "imgNote": "Viking (Husqvarna Group sibling brand) walk-behind",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1453,11 +1430,6 @@
     ],
     "verd": "Segway took longer than Husqvarna to get the basics right but the H800E is solid. Reliable and well-supported now. The 18cm cut is the only limitation — it is slow.",
     "tip": "£1000–1700 used. VisionFence base must be included with calibration intact. Test it in mixed lighting if possible — heavy rain can fool the cameras. Segway accounts transfer cleanly if seller does the factory reset; insist on this.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/2022-06-08%2008%2038%2058%20A%20Greenworks%2040V%2021-Inch%20Brushless%20Self-Propelled%20Mower%20(6AH%20Battery%20and%20Charger%20Included%2C%20M-210-SP)%20along%20Aquetong%20Lane%20in%20the%20Mountainview%20section%20of%20Ewing%20Township%2C%20Mercer%20County%2C%20New%20Jersey.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "2022-06-08 08 38 58 A Greenworks 40V 21-Inch Brushless Self-Propelled Mower (6AH Battery and Charger Included, M-210-SP) along Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Greenworks 40V self-propelled — same brand and class",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1583,12 +1555,12 @@
     ],
     "verd": "The right robot for a small flat suburban lawn. Quiet, neat, reliable, and Gardena have been making robots for years. If your lawn is under 250m², it is the safer choice over the new Mammotion or Segway entry models.",
     "tip": "£170–340 used. Boundary wire integrity check as always. Gardena dock contacts are gold-plated and rarely corrode — that is a quality marker. Confirm the seller has the original cutting blades stored (they wear and 4-pack costs £15). Reset the Gardena Smart app before purchase.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Gardena%20robot%20mower.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Gardena robot mower.jpg",
     "imgLicense": "CC BY-SA",
-    "imgNote": "Gardena robotic mower (family match for Sileno Minimo)",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Gardena robotic mower"
   },
   {
     "id": 37,
@@ -1632,12 +1604,12 @@
     ],
     "verd": "The default sensible ride-on for 0.5–1 acre UK lawns. JD pedigree, parts everywhere, holds value remarkably well. Spend slightly more, save it back on resale.",
     "tip": "£1700–2500 used. Engine hours matter more than years — under 200 hours is excellent, over 600 means assume the worst. Test the PTO clutch — should engage smoothly. Hydrostatic transmission should pull cleanly forward and back with no jolts. JD service history adds £300 to fair value.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Hedge%20and%20ditch%20trimming%20with%20a%20John%20Deere%20X300R%20ride-on%20mower%20-%20geograph.org.uk%20-%207023613.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Hedge and ditch trimming with a John Deere X300R ride-on mower - geograph.org.uk - 7023613.jpg",
-    "imgLicense": "CC BY-SA 2.0",
-    "imgNote": "X300R — X-series sibling of X167R",
-    "lastReviewed": "2026-05-09"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "John Deere X300R — X-series sibling"
   },
   {
     "id": 38,
@@ -1680,11 +1652,12 @@
     ],
     "verd": "For estate-size lawns and people who want the best mid-size ride-on you can buy. The 4-wheel steering really does help around obstacles. Pricey but earns it back in time saved.",
     "tip": "£2800–4200 used. Engine hours under 400 is excellent. 4WS linkage components wear — check tracking on a flat surface for pull. Insist on full JD service history. Anti-scalp wheels on the deck show heavy use; replacements are £30 each.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/John%20Deere%20lawn%20mower.JPG?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "John Deere lawn mower.JPG",
     "imgLicense": "CC BY-SA",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "John Deere lawn mower"
   },
   {
     "id": 39,
@@ -1727,11 +1700,6 @@
     ],
     "verd": "The JD X167R's direct rival at a lower price. Cuts as well, holds value less. Buy if budget is tight, JD if you can stretch.",
     "tip": "£900–1500 used. Stiga engine hours easier to ignore than JD because spare parts cost less — but still ask. Hydrostatic drive belt is the wear point — slipping under load means £80 belt and dealer fitting. Anti-scalp wheels and deck wash port are check items.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Deere%20lawn%20tractor.JPG?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Deere lawn tractor.JPG",
-    "imgLicense": "CC BY-SA 3.0",
-    "imgNote": "John Deere lawn tractor — same brand and class",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1773,12 +1741,12 @@
     ],
     "verd": "A solid heavy-duty alternative to JD that punches above its price. The Kohler engine is a real plus. Just be aware UK service is patchy.",
     "tip": "£1300–2200 used. Kohler engine hours under 400 is good. Cub Cadet steering box wears — check for play. PTO clutch must engage cleanly without slip. Service history is harder to verify (smaller dealer network) so weight that into the price.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Cub%20Cadet%20XT1.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Cub Cadet XT1.jpg",
     "imgLicense": "CC BY-SA",
-    "imgNote": "XT1 — same family as XT2",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Cub Cadet XT1 — same XT-series"
   },
   {
     "id": 41,
@@ -1821,11 +1789,6 @@
     ],
     "verd": "For people who care more about engine longevity than badge prestige. The Honda V-twin will run for 1500 hours with sensible service. Choose this over a JD if your priority is \"still works in 15 years\".",
     "tip": "£1700–2900 used. Honda engine hours under 500 is excellent — these run forever. Test the hydrostatic forward/reverse smoothness. Look at the deck spindles — bearing seizure is the most expensive ride-on fault and these are non-trivial to replace. Honda service stamps add £400 to fair value.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Kubota%20LX-401%20Agritechnica%202025%20(DSC08650).jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Kubota LX-401 Agritechnica 2025 (DSC08650).jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Kubota compact tractor — same brand",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -1870,7 +1833,12 @@
     ],
     "verd": "The default first ride-on. Half the price of a JD, does the same job on most UK gardens, parts are easy. The pragmatic choice — not the prestige one.",
     "tip": "£500–1100 used. Engine hours under 300 is excellent. Hydrostatic drive belt slip under load is the most common fault — test on an incline. Steering linkage develops play; check it. Mountfield/Stiga share parts so service at any dealer is straightforward.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Mountfield%20725M.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Mountfield 725M.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Mountfield ride-on (725M) — same brand class"
   },
   {
     "id": 43,
@@ -2040,11 +2008,6 @@
     ],
     "verd": "Compact and well-engineered for very small ornamental lawns. The grass box is the differentiator — most manual cylinders mulch only. Disappointingly small cut though.",
     "tip": "£20–45 used. Bosch builds to last so even old units are fine. Check the cylinder blades for nicks (re-sharpening £20). Grass box hinges are plastic and crack — inspect them. Bosch parts are rare but rarely needed.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Ego%2C%20Agritechnica%202023%2C%20Hanover%20(P1160031).jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Ego, Agritechnica 2023, Hanover (P1160031).jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "EGO outdoor power equipment — same brand",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -2130,7 +2093,12 @@
     ],
     "verd": "The IZY badge is what most UK buyers actually mean when they say \"I want a Honda for the lawn.\" Cheap to buy, easy to maintain, and the engine outlasts everything around it. The smartest budget Honda on the used market.",
     "tip": "£180–280 used is the sweet spot. Avoid anything over £320 — there is always another. Pull the dipstick: golden good, black means no service history. Plastic deck cracks around the wheel mounts after 8+ years — flip it and inspect. Genuine Honda blade is £20 if missing.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HRE%20410%2C%20Oude%20Pekela%20(2020)%2012.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Honda HRE 410, Oude Pekela (2020) 12.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Sibling Honda HRE 410 walk-behind"
   },
   {
     "id": 49,
@@ -2260,12 +2228,12 @@
     ],
     "verd": "The mower that defined \"the British striped lawn\" before everyone went Honda. Atco is now part of STIGA Group but the Liner still runs the original heavy-roller deck. A connoisseur classic on Marketplace.",
     "tip": "£200–400 used and the spread is wide because condition varies massively. Steel deck rust is the make-or-break — flip it and look for hole-through corrosion (not just surface). Original Atco serial sticker on the deck adds £40. Avoid anything stored outside year-round.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Atco%208-32E%201980.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Atco 8-32E 1980.jpg",
-    "imgLicense": "CC BY 3.0",
-    "imgNote": "Vintage Atco — same brand heritage",
-    "lastReviewed": "2026-05-09"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Vintage Atco — same brand heritage"
   },
   {
     "id": 52,
@@ -2354,12 +2322,12 @@
     ],
     "verd": "Not made any more, but the Suffolk Punch is the mower bowling-green keepers and ornamental-lawn obsessives still hunt for. If you have a flat formal lawn, nothing beats the cut and the stripes. Marketplace is the only way to buy one.",
     "tip": "£150–400 used depending on condition and age. Cylinder sharpness is the entire game — test cut on a piece of paper at the deck (it should slice cleanly). Re-grind is £40–60. Avoid welded frame repairs. Original Qualcast/Suffolk decals add £30 for collectors.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Cylinder%20mower%20bicycle.JPG?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Cylinder mower bicycle.JPG",
-    "imgLicense": "CC BY-SA 3.0",
-    "imgNote": "Vintage cylinder mower — same era and class",
-    "lastReviewed": "2026-05-09"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Vintage cylinder mower — same era and class"
   },
   {
     "id": 54,
@@ -2402,7 +2370,12 @@
     ],
     "verd": "The mower that defined the hover category and still the easiest answer for sloped, awkward, or banked lawns. Not for big jobs but unbeatable on the small stuff that wheeled mowers struggle with.",
     "tip": "£15–35 used. Cable damage is the #1 fault — check end-to-end. The lift fan housing develops cracks; flip it and inspect. Bag clip plastic snaps — replacement bag is £15 if missing. Massive Argos/B&Q used supply.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Flymo-e25.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Flymo-e25.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Flymo E25 hover mower — same family"
   },
   {
     "id": 55,
@@ -2446,7 +2419,12 @@
     ],
     "verd": "The right tool for sloped or oddly-shaped lawns. Mulching means you do not stop to empty a box. Wheeled mowers cannot match a hover for getting under fences and over banks.",
     "tip": "£25–55 used. Same checks as the Hover Vac — cable, fan housing, blade condition. The mulching plate at the deck base wears; replacement is £15. Glider 330s last 10+ years if stored indoors.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Flymo%201500.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Flymo 1500.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Flymo 1500 hover mower — same family"
   },
   {
     "id": 56,
@@ -2751,11 +2729,12 @@
     ],
     "verd": "Stihl arrived late to robotics but the iMOW 6 is genuinely competitive with the Husqvarna 410 NERA. Worth considering if you already trust Stihl petrol kit and have a Stihl dealer nearby.",
     "tip": "£1300–1900 used (rare on Marketplace yet — most are still under warranty). RTK reference station must be included. Verify dealer warranty transfer — Stihl handles this cleanly via chassis number. Reset the iMOW Cloud account before purchase.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Stihl%20robot%20mower.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Stihl robot mower.jpg",
     "imgLicense": "CC BY-SA",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Stihl robot mower"
   },
   {
     "id": 63,
@@ -2799,12 +2778,12 @@
     ],
     "verd": "The Husqvarna sweet-spot for 2024. Smaller and cheaper than the 430X NERA, EPOS-enabled (unlike the 305), and right for 1000–1500m² gardens. Likely to be the best-selling robot of the year.",
     "tip": "£900–1500 used (still rare). EPOS reference station is mandatory and must be included. Confirm satellite lock at the buyer’s property before payment. Husqvarna serial-number warranty checks confirm transferability.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20automower%20430X.jpg?width=600",
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20Automower%2C%20Esbjerg%2C%204.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
-    "imgFile": "Husqvarna automower 430X.jpg",
+    "imgFile": "Husqvarna Automower, Esbjerg, 4.jpg",
     "imgLicense": "CC BY-SA",
-    "imgNote": "Same chassis family (430X / 410 XE)",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Husqvarna Automower in operation"
   },
   {
     "id": 64,
@@ -2888,11 +2867,6 @@
     ],
     "verd": "The right Mammotion if your lawn is too big for the YUKA Mini but too small to justify the 5000. AWD opens up sloped lawns that nothing else handles. Buy with caution given Mammotion is still new in the UK.",
     "tip": "£1000–1600 used (rare yet — most under warranty). RTK base and antenna both required. Test on the buyer’s actual lawn before paying. Reset the Mammotion app account before transfer.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20Automower%2C%20Esbjerg%2C%204.jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Husqvarna Automower, Esbjerg, 4.jpg",
-    "imgLicense": "CC BY-SA 2.0",
-    "imgNote": "Husqvarna Automower in operation",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -3020,12 +2994,12 @@
     ],
     "verd": "A premium boundary-wire robot from a brand that knows engines but is newer to robotics. The Miimo line has caught up to Husqvarna on durability — pricing is the only concern.",
     "tip": "£900–1500 used. Honda Miimo serial-number checks confirm warranty transferability — do this on anything over £1100. Boundary wire integrity check as standard. Reset Miimo Live account before purchase.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20Miimo%20310%20-%201.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Honda Miimo 310 - 1.jpg",
     "imgLicense": "CC BY-SA",
-    "imgNote": "Miimo 310 — same Miimo family as HRM 70 Live",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Sibling Honda Miimo robotic mower"
   },
   {
     "id": 69,
@@ -3107,12 +3081,12 @@
     ],
     "verd": "Stiga’s answer to the Husqvarna 410 NERA at a lower price. Build quality is solid (it shares engineering with Mountfield). Worth checking if you have a Stiga or Mountfield dealer locally.",
     "tip": "£600–1000 used. RTK base required. Confirm satellite lock at the property. Stiga dealer network is patchy on robotics — verify local support before buying. Reset Stiga Smart account before purchase.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Stiga%20AutoClip%20140.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Stiga AutoClip 140.jpg",
     "imgLicense": "CC BY-SA",
-    "imgNote": "AutoClip 140 — same family",
-    "lastReviewed": "2026-05-09"
+    "imgNote": "Stiga AutoClip 140 — earlier robotic generation"
   },
   {
     "id": 71,
@@ -4349,7 +4323,12 @@
     ],
     "verd": "The Flymo hover for buyers who outgrow the Hover Vac. Bigger cut, better build, twin-handle for sloped lawns. Mulch-only is the design choice — accept it or buy a Hover Vac.",
     "tip": "£35–80 used. Lift fan housing crack is the killer — flip and inspect. Twin-handle pivot points should lock cleanly. Cable in good condition is non-negotiable. Plastic deck repairs are usually visible — walk away from anything welded.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Flymo%20H40%20push%20mower.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Flymo H40 push mower.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Flymo H40 push hover — same family"
   },
   {
     "id": 100,
@@ -4642,7 +4621,12 @@
     ],
     "verd": "A solid Husqvarna walk-behind petrol. Build quality genuinely above Mountfield/Cobra at this price point. The Husqvarna HQ engine is well-engineered but parts are dealer-only — that's the trade-off vs. a Briggs-equipped rival.",
     "tip": "£200–340 used. Husqvarna chassis serial verifies dealer service history — check it. HQ engine starts cleanly cold; sluggish cold-start is a sign of varnished carb (£60 service). Drive cable and rear flap hinge are wear points; check both.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Viking%20lawn%20mower.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Viking lawn mower.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Viking (Husqvarna Group sibling brand) walk-behind"
   },
   {
     "id": 107,
@@ -4686,7 +4670,12 @@
     ],
     "verd": "The right Husqvarna for owners of typical UK suburban gardens (1000–1500m²) who don't need EPOS. Smaller and cheaper than the 430X but with the connected features and the same proven Husqvarna durability. The middle of the range and the smart middle to land on.",
     "tip": "£500–900 used. Boundary wire integrity is the make-or-break — walk every metre. Husqvarna serial verifies warranty and dealer service. App account must be reset before transfer. Charging contacts on the dock corrode — clean before judging battery life.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Husqvarna%20CEORA%20professional%20robotic%20lawn%20mower%20at%20Brastad%20Arena%201.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Husqvarna CEORA professional robotic lawn mower at Brastad Arena 1.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Husqvarna CEORA — pro robotic in same family"
   },
   {
     "id": 108,
@@ -4938,11 +4927,6 @@
     ],
     "verd": "The Gardena Sileno Life sits between the Sileno Minimo and the Husqvarna 305 in capability and price. For 600–1000m² lawns it's the smart choice — quieter than Husqvarna, better-built than Worx Landroid. The Gardena Smart app is the weakest part.",
     "tip": "£350–650 used. Boundary wire walk-perimeter check as standard. Battery cells last about 4 years; demand a runtime test. Reset Gardena Smart account before purchase. Dock contacts gold-plated — Gardena uses better dock metal than most rivals.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Atco%2011-36%20Lawn%20Tractor%20(1986).jpg?width=600",
-    "imgSrc": "Wikimedia Commons",
-    "imgFile": "Atco 11-36 Lawn Tractor (1986).jpg",
-    "imgLicense": "CC BY-SA 3.0",
-    "imgNote": "Vintage Atco lawn tractor — same brand",
     "lastReviewed": "2026-05-09"
   },
   {
@@ -5068,12 +5052,12 @@
     ],
     "verd": "The Atco for buyers who want British-built stripes without paying Hayter money. Same heritage, similar build quality, slightly cheaper used. The Briggs 750EX is reliable but not Honda-level. Buy if you have a Briggs dealer locally.",
     "tip": "£200–380 used. Steel deck rust check is critical — flip and look for hole-through corrosion. Roller bearings should turn smoothly. Original Atco serial number on the deck adds £40 to fair value. Anything stored under cover is a buy.",
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Atco%20830%201988.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Atco 830 1988.jpg",
-    "imgLicense": "CC BY-SA 3.0",
-    "imgNote": "Vintage Atco — same brand heritage",
-    "lastReviewed": "2026-05-09"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Vintage Atco — same brand heritage"
   },
   {
     "id": 117,
@@ -5117,12 +5101,12 @@
     ],
     "verd": "For the formal-lawn obsessive who wants Allett-class cuts without going manual or petrol. The cordless cylinder is a niche but a real one — silent, clean, exquisite finish. Outsider buyers should ignore; bowling-green keepers will love it.",
     "tip": "£500–900 used. Cylinder sharpness is the entire game — test cut on paper. Re-grind is £40–60 at any cylinder mower service shop. Battery health critical (40-min runtime healthy; under 20 means dead). Atco service stamps add £100 to fair value.",
-    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Toro%2022%20Inch%20Recycler%20Walk%20Behind%20Lawn%20Mower.jpg?width=600",
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Atco%2011-36%20Lawn%20Tractor%20(1986).jpg?width=600",
     "imgSrc": "Wikimedia Commons",
-    "imgFile": "Toro 22 Inch Recycler Walk Behind Lawn Mower.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Toro 22\" Recycler — same line, slightly larger deck",
-    "lastReviewed": "2026-05-09"
+    "imgFile": "Atco 11-36 Lawn Tractor (1986).jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Vintage Atco lawn tractor — same brand"
   },
   {
     "id": 118,
@@ -5209,7 +5193,12 @@
     ],
     "verd": "The JD ride-on most buyers actually want — bigger than the X167R, cheaper than the X354. Mid X-series, the volume seller. Hydrostatic drive is standard, JD support is universal, resale stays strong. The default \"I want a JD\" answer for half-acre to acre lawns.",
     "tip": "£2500–3800 used. JD engine hours under 300 is excellent, under 600 fine. PTO clutch test critical — must engage cleanly with no slip. Hydrostatic transmission belt slip is the most common fault — test forward/reverse smoothly. JD service stamps add £400 to fair value.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Deere%20lawn%20tractor.JPG?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Deere lawn tractor.JPG",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "John Deere lawn tractor"
   },
   {
     "id": 120,
@@ -5250,7 +5239,12 @@
     ],
     "verd": "A solid American import for buyers who want a pro-grade cordless from a heritage brand. Toro is enormous in the US; the UK presence is growing but limited. Build quality is excellent. The battery ecosystem is the weakness in the UK market specifically.",
     "tip": "£250–420 used. Confirm Flex-Force battery is genuine and includes the SmartStow latch. Self-propel cable wear is common. Toro UK warranty is via dealer; check chassis number for warranty status. Battery cells degrade like any cordless — demand a runtime test.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Toro%2022%20Inch%20Recycler%20Walk%20Behind%20Lawn%20Mower.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Toro 22 Inch Recycler Walk Behind Lawn Mower.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Toro 22 Recycler — same line, slightly larger deck"
   },
   {
     "id": 121,
@@ -5293,7 +5287,12 @@
     ],
     "verd": "For people who care about their lawn the way bowling-green groundsmen do. The Allett Liberty is what the Suffolk Punch wishes it were — modern, cordless, and with interchangeable cassettes that turn it into a scarifier. A specialist tool for a specialist lawn. If that's you, nothing else competes.",
     "tip": "£600–1000 used. Cylinder sharpness is non-negotiable — test cut paper. Allett re-grind service exists at their factory; £80 turnaround. Confirm cassette set is complete (cylinder is mandatory; scarifier and brush are optional but valuable). Reset Allett account if app-connected.",
-    "lastReviewed": "2026-05-09"
+    "lastReviewed": "2026-05-09",
+    "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Allett%20Uplift86%20Rotary%20Mower.jpg?width=600",
+    "imgSrc": "Wikimedia Commons",
+    "imgFile": "Allett Uplift86 Rotary Mower.jpg",
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Allett Uplift86 — exact brand match"
   },
   {
     "id": 122,
@@ -6277,12 +6276,12 @@
     "verd": "Honda playing catch-up to EGO. The HRG 466 XB is fine — Honda fit and finish, decent runtime, the warranty Honda owners expect — but at £749 it's £100 more than an EGO LM1701E that has self-drive and a bigger battery. Buy this mower if you already own Honda OPE and want one charger across everything. Otherwise the EGO is the better mower at less money.",
     "tip": "Used HRG 466 XBs are uncommon — Honda owners tend to keep them. Best deals come from Honda dealers selling ex-demo at £450-550 with full warranty transfer. The 56V battery is Honda-specific; aftermarket cells don't exist, so battery health on a used buy is critical. Demand a runtime test — if it doesn't cut for 30 minutes on full charge, walk away.",
     "rank": 144,
+    "lastReviewed": "2026-05-09",
     "img": "https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HRE%20410%2C%20Oude%20Pekela%20(2020)%2002.jpg?width=600",
     "imgSrc": "Wikimedia Commons",
     "imgFile": "Honda HRE 410, Oude Pekela (2020) 02.jpg",
-    "imgLicense": "CC BY-SA 4.0",
-    "imgNote": "Honda HRE 410 electric — sibling battery-Honda walk-behind",
-    "lastReviewed": "2026-05-09"
+    "imgLicense": "CC BY-SA",
+    "imgNote": "Sibling Honda HRE 410 cordless walk-behind"
   },
   {
     "id": 145,

@@ -3,13 +3,15 @@
 // short scannable sections, bold lead-ins, ~500 words.
 // All 10 guides slot into BLOG_POSTS via the build loop.
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1590820292118-e256c3ac2676?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600';
+// Distinct Unsplash hero photos, each in production use elsewhere on the
+// site. Picked per-guide so the blog index doesn't show ten identical thumbs.
+const U = id => `https://images.unsplash.com/photo-${id}?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600`;
 
 export const INSPECTION_GUIDES = [
   // 1. Mountfield SP46
   {
     slug: 'inspect-used-mountfield-sp46',
-    image: HERO_IMG,
+    image: U("1590820292118-e256c3ac2676"),
     imageAlt: 'Mountfield SP46 self-propelled petrol mower on grass',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Mountfield SP46 — UK guide',
@@ -77,7 +79,7 @@ export const INSPECTION_GUIDES = [
   // 2. Hayter Harrier
   {
     slug: 'inspect-used-hayter-harrier',
-    image: HERO_IMG,
+    image: U("1458245201577-fc8a130b8829"),
     imageAlt: 'Hayter Harrier petrol mower on a striped lawn',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Hayter Harrier 41 / 48 / 56 — UK guide',
@@ -144,7 +146,7 @@ export const INSPECTION_GUIDES = [
   // 3. Husqvarna Automower 305 / 315
   {
     slug: 'inspect-used-husqvarna-automower',
-    image: HERO_IMG,
+    image: U("1741326757602-186060c5d5b5"),
     imageAlt: 'Husqvarna Automower robotic mower in a garden',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Husqvarna Automower (305, 310, 315 NERA) — UK guide',
@@ -212,7 +214,7 @@ export const INSPECTION_GUIDES = [
   // 4. Stihl iMOW
   {
     slug: 'inspect-used-stihl-imow',
-    image: HERO_IMG,
+    image: U("1608101854678-b45ad1d25556"),
     imageAlt: 'Stihl iMOW robotic mower on a garden lawn',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Stihl iMOW — UK guide',
@@ -277,7 +279,7 @@ export const INSPECTION_GUIDES = [
   // 5. EGO LM2135 / LM2114 / LMX5300
   {
     slug: 'inspect-used-ego-lm-cordless',
-    image: HERO_IMG,
+    image: U("1689728318937-17d24bc0a65c"),
     imageAlt: 'EGO 56V cordless lawn mower on grass',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used EGO 56V cordless mower (LM2135, LM2114, LMX5300) — UK guide',
@@ -351,7 +353,7 @@ export const INSPECTION_GUIDES = [
   // 6. Bosch Indego
   {
     slug: 'inspect-used-bosch-indego',
-    image: HERO_IMG,
+    image: U("1533195374643-6bf5271da610"),
     imageAlt: 'Bosch Indego robotic mower on a lawn',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Bosch Indego — UK guide',
@@ -416,7 +418,7 @@ export const INSPECTION_GUIDES = [
   // 7. Murray 11/30 (vintage)
   {
     slug: 'inspect-used-murray-11-30',
-    image: HERO_IMG,
+    image: U("1558904541-efa843a96f01"),
     imageAlt: 'Murray 11/30 vintage ride-on lawn tractor',
     imageCredit: 'Unsplash',
     title: 'How to inspect a vintage Murray 11/30 ride-on — UK guide',
@@ -485,7 +487,7 @@ export const INSPECTION_GUIDES = [
   // 8. John Deere X-series
   {
     slug: 'inspect-used-john-deere-x-series',
-    image: HERO_IMG,
+    image: U("1690068023694-053da714f95f"),
     imageAlt: 'John Deere X-series ride-on lawn tractor',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used John Deere X-series ride-on — UK guide',
@@ -553,7 +555,7 @@ export const INSPECTION_GUIDES = [
   // 9. Cobra MX46SPB
   {
     slug: 'inspect-used-cobra-mx46spb',
-    image: HERO_IMG,
+    image: U("1773917735999-2a89191afc55"),
     imageAlt: 'Cobra MX46SPB self-propelled petrol mower',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Cobra MX46SPB — UK guide',
@@ -621,7 +623,7 @@ export const INSPECTION_GUIDES = [
   // 10. Mountfield 1530H lawn tractor
   {
     slug: 'inspect-used-mountfield-1530h',
-    image: HERO_IMG,
+    image: U("1628340981113-fe1949fe5cc0"),
     imageAlt: 'Mountfield 1530H lawn tractor on a large lawn',
     imageCredit: 'Unsplash',
     title: 'How to inspect a used Mountfield 1530H lawn tractor — UK guide',
