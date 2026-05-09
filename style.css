@@ -1577,3 +1577,86 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .seas-month-mul { font-size: 9px }
 }
 
+/* ===== Newsletter signup ===== */
+.nl-section {
+  margin-top: 8px;
+  padding: 28px 30px;
+  background: linear-gradient(135deg, #0a1f10, #142b1a);
+  border-radius: 14px;
+  color: #c8d4c4;
+}
+.nl-section.nl-wide { padding: 36px 40px }
+.nl-inner { display: flex; flex-direction: column; gap: 16px; max-width: 720px }
+.nl-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent);
+}
+.nl-h {
+  margin: 0;
+  font-size: 24px; font-weight: 700;
+  color: #fff; letter-spacing: -0.5px; line-height: 1.2;
+}
+.nl-section.nl-wide .nl-h { font-size: 28px }
+.nl-lead { margin: 0; font-size: 15px; line-height: 1.55; color: #9aaf95 }
+.nl-form {
+  display: flex; gap: 8px; margin-top: 8px;
+  max-width: 520px;
+}
+.nl-form input {
+  flex: 1;
+  padding: 12px 14px;
+  background: white;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: inherit;
+}
+.nl-form input:focus { outline: 2px solid var(--accent); outline-offset: -1px }
+.nl-form button {
+  padding: 12px 22px;
+  background: var(--accent);
+  color: #0a1f10;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700; font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.nl-form button:hover { background: #4ea66a }
+.nl-promise {
+  margin: 4px 0 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #6a8270;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Owner-tip form ===== */
+.tip-section { margin-top: 8px }
+.tip-inner {
+  background: var(--accent-soft);
+  border: 1px dashed #c8d8b8;
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+.tip-inner .tip-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 8px;
+}
+.tip-inner h3 {
+  margin: 0 0 8px;
+  font-size: 20px; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.4px;
+}
+.tip-inner p {
+  margin: 0 0 16px;
+  font-size: 14px; line-height: 1.55; color: var(--ink-sub);
+  max-width: 600px;
+}
+

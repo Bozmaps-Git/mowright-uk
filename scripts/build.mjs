@@ -330,6 +330,59 @@ function heroIcon(m, size = 90) {
   </div>`;
 }
 
+// Newsletter signup — Buttondown embed.
+// TODO: replace BUTTONDOWN_PUBLICATION with the publication slug after
+// signing up at https://buttondown.com (free for under 100 subscribers).
+// Until then, the form posts to a non-existent endpoint and shows a
+// browser error — set the slug below before deploying any signup CTA.
+const BUTTONDOWN_PUBLICATION = 'mowright';
+
+function newsletterSignup(variant = 'default') {
+  const isWide = variant === 'wide';
+  return `
+  <section class="nl-section${isWide ? ' nl-wide' : ''}">
+    <div class="nl-inner">
+      <div class="nl-text">
+        <div class="nl-eyebrow">${isWide ? 'Watching the wires' : 'Get the newsletter'}</div>
+        <h3 class="nl-h">${isWide ? 'A weekly mower-watcher email — free.' : 'Weekly mower-watcher email'}</h3>
+        <p class="nl-lead">Five interesting Marketplace listings, one engine spotlight, one deal alert when a model drops at a major UK retailer. ${isWide ? 'No spam, one-click unsubscribe.' : ''}</p>
+      </div>
+      <form class="nl-form" action="https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_PUBLICATION}" method="post" target="_blank">
+        <label for="nl-email-${variant}" class="sr">Email address</label>
+        <input id="nl-email-${variant}" type="email" name="email" placeholder="you@example.com" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="nl-promise">No affiliate links. No upsells. Unsubscribe anytime in one click.</p>
+    </div>
+  </section>`;
+}
+
+// Owner-tip submission — mailto with prefilled subject + body.
+// Requires user to forward tips@mowright.co.uk somewhere they read it.
+function ownerTipForm(m) {
+  const subject = encodeURIComponent(`Owner tip: ${m.brand} ${m.model}`);
+  const body = encodeURIComponent(
+`Hi MowRight,
+
+I've owned a ${m.brand} ${m.model} for [years] / [hours per year]. Here's a tip future buyers should know:
+
+[your tip]
+
+I'd be happy to be credited as: [first name + county, or anonymous]
+
+Thanks`
+  );
+  return `
+  <section class="tip-section">
+    <div class="tip-inner">
+      <div class="tip-eyebrow">Help future buyers</div>
+      <h3>Owned a ${esc(m.brand)} ${esc(m.model)}?</h3>
+      <p>Send us a one-line tip — what broke, what worked, what you'd buy next time. We curate and publish under your verdict (with credit if you want).</p>
+      <a class="btn btn-secondary" href="mailto:tips@mowright.co.uk?subject=${subject}&body=${body}">Send a tip →</a>
+    </div>
+  </section>`;
+}
+
 // Repair-cost reference per mower. Derives common parts costs from the engine
 // family (looked up from ENGINES) plus type-specific items (drive cable for
 // self-propelled, battery for cordless/robotic, deck spindle for ride-on, etc).
@@ -891,6 +944,10 @@ ${siteHeader('browse')}
     ${repairCostSection(m)}
 
     ${fairOfferWidget(m)}
+
+    ${ownerTipForm(m)}
+
+    ${newsletterSignup()}
 
     ${related.length ? `
     <section>
