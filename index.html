@@ -163,12 +163,6 @@
 </section>
 
 <main id="main" class="page page--wide page--main">
-  <!-- Top banner ad -->
-  <div class="ad-banner">
-    <div class="ad-label">Ad · Sponsored</div>
-    <div class="ad-slot h90"><div class="lab">728×90 leaderboard</div><div class="meta">slot: home-top-banner</div></div>
-  </div>
-
   <div class="list-head">
     <h2 id="list-title">All mowers <span class="count" id="list-count"></span></h2>
     <a id="cat-guide-link" href="/buying-guide" hidden>Read the buying guide →</a>
@@ -530,14 +524,7 @@
       return;
     }
 
-    arr.forEach((m, i) => {
-      list.append(mowerRow(m));
-      if (i === 3 || i === 7) {
-        const ad = el('div', { class: 'ad-in-row' });
-        ad.innerHTML = '<div class="ad-label">Ad · Sponsored</div><div class="body"><div class="ad-slot h120"><div class="lab">In-list responsive ad</div><div class="meta">slot: home-in-list-' + (i === 3 ? 1 : 2) + '</div></div></div>';
-        list.append(ad);
-      }
-    });
+    arr.forEach(m => list.append(mowerRow(m)));
   }
 
   // ----- Category pills -----

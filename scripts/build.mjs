@@ -436,24 +436,6 @@ const siteFooter = () => `
   </div>
 </footer>`;
 
-const adBanner = (slot, label = 'Above-fold display ad', height = 90) => `
-<div class="ad-banner">
-  <div class="ad-label">Ad · Sponsored</div>
-  <div class="ad-slot h${height}"><div class="lab">${esc(label)}</div><div class="meta">slot: ${esc(slot)}</div></div>
-</div>`;
-
-const adInRow = slot => `
-<div class="ad-in-row">
-  <div class="ad-label">Ad · Sponsored</div>
-  <div class="body"><div class="ad-slot h120"><div class="lab">In-list responsive ad</div><div class="meta">slot: ${esc(slot)}</div></div></div>
-</div>`;
-
-const adAside = (slot, height = 250) => `
-<div class="aside-card">
-  <div class="ad-label">Ad · Sponsored</div>
-  <div class="ad-slot h${height}" style="margin-top:10px"><div class="lab">${height === 250 ? '300×250 sidebar' : '300×600 large sidebar'}</div><div class="meta">slot: ${esc(slot)}</div></div>
-</div>`;
-
 const ctaStrip = (heading, description, ctaLabel, ctaHref) => `
 <div class="cta">
   <div class="cta-text">
@@ -640,8 +622,6 @@ ${siteHeader('home')}
       ${prosCons(m)}
     </section>
 
-    ${adBanner('detail-mid', 'Mid-article responsive ad')}
-
     <section>
       <h2 class="section-h2">Full specs</h2>
       <div class="specs-card">${specsTable(m)}</div>
@@ -665,8 +645,6 @@ ${siteHeader('home')}
   </article>
 
   <aside class="detail-aside">
-    ${adAside('detail-sidebar-1', 250)}
-
     <div class="aside-card">
       <div class="l">At a glance</div>
       <div class="row"><span>Best for</span><strong>${esc(m.lawnSize)} lawns</strong></div>
@@ -682,8 +660,6 @@ ${siteHeader('home')}
       <a class="from-brand-name" href="${esc(brandUrl(m.brand))}">${esc(m.brand)} →</a>
       <p class="from-brand-blurb">${esc(brand?.blurb || 'See all models from this brand.')}</p>
     </div>
-
-    ${adAside('detail-sidebar-2', 340)}
   </aside>
 </main>
 
@@ -731,9 +707,7 @@ ${siteHeader('home')}
 </section>
 
 <main id="main" class="page page--main">
-  ${adBanner('category-' + cat.slug + '-top', 'Above-fold leaderboard')}
-
-  <h2 class="section-h2" style="margin-top:20px">All ${esc(cat.name.toLowerCase())} mowers (${list.length})</h2>
+  <h2 class="section-h2">All ${esc(cat.name.toLowerCase())} mowers (${list.length})</h2>
 
   ${list.length === 0 ? `<div class="empty"><h3>No models in this category yet</h3><p>Coming soon.</p></div>` : `
   <div class="mlist">${list.map(categoryListCard).join('')}</div>`}
@@ -803,11 +777,9 @@ ${siteHeader('home')}
 </section>
 
 <main id="main" class="page page--main">
-  ${adBanner('brand-' + slug(brandRaw) + '-top', 'Above-fold leaderboard')}
-
-  <h2 class="section-h2" style="margin-top:20px">${esc(brand.name)} models we've reviewed</h2>
+  <h2 class="section-h2">${esc(brand.name)} models we've reviewed</h2>
   <div class="mlist">
-    ${list.map((m, i) => brandListCard(m) + (i === 1 ? adInRow('brand-' + slug(brandRaw) + '-mid') : '')).join('')}
+    ${list.map(brandListCard).join('')}
   </div>
 </main>
 
@@ -846,18 +818,15 @@ ${siteHeader('guide')}
     <h1 class="bg-h1">Five questions, one mower.</h1>
     <p class="cat-lead" style="font-size:18px;max-width:640px;line-height:1.6">Most "best lawn mower" lists are paid placements. Ours isn't. Walk through these five questions in order and you'll have your answer in three minutes.</p>
 
-    ${adBanner('guide-top', 'Above-fold leaderboard')}
-
-    <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px">
-      ${sections.map((s, i) => `
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
+      ${sections.map(s => `
       <article class="guide-section">
         <div class="num">${s.num}</div>
         <div>
           <h2>${esc(s.title)}</h2>
           <p>${esc(s.body)}</p>
         </div>
-      </article>
-      ${i === 2 ? adInRow('guide-mid') : ''}`).join('')}
+      </article>`).join('')}
     </div>
 
     <div style="margin-top:32px">
@@ -890,7 +859,7 @@ ${siteHeader('about')}
 <section style="padding:32px 32px 80px">
   <div class="page page--narrow about" style="max-width:760px;padding:0">
     <h1 class="about-h1">We compare lawnmowers.<br/><span class="accent">That's the whole thing.</span></h1>
-    <p class="lead">MowRight UK was started in 2023 by a small team of British gardeners frustrated that every "best lawnmower 2024" article was a thinly-disguised affiliate ranking. We don't take affiliate commissions. We don't accept manufacturer-sponsored placements. We're funded entirely by display advertising, which is clearly labelled wherever it appears on this site.</p>
+    <p class="lead">MowRight UK was started in 2023 by a small team of British gardeners frustrated that every "best lawnmower 2024" article was a thinly-disguised affiliate ranking. We don't take affiliate commissions. We don't accept manufacturer-sponsored placements. The site is funded by unobtrusive display advertising — never inline product placements, never paid review slots.</p>
 
     <h2 class="about-h2">How we test</h2>
     <p>Every mower in our database is hands-on tested, either by a member of our team or — for older or rarer models — by a network of volunteer reviewers across the UK. Specs are taken from the manufacturer and verified. Prices are checked weekly against the lowest-listed major UK retailer (Amazon UK, B&amp;Q, Mowdirect, Robert Dyas) and against actual sold listings on Facebook Marketplace and eBay UK.</p>
