@@ -411,7 +411,8 @@ const siteHeader = (active = '') => `
     </a>
     <span class="brand-tag">UK lawnmower price comparison</span>
     <nav class="top-nav" aria-label="Primary">
-      <a href="/"${active === 'home' ? ' aria-current="page"' : ''}>Browse</a>
+      <a href="/"${active === 'home' ? ' aria-current="page"' : ''}>Home</a>
+      <a href="/browse"${active === 'browse' ? ' aria-current="page"' : ''}>Browse</a>
       <a href="/buying-guide"${active === 'guide' ? ' aria-current="page"' : ''}>Buying Guide</a>
       <a href="/blog"${active === 'blog' ? ' aria-current="page"' : ''}>Blog</a>
       <a href="/about"${active === 'about' ? ' aria-current="page"' : ''}>About</a>
@@ -423,7 +424,8 @@ const siteFooter = () => `
 <footer class="site-footer">
   <div class="inner">
     <nav>
-      <a href="/">Browse</a>
+      <a href="/">Home</a>
+      <a href="/browse">Browse</a>
       <a href="/blog">Blog</a>
       <a href="/buying-guide">Buying Guide</a>
       <a href="/engines">Engines</a>
@@ -556,7 +558,7 @@ function renderMowerPage(m) {
     }
   };
   const breadcrumbLD = crumbsLD([
-    ['Browse', '/'],
+    ['Browse', '/browse'],
     [cat.name, categoryUrl(m)],
     [m.brand, brandUrl(m.brand)],
     [m.model, null]
@@ -570,11 +572,11 @@ function renderMowerPage(m) {
     ogType: 'product',
     ldjson: [productLD, breadcrumbLD]
   })}
-${siteHeader('home')}
+${siteHeader('browse')}
 
 <div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <a href="${esc(categoryUrl(m))}">${esc(cat.name)}</a><span class="sep">›</span>
     <a href="${esc(brandUrl(m.brand))}">${esc(m.brand)}</a><span class="sep">›</span>
     <span aria-current="page">${esc(m.model)}</span>
@@ -673,7 +675,7 @@ function renderCategoryPage(typeRaw) {
   const cat = CATEGORIES[typeRaw];
   const list = mowers.filter(m => m.type === typeRaw).sort((a, b) => b.valueScore - a.valueScore);
   const best = list[0];
-  const breadcrumbLD = crumbsLD([['Browse', '/'], [cat.name + ' mowers', null]]);
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], [cat.name + ' mowers', null]]);
   const listLD = itemListLD(`${cat.name} lawnmowers`, list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
 
   return `${head({
@@ -683,11 +685,11 @@ function renderCategoryPage(typeRaw) {
     ogImage: cat.heroImg || '/og.png',
     ldjson: [breadcrumbLD, listLD]
   })}
-${siteHeader('home')}
+${siteHeader('browse')}
 
 <div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span aria-current="page">${esc(cat.name)}</span>
   </nav>
 </div>
@@ -728,7 +730,7 @@ function renderBrandPage(brandRaw) {
   if (!brand) return null;
   const list = mowers.filter(m => m.brand === brandRaw).sort((a, b) => b.valueScore - a.valueScore);
   const categories = [...new Set(list.map(m => m.type))];
-  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Brands', '/'], [brand.name, null]]);
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Brands', '/'], [brand.name, null]]);
   const listLD = itemListLD(`${brand.name} lawnmowers`, list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
   const orgLD = {
     '@context': 'https://schema.org',
@@ -746,11 +748,11 @@ function renderBrandPage(brandRaw) {
     canonical: '/brand/' + slug(brandRaw),
     ldjson: [breadcrumbLD, listLD, orgLD]
   })}
-${siteHeader('home')}
+${siteHeader('browse')}
 
 <div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span>Brands</span><span class="sep">›</span>
     <span aria-current="page">${esc(brand.name)}</span>
   </nav>
@@ -807,7 +809,7 @@ ${siteHeader('guide')}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span aria-current="page">Buying Guide</span>
   </nav>
 </div>
@@ -851,7 +853,7 @@ ${siteHeader('about')}
 
 <div class="page page--narrow" style="max-width:760px">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span aria-current="page">About</span>
   </nav>
 </div>
@@ -903,7 +905,7 @@ ${siteHeader()}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <a href="/about">About</a><span class="sep">›</span>
     <span aria-current="page">Image credits</span>
   </nav>
@@ -1054,7 +1056,7 @@ function renderComparisonPage(idA, idB, verdict) {
     `<tr><th>${esc(label)}</th>${cell(av, w, 'a', suffix)}${cell(bv, w, 'b', suffix)}</tr>`;
 
   const breadcrumbLD = crumbsLD([
-    ['Browse', '/'],
+    ['Browse', '/browse'],
     ['Comparisons', null],
     [`${a.brand} ${a.model} vs ${b.brand} ${b.model}`, null]
   ]);
@@ -1069,7 +1071,7 @@ ${siteHeader()}
 
 <div class="page">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span>Comparisons</span><span class="sep">›</span>
     <span aria-current="page">${esc(a.brand + ' ' + a.model)} vs ${esc(b.brand + ' ' + b.model)}</span>
   </nav>
@@ -1208,7 +1210,7 @@ const bestOfUrl = slug => `/best/${slug}`;
 
 function renderBestOfPage(cfg) {
   const list = mowers.filter(cfg.pick).sort((a, b) => cfg.sortBy(b) - cfg.sortBy(a)).slice(0, cfg.take);
-  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Best of', null], [cfg.title, null]]);
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Best of', null], [cfg.title, null]]);
   const listLD = itemListLD(cfg.title, list.map(m => ({ name: `${m.brand} ${m.model}`, url: mowerUrl(m) })));
   return `${head({
     title: `${cfg.title} — MowRight UK`,
@@ -1220,7 +1222,7 @@ ${siteHeader()}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span>Best of</span><span class="sep">›</span>
     <span aria-current="page">${esc(cfg.title)}</span>
   </nav>
@@ -1272,7 +1274,7 @@ const blogUrl = slug => `/blog/${slug}`;
 
 function renderBlogIndex() {
   const sorted = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
-  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Blog', null]]);
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Blog', null]]);
   const blogLD = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
@@ -1297,7 +1299,7 @@ ${siteHeader('blog')}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <span aria-current="page">Blog</span>
   </nav>
 </div>
@@ -1353,7 +1355,7 @@ function renderBlogPost(post) {
     }))
   } : null;
 
-  const breadcrumbLD = crumbsLD([['Browse', '/'], ['Blog', '/blog'], [post.title, null]]);
+  const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Blog', '/blog'], [post.title, null]]);
   const ld = [articleSchema, breadcrumbLD, ...(faqSchema ? [faqSchema] : [])];
 
   // Internal-link mowers from related[]
@@ -1370,7 +1372,7 @@ ${siteHeader('blog')}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <a href="/blog">Blog</a><span class="sep">›</span>
     <span aria-current="page">${esc(post.title.length > 60 ? post.title.slice(0, 60) + '…' : post.title)}</span>
   </nav>
@@ -1484,7 +1486,7 @@ ${siteHeader()}
 
 <div class="page page--narrow">
   <nav class="crumbs" aria-label="Breadcrumb">
-    <a href="/">Browse</a><span class="sep">›</span>
+    <a href="/browse">Browse</a><span class="sep">›</span>
     <a href="/buying-guide">Buying Guide</a><span class="sep">›</span>
     <span aria-current="page">Engines</span>
   </nav>
@@ -1537,6 +1539,7 @@ function renderSitemap() {
   const today = new Date().toISOString().split('T')[0];
   const urls = [
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
+    { loc: '/browse', priority: '0.95', changefreq: 'weekly' },
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
     { loc: '/engines', priority: '0.7', changefreq: 'monthly' },

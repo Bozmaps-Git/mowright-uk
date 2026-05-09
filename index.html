@@ -43,7 +43,7 @@
       "inLanguage": "en-GB",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://mowright.co.uk/?q={search_term_string}",
+        "target": "https://mowright.co.uk/browse?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },
@@ -79,7 +79,8 @@
     </a>
     <span class="brand-tag">UK lawnmower price comparison</span>
     <nav class="top-nav" aria-label="Primary">
-      <a href="/" aria-current="page">Browse</a>
+      <a href="/" aria-current="page">Home</a>
+      <a href="/browse">Browse</a>
       <a href="/buying-guide">Buying Guide</a>
       <a href="/blog">Blog</a>
       <a href="/about">About</a>
@@ -142,36 +143,89 @@
   </div>
 </section>
 
-<!-- Filter bar -->
-<section class="fbar" aria-label="Filter by category">
-  <div class="fbar-in">
-    <div class="fbar-pills" id="cat-pills" role="group" aria-label="Category"></div>
-    <div class="fbar-sort">
-      <span class="lab">Sort:</span>
-      <label for="f-sort" class="sr">Sort mowers</label>
-      <select id="f-sort">
-        <option value="value">Best value first</option>
-        <option value="price-low">Price: low to high</option>
-        <option value="price-high">Price: high to low</option>
-        <option value="rating">Highest rated</option>
-        <option value="quietest">Quietest first</option>
-        <option value="lightest">Lightest first</option>
-        <option value="widest">Widest cut first</option>
-      </select>
-    </div>
-  </div>
-</section>
-
 <main id="main" class="page page--wide page--main">
-  <div class="list-head">
-    <h2 id="list-title">All mowers <span class="count" id="list-count"></span></h2>
-    <a id="cat-guide-link" href="/buying-guide" hidden>Read the buying guide →</a>
-  </div>
+  <section>
+    <div class="section-head">
+      <div>
+        <div class="brand-eyebrow">Featured picks</div>
+        <h2 class="section-h2" style="margin-top:6px">The six we'd buy.</h2>
+      </div>
+      <a class="section-head-link" href="/browse">Browse all 151 mowers →</a>
+    </div>
+    <p style="margin:0 0 24px;font-size:15px;color:var(--ink-sub);max-width:680px">One mower per category that we think most UK gardeners should look at first. The full database has 151 across 38 brands — open the browse page to filter and compare.</p>
 
-  <div id="live" aria-live="polite" class="sr"></div>
-  <div class="mlist" id="mlist"></div>
+    <div class="feat-grid">
+      <a class="feat-card" href="/mower/mountfield-sp46">
+        <div class="feat-art" style="background:#fef3e2"><span class="feat-badge t-petrol">PETROL</span></div>
+        <div class="feat-body">
+          <div class="feat-brand">Mountfield</div>
+          <h3>SP46</h3>
+          <p>Britain's best-selling self-propelled petrol. The default value pick for medium UK lawns.</p>
+          <div class="feat-stats"><span>★ 4.3</span><span class="dot">·</span><span>£279 new</span><span class="dot">·</span><span class="accent">£140 used</span></div>
+        </div>
+      </a>
 
-  <div style="margin-top:36px">
+      <a class="feat-card" href="/mower/hayter-harrier-41-ad">
+        <div class="feat-art" style="background:#fef3e2"><span class="feat-badge t-petrol">PETROL</span></div>
+        <div class="feat-body">
+          <div class="feat-brand">Hayter</div>
+          <h3>Harrier 41 AD</h3>
+          <p>British-built premium roller — the Land Rover of mowers. Honda GCV inside, lasts 20 years.</p>
+          <div class="feat-stats"><span>★ 4.6</span><span class="dot">·</span><span>£799 new</span><span class="dot">·</span><span class="accent">£450 used</span></div>
+        </div>
+      </a>
+
+      <a class="feat-card" href="/mower/ego-lm2135e-sp">
+        <div class="feat-art" style="background:#ede4ff"><span class="feat-badge t-cordless">CORDLESS</span></div>
+        <div class="feat-body">
+          <div class="feat-brand">EGO</div>
+          <h3>LM2135E-SP</h3>
+          <p>The cordless that finally killed the small-petrol category. 56V, self-propelled, petrol-class cut.</p>
+          <div class="feat-stats"><span>★ 4.7</span><span class="dot">·</span><span>£699 new</span><span class="dot">·</span><span class="accent">£450 used</span></div>
+        </div>
+      </a>
+
+      <a class="feat-card" href="/mower/bosch-rotak-36-r">
+        <div class="feat-art" style="background:#e0ecff"><span class="feat-badge t-electric">ELECTRIC</span></div>
+        <div class="feat-body">
+          <div class="feat-brand">Bosch</div>
+          <h3>Rotak 36 R</h3>
+          <p>Corded mower with rear roller for stripes. The sub-£200 mower that gives you a lawn to be proud of.</p>
+          <div class="feat-stats"><span>★ 4.5</span><span class="dot">·</span><span>£199 new</span><span class="dot">·</span><span class="accent">£85 used</span></div>
+        </div>
+      </a>
+
+      <a class="feat-card" href="/mower/husqvarna-automower-305">
+        <div class="feat-art" style="background:#e8f0e3"><span class="feat-badge t-robotic">ROBOTIC</span></div>
+        <div class="feat-body">
+          <div class="feat-brand">Husqvarna</div>
+          <h3>Automower 305</h3>
+          <p>Boundary-wire entry robot for compact gardens. Husqvarna's 15-year reliability at the lowest entry price.</p>
+          <div class="feat-stats"><span>★ 4.5</span><span class="dot">·</span><span>£899 new</span><span class="dot">·</span><span class="accent">£450 used</span></div>
+        </div>
+      </a>
+
+      <a class="feat-card" href="/mower/john-deere-x167r">
+        <div class="feat-art" style="background:#fde8e8"><span class="feat-badge t-rideon">RIDE-ON</span></div>
+        <div class="feat-body">
+          <div class="feat-brand">John Deere</div>
+          <h3>X167R</h3>
+          <p>Rear-collect ride-on with 102cm deck. The default sensible ride-on for half-acre+ UK lawns.</p>
+          <div class="feat-stats"><span>★ 4.7</span><span class="dot">·</span><span>£3,499 new</span><span class="dot">·</span><span class="accent">£2,200 used</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="browse-cta">
+      <div>
+        <h3>Looking for something else?</h3>
+        <p>The full database has every UK mower across petrol, electric, cordless, hover, robotic, ride-on and manual. Filter by type, sort by value, compare up to 4 side by side.</p>
+      </div>
+      <a class="btn btn-primary" href="/browse">Browse all 151 mowers →</a>
+    </div>
+  </section>
+
+  <div style="margin-top:48px">
     <div class="cta">
       <div class="cta-text">
         <h3>Not sure where to start?</h3>
@@ -235,7 +289,8 @@
 <footer class="site-footer">
   <div class="inner">
     <nav>
-      <a href="/">Browse</a>
+      <a href="/">Home</a>
+      <a href="/browse">Browse</a>
       <a href="/blog">Blog</a>
       <a href="/buying-guide">Buying Guide</a>
       <a href="/engines">Engines</a>
@@ -248,47 +303,21 @@
   </div>
 </footer>
 
-<!-- Compare drawer (sticky bottom, hidden when empty) -->
-<div class="compare-drawer" id="cmp-drawer" hidden>
-  <div>
-    <div class="label">COMPARE</div>
-    <div class="count"><span id="cmp-n">0</span> of 4 selected</div>
-  </div>
-  <div class="chips" id="cmp-chips"></div>
-  <button class="clear" id="cmp-clear" type="button">Clear</button>
-  <button class="go" id="cmp-go" type="button" disabled>Compare →</button>
-</div>
-
-<!-- Compare modal -->
-<div class="cmod-bd" id="cmod-bd" role="dialog" aria-modal="true" aria-label="Compare mowers" hidden>
-  <div class="cmod" id="cmod">
-    <div class="cmod-head">
-      <div>
-        <div class="eye">HEAD-TO-HEAD</div>
-        <h2 id="cmod-title">Comparing mowers</h2>
-      </div>
-      <button class="close" id="cmod-close" aria-label="Close">×</button>
-    </div>
-    <div class="cmod-body" id="cmod-body"></div>
-  </div>
-</div>
-
 <script>
+// Slim home-page script: wire search to redirect to /browse, populate brand grid.
 (function () {
   'use strict';
+  const $ = s => document.querySelector(s);
+  const $$ = s => document.querySelectorAll(s);
 
-  const fmtGBP = n => '£' + (n || 0).toLocaleString('en-GB');
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const el = (tag, attrs, children = []) => {
+  // ----- Element factory -----
+  const el = (tag, attrs, children) => {
     const n = document.createElement(tag);
     if (attrs) {
       Object.entries(attrs).forEach(([k, v]) => {
-        if (v == null || v === false) return;
         if (k === 'class') n.className = v;
         else if (k === 'html') n.innerHTML = v;
         else if (k.startsWith('on') && typeof v === 'function') n.addEventListener(k.slice(2), v);
-        else if (v === true) n.setAttribute(k, '');
         else n.setAttribute(k, v);
       });
     }
@@ -299,460 +328,60 @@
     return n;
   };
 
-  // ----- Type-badge classes (match style.css) -----
-  const badgeClass = typeSlug => 't-' + typeSlug.replace('-', '');
+  // Search routes to /browse?q=...
+  const goBrowse = q => { location.href = '/browse' + (q ? '?q=' + encodeURIComponent(q) : ''); };
 
-  // ----- State -----
-  const STATE = {
-    data: null,
-    search: '',
-    category: null,
-    sort: 'value',
-    compare: []
-  };
+  $('#hero-search-form').addEventListener('submit', e => {
+    e.preventDefault();
+    goBrowse($('#hero-q').value.trim());
+  });
 
-  // ----- Hero icon (SVG by category) -----
-  function heroIconSVG(m, cat) {
-    const c = cat.color;
-    let body = '';
-    if (m.typeSlug === 'ride-on') {
-      body = `<rect x="20" y="55" width="160" height="40" rx="8" fill="${c}" opacity=".9"/>
-        <rect x="60" y="20" width="50" height="40" rx="6" fill="${c}" opacity=".7"/>
-        <circle cx="50" cy="105" r="20" fill="#1a1a1a"/><circle cx="150" cy="105" r="20" fill="#1a1a1a"/>
-        <circle cx="50" cy="105" r="9" fill="#3a3a3a"/><circle cx="150" cy="105" r="9" fill="#3a3a3a"/>`;
-    } else if (m.typeSlug === 'robotic') {
-      body = `<ellipse cx="100" cy="80" rx="70" ry="35" fill="${c}" opacity=".9"/>
-        <ellipse cx="100" cy="72" rx="60" ry="25" fill="${c}" opacity=".7"/>
-        <circle cx="100" cy="68" r="10" fill="#fff" opacity=".6"/>
-        <circle cx="65" cy="105" r="6" fill="#1a1a1a"/><circle cx="135" cy="105" r="6" fill="#1a1a1a"/>`;
-    } else if (m.typeSlug === 'hover') {
-      body = `<ellipse cx="100" cy="95" rx="65" ry="12" fill="#1a1a1a" opacity=".3"/>
-        <ellipse cx="100" cy="80" rx="60" ry="20" fill="${c}" opacity=".9"/>
-        <path d="M155 30 L185 10" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="100" cy="80" r="14" fill="#fff" opacity=".6"/>`;
-    } else {
-      body = `<path d="M155 30 L185 10" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-        <path d="M150 35 L180 15" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-        <rect x="40" y="50" width="130" height="50" rx="10" fill="${c}" opacity=".9"/>
-        <rect x="40" y="50" width="130" height="14" rx="10" fill="${c}" opacity=".6"/>
-        <rect x="55" y="68" width="40" height="22" rx="3" fill="#0f1f0f" opacity=".5"/>
-        <circle cx="60" cy="100" r="18" fill="#1a1a1a"/><circle cx="60" cy="100" r="8" fill="#3a3a3a"/>
-        <circle cx="150" cy="100" r="18" fill="#1a1a1a"/><circle cx="150" cy="100" r="8" fill="#3a3a3a"/>`;
-    }
-    return `<svg viewBox="0 0 200 130" aria-hidden="true">${body}</svg>`;
-  }
+  $('#head-q').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); goBrowse(e.target.value.trim()); }
+  });
 
-  function heroIcon(m, sizeClass = '') {
-    const cat = STATE.data.categories.find(c => c.slug === m.typeSlug);
-    if (m.img) {
-      return el('div', { class: 'mh-icon mh-photo ' + sizeClass, style: 'background:' + cat.bg }, [
-        el('img', { src: m.img, alt: m.brand + ' ' + m.model + (m.imgNote ? ' (representative photo)' : ''), loading: 'lazy', decoding: 'async' })
-      ]);
-    }
-    return el('div', { class: 'mh-icon ' + sizeClass, style: 'background:' + cat.bg }, [
-      Object.assign(document.createElement('div'), { innerHTML: heroIconSVG(m, cat) }).firstChild
-    ]);
-  }
+  $$('.hp-popular button').forEach(btn => {
+    btn.addEventListener('click', () => goBrowse(btn.dataset.pop));
+  });
 
-  // ----- Stars -----
-  function stars(rating, reviews) {
-    return el('span', { class: 'stars' }, [
-      el('span', { class: 's' }, '★'),
-      ' ' + rating.toFixed(1) + ' ',
-      reviews != null && el('span', { class: 'rv' }, '(' + reviews.toLocaleString('en-GB') + ')')
-    ].filter(Boolean));
-  }
-
-  function tbadge(typeSlug, name, size = 'md') {
-    const sz = size === 'sm' ? ' sm' : size === 'lg' ? ' lg' : '';
-    return el('span', { class: 'tbadge' + sz + ' ' + badgeClass(typeSlug) }, name);
-  }
-
-  // ----- Mower row -----
-  function mowerRow(m) {
-    const cat = STATE.data.categories.find(c => c.slug === m.typeSlug);
-    const isComparing = STATE.compare.includes(m.id);
-
-    const row = el('article', { class: 'mcard row-4', style: '' });
-
-    // Logo column
-    row.append(heroIcon(m));
-
-    // Info column
-    const info = el('div');
-    const meta = el('div', { class: 'm-meta-line' });
-    meta.append(
-      tbadge(m.typeSlug, cat.name, 'sm'),
-      el('span', { class: 'm-brand-mono', style: 'margin-left:8px' }, m.brand),
-      el('span', { style: 'margin-left:8px' }, stars(m.rating, m.reviews))
-    );
-    info.append(meta);
-
-    const a = el('a', { href: '/mower/' + m.id, style: 'color:inherit;text-decoration:none' }, m.brand + ' ' + m.model);
-    info.append(el('h3', { class: 'm-name', style: 'margin-top:6px' }, [a]));
-    info.append(el('p', { class: 'm-tagline' }, m.tagline));
-
-    const specs = el('div', { class: 'm-specs-line' });
-    specs.append(
-      el('span', { html: '<strong>' + m.cutWidth + ' cm</strong> cut' }),
-      el('span', null, '·'),
-      el('span', { html: '<strong>' + m.weight + ' kg</strong>' }),
-      el('span', null, '·'),
-      el('span', { html: '<strong>' + m.lawnSize + '</strong> lawn' })
-    );
-    if (m.selfPropelled || m.roller) {
-      specs.append(el('span', null, '·'));
-      const feats = [m.selfPropelled && 'Self-propelled', m.roller && 'Striped'].filter(Boolean).join(' · ');
-      specs.append(el('span', null, feats));
-    }
-    info.append(specs);
-    row.append(info);
-
-    // Price column
-    const price = el('div', { class: 'col-price-side' });
-    price.append(
-      el('span', { class: 'l' }, 'Used Avg'),
-      el('span', { class: 'v' }, fmtGBP(m.usedAvg)),
-      el('span', { class: 'x' }, 'New: ' + fmtGBP(m.buyNow))
-    );
-    row.append(price);
-
-    // Actions column
-    const actions = el('div', { class: 'col-actions' });
-    actions.append(
-      el('a', { class: 'btn btn-primary', href: '/mower/' + m.id }, 'View full specs →'),
-      el('button', {
-        class: 'btn btn-secondary',
-        type: 'button',
-        'aria-pressed': isComparing,
-        style: isComparing ? 'border-color:var(--accent);background:var(--accent-soft)' : '',
-        onclick: () => toggleCompare(m.id)
-      }, isComparing ? '✓ In compare' : '+ Compare')
-    );
-    row.append(actions);
-
-    return row;
-  }
-
-  // ----- Search normalisation + synonyms -----
-  // Strips spaces, hyphens, punctuation. Lower-cases. So "ride on", "Ride-On", "RIDEON" all collapse to "rideon".
-  const norm = s => (s || '').toLowerCase().replace(/[\s\-_,/&+.()]+/g, '').replace(/[^a-z0-9]/g, '');
-
-  // Common typos and synonyms — the corpus is expanded with these so a search like "electrik" or "robot" or "huskvarna" still matches.
-  const SYNONYMS_BY_TYPE = {
-    'Petrol':   ' petrol gas gasoline 4stroke twostroke combustion fuel',
-    'Electric': ' electric electrik elektrik elektric corded mains plugin lectric',
-    'Cordless': ' cordless cordles batterypowered battery lithium rechargeable wireless',
-    'Hover':    ' hover hovering cushion airglide',
-    'Robotic':  ' robotic robot automower autonomous robo automatic auto',
-    'Ride-on':  ' rideon ride on riding rider tractor siton sit on ridemower',
-    'Push':     ' push manual cylinder reel handpush hand'
-  };
-  const BRAND_TYPOS = {
-    'mountfield':  ' mountfeild mownfield muntfield',
-    'husqvarna':   ' huskvarna husquvarna husqavarna huskquarna huskvana',
-    'flymo':       ' flymow',
-    'stihl':       ' stihl steel stihel',
-    'bosch':       ' bosh bosche',
-    'honda':       ' hondah',
-    'mac allister':' macallister macalister',
-    'qualcast':    ' qaulcast qualast',
-    'briggs':      ' briggsandstratton briggs stratton bs',
-    'kubota':      ' kabota',
-    'allett':      ' alett'
-  };
-
-  function buildHaystack(m) {
-    const synonyms = SYNONYMS_BY_TYPE[m.type] || '';
-    const brandTypos = BRAND_TYPOS[m.brand.toLowerCase()] || '';
-    return norm(
-      m.brand + ' ' + m.model + ' ' + m.type + ' ' + (m.tagline || '') + ' ' +
-      (m.engine || '') + synonyms + brandTypos +
-      (m.selfPropelled ? ' selfpropelled self propelled' : '') +
-      (m.roller ? ' roller stripes striped striping' : '') +
-      (m.mulching ? ' mulching mulch' : '') +
-      (m.lawnSize ? ' ' + m.lawnSize : '')
-    );
-  }
-
-  // ----- Filtering & sorting -----
-  function getFiltered() {
-    let list = STATE.data.mowers.slice();
-    if (STATE.category) list = list.filter(m => m.typeSlug === STATE.category);
-    if (STATE.search.trim()) {
-      const nq = norm(STATE.search);
-      if (nq) list = list.filter(m => buildHaystack(m).includes(nq));
-    }
-    const sorts = {
-      'value': (a, b) => b.valueScore - a.valueScore,
-      'price-low': (a, b) => a.usedAvg - b.usedAvg,
-      'price-high': (a, b) => b.usedAvg - a.usedAvg,
-      'rating': (a, b) => b.rating - a.rating,
-      'quietest': (a, b) => (a.noiseDb || 1e3) - (b.noiseDb || 1e3),
-      'lightest': (a, b) => (a.weight || 1e6) - (b.weight || 1e6),
-      'widest': (a, b) => (b.cutWidth || 0) - (a.cutWidth || 0)
-    };
-    return list.sort(sorts[STATE.sort] || sorts.value);
-  }
-
-  // ----- Render list -----
-  function renderList() {
-    const list = $('#mlist');
-    list.textContent = '';
-    const arr = getFiltered();
-
-    const cat = STATE.category && STATE.data.categories.find(c => c.slug === STATE.category);
-    const titleEl = $('#list-title');
-    titleEl.firstChild.textContent = cat ? cat.name + ' mowers ' : 'All mowers ';
-    $('#list-count').textContent = arr.length + ' of ' + STATE.data.mowers.length;
-    $('#live').textContent = 'Showing ' + arr.length + ' mowers';
-
-    const guideLink = $('#cat-guide-link');
-    if (cat) {
-      guideLink.hidden = false;
-      guideLink.textContent = 'Read the ' + cat.name.toLowerCase() + ' buying guide →';
-      guideLink.href = '/' + cat.slug;
-    } else {
-      guideLink.hidden = true;
-    }
-
-    if (arr.length === 0) {
-      list.append(el('div', { class: 'empty' }, [
-        el('h3', null, 'No mowers match your search.'),
-        el('p', null, 'Try clearing the filter or searching a different term.')
-      ]));
-      return;
-    }
-
-    arr.forEach(m => list.append(mowerRow(m)));
-  }
-
-  // ----- Category pills -----
-  function renderPills() {
-    const wrap = $('#cat-pills');
-    wrap.textContent = '';
-    const allBtn = el('button', {
-      class: 'fpill', type: 'button',
-      'aria-pressed': !STATE.category,
-      style: !STATE.category ? 'background:var(--ink);border-color:var(--ink);color:white;font-weight:600' : '',
-      onclick: () => { STATE.category = null; renderList(); renderPills(); }
-    }, [
-      'All types ',
-      el('span', { class: 'ct' }, STATE.data.mowers.length)
-    ]);
-    wrap.append(allBtn);
-
-    STATE.data.categories.forEach(cat => {
-      const count = STATE.data.mowers.filter(m => m.typeSlug === cat.slug).length;
-      const isActive = STATE.category === cat.slug;
-      const btn = el('button', {
-        class: 'fpill', type: 'button',
-        'aria-pressed': isActive,
-        style: isActive ? `background:${cat.bg};border-color:${cat.color};color:${cat.color};font-weight:700` : '',
-        onclick: () => { STATE.category = cat.slug; renderList(); renderPills(); }
-      }, [
-        cat.name + ' ',
-        el('span', { class: 'ct' }, count)
-      ]);
-      wrap.append(btn);
-    });
-  }
-
-  // ----- Compare drawer -----
-  function toggleCompare(id) {
-    const idx = STATE.compare.indexOf(id);
-    if (idx > -1) STATE.compare.splice(idx, 1);
-    else if (STATE.compare.length < 4) STATE.compare.push(id);
-    renderList();
-    renderDrawer();
-  }
-
-  function renderDrawer() {
-    const drawer = $('#cmp-drawer');
-    drawer.hidden = STATE.compare.length === 0;
-    if (STATE.compare.length === 0) return;
-    $('#cmp-n').textContent = STATE.compare.length;
-    const chips = $('#cmp-chips');
-    chips.textContent = '';
-    STATE.compare.forEach(id => {
-      const m = STATE.data.mowers.find(x => x.id === id);
-      if (!m) return;
-      const chip = el('span', { class: 'chip' }, [
-        m.brand + ' ' + m.model,
-        el('button', { type: 'button', 'aria-label': 'Remove ' + m.model, onclick: () => toggleCompare(id) }, '×')
-      ]);
-      chips.append(chip);
-    });
-    for (let i = STATE.compare.length; i < 4; i++) {
-      chips.append(el('span', { class: 'empty' }, '+ slot'));
-    }
-    $('#cmp-go').disabled = STATE.compare.length < 2;
-  }
-
-  // ----- Compare modal -----
-  function openCompareModal() {
-    const items = STATE.compare.map(id => STATE.data.mowers.find(x => x.id === id)).filter(Boolean);
-    if (items.length < 2) return;
-    const rows = [
-      { k: 'Type',          get: m => tbadge(m.typeSlug, STATE.data.categories.find(c => c.slug === m.typeSlug).name, 'sm'), highlight: false },
-      { k: 'RRP New',       get: m => m.rrp ? fmtGBP(m.rrp) : '—' },
-      { k: 'Buy Now',       get: m => fmtGBP(m.buyNow) },
-      { k: 'Used Avg',      get: m => el('span', { style: 'color:var(--accent-deep);font-weight:700' }, fmtGBP(m.usedAvg)), highlight: true },
-      { k: 'Cut width',     get: m => m.cutWidth + ' cm' },
-      { k: 'Weight',        get: m => m.weight + ' kg' },
-      { k: 'Engine',        get: m => m.engine },
-      { k: 'Deck',          get: m => m.deck },
-      { k: 'Self-propelled',get: m => m.selfPropelled ? '✓' : '—' },
-      { k: 'Roller (stripes)', get: m => m.roller ? '✓' : '—' },
-      { k: 'Mulching',      get: m => m.mulching ? '✓' : '—' },
-      { k: 'Cutting heights', get: m => m.cuttingHeights },
-      { k: 'Bag capacity',  get: m => m.bagCapacity > 0 ? m.bagCapacity + ' L' : '—' },
-      { k: 'Lawn size',     get: m => m.lawnSize },
-      { k: 'Noise',         get: m => m.noiseDb > 0 ? m.noiseDb + ' dB' : 'Silent' },
-      { k: 'Rating',        get: m => stars(m.rating, m.reviews) },
-      { k: 'Value score',   get: m => el('span', { style: 'font-weight:700;color:' + (m.valueScore >= 8.5 ? 'var(--accent)' : 'var(--ink)') }, m.valueScore + ' / 10'), highlight: true }
-    ];
-    $('#cmod-title').textContent = 'Comparing ' + items.length + ' mowers';
-    const body = $('#cmod-body');
-    body.textContent = '';
-
-    const cols = '180px repeat(' + items.length + ', 1fr)';
-    const tbl = el('div', { class: 'cmod-tbl', style: 'grid-template-columns:' + cols });
-
-    // Header row
-    const head = el('div', { class: 'tr head', style: 'display:grid;grid-template-columns:' + cols + ';background:var(--bg);border-bottom:1px solid var(--border)' });
-    head.append(el('div', { class: 'lab' }, 'SPEC'));
-    items.forEach(m => {
-      const cell = el('div', { class: 'col', style: 'border-left:1px solid var(--border);padding:16px' });
-      cell.append(heroIcon(m, 'sz-70'));
-      cell.append(el('div', { style: 'margin-top:10px;font-size:11px;color:var(--muted)' }, m.brand));
-      cell.append(el('div', { style: 'font-size:14px;font-weight:700;color:var(--ink)' }, m.model));
-      head.append(cell);
-    });
-    tbl.append(head);
-
-    rows.forEach((r, idx) => {
-      const trBg = r.highlight ? 'var(--accent-soft)' : (idx % 2 === 0 ? 'var(--surface)' : 'var(--bg)');
-      const tr = el('div', { class: 'body-row', style: 'display:grid;grid-template-columns:' + cols + ';border-bottom:1px solid var(--border-soft);background:' + trBg });
-      tr.append(el('div', { style: 'padding:12px 16px;font-size:12px;color:var(--ink-sub);font-weight:500' }, r.k));
-      items.forEach(m => {
-        const v = r.get(m);
-        const cell = el('div', {
-          style: 'padding:12px 16px;border-left:1px solid var(--border-soft);font-size:13px;color:var(--ink);font-weight:' + (r.highlight ? 700 : 500)
-        });
-        if (v == null) cell.append('—');
-        else if (typeof v === 'string' || typeof v === 'number') cell.append(String(v));
-        else cell.append(v);
-        tr.append(cell);
-      });
-      tbl.append(tr);
-    });
-
-    body.append(tbl);
-    $('#cmod-bd').hidden = false;
-    document.body.style.overflow = 'hidden';
-    $('#cmod-close').focus();
-  }
-
-  function closeCompareModal() {
-    $('#cmod-bd').hidden = true;
-    document.body.style.overflow = '';
-  }
-
-  // ----- Brand cards -----
-  function renderBrands() {
-    const grid = $('#featured-brands');
-    grid.textContent = '';
-    const featured = STATE.data.featuredBrands
-      .map(slug => STATE.data.brands.find(b => b.slug === slug))
-      .filter(Boolean);
-    featured.forEach(b => {
-      const count = STATE.data.mowers.filter(m => m.brandSlug === b.slug).length;
-      const children = [];
-      if (b.logo) {
-        children.push(el('div', { class: 'b-logo' }, [
-          el('img', { src: b.logo, alt: b.name + ' logo', loading: 'lazy', decoding: 'async' })
-        ]));
-      }
-      children.push(
-        el('h3', null, b.name),
-        el('div', { class: 'parent' }, b.parent),
-        el('p', null, b.focus),
-        el('div', { class: 'pillset' }, b.categories ? b.categories.map(c => el('span', null, c)) : []),
-        el('div', { class: 'ms' }, count + ' models reviewed →')
-      );
-      grid.append(el('a', { class: 'hp-brand', href: '/brand/' + b.slug }, children));
-    });
-
-    const allWrap = $('#all-brands');
-    allWrap.textContent = '';
-    STATE.data.brands.slice().sort((a, b) => a.name.localeCompare(b.name)).forEach(b => {
-      allWrap.append(el('a', {
-        href: '/brand/' + b.slug,
-        style: 'padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--ink);text-decoration:none'
-      }, b.name));
-    });
-    $('#brand-count').textContent = STATE.data.brands.length;
-  }
-
-  // ----- Wire up -----
-  function wireSearch() {
-    let t;
-    const onChange = v => { clearTimeout(t); t = setTimeout(() => { STATE.search = v; renderList() }, 150) };
-    $('#head-q').addEventListener('input', e => onChange(e.target.value));
-    $('#hero-q').addEventListener('input', e => { onChange(e.target.value); $('#head-q').value = e.target.value });
-    $('#hero-search-form').addEventListener('submit', e => {
-      e.preventDefault();
-      $('#main').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    $$('.hp-popular button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const v = btn.dataset.pop;
-        $('#head-q').value = v;
-        $('#hero-q').value = v;
-        onChange(v);
-        $('#main').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    // URL ?q=foo prefill
-    const params = new URLSearchParams(location.search);
-    const q = params.get('q');
-    if (q) {
-      $('#head-q').value = q;
-      $('#hero-q').value = q;
-      STATE.search = q;
-    }
-    const cmp = params.get('compare');
-    if (cmp) STATE.compare = cmp.split(',').filter(Boolean).slice(0, 4);
-  }
-
-  function wireCompareUI() {
-    $('#cmp-clear').addEventListener('click', () => { STATE.compare = []; renderList(); renderDrawer(); });
-    $('#cmp-go').addEventListener('click', openCompareModal);
-    $('#cmod-close').addEventListener('click', closeCompareModal);
-    $('#cmod-bd').addEventListener('click', e => { if (e.target.id === 'cmod-bd') closeCompareModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#cmod-bd').hidden) closeCompareModal(); });
-
-    $('#f-sort').addEventListener('change', e => { STATE.sort = e.target.value; renderList(); });
-  }
-
-  // ----- Boot -----
+  // Brand grid + all-brands list
   fetch('/mowers-spa.json', { cache: 'no-cache' })
-    .then(r => { if (!r.ok) throw new Error('Failed to load mowers data: ' + r.status); return r.json() })
+    .then(r => { if (!r.ok) throw new Error('Failed to load: ' + r.status); return r.json() })
     .then(data => {
-      STATE.data = data;
-      wireSearch();
-      wireCompareUI();
-      renderPills();
-      renderList();
-      renderDrawer();
-      renderBrands();
+      const grid = $('#featured-brands');
+      grid.textContent = '';
+      const featured = data.featuredBrands
+        .map(slug => data.brands.find(b => b.slug === slug))
+        .filter(Boolean);
+      featured.forEach(b => {
+        const count = data.mowers.filter(m => m.brandSlug === b.slug).length;
+        const children = [];
+        if (b.logo) {
+          children.push(el('div', { class: 'b-logo' }, [
+            el('img', { src: b.logo, alt: b.name + ' logo', loading: 'lazy', decoding: 'async' })
+          ]));
+        }
+        children.push(
+          el('h3', null, b.name),
+          el('div', { class: 'parent' }, b.parent),
+          el('p', null, b.focus),
+          el('div', { class: 'pillset' }, b.categories ? b.categories.map(c => el('span', null, c)) : []),
+          el('div', { class: 'ms' }, count + ' models reviewed →')
+        );
+        grid.append(el('a', { class: 'hp-brand', href: '/brand/' + b.slug }, children));
+      });
+
+      const allWrap = $('#all-brands');
+      allWrap.textContent = '';
+      data.brands.slice().sort((a, b) => a.name.localeCompare(b.name)).forEach(b => {
+        allWrap.append(el('a', {
+          href: '/brand/' + b.slug,
+          style: 'padding:5px 10px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--ink);text-decoration:none'
+        }, b.name));
+      });
+      $('#brand-count').textContent = data.brands.length;
     })
-    .catch(e => {
-      console.error(e);
-      $('#mlist').innerHTML = '<div class="empty"><h3>Could not load mower data</h3><p>' + e.message + '</p></div>';
-    });
+    .catch(e => { console.error(e); });
 })();
 </script>
 </body>

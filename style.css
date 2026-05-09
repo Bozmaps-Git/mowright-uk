@@ -935,3 +935,114 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .empty h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: var(--ink) }
 .empty p { margin: 0; font-size: 13px; color: var(--muted) }
+
+/* ===== Featured mowers (home page) ===== */
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+  margin-bottom: 8px; flex-wrap: wrap;
+}
+.section-head-link {
+  font-size: 14px; font-weight: 600; color: var(--accent-deep);
+  white-space: nowrap; padding-bottom: 6px;
+}
+.section-head-link:hover { color: #0a3024; text-decoration: none }
+
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+.feat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.feat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -8px rgba(15, 30, 15, 0.15);
+  text-decoration: none;
+}
+.feat-art {
+  height: 140px;
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  padding: 14px;
+}
+.feat-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.2px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: white;
+  color: var(--ink);
+}
+.feat-badge.t-petrol   { background: #fff; color: #92400e }
+.feat-badge.t-electric { background: #fff; color: #1e3a8a }
+.feat-badge.t-cordless { background: #fff; color: #5b21b6 }
+.feat-badge.t-hover    { background: #fff; color: #0e7490 }
+.feat-badge.t-robotic  { background: #fff; color: #2c5a2e }
+.feat-badge.t-rideon   { background: #fff; color: #991b1b }
+.feat-badge.t-manual   { background: #fff; color: #4b5563 }
+
+.feat-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px }
+.feat-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.feat-card h3 {
+  margin: 0; font-size: 19px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.4px; line-height: 1.2;
+}
+.feat-card p {
+  margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-sub);
+}
+.feat-stats {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 4px;
+  font-size: 13px; color: var(--ink-sub);
+}
+.feat-stats .dot { color: var(--muted-soft) }
+.feat-stats .accent { color: var(--accent-deep); font-weight: 700 }
+
+.browse-cta {
+  margin-top: 28px;
+  background: var(--accent-soft);
+  border: 1px solid #c8d8b8;
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  flex-wrap: wrap;
+}
+.browse-cta h3 { margin: 0 0 6px; font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.4px }
+.browse-cta p { margin: 0; font-size: 14px; color: var(--ink-sub); line-height: 1.55; max-width: 540px }
+.browse-cta .btn { white-space: nowrap }
+
+/* ===== Browse page header ===== */
+.browse-header {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--accent-soft) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 0 32px;
+}
+.browse-h1 {
+  margin: 12px 0 0;
+  font-size: 42px; font-weight: 700; color: var(--ink);
+  letter-spacing: -1.4px; line-height: 1.05;
+}
+.browse-h1 .accent { color: var(--accent-deep) }
+.browse-lead {
+  margin: 16px 0 0;
+  font-size: 17px; line-height: 1.55; color: var(--ink-sub);
+  max-width: 680px;
+}
+@media (max-width: 600px) {
+  .browse-h1 { font-size: 32px; letter-spacing: -1px }
+  .browse-lead { font-size: 15px }
+}
