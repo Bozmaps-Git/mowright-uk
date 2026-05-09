@@ -1098,5 +1098,96 @@ export const BLOG_POSTS = [
       { q: "The engine looks repainted — should I walk away?", a: "Not necessarily. A repainted engine usually means the original failed and was replaced — which is sometimes a savvy repair, sometimes a warning sign. Treat the mower as being the age of its newer engine, not its chassis. Ask the seller for paperwork. If they can't show you any, knock 20% off the asking price and decide whether you still want it." },
       { q: "How long should a Briggs walk-behind engine last in domestic use?", a: "On a typical UK lawn — 30 to 40 hours of mowing a year, basic annual oil change, a fresh spark plug every three seasons — a 500E series engine will reliably do twelve to fifteen years before anything serious needs doing. The 675EX and bigger overhead-valve engines last twenty. The deck and the drive cable will give up before the engine does." }
     ]
+  },
+
+  // ============================================================
+  {
+    slug: 'spring-mower-service-uk',
+    image: 'https://images.unsplash.com/photo-1731082686849-d2e0a4d2c70c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: 'A man pushing a lawn mower across a freshly cut spring lawn',
+    imageCredit: 'Unsplash',
+
+    title: '10-minute spring mower service — UK checklist for under £15',
+    description: "The petrol-mower spring wake-up: drain stale fuel, change oil, swap the plug, sharpen the blade. Ten minutes, fifteen quid in parts, and your mower starts on the second pull instead of going to the tip.",
+    keyword: 'spring mower service uk',
+    date: '2026-05-09',
+    related: [3, 1, 4, 6],
+    lead: "Your mower has been in the shed since October. Half the petrol mowers on Marketplace this week aren't being sold for cash — they're being sold because someone tried to start a neglected machine and gave up. Here's the ten-minute service that prevents you joining them.",
+    sections: [
+      {
+        h: 'What you need',
+        p: [
+          "**About fifteen quid:** fresh E5 petrol (£3 for a 5L can), engine oil (£8 for SAE 30), a new spark plug if yours is over three years old (£4). Plus a spark-plug socket (16mm or 21mm depending on engine) and a screwdriver.",
+          "**About ten minutes** if everything's straightforward. **Half an hour** if the carb needs cleaning."
+        ]
+      },
+      {
+        h: '1. Drain the old fuel — 2 minutes',
+        p: [
+          "**This is the single most important step.** Modern E5 and E10 petrol degrades in 4-6 months. Last October's fuel is now half varnish.",
+          "Tip the mower on its side, drain the tank into a metal container (never plastic — petrol vapour). For Mountfield and Stiga mowers there's a brass screw on the underside of the carb that releases the float bowl too — undo it and let the carb drain.",
+          "**Refill with fresh E5.** E10 works but degrades faster — pay the extra 5p/litre for E5 if you can."
+        ]
+      },
+      {
+        h: '2. Change the oil — 3 minutes',
+        p: [
+          "If you didn't change it last autumn, do it now. Tip the mower on its side (filler-cap up), drain the old oil into a tray, refill with fresh SAE 30 or 10W-30 to the dipstick mark.",
+          "**Honda mowers** use Honda 10W-30 SJ specifically — slightly different additive package. Worth the extra £4.",
+          "**Briggs and Stiga engines** are happy with any SAE 30 from Halfords or any motor factor. Don't overfill — too much oil smokes worse than too little."
+        ]
+      },
+      {
+        h: '3. Spark plug — 2 minutes',
+        p: [
+          "Pull the plug. A healthy plug is light tan in colour. **Black and oily** = mixture too rich, replace. **White and bone-dry** = mixture too lean, replace. **Tan and dry** = leave it.",
+          "Replacement plugs are NGK BPR4ES or BPR5ES depending on engine — £3-£4 at any motor factor or Halfords. Gap to 0.7mm with a feeler gauge or just eyeball it (the new ones come pre-gapped close enough)."
+        ]
+      },
+      {
+        h: '4. Air filter — 2 minutes',
+        p: [
+          "Pop the air filter cover (one or two screws). Foam filters wash out under warm soapy water, squeeze dry, re-oil with a few drops of motor oil. Paper filters get replaced — never washed.",
+          "**A grey or black filter is choked.** A wet filter is over-oiled. Aim for a uniform yellowy-orange tinge after re-oiling foam."
+        ]
+      },
+      {
+        h: '5. Sharpen the blade — 1 minute',
+        p: [
+          "Tilt the mower (spark plug disconnected and pointing up to avoid oil running into the cylinder). Run a flat file along the cutting edge at the original 30° angle. Five passes per side is usually enough for a season's edge.",
+          "**A sharp blade pays for itself within a week.** A blunt blade tears grass — visible as brown tips two days after cutting — and uses 15-20% more fuel."
+        ]
+      },
+      {
+        h: 'Now start it',
+        p: [
+          "Three primer squeezes (or auto-choke for ReadyStart engines). Pull the cord. A serviced mower fires on the first or second pull when cold.",
+          "**If it still won't start**, the carb has varnished from the stale fuel — see our [Mountfield SP46 won't start guide](/blog/mountfield-sp46-wont-start) for the carb-cleaning steps. Twenty minutes and a £6 can of carb cleaner spray fixes 95% of cases."
+        ]
+      },
+      {
+        h: 'Cordless mower? Different rules.',
+        p: [
+          "**No fuel, no carb, no plug, no oil** — but the battery and the blade still want attention. Charge the battery to 100%, then run the mower for two minutes to wake the cells. If runtime is noticeably shorter than last September, the battery is on its way out (typical 3-5 years to 80% capacity on EGO/Stihl/Greenworks).",
+          "Sharpen the blade as above — same logic, even more important on cordless because a blunt blade kills runtime fast.",
+          "**Robotic mower?** Power on the dock, check the boundary-loop LED is steady green, replace the cutting blades (£6-£8 a set) and let it self-test. See our [Husqvarna Automower troubleshooting guide](/blog/husqvarna-automower-305-troubleshooting) if anything's amber."
+        ]
+      },
+      {
+        h: 'Set the mower height',
+        p: [
+          "**First cut of the year** = highest setting your mower offers (usually 65-75mm). Cutting too short on the first pass shocks the grass and invites moss and weeds.",
+          "Drop the height by 5-10mm per cut over the next three weeks until you reach your normal summer setting (typically 35-40mm for a domestic lawn, 25mm if you want a closer ornamental finish).",
+          "**Never remove more than a third of the grass blade in one cut.** That's the single most important rule of mowing — break it and the lawn yellows for a week."
+        ]
+      }
+    ],
+    faqs: [
+      { q: "What if I forgot to drain or stabilise the fuel last autumn?", a: "About 80% of UK mowers stored with old E5 petrol still start fine after a fresh-fuel swap. The other 20% need a carburettor clean — easy DIY for £6 or £40 at a dealer. Either way, drain first before doing anything else." },
+      { q: "Should I service my mower at a dealer instead?", a: "A full Mountfield/Stiga dealer service costs £80-£120 and gets you everything above plus a deck clean, drive-cable check and a 12-month receipt. Worth it once when you buy a used mower; DIY annually after that." },
+      { q: "How often does the blade actually need sharpening?", a: "Once a year for domestic use. Twice a year if you cut more than 1,000m² weekly. The £18-£35 you'd pay a sharpener pays for itself in fuel saved and lawn quality. Or learn to file your own — five minutes a season is all it takes." },
+      { q: "What about ride-on mowers?", a: "Same checklist plus battery (12V SLA, £45 if dead), tyre pressures (8-10 PSI typical), transaxle fluid level if hydrostatic, and grease all the deck spindles. Most ride-ons hide the dipstick under a fuel-tank cowling — pull the seat to find it. Budget 30 minutes total." },
+      { q: "Is it worth doing this if I'm planning to buy a new mower anyway?", a: "Yes, because the wake-up service is also a sale-prep service. A serviced mower with a fresh plug, clean filter and oil change adds £30-£50 to the asking price on Marketplace and sells inside a week instead of three." }
+    ]
   }
 ];
