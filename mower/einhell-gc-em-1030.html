@@ -266,57 +266,7 @@
 
     <p class="fo-note">Calculations are guidance, not gospel. Used-market prices vary by region (Scotland is typically 10–15% cheaper than the South-East), season (October cheapest, March most expensive), and seller motivation.</p>
   </section>
-
-  <script>
-  (function(){
-    var sec = document.getElementById('fair-offer');
-    if (!sec) return;
-    var base = parseFloat(sec.dataset.baseUsed) || 0;
-    var rrp = parseFloat(sec.dataset.rrp) || base * 2;
-    function calc() {
-      var cond = parseFloat(document.getElementById('fo-condition').value);
-      var age = parseFloat(document.getElementById('fo-age').value);
-      var hours = document.getElementById('fo-hours').value;
-      var service = document.getElementById('fo-service').value;
-      var asking = parseFloat(document.getElementById('fo-asking').value) || 0;
-
-      // Condition: 1=-30%, 2=-15%, 3=0, 4=+12%, 5=+22%
-      var condMul = ({1:0.70, 2:0.85, 3:1.0, 4:1.12, 5:1.22})[cond];
-      // Age: each year past 5 reduces by 3%, capped at -40%
-      var ageMul = age <= 5 ? (1.0 + (5 - age) * 0.02) : Math.max(0.6, 1 - (age - 5) * 0.03);
-      // Hours
-      var hoursMul = ({low:1.12, med:1.0, high:0.82})[hours];
-      // Service history
-      var serviceMul = ({full:1.10, partial:1.0, none:0.85})[service];
-
-      var center = Math.round(base * condMul * ageMul * hoursMul * serviceMul);
-      var low = Math.round(center * 0.85);
-      var high = Math.round(center * 1.15);
-      // Cap premium below RRP * 0.85 (used can't sensibly exceed near-new pricing)
-      var premium = Math.min(Math.round(center * 1.18), Math.round(rrp * 0.85));
-
-      document.getElementById('fo-low').textContent = '£' + low.toLocaleString('en-GB');
-      document.getElementById('fo-fair').textContent = '£' + low.toLocaleString('en-GB') + ' – £' + high.toLocaleString('en-GB');
-      document.getElementById('fo-high').textContent = '£' + premium.toLocaleString('en-GB');
-
-      var verdict = document.getElementById('fo-verdict');
-      if (asking > 0) {
-        var msg, cls;
-        if (asking < low) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is below our walk-away floor — either a bargain or something is wrong. Inspect carefully.'; cls = 'fo-v-bargain'; }
-        else if (asking <= high) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' falls inside the fair range. Reasonable starting point — knock 10% off as an opening offer.'; cls = 'fo-v-fair'; }
-        else if (asking <= premium) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is in premium territory — only worth it if condition is genuinely mint and history is documented.'; cls = 'fo-v-premium'; }
-        else { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is above what this mower can fairly fetch given the inputs. Either the seller is optimistic, or you need to ask why.'; cls = 'fo-v-overpriced'; }
-        verdict.textContent = msg;
-        verdict.className = 'fo-verdict ' + cls;
-      } else {
-        verdict.textContent = 'Add an asking price above to compare it to the fair range.';
-        verdict.className = 'fo-verdict';
-      }
-    }
-    sec.querySelectorAll('select, input').forEach(function(el){ el.addEventListener('input', calc); el.addEventListener('change', calc); });
-    calc();
-  })();
-  </script>
+  <script src="/fair-offer.js" defer></script>
 
     
   <section class="tip-section">
@@ -333,14 +283,10 @@
     <div class="nl-inner">
       <div class="nl-text">
         <div class="nl-eyebrow">Get the newsletter</div>
-        <h3 class="nl-h">Weekly mower-watcher email</h3>
-        <p class="nl-lead">Five interesting Marketplace listings, one engine spotlight, one deal alert when a model drops at a major UK retailer. </p>
+        <h3 class="nl-h">Weekly mower-watcher email — launching 2026</h3>
+        <p class="nl-lead">Five interesting Marketplace listings, one engine spotlight, one deal alert when a model drops at a major UK retailer. Join the waitlist and we'll email you the first issue when it launches.</p>
       </div>
-      <form class="nl-form" action="https://buttondown.com/api/emails/embed-subscribe/mowright" method="post" target="_blank">
-        <label for="nl-email-default" class="sr">Email address</label>
-        <input id="nl-email-default" type="email" name="email" placeholder="you@example.com" required/>
-        <button type="submit">Subscribe</button>
-      </form>
+      <a class="nl-mailto" href="mailto:hello@mowright.co.uk?subject=Newsletter%20waitlist&body=Add%20me%20to%20the%20MowRight%20newsletter%20waitlist.">Join the waitlist →</a>
       <p class="nl-promise">No affiliate links. No upsells. Unsubscribe anytime in one click.</p>
     </div>
   </section>

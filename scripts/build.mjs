@@ -274,6 +274,8 @@ const itemListLD = (name, items) => ({
   }))
 });
 const fmtGBP = n => '£' + (n || 0).toLocaleString('en-GB');
+// New-price renderer that handles out-of-production mowers (buyNow = 0).
+const fmtNewPrice = n => n > 0 ? fmtGBP(n) : 'Used only';
 
 const stars = (rating, reviews) => `
 <span class="stars"><span class="s">★</span> ${rating.toFixed(1)}${reviews != null ? ` <span class="rv">(${reviews.toLocaleString('en-GB')})</span>` : ''}</span>`;
@@ -330,28 +332,45 @@ function heroIcon(m, size = 90) {
   </div>`;
 }
 
-// Newsletter signup — Buttondown embed.
-// TODO: replace BUTTONDOWN_PUBLICATION with the publication slug after
-// signing up at https://buttondown.com (free for under 100 subscribers).
-// Until then, the form posts to a non-existent endpoint and shows a
-// browser error — set the slug below before deploying any signup CTA.
-const BUTTONDOWN_PUBLICATION = 'mowright';
+// Newsletter signup. Two states controlled by NEWSLETTER_PROVIDER:
+//   'waitlist' — collects interest via mailto: (works immediately, no signup needed).
+//   'buttondown' — posts to Buttondown embed endpoint. Set BUTTONDOWN_PUBLICATION
+//                  to your slug after signing up at https://buttondown.com (free
+//                  under 100 subscribers).
+// Defaulting to 'waitlist' so the button always does something useful and never
+// 404s. Switch to 'buttondown' once you've created the publication.
+const NEWSLETTER_PROVIDER = 'waitlist';
+const BUTTONDOWN_PUBLICATION = 'mowright'; // unused while provider is 'waitlist'
 
 function newsletterSignup(variant = 'default') {
   const isWide = variant === 'wide';
+  const isWaitlist = NEWSLETTER_PROVIDER === 'waitlist';
+
+  const ctaArea = isWaitlist
+    ? `<a class="nl-mailto" href="mailto:hello@mowright.co.uk?subject=${encodeURIComponent('Newsletter waitlist')}&body=${encodeURIComponent('Add me to the MowRight newsletter waitlist.')}">Join the waitlist →</a>`
+    : `<form class="nl-form" action="https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_PUBLICATION}" method="post" target="_blank">
+        <label for="nl-email-${variant}" class="sr">Email address</label>
+        <input id="nl-email-${variant}" type="email" name="email" placeholder="you@example.com" required/>
+        <button type="submit">Subscribe</button>
+      </form>`;
+
+  const headline = isWaitlist
+    ? (isWide ? 'A weekly mower-watcher email — launching 2026.' : 'Weekly mower-watcher email — launching 2026')
+    : (isWide ? 'A weekly mower-watcher email — free.' : 'Weekly mower-watcher email');
+
+  const lead = isWaitlist
+    ? 'Five interesting Marketplace listings, one engine spotlight, one deal alert when a model drops at a major UK retailer. Join the waitlist and we\'ll email you the first issue when it launches.'
+    : 'Five interesting Marketplace listings, one engine spotlight, one deal alert when a model drops at a major UK retailer. ' + (isWide ? 'No spam, one-click unsubscribe.' : '');
+
   return `
   <section class="nl-section${isWide ? ' nl-wide' : ''}">
     <div class="nl-inner">
       <div class="nl-text">
         <div class="nl-eyebrow">${isWide ? 'Watching the wires' : 'Get the newsletter'}</div>
-        <h3 class="nl-h">${isWide ? 'A weekly mower-watcher email — free.' : 'Weekly mower-watcher email'}</h3>
-        <p class="nl-lead">Five interesting Marketplace listings, one engine spotlight, one deal alert when a model drops at a major UK retailer. ${isWide ? 'No spam, one-click unsubscribe.' : ''}</p>
+        <h3 class="nl-h">${headline}</h3>
+        <p class="nl-lead">${lead}</p>
       </div>
-      <form class="nl-form" action="https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_PUBLICATION}" method="post" target="_blank">
-        <label for="nl-email-${variant}" class="sr">Email address</label>
-        <input id="nl-email-${variant}" type="email" name="email" placeholder="you@example.com" required/>
-        <button type="submit">Subscribe</button>
-      </form>
+      ${ctaArea}
       <p class="nl-promise">No affiliate links. No upsells. Unsubscribe anytime in one click.</p>
     </div>
   </section>`;
@@ -462,7 +481,7 @@ function repairCostSection(m) {
 // Calculations driven by data attributes so we don't need to re-render JS per mower.
 function fairOfferWidget(m) {
   return `
-  <section id="fair-offer" class="fo-section" data-base-used="${m.usedAvg}" data-rrp="${m.rrp || m.buyNow}">
+  <section id="fair-offer" class="fo-section" data-base-used="${m.usedAvg}" data-rrp="${m.rrp || m.buyNow || m.usedAvg * 2}">
     <h2 class="section-h2">Fair-offer calculator</h2>
     <p class="fo-lead">Tell us about a specific used listing for the ${esc(m.brand)} ${esc(m.model)} you're looking at. We'll compute a fair offer range from our used-market data and the condition signals you provide.</p>
 
@@ -524,57 +543,7 @@ function fairOfferWidget(m) {
 
     <p class="fo-note">Calculations are guidance, not gospel. Used-market prices vary by region (Scotland is typically 10–15% cheaper than the South-East), season (October cheapest, March most expensive), and seller motivation.</p>
   </section>
-
-  <script>
-  (function(){
-    var sec = document.getElementById('fair-offer');
-    if (!sec) return;
-    var base = parseFloat(sec.dataset.baseUsed) || 0;
-    var rrp = parseFloat(sec.dataset.rrp) || base * 2;
-    function calc() {
-      var cond = parseFloat(document.getElementById('fo-condition').value);
-      var age = parseFloat(document.getElementById('fo-age').value);
-      var hours = document.getElementById('fo-hours').value;
-      var service = document.getElementById('fo-service').value;
-      var asking = parseFloat(document.getElementById('fo-asking').value) || 0;
-
-      // Condition: 1=-30%, 2=-15%, 3=0, 4=+12%, 5=+22%
-      var condMul = ({1:0.70, 2:0.85, 3:1.0, 4:1.12, 5:1.22})[cond];
-      // Age: each year past 5 reduces by 3%, capped at -40%
-      var ageMul = age <= 5 ? (1.0 + (5 - age) * 0.02) : Math.max(0.6, 1 - (age - 5) * 0.03);
-      // Hours
-      var hoursMul = ({low:1.12, med:1.0, high:0.82})[hours];
-      // Service history
-      var serviceMul = ({full:1.10, partial:1.0, none:0.85})[service];
-
-      var center = Math.round(base * condMul * ageMul * hoursMul * serviceMul);
-      var low = Math.round(center * 0.85);
-      var high = Math.round(center * 1.15);
-      // Cap premium below RRP * 0.85 (used can't sensibly exceed near-new pricing)
-      var premium = Math.min(Math.round(center * 1.18), Math.round(rrp * 0.85));
-
-      document.getElementById('fo-low').textContent = '£' + low.toLocaleString('en-GB');
-      document.getElementById('fo-fair').textContent = '£' + low.toLocaleString('en-GB') + ' – £' + high.toLocaleString('en-GB');
-      document.getElementById('fo-high').textContent = '£' + premium.toLocaleString('en-GB');
-
-      var verdict = document.getElementById('fo-verdict');
-      if (asking > 0) {
-        var msg, cls;
-        if (asking < low) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is below our walk-away floor — either a bargain or something is wrong. Inspect carefully.'; cls = 'fo-v-bargain'; }
-        else if (asking <= high) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' falls inside the fair range. Reasonable starting point — knock 10% off as an opening offer.'; cls = 'fo-v-fair'; }
-        else if (asking <= premium) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is in premium territory — only worth it if condition is genuinely mint and history is documented.'; cls = 'fo-v-premium'; }
-        else { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is above what this mower can fairly fetch given the inputs. Either the seller is optimistic, or you need to ask why.'; cls = 'fo-v-overpriced'; }
-        verdict.textContent = msg;
-        verdict.className = 'fo-verdict ' + cls;
-      } else {
-        verdict.textContent = 'Add an asking price above to compare it to the fair range.';
-        verdict.className = 'fo-verdict';
-      }
-    }
-    sec.querySelectorAll('select, input').forEach(function(el){ el.addEventListener('input', calc); el.addEventListener('change', calc); });
-    calc();
-  })();
-  </script>`;
+  <script src="/fair-offer.js" defer></script>`;
 }
 
 // Where to buy — retailer search-link buttons. No affiliate. Six retailers
@@ -782,7 +751,7 @@ const specsTable = m => {
 const threeUpPrice = m => `
 <div class="prices3">
   <div class="pp"><div class="l">RRP New</div><div class="v">${m.rrp ? fmtGBP(m.rrp) : '—'}</div><div class="x">${m.rrp ? 'Manufacturer' : 'No longer in production'}</div></div>
-  <div class="pp"><div class="l">Buy Now</div><div class="v">${fmtGBP(m.buyNow)}</div><div class="x">Lowest UK retailer</div></div>
+  <div class="pp"><div class="l">Buy Now</div><div class="v">${m.buyNow > 0 ? fmtGBP(m.buyNow) : '—'}</div><div class="x">${m.buyNow > 0 ? 'Lowest UK retailer' : 'Out of production'}</div></div>
   <div class="pp use"><div class="l">Used Avg</div><div class="v">${fmtGBP(m.usedAvg)}</div><div class="x">Facebook / eBay UK avg</div></div>
 </div>`;
 
@@ -800,7 +769,7 @@ function categoryListCard(m) {
   <div class="col-price-side">
     <span class="l">Used Avg</span>
     <span class="v">${fmtGBP(m.usedAvg)}</span>
-    <span class="x">New: ${fmtGBP(m.buyNow)}</span>
+    <span class="x">${m.buyNow > 0 ? 'New: ' + fmtGBP(m.buyNow) : 'Used only'}</span>
   </div>
 </a>`;
 }
@@ -854,9 +823,9 @@ function renderMowerPage(m) {
       '@type': 'AggregateOffer',
       priceCurrency: 'GBP',
       lowPrice: m.usedAvg,
-      highPrice: m.rrp || m.buyNow,
-      offerCount: 2,
-      availability: 'https://schema.org/InStock'
+      highPrice: m.rrp || m.buyNow || m.usedAvg,
+      offerCount: m.buyNow > 0 ? 2 : 1,
+      availability: m.buyNow > 0 ? 'https://schema.org/InStock' : 'https://schema.org/Discontinued'
     }
   };
   const breadcrumbLD = crumbsLD([
@@ -868,7 +837,7 @@ function renderMowerPage(m) {
 
   return `${head({
     title: `${m.brand} ${m.model} — UK price, used vs new & verdict`,
-    description: `${m.brand} ${m.model}: new ${fmtGBP(m.buyNow)}, used Marketplace average ${fmtGBP(m.usedAvg)}. Specs, expert verdict, pros and cons, and a marketplace buying tip.`,
+    description: `${m.brand} ${m.model}: ${m.buyNow > 0 ? 'new ' + fmtGBP(m.buyNow) + ', ' : ''}used Marketplace average ${fmtGBP(m.usedAvg)}. Specs, expert verdict, pros and cons, and a marketplace buying tip.`,
     canonical: mowerUrl(m),
     ogImage: m.img || '/og.png',
     ogType: 'product',
@@ -1768,7 +1737,7 @@ ${siteHeader()}
       <div class="col-price-side">
         <span class="l">Used Avg</span>
         <span class="v">${fmtGBP(m.usedAvg)}</span>
-        <span class="x">New: ${fmtGBP(m.buyNow)}</span>
+        <span class="x">${m.buyNow > 0 ? 'New: ' + fmtGBP(m.buyNow) : 'Used only'}</span>
       </div>
     </a>`).join('')}
   </div>
@@ -2061,7 +2030,7 @@ ${siteHeader()}
         <div class="eu-brand">${esc(m.brand)}</div>
         <div class="eu-name">${esc(m.model)}</div>
         <div class="eu-meta">${tbadge(m.type, 'sm')} <span class="eu-eng">${esc(m.engine)}</span></div>
-        <div class="eu-price">£${m.usedAvg} used <span class="dot">·</span> £${m.buyNow} new</div>
+        <div class="eu-price">£${m.usedAvg} used${m.buyNow > 0 ? ' <span class="dot">·</span> £' + m.buyNow + ' new' : ''}</div>
       </a>`).join('')}
     </div>`}
   </section>
@@ -2117,7 +2086,7 @@ ${siteHeader()}
       }).join('')}
     </div>
 
-    <p style="margin-top:32px;font-size:13px;color:var(--muted);font-style:italic">Heritage families also covered in passing on individual mower pages: Stihl EVC, Husqvarna HQ, Kohler 7000-series. Dedicated pages added as the catalogue grows.</p>
+    <p style="margin-top:32px;font-size:13px;color:var(--muted);font-style:italic">Stihl EVC, Husqvarna HQ and Kohler 7000-series engines are mentioned on individual mower pages and in the Briggs cheat-sheet blog post. Dedicated deep-dives for those families on the way as catalogue coverage grows.</p>
 
     <div style="margin-top:36px">
       ${ctaStrip("Now you know the engine — find the mower.", `Browse all ${mowers.length} mowers and filter by brand, type, or budget.`, 'Browse all mowers', '/browse')}
