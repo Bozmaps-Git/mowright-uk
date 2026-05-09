@@ -183,6 +183,149 @@
   </section>
 
     
+  <section id="repair-costs" class="repair-section">
+    <h2 class="section-h2">Repair-cost reference</h2>
+    <p class="repair-lead">UK 2026 ballpark prices for the parts you're most likely to need on this mower. OEM is dealer-genuine; aftermarket is what you'll find on eBay or generic small-engine suppliers. Use these to sense-check any quote and to negotiate on used buys.</p>
+    <div class="repair-table-wrap">
+      <table class="repair-table">
+        <thead><tr><th>Part / job</th><th>OEM</th><th>Aftermarket</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="rt-part">Replacement 38cm blade</div>
+              <div class="rt-note">Annual sharpening is free; replace when bent or cracked.</div>
+            </td>
+            <td><strong>£24–£32</strong></td>
+            <td>£8–£12</td>
+          </tr><tr>
+            <td>
+              <div class="rt-part">Blade re-sharpening (cylinder)</div>
+              <div class="rt-note">Cylinder mowers need annual sharpening; not optional for stripe quality.</div>
+            </td>
+            <td><strong>£35–£60 specialist</strong></td>
+            <td>£0 DIY with backlap kit</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+    
+  <section id="fair-offer" class="fo-section" data-base-used="35" data-rrp="99">
+    <h2 class="section-h2">Fair-offer calculator</h2>
+    <p class="fo-lead">Tell us about a specific used listing for the Einhell GE-HM 38 S-F you're looking at. We'll compute a fair offer range from our used-market data and the condition signals you provide.</p>
+
+    <div class="fo-form">
+      <div class="fo-field">
+        <label for="fo-condition">Overall condition</label>
+        <select id="fo-condition">
+          <option value="1">1 — Rough (welded repairs, missing parts)</option>
+          <option value="2">2 — Tired (heavy wear, dents, sun-faded)</option>
+          <option value="3" selected>3 — Average (used, no major faults)</option>
+          <option value="4">4 — Tidy (clean, well-maintained)</option>
+          <option value="5">5 — Mint (low hours, fresh service)</option>
+        </select>
+      </div>
+
+      <div class="fo-field">
+        <label for="fo-age">Age (years)</label>
+        <select id="fo-age">
+          <option value="0">Under 1 year</option>
+          <option value="2">1–3 years</option>
+          <option value="5" selected>3–7 years</option>
+          <option value="10">7–12 years</option>
+          <option value="15">12+ years</option>
+        </select>
+      </div>
+
+      <div class="fo-field">
+        <label for="fo-hours">Estimated use</label>
+        <select id="fo-hours">
+          <option value="low">Low — small lawn, weekend use only</option>
+          <option value="med" selected>Medium — typical UK lawn, weekly use</option>
+          <option value="high">High — large lawn, twice-weekly / commercial</option>
+        </select>
+      </div>
+
+      <div class="fo-field">
+        <label for="fo-service">Service history</label>
+        <select id="fo-service">
+          <option value="full">Documented dealer service history</option>
+          <option value="partial" selected>Some receipts / owner-serviced</option>
+          <option value="none">None / unknown</option>
+        </select>
+      </div>
+
+      <div class="fo-field">
+        <label for="fo-asking">Asking price (£)</label>
+        <input id="fo-asking" type="number" placeholder="e.g. 35" inputmode="numeric"/>
+      </div>
+    </div>
+
+    <div class="fo-result" id="fo-result">
+      <div class="fo-row">
+        <div class="fo-band fo-band-low"><div class="lab">Walk away below</div><div class="val" id="fo-low">£—</div></div>
+        <div class="fo-band fo-band-fair"><div class="lab">Fair offer range</div><div class="val" id="fo-fair">£— – £—</div></div>
+        <div class="fo-band fo-band-high"><div class="lab">Premium (only if perfect)</div><div class="val" id="fo-high">£—</div></div>
+      </div>
+      <div class="fo-verdict" id="fo-verdict">Adjust the inputs above to see a fair-offer range.</div>
+    </div>
+
+    <p class="fo-note">Calculations are guidance, not gospel. Used-market prices vary by region (Scotland is typically 10–15% cheaper than the South-East), season (October cheapest, March most expensive), and seller motivation.</p>
+  </section>
+
+  <script>
+  (function(){
+    var sec = document.getElementById('fair-offer');
+    if (!sec) return;
+    var base = parseFloat(sec.dataset.baseUsed) || 0;
+    var rrp = parseFloat(sec.dataset.rrp) || base * 2;
+    function calc() {
+      var cond = parseFloat(document.getElementById('fo-condition').value);
+      var age = parseFloat(document.getElementById('fo-age').value);
+      var hours = document.getElementById('fo-hours').value;
+      var service = document.getElementById('fo-service').value;
+      var asking = parseFloat(document.getElementById('fo-asking').value) || 0;
+
+      // Condition: 1=-30%, 2=-15%, 3=0, 4=+12%, 5=+22%
+      var condMul = ({1:0.70, 2:0.85, 3:1.0, 4:1.12, 5:1.22})[cond];
+      // Age: each year past 5 reduces by 3%, capped at -40%
+      var ageMul = age <= 5 ? (1.0 + (5 - age) * 0.02) : Math.max(0.6, 1 - (age - 5) * 0.03);
+      // Hours
+      var hoursMul = ({low:1.12, med:1.0, high:0.82})[hours];
+      // Service history
+      var serviceMul = ({full:1.10, partial:1.0, none:0.85})[service];
+
+      var center = Math.round(base * condMul * ageMul * hoursMul * serviceMul);
+      var low = Math.round(center * 0.85);
+      var high = Math.round(center * 1.15);
+      // Cap premium below RRP * 0.85 (used can't sensibly exceed near-new pricing)
+      var premium = Math.min(Math.round(center * 1.18), Math.round(rrp * 0.85));
+
+      document.getElementById('fo-low').textContent = '£' + low.toLocaleString('en-GB');
+      document.getElementById('fo-fair').textContent = '£' + low.toLocaleString('en-GB') + ' – £' + high.toLocaleString('en-GB');
+      document.getElementById('fo-high').textContent = '£' + premium.toLocaleString('en-GB');
+
+      var verdict = document.getElementById('fo-verdict');
+      if (asking > 0) {
+        var msg, cls;
+        if (asking < low) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is below our walk-away floor — either a bargain or something is wrong. Inspect carefully.'; cls = 'fo-v-bargain'; }
+        else if (asking <= high) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' falls inside the fair range. Reasonable starting point — knock 10% off as an opening offer.'; cls = 'fo-v-fair'; }
+        else if (asking <= premium) { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is in premium territory — only worth it if condition is genuinely mint and history is documented.'; cls = 'fo-v-premium'; }
+        else { msg = 'Asking £' + asking.toLocaleString('en-GB') + ' is above what this mower can fairly fetch given the inputs. Either the seller is optimistic, or you need to ask why.'; cls = 'fo-v-overpriced'; }
+        verdict.textContent = msg;
+        verdict.className = 'fo-verdict ' + cls;
+      } else {
+        verdict.textContent = 'Add an asking price above to compare it to the fair range.';
+        verdict.className = 'fo-verdict';
+      }
+    }
+    sec.querySelectorAll('select, input').forEach(function(el){ el.addEventListener('input', calc); el.addEventListener('change', calc); });
+    calc();
+  })();
+  </script>
+
+    
     <section>
       <h2 class="section-h2">Related mowers</h2>
       <div class="related">
