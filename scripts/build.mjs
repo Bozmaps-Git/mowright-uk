@@ -6,8 +6,14 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { BLOG_POSTS } from './blog-posts.mjs';
+import { BLOG_POSTS as BASE_BLOG_POSTS } from './blog-posts.mjs';
+import { INSPECTION_GUIDES } from './inspection-guides.mjs';
 import { ENGINES } from './engines.mjs';
+
+// Inspection guides are blog posts in their own right — concat into the
+// main BLOG_POSTS list so they appear in the index, the sitemap and the
+// blog index page automatically.
+const BLOG_POSTS = [...BASE_BLOG_POSTS, ...INSPECTION_GUIDES];
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mowright.co.uk';
