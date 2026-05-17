@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -31,10 +31,49 @@
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"EGO LM2114E-SP","brand":{"@type":"Brand","name":"EGO"},"description":"21-inch self-propelled cordless with steel deck","category":"Cordless lawnmower","sku":"ego-lm2114e-sp","aggregateRating":{"@type":"AggregateRating","ratingValue":4.7,"reviewCount":384,"bestRating":5,"worstRating":1},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","lowPrice":420,"highPrice":799,"offerCount":2,"availability":"https://schema.org/InStock"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Browse","item":"https://mowright.co.uk/browse"},{"@type":"ListItem","position":2,"name":"Cordless","item":"https://mowright.co.uk/cordless"},{"@type":"ListItem","position":3,"name":"EGO","item":"https://mowright.co.uk/brand/ego"},{"@type":"ListItem","position":4,"name":"LM2114E-SP"}]}</script>
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 
+<div id="cc-banner" class="cc-banner" hidden role="region" aria-label="Cookie consent">
+  <div class="cc-banner-text">
+    <strong>We use cookies.</strong> MowRight UK uses essential cookies to remember your choice, and optional advertising cookies (Google AdSense) to keep the site free. <a href="/cookies">Read the cookie policy</a>.
+  </div>
+  <div class="cc-banner-actions">
+    <button type="button" class="cc-btn cc-btn-reject" data-cc="reject">Reject optional</button>
+    <button type="button" class="cc-btn cc-btn-accept" data-cc="accept">Accept all</button>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    var key = 'mw_consent';
+    var raw = document.cookie.split('; ').find(function(c){ return c.indexOf(key + '=') === 0; });
+    var current = raw ? decodeURIComponent(raw.split('=')[1]) : null;
+    var banner = document.getElementById('cc-banner');
+    if (!banner) return;
+    function setConsent(v){
+      var d = new Date(); d.setFullYear(d.getFullYear() + 1);
+      document.cookie = key + '=' + encodeURIComponent(v) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+      banner.hidden = true;
+      try {
+        if (window.gtag) { window.gtag('consent', 'update', { ad_storage: v === 'accept' ? 'granted' : 'denied', analytics_storage: v === 'accept' ? 'granted' : 'denied' }); }
+      } catch(_) {}
+    }
+    if (!current) { banner.hidden = false; }
+    banner.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-cc]');
+      if (!btn) return;
+      setConsent(btn.getAttribute('data-cc'));
+    });
+    window.__mwOpenCookieSettings = function(){ banner.hidden = false; };
+  } catch(_) {}
+})();
+</script>
 <header class="top" role="banner">
   <div class="top-in">
     <a class="brand-link" href="/" aria-label="MowRight UK home">
@@ -310,21 +349,33 @@
   <div class="m">LM2135E-SP</div>
   <div class="p">Used: £450</div>
 </a>
-<a href="/mower/honda-hrg-466-xb">
-  <div class="mh-icon mh-photo sz-70" style="background:#ede4ff">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Honda%20HRE%20410%2C%20Oude%20Pekela%20(2020)%2002.jpg?width=600" alt="Honda HRG 466 XB (representative photo)" loading="lazy" decoding="async"/>
-    </div>
-  <div class="b">Honda</div>
-  <div class="m">HRG 466 XB</div>
-  <div class="p">Used: £470</div>
+<a href="/mower/ego-lm2024e-sp">
+  <div class="mh-icon sz-70" style="background:#ede4ff" aria-hidden="true">
+    <svg viewBox="0 0 200 130"><path d="M155 30 L185 10" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M150 35 L180 15" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <rect x="40" y="50" width="130" height="50" rx="10" fill="#7c3aed" opacity=".9"/>
+      <rect x="40" y="50" width="130" height="14" rx="10" fill="#7c3aed" opacity=".6"/>
+      <rect x="55" y="68" width="40" height="22" rx="3" fill="#0f1f0f" opacity=".5"/>
+      <circle cx="60" cy="100" r="18" fill="#1a1a1a"/><circle cx="60" cy="100" r="8" fill="#3a3a3a"/>
+      <circle cx="150" cy="100" r="18" fill="#1a1a1a"/><circle cx="150" cy="100" r="8" fill="#3a3a3a"/></svg>
+  </div>
+  <div class="b">EGO</div>
+  <div class="m">LM2024E-SP</div>
+  <div class="p">Used: £380</div>
 </a>
-<a href="/mower/toro-21-recycler-60v">
-  <div class="mh-icon mh-photo sz-70" style="background:#ede4ff">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Toro%2022%20Inch%20Recycler%20Walk%20Behind%20Lawn%20Mower.jpg?width=600" alt="Toro 21&quot; Recycler 60V (representative photo)" loading="lazy" decoding="async"/>
-    </div>
-  <div class="b">Toro</div>
-  <div class="m">21&quot; Recycler 60V</div>
-  <div class="p">Used: £480</div>
+<a href="/mower/makita-dlm533z">
+  <div class="mh-icon sz-70" style="background:#ede4ff" aria-hidden="true">
+    <svg viewBox="0 0 200 130"><path d="M155 30 L185 10" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M150 35 L180 15" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <rect x="40" y="50" width="130" height="50" rx="10" fill="#7c3aed" opacity=".9"/>
+      <rect x="40" y="50" width="130" height="14" rx="10" fill="#7c3aed" opacity=".6"/>
+      <rect x="55" y="68" width="40" height="22" rx="3" fill="#0f1f0f" opacity=".5"/>
+      <circle cx="60" cy="100" r="18" fill="#1a1a1a"/><circle cx="60" cy="100" r="8" fill="#3a3a3a"/>
+      <circle cx="150" cy="100" r="18" fill="#1a1a1a"/><circle cx="150" cy="100" r="8" fill="#3a3a3a"/></svg>
+  </div>
+  <div class="b">Makita</div>
+  <div class="m">DLM533Z</div>
+  <div class="p">Used: £380</div>
 </a></div>
     </section>
   </article>
@@ -358,7 +409,7 @@
           <span class="footer-mark">M</span>
           <span class="footer-word">Mow<span>Right</span> UK</span>
         </a>
-        <p class="footer-tagline">Independent UK lawnmower research. 151 models across 37 brands, with new and used prices on every one.</p>
+        <p class="footer-tagline">Independent UK lawnmower research. 176 models across 38 brands, with new and used prices on every one.</p>
         <p class="footer-promise">No affiliate commissions. No sponsored reviews. No upsells.</p>
       </div>
 
@@ -390,11 +441,17 @@
       </div>
 
       <div class="footer-col">
-        <h4>About</h4>
+        <h4>About &amp; legal</h4>
         <ul>
           <li><a href="/about">About MowRight</a></li>
+          <li><a href="/editorial">Editorial policy</a></li>
+          <li><a href="/find-my-mower">Find my mower</a></li>
+          <li><a href="/contact">Contact us</a></li>
           <li><a href="/credits">Image credits</a></li>
           <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/cookies">Cookie policy</a></li>
+          <li><a href="/terms">Terms of use</a></li>
+          <li><a href="#" onclick="window.__mwOpenCookieSettings&amp;&amp;window.__mwOpenCookieSettings();return false;">Cookie settings</a></li>
         </ul>
       </div>
 
@@ -404,11 +461,11 @@
       <div class="footer-copy">
         <span>© 2026 MowRight UK</span>
         <span class="sep">·</span>
-        <span>151 models</span>
+        <span>Edited by Semir Kahrimanovic</span>
         <span class="sep">·</span>
-        <span>37 brands</span>
+        <span>176 models · 38 brands</span>
       </div>
-      <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings.</p>
+      <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings. MowRight UK is published by Bozmaps and is not affiliated with any lawnmower manufacturer or retailer.</p>
     </div>
   </div>
 </footer>

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -30,10 +30,49 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6052985070008267" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
 
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 
+<div id="cc-banner" class="cc-banner" hidden role="region" aria-label="Cookie consent">
+  <div class="cc-banner-text">
+    <strong>We use cookies.</strong> MowRight UK uses essential cookies to remember your choice, and optional advertising cookies (Google AdSense) to keep the site free. <a href="/cookies">Read the cookie policy</a>.
+  </div>
+  <div class="cc-banner-actions">
+    <button type="button" class="cc-btn cc-btn-reject" data-cc="reject">Reject optional</button>
+    <button type="button" class="cc-btn cc-btn-accept" data-cc="accept">Accept all</button>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    var key = 'mw_consent';
+    var raw = document.cookie.split('; ').find(function(c){ return c.indexOf(key + '=') === 0; });
+    var current = raw ? decodeURIComponent(raw.split('=')[1]) : null;
+    var banner = document.getElementById('cc-banner');
+    if (!banner) return;
+    function setConsent(v){
+      var d = new Date(); d.setFullYear(d.getFullYear() + 1);
+      document.cookie = key + '=' + encodeURIComponent(v) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+      banner.hidden = true;
+      try {
+        if (window.gtag) { window.gtag('consent', 'update', { ad_storage: v === 'accept' ? 'granted' : 'denied', analytics_storage: v === 'accept' ? 'granted' : 'denied' }); }
+      } catch(_) {}
+    }
+    if (!current) { banner.hidden = false; }
+    banner.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-cc]');
+      if (!btn) return;
+      setConsent(btn.getAttribute('data-cc'));
+    });
+    window.__mwOpenCookieSettings = function(){ banner.hidden = false; };
+  } catch(_) {}
+})();
+</script>
 <header class="top" role="banner">
   <div class="top-in">
     <a class="brand-link" href="/" aria-label="MowRight UK home">
@@ -62,25 +101,40 @@
 <section style="padding:32px 32px 80px">
   <div class="page page--narrow about" style="max-width:760px;padding:0">
     <h1 class="about-h1">We compare lawnmowers.<br/><span class="accent">That's the whole thing.</span></h1>
-    <p class="lead">MowRight UK was started in 2023 by a small team of British gardeners frustrated that every "best lawnmower 2024" article was a thinly-disguised affiliate ranking. We don't take affiliate commissions. We don't accept manufacturer-sponsored placements. The site is funded by unobtrusive display advertising — never inline product placements, never paid review slots.</p>
+    <p class="lead">MowRight UK is an independent, reader-supported lawnmower price guide for the UK. We don't take affiliate commissions, we don't accept manufacturer-sponsored placements, and we don't run paid review slots. The site is funded by unobtrusive display advertising. That's it.</p>
 
-    <h2 class="about-h2">How we test</h2>
-    <p>Every mower in our database is hands-on tested, either by a member of our team or — for older or rarer models — by a network of volunteer reviewers across the UK. Specs are taken from the manufacturer and verified. Prices are checked weekly against the lowest-listed major UK retailer (Amazon UK, B&amp;Q, Mowdirect, Robert Dyas) and against actual sold listings on Facebook Marketplace and eBay UK.</p>
+    <div class="about-author">
+      <div class="about-author-pic" aria-hidden="true">SK</div>
+      <div>
+        <div class="about-author-name">Edited by Semir Kahrimanovic</div>
+        <p class="about-author-bio">MowRight UK is researched and edited by Semir Kahrimanovic, founder of <a href="https://bozmaps.com" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">Bozmaps</a>, a UK-based research and mapping company. Semir grew up around small-engine repair, has owned petrol, electric, cordless and robotic mowers on UK lawns from 200&nbsp;m² to 2,500&nbsp;m², and started MowRight after one too many "best lawnmower 2024" listicles that turned out to be affiliate rankings.</p>
+      </div>
+    </div>
 
-    <h2 class="about-h2">About the used-price data</h2>
-    <p>The "Used Average" price on every model page is calculated from a rolling 90-day window of sold listings on Facebook Marketplace, Gumtree, and eBay UK (sold-completed only, not asking prices). We exclude obvious outliers — broken mowers, dealer flips, missing parts. You should always verify with a starting demonstration before paying.</p>
+    <h2 class="about-h2">How we research mowers</h2>
+    <p>Every mower in the catalogue is researched from a consistent set of sources: manufacturer specifications, owner-review aggregates on Amazon UK, eBay UK, and dedicated mower-owner forums (Mowforum, GardenForumUK), independent expert reviews where they exist (Which?, Gardeners' World, Expert Reviews), and our own hands-on time with the models we've owned or operated. We don't claim to have personally tested all 151 mowers; where we have, the model page says so. Where we haven't, the verdict is drawn from triangulating owner reports rather than a single review.</p>
+    <p>Our full methodology — how we score value, what makes a model qualify, how we handle disagreements between sources, and how we update entries when new information comes in — is documented in our <a href="/editorial" style="color:var(--accent);font-weight:600">editorial policy</a>.</p>
+
+    <h2 class="about-h2">About the price data</h2>
+    <p>Three prices appear on every model page:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>RRP</strong> — the manufacturer's recommended price as listed on the brand's UK site.</li>
+      <li><strong>Buy Now (new)</strong> — the lowest verified price across major UK retailers (Amazon UK, B&amp;Q, MowersOnline, Robert Dyas) at the last review date shown on the page.</li>
+      <li><strong>Used Average</strong> — an indicative figure compiled from public Facebook Marketplace, Gumtree, and eBay UK listings over a rolling window. These are estimates, not a live scrape. They reflect what we see clearing in good condition, with obvious broken or part-only listings excluded.</li>
+    </ul>
+    <p>Prices on the internet move daily. Treat every figure on this site as a starting point for your own search and verify on the seller's page before you buy or offer.</p>
 
     <h2 class="about-h2">Brands we cover</h2>
-    <p style="margin-top:14px">All 37 brands in our database have a dedicated page with focus, parent group, UK position, and full model list.</p>
+    <p style="margin-top:14px">All 38 brands in our database have a dedicated page with focus, parent group, UK position, and full model list.</p>
     <div class="brand-grid">
       
       <a class="brand-tile" href="/brand/al-ko">
         <div class="b-name">AL-KO</div>
-        <div class="b-meta">1 model · Petrol</div>
+        <div class="b-meta">2 models · Petrol</div>
       </a>
       <a class="brand-tile" href="/brand/allett">
         <div class="b-name">Allett</div>
-        <div class="b-meta">1 model · Cordless</div>
+        <div class="b-meta">2 models · Cordless +1</div>
       </a>
       <a class="brand-tile" href="/brand/atco">
         <div class="b-name">Atco</div>
@@ -88,11 +142,11 @@
       </a>
       <a class="brand-tile" href="/brand/black-plus-decker">
         <div class="b-name">Black+Decker</div>
-        <div class="b-meta">1 model · Electric</div>
+        <div class="b-meta">2 models · Electric</div>
       </a>
       <a class="brand-tile" href="/brand/bosch">
         <div class="b-name">Bosch</div>
-        <div class="b-meta">9 models · Electric +3</div>
+        <div class="b-meta">10 models · Electric +3</div>
       </a>
       <a class="brand-tile" href="/brand/cobra">
         <div class="b-name">Cobra</div>
@@ -100,15 +154,15 @@
       </a>
       <a class="brand-tile" href="/brand/countax">
         <div class="b-name">Countax</div>
-        <div class="b-meta">1 model · Ride-on</div>
+        <div class="b-meta">2 models · Ride-on</div>
       </a>
       <a class="brand-tile" href="/brand/cub-cadet">
         <div class="b-name">Cub Cadet</div>
-        <div class="b-meta">1 model · Ride-on</div>
+        <div class="b-meta">2 models · Ride-on +1</div>
       </a>
       <a class="brand-tile" href="/brand/ego">
         <div class="b-name">EGO</div>
-        <div class="b-meta">6 models · Cordless +1</div>
+        <div class="b-meta">8 models · Cordless +1</div>
       </a>
       <a class="brand-tile" href="/brand/einhell">
         <div class="b-name">Einhell</div>
@@ -116,11 +170,11 @@
       </a>
       <a class="brand-tile" href="/brand/ferrex">
         <div class="b-name">Ferrex</div>
-        <div class="b-meta">1 model · Cordless</div>
+        <div class="b-meta">2 models · Cordless</div>
       </a>
       <a class="brand-tile" href="/brand/flymo">
         <div class="b-name">Flymo</div>
-        <div class="b-meta">6 models · Electric +2</div>
+        <div class="b-meta">7 models · Electric +3</div>
       </a>
       <a class="brand-tile" href="/brand/gardena">
         <div class="b-name">Gardena</div>
@@ -128,7 +182,7 @@
       </a>
       <a class="brand-tile" href="/brand/greenworks">
         <div class="b-name">Greenworks</div>
-        <div class="b-meta">3 models · Cordless</div>
+        <div class="b-meta">4 models · Cordless</div>
       </a>
       <a class="brand-tile" href="/brand/hayter">
         <div class="b-name">Hayter</div>
@@ -140,11 +194,11 @@
       </a>
       <a class="brand-tile" href="/brand/husqvarna">
         <div class="b-name">Husqvarna</div>
-        <div class="b-meta">8 models · Cordless +2</div>
+        <div class="b-meta">10 models · Cordless +2</div>
       </a>
       <a class="brand-tile" href="/brand/hyundai">
         <div class="b-name">Hyundai</div>
-        <div class="b-meta">5 models · Petrol +1</div>
+        <div class="b-meta">6 models · Petrol +1</div>
       </a>
       <a class="brand-tile" href="/brand/john-deere">
         <div class="b-name">John Deere</div>
@@ -154,13 +208,17 @@
         <div class="b-name">Kubota</div>
         <div class="b-meta">6 models · Ride-on</div>
       </a>
+      <a class="brand-tile" href="/brand/lawnflite">
+        <div class="b-name">Lawnflite</div>
+        <div class="b-meta">2 models · Petrol</div>
+      </a>
       <a class="brand-tile" href="/brand/mac-allister">
         <div class="b-name">Mac Allister</div>
-        <div class="b-meta">1 model · Petrol</div>
+        <div class="b-meta">2 models · Petrol</div>
       </a>
       <a class="brand-tile" href="/brand/makita">
         <div class="b-name">Makita</div>
-        <div class="b-meta">3 models · Cordless</div>
+        <div class="b-meta">4 models · Cordless</div>
       </a>
       <a class="brand-tile" href="/brand/mammotion">
         <div class="b-name">Mammotion</div>
@@ -168,7 +226,7 @@
       </a>
       <a class="brand-tile" href="/brand/mountfield">
         <div class="b-name">Mountfield</div>
-        <div class="b-meta">14 models · Petrol +2</div>
+        <div class="b-meta">15 models · Petrol +2</div>
       </a>
       <a class="brand-tile" href="/brand/murray">
         <div class="b-name">Murray</div>
@@ -176,7 +234,7 @@
       </a>
       <a class="brand-tile" href="/brand/parkside">
         <div class="b-name">Parkside</div>
-        <div class="b-meta">1 model · Cordless</div>
+        <div class="b-meta">2 models · Cordless</div>
       </a>
       <a class="brand-tile" href="/brand/qualcast">
         <div class="b-name">Qualcast</div>
@@ -184,7 +242,7 @@
       </a>
       <a class="brand-tile" href="/brand/ryobi">
         <div class="b-name">Ryobi</div>
-        <div class="b-meta">3 models · Cordless</div>
+        <div class="b-meta">4 models · Cordless</div>
       </a>
       <a class="brand-tile" href="/brand/segway">
         <div class="b-name">Segway</div>
@@ -192,7 +250,7 @@
       </a>
       <a class="brand-tile" href="/brand/spear-and-jackson">
         <div class="b-name">Spear &amp; Jackson</div>
-        <div class="b-meta">1 model · Electric</div>
+        <div class="b-meta">2 models · Electric</div>
       </a>
       <a class="brand-tile" href="/brand/stiga">
         <div class="b-name">Stiga</div>
@@ -200,11 +258,11 @@
       </a>
       <a class="brand-tile" href="/brand/stihl">
         <div class="b-name">Stihl</div>
-        <div class="b-meta">8 models · Petrol +2</div>
+        <div class="b-meta">9 models · Petrol +2</div>
       </a>
       <a class="brand-tile" href="/brand/toro">
         <div class="b-name">Toro</div>
-        <div class="b-meta">1 model · Cordless</div>
+        <div class="b-meta">2 models · Cordless +1</div>
       </a>
       <a class="brand-tile" href="/brand/webb">
         <div class="b-name">Webb</div>
@@ -216,16 +274,25 @@
       </a>
       <a class="brand-tile" href="/brand/worx">
         <div class="b-name">Worx</div>
-        <div class="b-meta">5 models · Cordless +1</div>
+        <div class="b-meta">6 models · Cordless +1</div>
       </a>
       <a class="brand-tile" href="/brand/yard-force">
         <div class="b-name">Yard Force</div>
-        <div class="b-meta">1 model · Robotic</div>
+        <div class="b-meta">2 models · Robotic +1</div>
       </a>
     </div>
 
+    <h2 class="about-h2">Trust &amp; transparency</h2>
+    <p>We publish four short policies so you can see exactly what we do and don't do:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><a href="/editorial" style="color:var(--accent);font-weight:600">Editorial policy</a> — how we research, score, and correct mowers.</li>
+      <li><a href="/privacy" style="color:var(--accent);font-weight:600">Privacy policy</a> — what data we collect (very little) and how it's used.</li>
+      <li><a href="/cookies" style="color:var(--accent);font-weight:600">Cookie policy</a> — which cookies the site uses and how to control them.</li>
+      <li><a href="/terms" style="color:var(--accent);font-weight:600">Terms of use</a> — the legal small print for using this site.</li>
+    </ul>
+
     <h2 class="about-h2">Get in touch</h2>
-    <p>Spotted a price error? Want us to add a model? Email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a>. We read everything.</p>
+    <p>Spotted a price error? Want us to add a model? Got a UK mower question we should answer in print? Head to the <a href="/contact" style="color:var(--accent);font-weight:600">contact page</a> or email <a href="mailto:hello@mowright.co.uk" style="color:var(--accent);font-weight:600">hello@mowright.co.uk</a>. We read everything.</p>
   </div>
 </section>
 
@@ -239,7 +306,7 @@
           <span class="footer-mark">M</span>
           <span class="footer-word">Mow<span>Right</span> UK</span>
         </a>
-        <p class="footer-tagline">Independent UK lawnmower research. 151 models across 37 brands, with new and used prices on every one.</p>
+        <p class="footer-tagline">Independent UK lawnmower research. 176 models across 38 brands, with new and used prices on every one.</p>
         <p class="footer-promise">No affiliate commissions. No sponsored reviews. No upsells.</p>
       </div>
 
@@ -271,11 +338,17 @@
       </div>
 
       <div class="footer-col">
-        <h4>About</h4>
+        <h4>About &amp; legal</h4>
         <ul>
           <li><a href="/about">About MowRight</a></li>
+          <li><a href="/editorial">Editorial policy</a></li>
+          <li><a href="/find-my-mower">Find my mower</a></li>
+          <li><a href="/contact">Contact us</a></li>
           <li><a href="/credits">Image credits</a></li>
           <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/cookies">Cookie policy</a></li>
+          <li><a href="/terms">Terms of use</a></li>
+          <li><a href="#" onclick="window.__mwOpenCookieSettings&amp;&amp;window.__mwOpenCookieSettings();return false;">Cookie settings</a></li>
         </ul>
       </div>
 
@@ -285,11 +358,11 @@
       <div class="footer-copy">
         <span>© 2026 MowRight UK</span>
         <span class="sep">·</span>
-        <span>151 models</span>
+        <span>Edited by Semir Kahrimanovic</span>
         <span class="sep">·</span>
-        <span>37 brands</span>
+        <span>176 models · 38 brands</span>
       </div>
-      <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings.</p>
+      <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings. MowRight UK is published by Bozmaps and is not affiliated with any lawnmower manufacturer or retailer.</p>
     </div>
   </div>
 </footer>
