@@ -32,7 +32,7 @@ In Stripe Dashboard:
    - Events to send: `checkout.session.completed` (you can also enable `charge.refunded` if you ever want to handle refunds later).
    - After saving, copy the **Signing secret** (`whsec_…`).
 
-The listing fee is set in code via env vars (default £2.99). To change the price, update `LISTING_FEE_PENCE` on Vercel and the `<meta name="mw-listing-fee-pence">` tag inside `sell.html`.
+The listing fee is set via the `LISTING_FEE_PENCE` env var. **Default is `0` (free)** while we're getting started, which makes the API skip Stripe entirely and publish the listing directly. To start charging later, set `LISTING_FEE_PENCE=299` on Vercel (and update the `<meta name="mw-listing-fee-pence">` tag inside `sell.html` if you reintroduce the live seller form). When the fee is non-zero, the full Stripe Checkout flow runs as designed.
 
 ## 3. Vercel environment variables
 

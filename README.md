@@ -7,7 +7,7 @@ Single-page web app for buyers checking secondhand lawnmower listings on Faceboo
 ## Pages
 
 - **`/marketplace`** — public listings grid (used mowers from UK owners), with type / condition / price / search filters
-- **`/sell`** — seller flow: magic-link auth → listing form with photos → Stripe Checkout (£2.99 flat) → goes live for 30 days. Setup steps in `MARKETPLACE_SETUP.md`.
+- **`/sell`** — seller flow: magic-link auth → listing form with photos → publishes listing → goes live for 30 days. Free while in early access (default `LISTING_FEE_PENCE=0` skips Stripe entirely); set the env var to charge later. Setup steps in `MARKETPLACE_SETUP.md`.
 - **`/listing?id=…`** — listing detail with native-share + WhatsApp / Facebook / X / Reddit / Email share buttons
 - **`/account`** — seller's "My listings" dashboard (pay for drafts, copy share link, mark sold, delete)
 - **`/`** — single-page browse with filters, search, slide-out detail panel, and side-by-side compare

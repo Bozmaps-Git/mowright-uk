@@ -12,8 +12,8 @@ import { createClient } from '@supabase/supabase-js';
 const SITE_URL =
   process.env.SITE_URL ||
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://mowright.co.uk');
-const LISTING_FEE_PENCE = parseInt(process.env.LISTING_FEE_PENCE || '299', 10);
-const LISTING_FEE_LABEL = process.env.LISTING_FEE_LABEL || 'MowRight UK listing — 30 days';
+const LISTING_FEE_PENCE = parseInt(process.env.LISTING_FEE_PENCE || '0', 10);
+const LISTING_FEE_LABEL = process.env.LISTING_FEE_LABEL || 'MowRight UK listing, 30 days';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -50,6 +50,24 @@ export default async function handler(req, res) {
     if (listing.seller_id !== userId) return res.status(403).json({ error: 'Not your listing' });
     if (listing.status !== 'draft') {
       return res.status(400).json({ error: 'Listing is already live or sold' });
+    }
+
+    // Free-listing path: skip Stripe entirely, publish the listing directly.
+    if (LISTING_FEE_PENCE === 0) {
+      const LISTING_DURATION_DAYS = parseInt(process.env.LISTING_DURATION_DAYS || '30', 10);
+      const now = new Date();
+      const expiresAt = new Date(now.getTime() + LISTING_DURATION_DAYS * 86400000);
+      const { error: updErr } = await admin
+        .from('listings')
+        .update({
+          status: 'live',
+          paid_at: now.toISOString(),
+          expires_at: expiresAt.toISOString(),
+        })
+        .eq('id', listing.id)
+        .eq('status', 'draft');
+      if (updErr) return res.status(500).json({ error: updErr.message });
+      return res.status(200).json({ url: `${SITE_URL}/account?paid=1&id=${encodeURIComponent(listing.id)}` });
     }
 
     const session = await stripe.checkout.sessions.create({

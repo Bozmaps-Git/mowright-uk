@@ -14,7 +14,7 @@ const meta = (name) => {
 };
 const SUPABASE_URL = meta('mw-supabase-url');
 const SUPABASE_ANON_KEY = meta('mw-supabase-anon-key');
-export const LISTING_FEE_PENCE = parseInt(meta('mw-listing-fee-pence') || '299', 10);
+export const LISTING_FEE_PENCE = parseInt(meta('mw-listing-fee-pence') || '0', 10);
 export const LISTING_DURATION_DAYS = parseInt(meta('mw-listing-duration-days') || '30', 10);
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
