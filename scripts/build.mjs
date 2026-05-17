@@ -621,6 +621,10 @@ const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'ar
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6052985070008267" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
 ${ldjson ? (Array.isArray(ldjson) ? ldjson : [ldjson]).map(j => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n') : ''}
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>`;
