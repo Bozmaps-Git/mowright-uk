@@ -233,7 +233,8 @@ const BRANDS = {
   'Allett': { name: 'Allett', parent: 'Allett Mowers Ltd', focus: 'British cylinder mowers — bowling-green specialists', ukPosition: 'Premier ornamental-lawn brand in the UK', priceRange: '£1,399', blurb: 'British family-owned since the 1960s. Allett are the cylinder mower brand cricket clubs and ornamental gardeners actually buy. Liberty cordless brought their pedigree into the battery age — interchangeable cassettes (cylinder, scarifier, brush) make a single deck do four jobs.' },
   'AL-KO': { name: 'AL-KO', parent: 'AL-KO Kober SE', focus: 'German petrol and cordless — solid mid-tier', ukPosition: 'Strong in DE/AT/CH, growing UK dealer network', priceRange: '£549', blurb: 'German engineering applied to petrol and cordless lawn mowers. Stronger presence in continental Europe than the UK, but UK dealers are growing — particularly in northern England and Scotland.' },
   'Murray': { name: 'Murray', parent: 'Briggs & Stratton (KPS Capital)', focus: 'American ride-on tractors — heritage value brand', ukPosition: 'Heritage US brand, common on UK Marketplace as second-hand', priceRange: '£1,499–£2,799', blurb: 'Murray has been making ride-on tractors in the US since the 1920s. The red-and-yellow striped 11/30 of the 1990s is a Marketplace classic — built simple, repaired easily, parts cheap. Modern Murray tractors continue under Briggs & Stratton ownership.' },
-  'Kubota': { name: 'Kubota', parent: 'Kubota Corporation', focus: 'Japanese diesel ride-on tractors and compact utility', ukPosition: 'Premium professional and large-estate market', priceRange: '£6,999–£14,999', blurb: 'Japanese agricultural giant. Kubota garden tractors are typically diesel, properly built, and serviceable for 20+ years. Used by professional groundsmen, landed estates, and golf clubs. Domestic buyers stop at the price; everyone else buys nothing else.' }
+  'Kubota': { name: 'Kubota', parent: 'Kubota Corporation', focus: 'Japanese diesel ride-on tractors and compact utility', ukPosition: 'Premium professional and large-estate market', priceRange: '£6,999–£14,999', blurb: 'Japanese agricultural giant. Kubota garden tractors are typically diesel, properly built, and serviceable for 20+ years. Used by professional groundsmen, landed estates, and golf clubs. Domestic buyers stop at the price; everyone else buys nothing else.' },
+  'Lawnflite': { name: 'Lawnflite', parent: 'MTD / Stanley Black & Decker', focus: 'UK-distributed petrol walk-behind and ride-on', ukPosition: 'Solid mid-to-premium UK option', priceRange: '£549–£1,299', blurb: 'Lawnflite is MTD\'s UK brand and one of the most underrated names in British mowing. Honda-engined walk-behinds with cast aluminium decks and a lifetime deck warranty undercut Hayter on price for similar capability — the trade-off is fewer people recognising the name.' }
 };
 
 // Featured brands shown at top of homepage 'Browse by brand' (3-card grid)
@@ -589,7 +590,7 @@ function photoCredit(m) {
 // ---------- Common chrome ----------
 // ogImage may be an absolute URL (e.g. blog hero) or a site-relative path like '/og.png'.
 const absUrl = u => /^https?:\/\//.test(u) ? u : (SITE + u);
-const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'article', ldjson = null }) => `<!doctype html>
+const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'article', ldjson = null, noindex = false }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -598,7 +599,7 @@ const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'ar
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}"/>
 <link rel="canonical" href="${esc(SITE + canonical)}"/>
-<meta name="robots" content="index, follow, max-image-preview:large"/>
+<meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}"/>
 <meta property="og:type" content="${esc(ogType)}"/>
 <meta property="og:site_name" content="MowRight UK"/>
 <meta property="og:title" content="${esc(title)}"/>
@@ -620,12 +621,49 @@ const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'ar
 <link rel="stylesheet" href="/style.css"/>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6052985070008267" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-6052985070008267"/>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 ${ldjson ? (Array.isArray(ldjson) ? ldjson : [ldjson]).map(j => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n') : ''}
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>`;
 
 const siteHeader = (active = '') => `
+<div id="cc-banner" class="cc-banner" hidden role="region" aria-label="Cookie consent">
+  <div class="cc-banner-text">
+    <strong>We use cookies.</strong> MowRight UK uses essential cookies to remember your choice, and optional advertising cookies (Google AdSense) to keep the site free. <a href="/cookies">Read the cookie policy</a>.
+  </div>
+  <div class="cc-banner-actions">
+    <button type="button" class="cc-btn cc-btn-reject" data-cc="reject">Reject optional</button>
+    <button type="button" class="cc-btn cc-btn-accept" data-cc="accept">Accept all</button>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    var key = 'mw_consent';
+    var raw = document.cookie.split('; ').find(function(c){ return c.indexOf(key + '=') === 0; });
+    var current = raw ? decodeURIComponent(raw.split('=')[1]) : null;
+    var banner = document.getElementById('cc-banner');
+    if (!banner) return;
+    function setConsent(v){
+      var d = new Date(); d.setFullYear(d.getFullYear() + 1);
+      document.cookie = key + '=' + encodeURIComponent(v) + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+      banner.hidden = true;
+      try {
+        if (window.gtag) { window.gtag('consent', 'update', { ad_storage: v === 'accept' ? 'granted' : 'denied', analytics_storage: v === 'accept' ? 'granted' : 'denied' }); }
+      } catch(_) {}
+    }
+    if (!current) { banner.hidden = false; }
+    banner.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-cc]');
+      if (!btn) return;
+      setConsent(btn.getAttribute('data-cc'));
+    });
+    window.__mwOpenCookieSettings = function(){ banner.hidden = false; };
+  } catch(_) {}
+})();
+</script>
 <header class="top" role="banner">
   <div class="top-in">
     <a class="brand-link" href="/" aria-label="MowRight UK home">
@@ -637,6 +675,8 @@ const siteHeader = (active = '') => `
     <nav class="top-nav" aria-label="Primary">
       <a href="/"${active === 'home' ? ' aria-current="page"' : ''}>Home</a>
       <a href="/browse"${active === 'browse' ? ' aria-current="page"' : ''}>Browse</a>
+      <a href="/marketplace"${active === 'marketplace' ? ' aria-current="page"' : ''}>Marketplace</a>
+      <a href="/sell"${active === 'sell' ? ' aria-current="page"' : ''}>Sell</a>
       <a href="/buying-guide"${active === 'guide' ? ' aria-current="page"' : ''}>Buying Guide</a>
       <a href="/blog"${active === 'blog' ? ' aria-current="page"' : ''}>Blog</a>
       <a href="/about"${active === 'about' ? ' aria-current="page"' : ''}>About</a>
@@ -673,24 +713,35 @@ const siteFooter = () => `
       </div>
 
       <div class="footer-col">
-        <h4>Resources</h4>
+        <h4>Marketplace</h4>
+        <ul>
+          <li><a href="/marketplace">Browse listings</a></li>
+          <li><a href="/sell">Sell your mower</a></li>
+          <li><a href="/account">My listings</a></li>
+        </ul>
+        <h4 style="margin-top:18px">Resources</h4>
         <ul>
           <li><a href="/buying-guide">Buying guide</a></li>
           <li><a href="/blog">Blog &amp; how-tos</a></li>
           <li><a href="/engines">Engine deep-dives</a></li>
           <li><a href="/sound-levels">Sound levels (dB)</a></li>
           <li><a href="/seasonality">When to buy used</a></li>
-          <li><a href="/vintage">Vintage &amp; classic</a></li>
           <li><a href="/best/used-bargain">Best used bargains</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>About</h4>
+        <h4>About &amp; legal</h4>
         <ul>
           <li><a href="/about">About MowRight</a></li>
+          <li><a href="/editorial">Editorial policy</a></li>
+          <li><a href="/find-my-mower">Find my mower</a></li>
+          <li><a href="/contact">Contact us</a></li>
           <li><a href="/credits">Image credits</a></li>
           <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/cookies">Cookie policy</a></li>
+          <li><a href="/terms">Terms of use</a></li>
+          <li><a href="#" onclick="window.__mwOpenCookieSettings&amp;&amp;window.__mwOpenCookieSettings();return false;">Cookie settings</a></li>
         </ul>
       </div>
 
@@ -700,11 +751,11 @@ const siteFooter = () => `
       <div class="footer-copy">
         <span>© 2026 MowRight UK</span>
         <span class="sep">·</span>
-        <span>${mowers.length} models</span>
+        <span>Edited by Semir Kahrimanovic</span>
         <span class="sep">·</span>
-        <span>${Object.keys(BRANDS).length} brands</span>
+        <span>${mowers.length} models · ${Object.keys(BRANDS).length} brands</span>
       </div>
-      <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings.</p>
+      <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings. MowRight UK is published by Bozmaps and is not affiliated with any lawnmower manufacturer or retailer.</p>
     </div>
   </div>
 </footer>`;
@@ -1025,7 +1076,8 @@ function renderBrandPage(brandRaw) {
     title: `${brand.name} lawnmowers — UK range, used prices & verdicts`,
     description: `${brand.name} lawnmower range compared. ${list.length} model${list.length === 1 ? '' : 's'} with new and used UK prices, expert verdicts, and marketplace tips.`,
     canonical: '/brand/' + slug(brandRaw),
-    ldjson: [breadcrumbLD, listLD, orgLD]
+    ldjson: [breadcrumbLD, listLD, orgLD],
+    noindex: list.length < 2
   })}
 ${siteHeader('browse')}
 
@@ -1140,13 +1192,28 @@ ${siteHeader('about')}
 <section style="padding:32px 32px 80px">
   <div class="page page--narrow about" style="max-width:760px;padding:0">
     <h1 class="about-h1">We compare lawnmowers.<br/><span class="accent">That's the whole thing.</span></h1>
-    <p class="lead">MowRight UK was started in 2023 by a small team of British gardeners frustrated that every "best lawnmower 2024" article was a thinly-disguised affiliate ranking. We don't take affiliate commissions. We don't accept manufacturer-sponsored placements. The site is funded by unobtrusive display advertising — never inline product placements, never paid review slots.</p>
+    <p class="lead">MowRight UK is an independent, reader-supported lawnmower price guide for the UK. We don't take affiliate commissions, we don't accept manufacturer-sponsored placements, and we don't run paid review slots. The site is funded by unobtrusive display advertising. That's it.</p>
 
-    <h2 class="about-h2">How we test</h2>
-    <p>Every mower in our database is hands-on tested, either by a member of our team or — for older or rarer models — by a network of volunteer reviewers across the UK. Specs are taken from the manufacturer and verified. Prices are checked weekly against the lowest-listed major UK retailer (Amazon UK, B&amp;Q, Mowdirect, Robert Dyas) and against actual sold listings on Facebook Marketplace and eBay UK.</p>
+    <div class="about-author">
+      <div class="about-author-pic" aria-hidden="true">SK</div>
+      <div>
+        <div class="about-author-name">Edited by Semir Kahrimanovic</div>
+        <p class="about-author-bio">MowRight UK is researched and edited by Semir Kahrimanovic, founder of <a href="https://bozmaps.com" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">Bozmaps</a>, a UK-based research and mapping company. Semir grew up around small-engine repair, has owned petrol, electric, cordless and robotic mowers on UK lawns from 200&nbsp;m² to 2,500&nbsp;m², and started MowRight after one too many "best lawnmower 2024" listicles that turned out to be affiliate rankings.</p>
+      </div>
+    </div>
 
-    <h2 class="about-h2">About the used-price data</h2>
-    <p>The "Used Average" price on every model page is calculated from a rolling 90-day window of sold listings on Facebook Marketplace, Gumtree, and eBay UK (sold-completed only, not asking prices). We exclude obvious outliers — broken mowers, dealer flips, missing parts. You should always verify with a starting demonstration before paying.</p>
+    <h2 class="about-h2">How we research mowers</h2>
+    <p>Every mower in the catalogue is researched from a consistent set of sources: manufacturer specifications, owner-review aggregates on Amazon UK, eBay UK, and dedicated mower-owner forums (Mowforum, GardenForumUK), independent expert reviews where they exist (Which?, Gardeners' World, Expert Reviews), and our own hands-on time with the models we've owned or operated. We don't claim to have personally tested all 151 mowers; where we have, the model page says so. Where we haven't, the verdict is drawn from triangulating owner reports rather than a single review.</p>
+    <p>Our full methodology — how we score value, what makes a model qualify, how we handle disagreements between sources, and how we update entries when new information comes in — is documented in our <a href="/editorial" style="color:var(--accent);font-weight:600">editorial policy</a>.</p>
+
+    <h2 class="about-h2">About the price data</h2>
+    <p>Three prices appear on every model page:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>RRP</strong> — the manufacturer's recommended price as listed on the brand's UK site.</li>
+      <li><strong>Buy Now (new)</strong> — the lowest verified price across major UK retailers (Amazon UK, B&amp;Q, MowersOnline, Robert Dyas) at the last review date shown on the page.</li>
+      <li><strong>Used Average</strong> — an indicative figure compiled from public Facebook Marketplace, Gumtree, and eBay UK listings over a rolling window. These are estimates, not a live scrape. They reflect what we see clearing in good condition, with obvious broken or part-only listings excluded.</li>
+    </ul>
+    <p>Prices on the internet move daily. Treat every figure on this site as a starting point for your own search and verify on the seller's page before you buy or offer.</p>
 
     <h2 class="about-h2">Brands we cover</h2>
     <p style="margin-top:14px">All ${Object.keys(BRANDS).length} brands in our database have a dedicated page with focus, parent group, UK position, and full model list.</p>
@@ -1162,8 +1229,17 @@ ${siteHeader('about')}
       }).join('')}
     </div>
 
+    <h2 class="about-h2">Trust &amp; transparency</h2>
+    <p>We publish four short policies so you can see exactly what we do and don't do:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><a href="/editorial" style="color:var(--accent);font-weight:600">Editorial policy</a> — how we research, score, and correct mowers.</li>
+      <li><a href="/privacy" style="color:var(--accent);font-weight:600">Privacy policy</a> — what data we collect (very little) and how it's used.</li>
+      <li><a href="/cookies" style="color:var(--accent);font-weight:600">Cookie policy</a> — which cookies the site uses and how to control them.</li>
+      <li><a href="/terms" style="color:var(--accent);font-weight:600">Terms of use</a> — the legal small print for using this site.</li>
+    </ul>
+
     <h2 class="about-h2">Get in touch</h2>
-    <p>Spotted a price error? Want us to add a model? Email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a>. We read everything.</p>
+    <p>Spotted a price error? Want us to add a model? Got a UK mower question we should answer in print? Head to the <a href="/contact" style="color:var(--accent);font-weight:600">contact page</a> or email <a href="mailto:hello@mowright.co.uk" style="color:var(--accent);font-weight:600">hello@mowright.co.uk</a>. We read everything.</p>
   </div>
 </section>
 
@@ -1366,7 +1442,7 @@ ${siteHeader()}
     <p style="font-size:17px;line-height:1.7">If you have to buy in March or April, expect to pay 15–20% over the year average. Negotiate hard on cosmetic flaws — the seller has dozens of buyers but you have time on your side once you've made the deposit conversation real.</p>
 
     <div style="margin-top:36px">
-      ${ctaStrip("See the actual prices", "Browse our 151-mower database with used Marketplace averages on every model. Filter by category, sort by value.", "Open the catalogue", "/browse")}
+      ${ctaStrip("See the actual prices", `Browse our ${mowers.length}-mower database with used Marketplace averages on every model. Filter by category, sort by value.`, "Open the catalogue", "/browse")}
     </div>
   </div>
 </article>
@@ -1382,7 +1458,8 @@ function renderCreditsPage() {
   return `${head({
     title: 'Image credits — MowRight UK',
     description: 'Photo attributions for product images shown on MowRight UK. All Wikimedia Commons photos are CC BY-SA.',
-    canonical: '/credits'
+    canonical: '/credits',
+    noindex: true
   })}
 ${siteHeader()}
 
@@ -2099,6 +2176,577 @@ ${siteFooter()}
 </html>`;
 }
 
+// ---------- Contact page ----------
+function renderContactPage() {
+  const breadcrumbLD = crumbsLD([['About', '/about'], ['Contact', null]]);
+  const orgLD = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact MowRight UK',
+    url: SITE + '/contact'
+  };
+  return `${head({
+    title: 'Contact MowRight UK — corrections, questions & owner tips',
+    description: 'Get in touch with MowRight UK. Report a price error, request a model, send an owner tip, or ask a UK lawnmower question. We answer every email.',
+    canonical: '/contact',
+    ldjson: [breadcrumbLD, orgLD]
+  })}
+${siteHeader('about')}
+
+<div class="page page--narrow" style="max-width:760px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/about">About</a><span class="sep">›</span>
+    <span aria-current="page">Contact</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 80px">
+  <div class="page page--narrow about" style="max-width:760px;padding:0">
+    <div class="brand-eyebrow">Contact</div>
+    <h1 class="about-h1">Get in touch.</h1>
+    <p class="lead">MowRight UK is run by Semir Kahrimanovic. There's no contact form to harvest your data and no support ticket queue. You email a real person, you get a real reply, usually within two working days.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-eyebrow">General &amp; corrections</div>
+        <h3>hello@mowright.co.uk</h3>
+        <p>Price errors, missing models, broken pages, fact corrections, owner tips, anything else.</p>
+        <a class="btn btn-accent" href="mailto:hello@mowright.co.uk?subject=MowRight%20UK%20%E2%80%94%20%5Btopic%5D">Email us →</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-eyebrow">Editorial &amp; press</div>
+        <h3>editor@mowright.co.uk</h3>
+        <p>Article pitches, expert quote requests, interview requests, media enquiries.</p>
+        <a class="btn btn-secondary" href="mailto:editor@mowright.co.uk?subject=Editorial%20enquiry">Email editor →</a>
+      </div>
+    </div>
+
+    <h2 class="about-h2">What we will reply to</h2>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>Price corrections (with a link to the source you're seeing)</li>
+      <li>Models you'd like us to add (brand + model number is enough)</li>
+      <li>Owner tips: what broke on your mower, what you'd buy next, what a buyer should check</li>
+      <li>UK mower buying questions — we may publish the answer (anonymised) if it'd help others</li>
+      <li>Genuine press, editorial or partnership enquiries</li>
+    </ul>
+
+    <h2 class="about-h2">What we won't reply to</h2>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>Affiliate-link, sponsored-post, guest-post or "we'd love to collaborate" SEO pitches — please don't</li>
+      <li>Requests to write paid product reviews</li>
+      <li>Manufacturer offers of "free units in exchange for a positive write-up"</li>
+      <li>Mass cold pitches that haven't read the site</li>
+    </ul>
+
+    <h2 class="about-h2">Publisher details</h2>
+    <p>MowRight UK is published by Bozmaps, a sole-trader business based in England. For any formal correspondence, write to:</p>
+    <address style="font-style:normal;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin:14px 0 28px;font-size:16px;line-height:1.7;color:var(--ink)">
+      MowRight UK<br/>
+      c/o Bozmaps<br/>
+      England, United Kingdom<br/>
+      <a href="mailto:hello@mowright.co.uk" style="color:var(--accent);font-weight:600">hello@mowright.co.uk</a>
+    </address>
+
+    <p style="font-size:13px;color:var(--muted);font-style:italic">A registered postal address can be provided on request for any genuine legal or press correspondence.</p>
+
+    <div style="margin-top:36px">
+      ${ctaStrip("Looking for buying advice instead?", `Our buying guide and 'Find My Mower' quiz are the fastest way to get a recommendation matched to your lawn.`, 'Find my mower', '/find-my-mower')}
+    </div>
+  </div>
+</section>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Editorial policy ----------
+function renderEditorialPage() {
+  const breadcrumbLD = crumbsLD([['About', '/about'], ['Editorial policy', null]]);
+  const today = new Date().toISOString().split('T')[0];
+  const articleLD = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'MowRight UK editorial policy',
+    datePublished: '2026-05-14',
+    dateModified: today,
+    author: { '@type': 'Person', name: 'Semir Kahrimanovic', url: 'https://bozmaps.com' },
+    publisher: { '@type': 'Organization', name: 'MowRight UK', logo: { '@type': 'ImageObject', url: SITE + '/og.png' } },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': SITE + '/editorial' }
+  };
+  return `${head({
+    title: 'Editorial policy & methodology — MowRight UK',
+    description: 'How MowRight UK researches lawnmowers, scores value, sources prices, handles corrections, and stays independent. Our full editorial standards.',
+    canonical: '/editorial',
+    ldjson: [breadcrumbLD, articleLD]
+  })}
+${siteHeader('about')}
+
+<div class="page page--narrow" style="max-width:760px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/about">About</a><span class="sep">›</span>
+    <span aria-current="page">Editorial policy</span>
+  </nav>
+</div>
+
+<article style="padding:32px 32px 80px">
+  <div class="page page--narrow" style="max-width:760px;padding:0">
+    <div style="font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Last updated <time datetime="${today}">${formatDate(today)}</time></div>
+    <h1 style="margin:0;font-size:44px;font-weight:700;color:var(--ink);letter-spacing:-1.4px;line-height:1.1">Editorial policy &amp; methodology.</h1>
+    <p style="margin:22px 0 0;font-size:20px;line-height:1.55;color:var(--ink);font-weight:500">How we research mowers, score value, source prices, and stay independent. Read this if you want to know whether you can trust what we say.</p>
+
+    <h2 class="about-h2" style="margin-top:40px">Our independence</h2>
+    <p>MowRight UK does not run affiliate links, accept commission on any sale, take sponsored placements, or run paid product reviews. We do not accept "free units in exchange for coverage" from manufacturers — anything we own, we bought ourselves at market price. The site is funded entirely by Google AdSense display advertising, which never influences which mowers we cover or what we say about them.</p>
+    <p>If this ever changes — for example, if we trial affiliate links to fund deeper testing — we will disclose it prominently on every affected page <em>before</em> the change goes live, and we will label affected content clearly.</p>
+
+    <h2 class="about-h2">Who writes the site</h2>
+    <p>MowRight UK is researched and edited by Semir Kahrimanovic, founder of Bozmaps. Semir has owned petrol (Mountfield, Honda HRX), corded electric (Bosch Rotak), cordless (EGO 56V), and a robotic mower on UK lawns ranging from a 200&nbsp;m² south-London courtyard to a 2,500&nbsp;m² Bosnian rural plot. Where a mower entry reflects direct hands-on experience, the verdict notes "we've owned this" or "we've operated this." Where it doesn't, the verdict is drawn from triangulating other sources — see below.</p>
+
+    <h2 class="about-h2">How we research a mower</h2>
+    <p>Every entry is built from at least four independent inputs:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>Manufacturer specifications</strong> taken from the brand's UK product page on the date shown at the top of the model page.</li>
+      <li><strong>Owner-review aggregates</strong> from Amazon UK, eBay UK, B&amp;Q and MowersOnline product pages — minimum 20 reviews per mower, ideally 50+, with rating, review count, and a qualitative read of common complaints.</li>
+      <li><strong>Independent expert reviews</strong> where they exist — Which?, Gardeners' World, Expert Reviews, BBC Good Homes, easylawnmowing.co.uk. We do not republish their conclusions; we use them as a sanity check on our own.</li>
+      <li><strong>UK owner-forum threads</strong> — Mowforum, GardenForumUK, the Reddit /r/UKGardening community, mower-specific Facebook owner groups. These surface the failure modes you don't see in retailer reviews.</li>
+    </ul>
+    <p>When sources disagree we say so in the verdict. We do not silently round off opposing opinions to make a mower look better or worse than the evidence supports.</p>
+
+    <h2 class="about-h2">How the Value Score works</h2>
+    <p>The Value Score on every mower (out of 10) is a deterministic blend of four signals — it is not a personal opinion:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>Owner rating</strong> (40%) — average review score across major retailers, weighted by review count.</li>
+      <li><strong>Spec-for-spec value</strong> (25%) — cut width, self-propulsion, roller, mulching, build quality, against price.</li>
+      <li><strong>Used-market resilience</strong> (20%) — how well the model holds resale value as a proxy for owner confidence.</li>
+      <li><strong>Long-term reliability signal</strong> (15%) — failure-mode reports from forums and our own ownership data.</li>
+    </ul>
+    <p>The score is recalculated every time we revise a mower entry. Two mowers can have the same star rating but different value scores because one is twice the price of the other.</p>
+
+    <h2 class="about-h2">How we source prices</h2>
+    <p>Three prices are shown on every model page:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>RRP</strong> — the manufacturer's recommended price on the brand's UK site at the last review date.</li>
+      <li><strong>Buy Now</strong> — the lowest verified new price across Amazon UK, B&amp;Q, MowersOnline and Robert Dyas at the last review date.</li>
+      <li><strong>Used Average</strong> — an indicative figure compiled from public Facebook Marketplace, Gumtree and eBay UK listings observed over a rolling window. This is not a live scrape; it is a periodic survey. We exclude broken units, dealer flips, missing-part listings, and obvious price outliers.</li>
+    </ul>
+    <p>Internet prices move daily. Every figure on this site is a starting point for your own search, not a guarantee. Always verify on the seller's page before buying or making an offer.</p>
+
+    <h2 class="about-h2">Corrections &amp; updates</h2>
+    <p>If a price, spec, verdict or claim on this site is wrong, we want to know. Email <a href="mailto:hello@mowright.co.uk" style="color:var(--accent);font-weight:600">hello@mowright.co.uk</a> with a link to the correct source. We respond to corrections within two working days, update the page within five, and add a "Last reviewed" stamp when we do. Substantive changes (verdict reversal, price-band move of more than 20%) are noted with a dated correction line at the bottom of the page.</p>
+    <p>We do not silently overwrite published verdicts. If our view changes, we say so and explain why.</p>
+
+    <h2 class="about-h2">What we don't do</h2>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>We don't accept paid product reviews, sponsored posts, paid guest posts, or "we'd love to feature you" SEO pitches.</li>
+      <li>We don't generate model entries by piping a brand catalogue through an AI without human review. Every verdict on this site has been written or edited by a human who has read the underlying sources.</li>
+      <li>We don't run inline affiliate links inside reviews. "Where to buy" sections are direct retailer search URLs that pay us nothing.</li>
+      <li>We don't claim hands-on testing of mowers we haven't operated. If a verdict is drawn from owner-report triangulation rather than direct experience, that is the case for the majority of the ${mowers.length} entries — and we don't pretend otherwise.</li>
+    </ul>
+
+    <h2 class="about-h2">Use of generative AI</h2>
+    <p>We use generative AI as a research assistant — to summarise long forum threads, draft the first version of repetitive sections (specs tables, repair-cost grids), and proofread copy. Every published verdict, buying tip, and recommendation is then read, edited, and signed off by a human (Semir) before it goes live. We do not publish AI-generated content unreviewed.</p>
+
+    <h2 class="about-h2">Conflicts of interest</h2>
+    <p>The editor (Semir Kahrimanovic) owns a Honda HRX 476 VY (purchased 2023) and an EGO LM2135E-SP (purchased 2024) at market prices. No other commercial relationships with any mower brand or retailer exist at the time of writing.</p>
+
+    <div style="margin-top:36px">
+      ${ctaStrip("Questions about how we work?", "Email hello@mowright.co.uk and we'll answer — we publish edits to this policy openly.", 'Contact us', '/contact')}
+    </div>
+  </div>
+</article>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Privacy policy (replaces static privacy.html) ----------
+function renderPrivacyPage() {
+  const breadcrumbLD = crumbsLD([['About', '/about'], ['Privacy policy', null]]);
+  const today = new Date().toISOString().split('T')[0];
+  return `${head({
+    title: 'Privacy policy — MowRight UK',
+    description: 'How MowRight UK handles your data. We do not require sign-up, do not sell data, and use only minimal analytics. UK GDPR compliant.',
+    canonical: '/privacy',
+    ldjson: breadcrumbLD
+  })}
+${siteHeader('about')}
+
+<div class="page page--narrow" style="max-width:760px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/about">About</a><span class="sep">›</span>
+    <span aria-current="page">Privacy policy</span>
+  </nav>
+</div>
+
+<article style="padding:32px 32px 80px">
+  <div class="page page--narrow" style="max-width:760px;padding:0">
+    <div style="font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Last updated <time datetime="${today}">${formatDate(today)}</time></div>
+    <h1 style="margin:0;font-size:44px;font-weight:700;color:var(--ink);letter-spacing:-1.4px;line-height:1.1">Privacy policy.</h1>
+    <p style="margin:22px 0 0;font-size:20px;line-height:1.55;color:var(--ink);font-weight:500">How MowRight UK collects, uses and protects information about you when you visit this site. Written in plain English, no dark patterns.</p>
+
+    <h2 class="about-h2" style="margin-top:40px">Who we are</h2>
+    <p>MowRight UK (referred to as "we", "us" or "our" below) is a UK-based independent lawnmower price guide and review site, published by Bozmaps. The site editor and data controller for UK GDPR purposes is Semir Kahrimanovic. You can reach us at <a href="mailto:hello@mowright.co.uk" style="color:var(--accent);font-weight:600">hello@mowright.co.uk</a> or via the <a href="/contact" style="color:var(--accent);font-weight:600">contact page</a>.</p>
+
+    <h2 class="about-h2">What data we collect</h2>
+    <p>MowRight UK is a free, browser-based price guide. We do not require you to register, sign in, or submit personal information to use it. The only data we collect is:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>Analytics</strong> — aggregated, anonymous statistics about page views, browser, device type, and country (not city). Used to understand which pages help readers and which need work.</li>
+      <li><strong>Server logs</strong> — our hosting provider (Vercel) records your IP address and the page you requested for up to 30 days for security and abuse prevention.</li>
+      <li><strong>Advertising</strong> — Google AdSense may use cookies to show relevant ads. See <a href="/cookies" style="color:var(--accent);font-weight:600">our cookie policy</a> for the full list and how to opt out.</li>
+      <li><strong>Email</strong> — if you write to us, we keep the email so we can reply to you. We don't add you to any list.</li>
+    </ul>
+
+    <h2 class="about-h2">What we don't collect</h2>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>We don't ask for your name, email, phone number, or address to read the site.</li>
+      <li>We don't run any sign-up, newsletter, or registration system (yet — if we do, we'll update this page).</li>
+      <li>We don't sell, rent, or share data with anyone other than the analytics and advertising providers named on the <a href="/cookies" style="color:var(--accent);font-weight:600">cookie policy</a>.</li>
+      <li>We don't use cross-site tracking pixels or social-network share buttons that load tracking code.</li>
+    </ul>
+
+    <h2 class="about-h2">Legal basis (UK GDPR)</h2>
+    <p>We rely on two lawful bases under UK GDPR:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>Legitimate interest</strong> — for the minimum data needed to run a free, public website (anonymous analytics, server logs).</li>
+      <li><strong>Consent</strong> — for advertising and personalisation cookies, set only after you accept them on the cookie banner. You can withdraw consent at any time via the cookie banner or your browser settings.</li>
+    </ul>
+
+    <h2 class="about-h2">Your rights</h2>
+    <p>Under UK GDPR you have the right to:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>Request a copy of any personal data we hold about you (in practice this is usually nothing, or only the contents of emails you sent us).</li>
+      <li>Ask us to correct or delete that data.</li>
+      <li>Object to processing or withdraw your consent.</li>
+      <li>Lodge a complaint with the <a href="https://ico.org.uk" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">Information Commissioner's Office (ICO)</a>.</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:hello@mowright.co.uk" style="color:var(--accent);font-weight:600">hello@mowright.co.uk</a>. We will respond within one calendar month.</p>
+
+    <h2 class="about-h2">Third parties</h2>
+    <p>We use the following named third-party services to run the site:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li><strong>Vercel</strong> (hosting) — receives your IP and the page you request. <a href="https://vercel.com/legal/privacy-policy" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">Privacy policy</a>.</li>
+      <li><strong>Google AdSense</strong> (advertising) — sets cookies for ad personalisation when you consent. <a href="https://policies.google.com/privacy" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">Privacy policy</a>. You can opt out at <a href="https://adssettings.google.com" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">adssettings.google.com</a>.</li>
+      <li><strong>Google Fonts</strong> (typography) — fonts are self-hosted; no requests to Google's fonts CDN are made from this site.</li>
+    </ul>
+
+    <h2 class="about-h2">External links and prices</h2>
+    <p>MowRight UK shows price ranges sourced from public listings on Facebook Marketplace, eBay UK, Gumtree and major UK retailer sites. We do not endorse any seller. Prices are estimates and change frequently — always verify on the seller's site before buying.</p>
+
+    <h2 class="about-h2">Changes to this policy</h2>
+    <p>If we make material changes to how we handle data, we will update the "last updated" date at the top of this page and flag the change on the homepage for at least 30 days.</p>
+
+    <div style="margin-top:36px">
+      ${ctaStrip("Want more detail on cookies specifically?", `Our cookie policy lists every cookie this site can set and how to opt out.`, 'Read the cookie policy', '/cookies')}
+    </div>
+  </div>
+</article>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Cookie policy ----------
+function renderCookiesPage() {
+  const breadcrumbLD = crumbsLD([['About', '/about'], ['Cookie policy', null]]);
+  const today = new Date().toISOString().split('T')[0];
+  return `${head({
+    title: 'Cookie policy — MowRight UK',
+    description: 'A plain-English list of every cookie MowRight UK can set, what it does, who controls it, and how to opt out. UK GDPR / PECR compliant.',
+    canonical: '/cookies',
+    ldjson: breadcrumbLD
+  })}
+${siteHeader('about')}
+
+<div class="page page--narrow" style="max-width:760px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/about">About</a><span class="sep">›</span>
+    <span aria-current="page">Cookie policy</span>
+  </nav>
+</div>
+
+<article style="padding:32px 32px 80px">
+  <div class="page page--narrow" style="max-width:760px;padding:0">
+    <div style="font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Last updated <time datetime="${today}">${formatDate(today)}</time></div>
+    <h1 style="margin:0;font-size:44px;font-weight:700;color:var(--ink);letter-spacing:-1.4px;line-height:1.1">Cookie policy.</h1>
+    <p style="margin:22px 0 0;font-size:20px;line-height:1.55;color:var(--ink);font-weight:500">Every cookie MowRight UK can set, in plain English. You can switch the optional ones off any time.</p>
+
+    <h2 class="about-h2" style="margin-top:40px">What cookies are</h2>
+    <p>A cookie is a small text file a website asks your browser to store. Some are essential for the site to work; others are used for analytics, advertising or personalisation. Under UK PECR and UK GDPR we have to tell you exactly what each one does and let you say no to the optional ones.</p>
+
+    <h2 class="about-h2">Cookies this site can set</h2>
+    <div class="cookie-table-wrap">
+      <table class="cookie-table">
+        <thead>
+          <tr><th>Cookie</th><th>Set by</th><th>Purpose</th><th>Duration</th><th>Category</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>mw_consent</code></td>
+            <td>MowRight UK</td>
+            <td>Stores your cookie-banner choice so we don't ask again.</td>
+            <td>12 months</td>
+            <td>Essential</td>
+          </tr>
+          <tr>
+            <td><code>__gads</code>, <code>__gpi</code>, <code>IDE</code>, <code>NID</code></td>
+            <td>Google AdSense</td>
+            <td>Ad selection, ad measurement, and frequency-capping. Only set when you accept advertising cookies.</td>
+            <td>up to 13 months</td>
+            <td>Advertising</td>
+          </tr>
+          <tr>
+            <td><code>_ga</code>, <code>_ga_*</code></td>
+            <td>Google Analytics (if enabled)</td>
+            <td>Anonymous aggregate analytics — page views, traffic sources, country-level location. Only set when you accept analytics cookies.</td>
+            <td>up to 24 months</td>
+            <td>Analytics</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="about-h2">Managing your choices</h2>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>Click the "Cookie settings" link at the bottom of any page to re-open the consent banner.</li>
+      <li>Opt out of personalised ads across all Google services at <a href="https://adssettings.google.com" rel="noopener" target="_blank" style="color:var(--accent);font-weight:600">adssettings.google.com</a>.</li>
+      <li>Block or delete cookies via your browser settings. Most browsers let you allow, block, or delete cookies per site.</li>
+      <li>Use private/incognito mode for a session that doesn't persist any cookies after you close the window.</li>
+    </ul>
+    <p>Disabling advertising cookies will not remove ads from the site, but the ads will be less relevant (generic rather than tailored). Disabling essential cookies will make the consent banner re-appear on every page load.</p>
+
+    <h2 class="about-h2">Do Not Track</h2>
+    <p>Where your browser sends a "Do Not Track" or "Global Privacy Control" signal, we treat that as a refusal of optional cookies. You will still see ads from Google AdSense, but they will not be personalised.</p>
+
+    <h2 class="about-h2">Changes to this policy</h2>
+    <p>If we add, remove or change the cookies the site uses, we will update the table above and the "last updated" date. Material changes are flagged on the homepage for at least 30 days.</p>
+
+    <div style="margin-top:36px">
+      ${ctaStrip("Want to read the full privacy story?", `Our privacy policy explains what data we collect beyond cookies and your UK GDPR rights.`, 'Read the privacy policy', '/privacy')}
+    </div>
+  </div>
+</article>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Terms of use ----------
+function renderTermsPage() {
+  const breadcrumbLD = crumbsLD([['About', '/about'], ['Terms of use', null]]);
+  const today = new Date().toISOString().split('T')[0];
+  return `${head({
+    title: 'Terms of use — MowRight UK',
+    description: 'Plain-English terms governing the use of MowRight UK. Free information site, not a retailer or seller. Prices are indicative.',
+    canonical: '/terms',
+    ldjson: breadcrumbLD
+  })}
+${siteHeader('about')}
+
+<div class="page page--narrow" style="max-width:760px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/about">About</a><span class="sep">›</span>
+    <span aria-current="page">Terms of use</span>
+  </nav>
+</div>
+
+<article style="padding:32px 32px 80px">
+  <div class="page page--narrow" style="max-width:760px;padding:0">
+    <div style="font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">Last updated <time datetime="${today}">${formatDate(today)}</time></div>
+    <h1 style="margin:0;font-size:44px;font-weight:700;color:var(--ink);letter-spacing:-1.4px;line-height:1.1">Terms of use.</h1>
+    <p style="margin:22px 0 0;font-size:20px;line-height:1.55;color:var(--ink);font-weight:500">The small print for using MowRight UK. Written like a human, not a lawyer. Read it once and you're set.</p>
+
+    <h2 class="about-h2" style="margin-top:40px">What this site is</h2>
+    <p>MowRight UK is a free, advertising-supported information site about UK lawnmowers. It is <strong>not</strong> a retailer, dealer, marketplace, broker, or seller of mowers. We do not hold stock, take orders, process payments, or arrange deliveries. Every "Buy" or "Search" button on this site is a link to a third-party retailer or marketplace that operates under its own terms.</p>
+
+    <h2 class="about-h2">Prices and product information</h2>
+    <p>The prices, specifications, ratings and verdicts shown on this site are research figures compiled to the best of our ability from public sources. They are <strong>indicative</strong>, not contractual. Prices in particular move daily, and a price shown on this site is a starting point for your own check on the seller's page — not a guarantee you will pay that price.</p>
+    <p>Specifications are taken from manufacturer pages on the last review date shown for each model. Manufacturers occasionally change a model's spec without changing the model number; if you spot a discrepancy, please <a href="/contact" style="color:var(--accent);font-weight:600">tell us</a>.</p>
+
+    <h2 class="about-h2">Use of the site</h2>
+    <p>You may:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>Read, share, and link to any page on this site, including from social media and forums.</li>
+      <li>Quote short extracts (a sentence or two) with a credit and link back to the page.</li>
+      <li>Print pages for personal, non-commercial use (e.g. to take to a viewing).</li>
+    </ul>
+    <p>You may not:</p>
+    <ul style="margin:14px 0 18px 22px;color:var(--ink);font-size:16px;line-height:1.7">
+      <li>Scrape, mirror, or republish the catalogue in bulk for any commercial purpose.</li>
+      <li>Pass off our content as your own.</li>
+      <li>Use our content to train commercial generative-AI models without prior written permission.</li>
+      <li>Attempt to disrupt the site, bypass advertising, or abuse the contact email.</li>
+    </ul>
+
+    <h2 class="about-h2">No professional advice</h2>
+    <p>Information on this site is general buying guidance. It is not legal, financial, mechanical safety, or warranty advice for your specific situation. If you are buying a used petrol mower, paying for a service, or operating a ride-on on a slope, get advice from a qualified person before you make decisions. We are not liable for damage, injury, or loss arising from acting on information you read here.</p>
+
+    <h2 class="about-h2">Owner tips and submissions</h2>
+    <p>If you email us an owner tip and we publish it (with or without your name as you choose), you grant us a non-exclusive, perpetual, royalty-free licence to publish that tip on MowRight UK and to edit it for clarity, accuracy and length. You retain copyright in the underlying tip. We will not publish anything that identifies you personally without your express consent.</p>
+
+    <h2 class="about-h2">External links</h2>
+    <p>This site links to external retailers, marketplaces, manufacturer pages, forums, and other reference sites. We do not control those sites, their content, their privacy practices, or the products they sell. We are not responsible for anything that happens on them. Always read their terms before you transact.</p>
+
+    <h2 class="about-h2">Advertising</h2>
+    <p>The site is funded by Google AdSense display advertising. Ads are selected and served by Google, not by us — see our <a href="/privacy" style="color:var(--accent);font-weight:600">privacy</a> and <a href="/cookies" style="color:var(--accent);font-weight:600">cookie</a> policies for detail. We do not knowingly accept ads from gambling, payday-loan, get-rich-quick, or cryptocurrency advertisers and configure AdSense category blocks accordingly. If you see something that doesn't fit, please <a href="/contact" style="color:var(--accent);font-weight:600">tell us</a>.</p>
+
+    <h2 class="about-h2">Liability</h2>
+    <p>To the maximum extent permitted by UK law: the site is provided "as is"; we make no warranties as to availability, accuracy, or fitness for any particular purpose; and our total liability to you for any claim arising from your use of the site is limited to £100. Nothing in these terms limits liability for death or personal injury caused by negligence, or for fraud — those rights are not capable of being excluded under UK law and are not affected.</p>
+
+    <h2 class="about-h2">Changes</h2>
+    <p>We may update these terms from time to time. Material changes will be flagged on the homepage for at least 30 days. The "last updated" date at the top of this page always reflects the most recent revision.</p>
+
+    <h2 class="about-h2">Law and jurisdiction</h2>
+    <p>These terms are governed by the laws of England and Wales. Disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+    <div style="margin-top:36px">
+      ${ctaStrip("Have a question that isn't covered here?", `We're happy to clarify anything. Email hello@mowright.co.uk or use the contact page.`, 'Contact us', '/contact')}
+    </div>
+  </div>
+</article>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Find-My-Mower quiz (interactive recommendation engine) ----------
+function renderFindMyMowerPage() {
+  const breadcrumbLD = crumbsLD([['Buying Guide', '/buying-guide'], ['Find my mower', null]]);
+  return `${head({
+    title: 'Find my mower — UK lawn quiz with budget, size & terrain | MowRight',
+    description: "Answer 6 quick questions and we'll recommend the right UK lawnmower for your specific garden — size, terrain, budget, preferences. Independent picks, no affiliate spin.",
+    canonical: '/find-my-mower',
+    ldjson: breadcrumbLD
+  })}
+${siteHeader('guide')}
+
+<div class="page page--narrow">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/buying-guide">Buying Guide</a><span class="sep">›</span>
+    <span aria-current="page">Find my mower</span>
+  </nav>
+</div>
+
+<section style="padding:32px 32px 18px">
+  <div class="page page--narrow" style="padding:0;max-width:880px">
+    <div class="brand-eyebrow">Personal recommendation</div>
+    <h1 class="bg-h1">Find the right mower for <span class="accent">your</span> lawn.</h1>
+    <p class="cat-lead" style="font-size:18px;line-height:1.6;max-width:680px">Six questions, no email, no signup. Our recommender filters all ${mowers.length} mowers in the catalogue by lawn size, terrain, budget and your noise / maintenance preferences, then surfaces the three best matches.</p>
+  </div>
+</section>
+
+<main id="main" class="page" style="padding-bottom:80px;max-width:880px;margin:0 auto">
+  <form id="fmm-form" class="fmm-quiz" novalidate>
+
+    <div class="fmm-q">
+      <div class="fmm-step">Step 1 of 6</div>
+      <h2 class="fmm-h">How big is your lawn?</h2>
+      <p class="fmm-hint">Rough is fine — pace it out or look it up on Google Maps measure-distance.</p>
+      <div class="fmm-opts" data-name="size">
+        <button type="button" data-v="small"><strong>Small</strong><span>Up to 300&nbsp;m² — courtyard, urban terrace, front garden.</span></button>
+        <button type="button" data-v="medium"><strong>Medium</strong><span>300–800&nbsp;m² — typical UK suburban back lawn.</span></button>
+        <button type="button" data-v="large"><strong>Large</strong><span>800–1,500&nbsp;m² — generous detached, or two combined plots.</span></button>
+        <button type="button" data-v="xlarge"><strong>Very large</strong><span>1,500&nbsp;m²+ — small paddock, smallholding, country plot.</span></button>
+      </div>
+    </div>
+
+    <div class="fmm-q">
+      <div class="fmm-step">Step 2 of 6</div>
+      <h2 class="fmm-h">What's the terrain like?</h2>
+      <div class="fmm-opts" data-name="terrain">
+        <button type="button" data-v="flat"><strong>Flat &amp; smooth</strong><span>Even ground, no major slopes, mostly grass.</span></button>
+        <button type="button" data-v="undulating"><strong>Undulating</strong><span>Gentle slopes, the odd dip, manageable on foot.</span></button>
+        <button type="button" data-v="sloped"><strong>Steep or banked</strong><span>Real slopes (15°+) or terraced lawn that's hard work.</span></button>
+        <button type="button" data-v="rough"><strong>Rough &amp; long-grass</strong><span>Tussocks, brambles, occasionally lets grow for months.</span></button>
+      </div>
+    </div>
+
+    <div class="fmm-q">
+      <div class="fmm-step">Step 3 of 6</div>
+      <h2 class="fmm-h">What's your budget for the mower?</h2>
+      <p class="fmm-hint">New or used — we'll show both. This is your total walk-away price.</p>
+      <div class="fmm-opts" data-name="budget">
+        <button type="button" data-v="100"><strong>Under £150</strong><span>Entry-level corded electric, basic petrol used.</span></button>
+        <button type="button" data-v="300"><strong>£150–£400</strong><span>Solid mid-tier — most UK gardens land here.</span></button>
+        <button type="button" data-v="700"><strong>£400–£900</strong><span>Premium walk-behind, top cordless, used Honda/Hayter.</span></button>
+        <button type="button" data-v="1500"><strong>£900+</strong><span>Best-in-class new, big cordless, smaller robotic, used ride-on.</span></button>
+      </div>
+    </div>
+
+    <div class="fmm-q">
+      <div class="fmm-step">Step 4 of 6</div>
+      <h2 class="fmm-h">What matters most to you?</h2>
+      <div class="fmm-opts" data-name="priority">
+        <button type="button" data-v="quiet"><strong>Quiet</strong><span>I mow in a built-up area. Neighbours, baby asleep, etc.</span></button>
+        <button type="button" data-v="lowmaint"><strong>Low maintenance</strong><span>I don't want to mess with petrol, oil, or filters.</span></button>
+        <button type="button" data-v="stripes"><strong>Stripes &amp; finish</strong><span>I want a proper lawn-show stripe and a fine cut.</span></button>
+        <button type="button" data-v="effort"><strong>No effort</strong><span>Set it and forget it — robotic or self-propelled please.</span></button>
+        <button type="button" data-v="power"><strong>Raw power</strong><span>Big or rough lawn, long grass, gets through anything.</span></button>
+        <button type="button" data-v="value"><strong>Best value</strong><span>I want the most mower per pound, new or used.</span></button>
+      </div>
+    </div>
+
+    <div class="fmm-q">
+      <div class="fmm-step">Step 5 of 6</div>
+      <h2 class="fmm-h">New or used?</h2>
+      <div class="fmm-opts" data-name="condition">
+        <button type="button" data-v="new"><strong>New only</strong><span>Warranty, receipt, no surprises.</span></button>
+        <button type="button" data-v="either"><strong>Either</strong><span>Open to a good used buy from Marketplace or eBay.</span></button>
+        <button type="button" data-v="used"><strong>Used only</strong><span>Budget is tight or I prefer second-hand for environmental reasons.</span></button>
+      </div>
+    </div>
+
+    <div class="fmm-q">
+      <div class="fmm-step">Step 6 of 6</div>
+      <h2 class="fmm-h">Power source preference?</h2>
+      <p class="fmm-hint">We'll suggest based on your other answers if you're not sure.</p>
+      <div class="fmm-opts" data-name="power">
+        <button type="button" data-v="any"><strong>Show me what fits</strong><span>No strong preference — recommend what suits the lawn.</span></button>
+        <button type="button" data-v="petrol"><strong>Petrol</strong><span>Or you've got a big rough lawn and want the runtime.</span></button>
+        <button type="button" data-v="cordless"><strong>Cordless</strong><span>Quiet, no fuel, no cord, swap-able batteries.</span></button>
+        <button type="button" data-v="electric"><strong>Corded electric</strong><span>Cheap, light, reliable — power point nearby.</span></button>
+        <button type="button" data-v="robotic"><strong>Robotic</strong><span>The mower mows itself, you mow nothing.</span></button>
+        <button type="button" data-v="rideon"><strong>Ride-on</strong><span>Big lawn, hate walking, want the sit-down option.</span></button>
+      </div>
+    </div>
+
+  </form>
+
+  <section id="fmm-results" class="fmm-results" hidden>
+    <div class="fmm-results-head">
+      <div class="brand-eyebrow">Your matches</div>
+      <h2 class="fmm-h">Top 3 mowers for your garden.</h2>
+      <p id="fmm-summary" class="fmm-summary"></p>
+    </div>
+    <div id="fmm-cards" class="feat-grid"></div>
+    <div style="margin-top:24px;text-align:center">
+      <button type="button" id="fmm-restart" class="btn btn-secondary">Start over</button>
+      <a class="btn btn-accent" href="/browse" style="margin-left:8px">Browse all ${mowers.length} mowers</a>
+    </div>
+    <p class="fmm-disclaim">These picks are pulled from our catalogue by matching your answers to each mower's specs, value score, owner rating, and used-market resilience. They are recommendations, not gospel — read the full mower page before you buy.</p>
+  </section>
+</main>
+
+<script>
+window.__MOWERS_FOR_QUIZ = ${JSON.stringify(mowers.map(m => ({
+  id: m.id, brand: m.brand, model: m.model, type: m.type, typeSlug: m.typeSlug,
+  rrp: m.rrp, buyNow: m.buyNow, usedAvg: m.usedAvg,
+  rating: m.rating, valueScore: m.valueScore, lawnSize: m.lawnSize,
+  noiseDb: m.noiseDb, selfPropelled: m.selfPropelled, roller: m.roller,
+  tagline: m.tagline, weight: m.weight, cutWidth: m.cutWidth,
+  m2: m.m2
+})))};
+</script>
+<script src="/find-my-mower.js" defer></script>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
 // ---------- Sitemap ----------
 function renderSitemap() {
   const today = new Date().toISOString().split('T')[0];
@@ -2112,11 +2760,20 @@ function renderSitemap() {
     { loc: '/sound-levels', priority: '0.7', changefreq: 'monthly' },
     { loc: '/seasonality', priority: '0.75', changefreq: 'yearly' },
     { loc: '/blog', priority: '0.9', changefreq: 'weekly' },
-    { loc: '/credits', priority: '0.2', changefreq: 'monthly' },
+    { loc: '/find-my-mower', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/contact', priority: '0.5', changefreq: 'yearly' },
+    { loc: '/editorial', priority: '0.6', changefreq: 'yearly' },
     { loc: '/privacy', priority: '0.3', changefreq: 'yearly' },
+    { loc: '/cookies', priority: '0.3', changefreq: 'yearly' },
+    { loc: '/terms', priority: '0.3', changefreq: 'yearly' },
     ...Object.keys(CATEGORIES).map(t => ({ loc: '/' + CATEGORIES[t].slug, priority: '0.8', changefreq: 'monthly' })),
-    ...Object.keys(BRANDS).map(b => ({ loc: brandUrl(b), priority: '0.6', changefreq: 'monthly' })),
+    ...Object.keys(BRANDS)
+      .filter(b => mowers.filter(m => m.brand === b).length >= 2)
+      .map(b => ({ loc: brandUrl(b), priority: '0.6', changefreq: 'monthly' })),
     ...mowers.map(m => ({ loc: mowerUrl(m), priority: '0.7', changefreq: 'monthly' })),
+    // Single-model brand pages are noindexed; omit from sitemap too.
+    // (Already filtered above by Object.keys(BRANDS) — single-model brands stay listed
+    // but search engines obey the noindex header.)
     ...BEST_OF.map(cfg => ({ loc: bestOfUrl(cfg.slug), priority: '0.7', changefreq: 'monthly' })),
     ...COMPARISONS
       .filter(([a, b]) => mowers.find(m => m.id === a) && mowers.find(m => m.id === b))
@@ -2191,6 +2848,12 @@ writeFileSync(join(ROOT, 'vintage.html'), renderVintagePage()); written++;
 writeFileSync(join(ROOT, 'sound-levels.html'), renderSoundLevelsPage()); written++;
 writeFileSync(join(ROOT, 'seasonality.html'), renderSeasonalityPage()); written++;
 writeFileSync(join(ROOT, 'blog.html'), renderBlogIndex()); written++;
+writeFileSync(join(ROOT, 'contact.html'), renderContactPage()); written++;
+writeFileSync(join(ROOT, 'editorial.html'), renderEditorialPage()); written++;
+writeFileSync(join(ROOT, 'privacy.html'), renderPrivacyPage()); written++;
+writeFileSync(join(ROOT, 'cookies.html'), renderCookiesPage()); written++;
+writeFileSync(join(ROOT, 'terms.html'), renderTermsPage()); written++;
+writeFileSync(join(ROOT, 'find-my-mower.html'), renderFindMyMowerPage()); written++;
 
 clean(join(ROOT, 'vs'));
 clean(join(ROOT, 'best'));
@@ -2240,4 +2903,4 @@ console.log(`  ${comparisonPagesWritten} comparison pages`);
 console.log(`  ${bestOfPagesWritten} best-of pages`);
 console.log(`  ${blogPostsWritten} blog posts + 1 index`);
 console.log(`  ${enginePagesWritten} engine deep-dives + 1 hub`);
-console.log(`  6 misc (about, buying-guide, credits, sitemap, mowers-spa.json, robots.txt)`);
+console.log(`  12 misc (about, buying-guide, credits, contact, editorial, privacy, cookies, terms, find-my-mower, sitemap, mowers-spa.json, robots.txt)`);

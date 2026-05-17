@@ -1,11 +1,15 @@
 {
   "name": "mowright-uk",
   "version": "1.0.0",
-  "description": "UK lawnmower price guide and comparison tool.",
+  "description": "UK lawnmower price guide, comparison tool, and seller marketplace.",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
     "rebuild": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "stripe": "^17.0.0"
   }
 }

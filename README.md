@@ -6,13 +6,29 @@ Single-page web app for buyers checking secondhand lawnmower listings on Faceboo
 
 ## Pages
 
+- **`/marketplace`** — public listings grid (used mowers from UK owners), with type / condition / price / search filters
+- **`/sell`** — seller flow: magic-link auth → listing form with photos → Stripe Checkout (£2.99 flat) → goes live for 30 days. Setup steps in `MARKETPLACE_SETUP.md`.
+- **`/listing?id=…`** — listing detail with native-share + WhatsApp / Facebook / X / Reddit / Email share buttons
+- **`/account`** — seller's "My listings" dashboard (pay for drafts, copy share link, mark sold, delete)
 - **`/`** — single-page browse with filters, search, slide-out detail panel, and side-by-side compare
-- **`/mower/<brand>-<model>`** — full standalone page per mower (one of 72) with verdict, marketplace tip, pros/cons, full specs, structured data, and related mowers
+- **`/mower/<brand>-<model>`** — full standalone page per mower (one of 151) with verdict, marketplace tip, pros/cons, full specs, structured data, and related mowers
 - **`/<category>`** — category landing pages: `/petrol`, `/electric`, `/cordless`, `/hover`, `/robotic`, `/ride-on`, `/manual`. Each has a category-specific buying guide plus all models in that category
-- **`/brand/<slug>`** — brand landing pages (32 brands) with parent group, UK position, and all models from that brand
+- **`/brand/<slug>`** — brand landing pages (37 brands) with parent group, UK position, and all models from that brand. Single-model brand pages are `noindex` (low-content avoidance).
+- **`/find-my-mower`** — 6-question quiz that recommends 3 mowers from the catalogue based on lawn size, terrain, budget, priority, condition and power preference
 - **`/buying-guide`** — buying guide hub indexing all category guides plus universal Marketplace tips
-- **`/about`** — what MowRight is, where the prices come from, brand and category indexes
-- **`/privacy`** — privacy policy
+- **`/blog`** — long-form articles and inspection guides
+- **`/engines`** — engine deep-dives (Honda GCV, Briggs, Kawasaki, Stiga, Loncin)
+- **`/best/<slug>`** — curated best-of rankings (quietest robotic, best used bargain, etc.)
+- **`/vs/<a>-vs-<b>`** — head-to-head comparison pages
+- **`/about`** — who runs MowRight, methodology, brand index, named-editor byline
+- **`/editorial`** — full editorial policy and research methodology
+- **`/contact`** — contact page with editorial and general inboxes, publisher address
+- **`/privacy`** — privacy policy (UK GDPR)
+- **`/cookies`** — cookie policy with full named-cookie table
+- **`/terms`** — terms of use
+- **`/credits`** — image attributions (Wikimedia CC BY-SA)
+
+The site ships with a cookie-consent banner (`mw_consent` cookie, 12-month lifetime) that defaults to no advertising cookies until accepted.
 
 ## Tech
 
