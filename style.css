@@ -1981,6 +1981,102 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 /* ============================================================================
+   Marketplace coming-soon elements (pill, ghost cards, waitlist blocks)
+   ============================================================================ */
+
+.mw-soon-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent-deep); color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 6px 12px; border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(15, 61, 46, 0.20);
+}
+.mw-soon-pill::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(95, 184, 120, 0.25);
+  animation: mwSoonPulse 1.8s ease-in-out infinite;
+}
+@keyframes mwSoonPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(95, 184, 120, 0.25); }
+  50%      { box-shadow: 0 0 0 8px rgba(95, 184, 120, 0.10); }
+}
+
+.mw-soon-cta {
+  display: flex; gap: 12px; margin: 22px 0 10px;
+  flex-wrap: wrap;
+}
+.mw-soon-note {
+  margin: 8px 0 0; font-size: 13px; color: var(--muted);
+}
+.mw-soon-disclaim {
+  margin: 18px 0 8px; font-size: 12px; color: var(--muted);
+  font-style: italic;
+}
+
+/* Standalone soon card (account, listing fallback) */
+.mw-soon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 36px 32px;
+  box-shadow: 0 1px 0 rgba(15, 31, 15, 0.02), 0 12px 32px rgba(15, 31, 15, 0.05);
+  text-align: center;
+}
+.mw-soon-card .lead { max-width: 560px; margin-left: auto; margin-right: auto; }
+.mw-soon-card .btn-row { justify-content: center; }
+@media (max-width: 560px) {
+  .mw-soon-card { padding: 28px 22px; border-radius: 14px; }
+}
+
+/* Soon block (callout, full-width inside main) */
+.mw-soon-block {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, #f0f5ec 100%);
+  border: 1px solid #d8e6d4;
+  border-radius: 18px;
+  padding: 36px 40px;
+  margin: 56px 0 24px;
+}
+.mw-soon-block-in { max-width: 640px; }
+.mw-soon-block .lead { margin: 6px 0 0; color: var(--ink-sub); }
+@media (max-width: 560px) {
+  .mw-soon-block { padding: 26px 22px; border-radius: 14px; margin: 36px 0 16px; }
+}
+
+/* Preview / ghost listing cards */
+.mw-soon-preview { margin-top: 32px; }
+.mw-mp-card--ghost {
+  pointer-events: none;
+  position: relative;
+}
+.mw-mp-card--ghost .mw-mp-art {
+  filter: grayscale(40%) brightness(0.95);
+}
+.mw-soon-overlay {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15, 61, 46, 0.92);
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 8px 14px; border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(15, 61, 46, 0.30);
+  z-index: 2;
+}
+
+.mw-soon-list {
+  margin: 14px 0 0 22px;
+  padding: 0;
+  font-size: 15px; line-height: 1.7;
+  color: var(--ink);
+}
+.mw-soon-list li { margin-bottom: 4px; }
+
+/* ============================================================================
    Marketplace — /sell, /marketplace, /listing, /account
    ============================================================================ */
 

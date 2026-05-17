@@ -4,25 +4,18 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#f8faf7"/>
-<title id="page-title">Listing — MowRight UK Marketplace</title>
-<meta name="description" id="page-desc" content="Used lawnmower for sale on MowRight UK Marketplace."/>
-<link rel="canonical" href="https://mowright.co.uk/listing" id="page-canonical"/>
-<meta name="robots" content="index, follow"/>
-<meta property="og:type" content="product"/>
-<meta property="og:site_name" content="MowRight UK"/>
-<meta property="og:title" content="Used lawnmower on MowRight UK Marketplace" id="og-title"/>
-<meta property="og:description" content="Used lawnmower for sale on MowRight UK Marketplace." id="og-desc"/>
-<meta property="og:image" content="https://mowright.co.uk/og.png" id="og-image"/>
-<meta name="twitter:card" content="summary_large_image"/>
-
-<meta name="mw-supabase-url" content="__SUPABASE_URL__"/>
-<meta name="mw-supabase-anon-key" content="__SUPABASE_ANON_KEY__"/>
+<title>Listing, opening soon, MowRight UK Marketplace</title>
+<meta name="description" content="MowRight UK Marketplace is opening soon. Individual seller listings will appear here at launch."/>
+<link rel="canonical" href="https://mowright.co.uk/listing"/>
+<meta name="robots" content="noindex, nofollow"/>
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="manifest" href="/site.webmanifest"/>
 <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="stylesheet" href="/fonts/fonts.css"/>
 <link rel="stylesheet" href="/style.css"/>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -45,70 +38,23 @@
   </div>
 </header>
 
-<main id="main" class="page page--wide">
+<main id="main" class="page page--narrow" style="max-width:760px;padding-top:48px;padding-bottom:80px">
 
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="/marketplace">Marketplace</a><span class="sep">›</span>
-    <span id="crumb-current" aria-current="page">Listing</span>
+    <span aria-current="page">Listing</span>
   </nav>
 
-  <div id="loading" class="mw-card"><p class="mw-status">Loading listing…</p></div>
+  <div class="mw-soon-card">
+    <span class="mw-soon-pill">Opening soon · Q3 2026</span>
+    <h1 class="section-h2" style="margin:14px 0 8px;font-size:28px">Individual listings open with the marketplace.</h1>
+    <p class="lead">From launch, each seller listing will live on its own page with photos, condition, location, and one-tap share buttons for WhatsApp, Facebook, X and copy-link. Join the waitlist to be notified when the first listings drop.</p>
 
-  <div id="missing" hidden class="mw-card">
-    <h2 class="section-h2">Listing not found.</h2>
-    <p>This listing may have expired, been sold, or been removed by the seller.</p>
-    <p><a href="/marketplace" class="btn btn-accent">Browse all listings →</a></p>
+    <div class="btn-row" style="margin-top:22px">
+      <a class="btn btn-accent" href="mailto:hello@mowright.co.uk?subject=MowRight%20Marketplace%20-%20buyer%20waitlist&body=Hi%2C%0A%0APlease%20add%20me%20to%20the%20MowRight%20Marketplace%20buyer%20waitlist.%20%0A%0AI%27m%20looking%20for%3A%20%5Bbrand%20%2B%20model%20or%20type%5D%0A%0AThanks%21">Join the buyer waitlist →</a>
+      <a class="btn btn-secondary" href="/marketplace">Back to marketplace</a>
+    </div>
   </div>
-
-  <article id="listing" hidden class="mw-listing">
-
-    <div class="mw-listing-gallery">
-      <div class="mw-listing-main"><img id="main-photo" alt=""/></div>
-      <div class="mw-listing-thumbs" id="thumbs"></div>
-    </div>
-
-    <div class="mw-listing-side">
-      <span class="feat-badge" id="badge"></span>
-      <h1 id="title" class="mw-listing-title"></h1>
-      <div class="mw-listing-price" id="price"></div>
-
-      <dl class="mw-listing-specs">
-        <div><dt>Condition</dt><dd id="s-condition"></dd></div>
-        <div><dt>Type</dt><dd id="s-type"></dd></div>
-        <div><dt>Brand</dt><dd id="s-brand"></dd></div>
-        <div><dt>Model</dt><dd id="s-model"></dd></div>
-        <div><dt>Year</dt><dd id="s-year"></dd></div>
-        <div><dt>Hours</dt><dd id="s-hours"></dd></div>
-        <div><dt>Location</dt><dd id="s-location"></dd></div>
-        <div><dt>Listed</dt><dd id="s-listed"></dd></div>
-      </dl>
-
-      <div class="mw-listing-contact">
-        <h3>Contact the seller</h3>
-        <p class="mw-muted-note">MowRight does not handle payment between buyer and seller. Arrange viewing or pickup directly.</p>
-        <p id="contact-email"></p>
-        <p id="contact-phone"></p>
-      </div>
-
-      <div class="mw-listing-share">
-        <h3>Share this listing</h3>
-        <div class="mw-share-buttons" id="share-buttons"></div>
-        <button type="button" id="copy-link" class="btn btn-secondary mw-share-copy">Copy link</button>
-        <span id="copy-status" class="mw-status" hidden></span>
-      </div>
-    </div>
-
-    <section class="mw-listing-desc">
-      <h2 class="section-h2">About this mower</h2>
-      <p id="description"></p>
-    </section>
-
-    <section class="mw-listing-research" id="research-block" hidden>
-      <h2 class="section-h2">MowRight research on this model</h2>
-      <p>We track this model in our independent UK price guide. Compare it against new and used averages before you offer.</p>
-      <a id="research-link" class="btn btn-accent" href="#">See full research →</a>
-    </section>
-  </article>
 
 </main>
 
@@ -127,7 +73,7 @@
         <ul>
           <li><a href="/marketplace">Browse listings</a></li>
           <li><a href="/sell">Sell your mower</a></li>
-          <li><a href="/account">My listings</a></li>
+          <li><a href="mailto:hello@mowright.co.uk?subject=MowRight%20Marketplace%20waitlist">Join waitlist</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -151,171 +97,6 @@
     </div>
   </div>
 </footer>
-
-<script type="module">
-import {
-  fetchListingById, publicImageUrl, fmtGBP, fmtDate,
-  listingPublicUrl, shareTargets, nativeShare, copyToClipboard, escapeHtml,
-} from '/marketplace.js';
-
-const id = new URLSearchParams(location.search).get('id');
-const loading = document.getElementById('loading');
-const missing = document.getElementById('missing');
-const article = document.getElementById('listing');
-
-if (!id) {
-  loading.hidden = true; missing.hidden = false;
-} else {
-  boot(id);
-}
-
-async function boot(id) {
-  try {
-    const { listing, images } = await fetchListingById(id);
-    if (!listing || (listing.status !== 'live' && listing.status !== 'sold')) {
-      loading.hidden = true; missing.hidden = false; return;
-    }
-    render(listing, images);
-    loading.hidden = true; article.hidden = false;
-  } catch (e) {
-    console.error(e);
-    loading.hidden = true; missing.hidden = false;
-  }
-}
-
-function render(l, images) {
-  // Head
-  const url = listingPublicUrl(l.id);
-  const title = `${l.title} — £${(l.price_pence / 100).toFixed(0)} | MowRight UK`;
-  const desc = `${l.brand} ${l.model} (${l.condition}) for sale in ${l.postcode_area}${l.town ? ', ' + l.town : ''}. ${fmtGBP(l.price_pence)} on MowRight UK Marketplace.`;
-
-  document.getElementById('page-title').textContent = title;
-  document.getElementById('page-desc').setAttribute('content', desc);
-  document.getElementById('page-canonical').setAttribute('href', url);
-  document.getElementById('og-title').setAttribute('content', title);
-  document.getElementById('og-desc').setAttribute('content', desc);
-
-  // Crumb
-  document.getElementById('crumb-current').textContent = l.title;
-
-  // Gallery
-  const mainImg = document.getElementById('main-photo');
-  const firstUrl = images[0] ? publicImageUrl(images[0].storage_path) : '/og.png';
-  mainImg.src = firstUrl;
-  mainImg.alt = l.title;
-  document.getElementById('og-image').setAttribute('content', firstUrl);
-
-  const thumbs = document.getElementById('thumbs');
-  thumbs.innerHTML = images.map((img, i) => {
-    const u = publicImageUrl(img.storage_path);
-    return `<button type="button" class="mw-thumb${i === 0 ? ' is-active' : ''}" data-src="${u}"><img src="${u}" alt=""/></button>`;
-  }).join('');
-  thumbs.addEventListener('click', (e) => {
-    const btn = e.target.closest('.mw-thumb');
-    if (!btn) return;
-    mainImg.src = btn.dataset.src;
-    thumbs.querySelectorAll('.mw-thumb').forEach(b => b.classList.toggle('is-active', b === btn));
-  });
-
-  // Badge
-  const badge = document.getElementById('badge');
-  const typeSlug = ({ 'Push': 'manual', 'Ride-on': 'rideon' }[l.mower_type] || (l.mower_type || '').toLowerCase());
-  badge.className = `feat-badge t-${typeSlug}`;
-  badge.textContent = l.mower_type;
-
-  // Title + price
-  document.getElementById('title').textContent = l.title;
-  document.getElementById('price').textContent = fmtGBP(l.price_pence) + (l.status === 'sold' ? ' · SOLD' : '');
-
-  // Specs
-  const set = (id, val) => {
-    const row = document.getElementById(id).parentElement;
-    if (val == null || val === '') { row.style.display = 'none'; return; }
-    document.getElementById(id).textContent = val;
-  };
-  set('s-condition', l.condition);
-  set('s-type', l.mower_type);
-  set('s-brand', l.brand);
-  set('s-model', l.model);
-  set('s-year', l.year);
-  set('s-hours', l.hours != null ? l.hours + ' hrs' : null);
-  set('s-location', l.postcode_area + (l.town ? ', ' + l.town : ''));
-  set('s-listed', fmtDate(l.paid_at || l.created_at));
-
-  // Contact
-  const ce = document.getElementById('contact-email');
-  const cp = document.getElementById('contact-phone');
-  if (l.contact_email) {
-    ce.innerHTML = `<strong>Email:</strong> <a href="mailto:${escapeHtml(l.contact_email)}?subject=${encodeURIComponent('MowRight listing: ' + l.title)}">${escapeHtml(l.contact_email)}</a>`;
-  } else ce.style.display = 'none';
-  if (l.contact_phone) {
-    cp.innerHTML = `<strong>Phone:</strong> <a href="tel:${escapeHtml(l.contact_phone)}">${escapeHtml(l.contact_phone)}</a>`;
-  } else cp.style.display = 'none';
-
-  // Description
-  document.getElementById('description').textContent = l.description;
-
-  // Research link (best-effort link to catalogue)
-  if (l.catalog_slug) {
-    document.getElementById('research-block').hidden = false;
-    document.getElementById('research-link').href = '/mower/' + l.catalog_slug;
-  }
-
-  // Share
-  const targets = shareTargets(l, url);
-  const wrap = document.getElementById('share-buttons');
-
-  if (navigator.share) {
-    const native = document.createElement('button');
-    native.type = 'button';
-    native.className = 'btn btn-accent mw-share-btn';
-    native.textContent = 'Share';
-    native.addEventListener('click', () => nativeShare(l, url));
-    wrap.appendChild(native);
-  }
-
-  for (const t of targets) {
-    const a = document.createElement('a');
-    a.className = `btn btn-secondary mw-share-btn mw-share-${t.id}`;
-    a.href = t.href;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.textContent = t.label;
-    wrap.appendChild(a);
-  }
-
-  document.getElementById('copy-link').addEventListener('click', async () => {
-    const ok = await copyToClipboard(url);
-    const s = document.getElementById('copy-status');
-    s.hidden = false;
-    s.textContent = ok ? 'Link copied.' : 'Copy failed — long-press the URL bar instead.';
-    s.className = 'mw-status ' + (ok ? 'mw-status--ok' : 'mw-status--err');
-    setTimeout(() => { s.hidden = true; }, 2500);
-  });
-
-  // JSON-LD product schema for SEO
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: l.title,
-    description: l.description.slice(0, 500),
-    image: firstUrl,
-    brand: { '@type': 'Brand', name: l.brand },
-    offers: {
-      '@type': 'Offer',
-      url,
-      priceCurrency: 'GBP',
-      price: (l.price_pence / 100).toFixed(2),
-      availability: l.status === 'live' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      itemCondition: l.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
-    },
-  };
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(ld);
-  document.head.appendChild(script);
-}
-</script>
 
 </body>
 </html>
