@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://mowright.co.uk/</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mowright.co.uk/og.png</image:loc>
+      <image:title>MowRight UK — UK lawnmower price comparison</image:title>
+      <image:caption>Independent UK lawnmower price guide and comparison site.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://mowright.co.uk/browse</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://mowright.co.uk/og.png</image:loc>
+      <image:title>Browse 176 UK lawnmowers</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mowright.co.uk/about</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://mowright.co.uk/og.png</image:loc>
+      <image:title>About MowRight UK</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mowright.co.uk/buying-guide</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://mowright.co.uk/og.png</image:loc>
+      <image:title>UK lawnmower buying guide — 5 questions, one mower</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mowright.co.uk/engines</loc>

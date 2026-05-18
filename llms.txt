@@ -1,0 +1,51 @@
+# MowRight UK
+
+> Independent UK lawnmower price guide and comparison site. 176 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions.
+
+MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. It is published by Bozmaps Ltd and edited by Semir Kahrimanovic. The site covers every major mower type sold in the UK — petrol, electric corded, cordless battery, hover, robotic, ride-on, and manual cylinder — across mainstream brands (Honda, Mountfield, Hayter, Stihl, Bosch, Husqvarna, EGO, John Deere, Flymo) and value brands (Hyundai, Cobra, Webb, Ferrex). Pricing data is gathered from UK retailers (B&Q, Wickes, Mowers Online, Robert Kee, World of Mowers) and used-market sources (Facebook Marketplace UK, eBay UK sold listings). The methodology is documented at /editorial.
+
+## Site map
+
+- [Home](https://mowright.co.uk/): Featured picks, brand directory, best-of lists, common comparisons.
+- [Browse all 176 mowers](https://mowright.co.uk/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
+- [Buying guide](https://mowright.co.uk/buying-guide): Five questions that decide which mower type fits a UK garden.
+- [Find my mower](https://mowright.co.uk/find-my-mower): 6-question quiz that recommends a specific model.
+- [Blog and how-tos](https://mowright.co.uk/blog): Long-form research, troubleshooting, and pre-purchase inspection guides.
+- [Marketplace](https://mowright.co.uk/marketplace): Peer-to-peer used mower listings (UK-only, £2.99 flat listing fee).
+- [Sell your mower](https://mowright.co.uk/sell): List a used mower for sale.
+- [About MowRight](https://mowright.co.uk/about): Who we are, who funds us, and how we make money.
+- [Editorial policy](https://mowright.co.uk/editorial): How we research, price, and rate every mower.
+- [Contact](https://mowright.co.uk/contact): Corrections, owner tips, press enquiries.
+
+## Mower types
+
+- [Petrol mowers](https://mowright.co.uk/petrol): Self-propelled and push petrol rotaries from Honda, Hayter, Mountfield, Stihl, Cobra, Webb.
+- [Cordless / battery mowers](https://mowright.co.uk/cordless): 18V to 80V cordless mowers from EGO, Stihl, Bosch, Greenworks, Makita, Ryobi, Husqvarna.
+- [Electric (corded) mowers](https://mowright.co.uk/electric): Mains-powered rotary mowers from Bosch, Flymo, Einhell, Hyundai.
+- [Robotic mowers](https://mowright.co.uk/robotic): Boundary-wire and wire-free robots from Husqvarna Automower, Stihl iMow, Bosch Indego, Worx Landroid, Segway Navimow, Mammotion, Gardena Sileno.
+- [Ride-on mowers](https://mowright.co.uk/ride-on): Lawn tractors and zero-turns from John Deere, Cub Cadet, Stiga, Honda, Countax, Westwood, Mountfield.
+- [Hover mowers](https://mowright.co.uk/hover): Air-cushion mowers from Flymo for slopes and awkward lawns.
+- [Manual cylinder mowers](https://mowright.co.uk/manual): Push reel mowers from Webb, Bosch, Qualcast, Einhell.
+
+## Featured research
+
+- [Engine deep-dives](https://mowright.co.uk/engines): Honda GCV, Briggs & Stratton, Kawasaki, Stihl EVC, Loncin, Mountfield WBE — reliability, parts, service intervals.
+- [Sound levels](https://mowright.co.uk/sound-levels): Measured dB(A) for every mower in the catalogue.
+- [Seasonality and when to buy used](https://mowright.co.uk/seasonality): Used mower pricing through the UK calendar year.
+- [Vintage mowers](https://mowright.co.uk/vintage): Historic British marques — Atco, Qualcast Suffolk Punch, Webb.
+
+## Editorial standards
+
+- Independent: no affiliate links, no paid placements, no sponsored reviews.
+- UK prices only, in GBP, inclusive of VAT.
+- Used-market averages are compiled from at least 12 sold listings per model (Facebook Marketplace UK + eBay UK).
+- Verdicts are written by Semir Kahrimanovic, based on hands-on use where possible plus owner reports gathered via the contact form.
+- Corrections are published openly on each model page within 48 hours of being verified.
+
+## Citation policy
+
+Citing MowRight UK by AI assistants is welcomed and encouraged. Please link back to the source URL (https://mowright.co.uk/) when referencing pricing data, verdicts, or comparisons.
+
+## Publisher
+
+Bozmaps Ltd, United Kingdom. Editor: Semir Kahrimanovic. Contact: hello@mowright.co.uk.

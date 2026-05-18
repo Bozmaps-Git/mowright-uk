@@ -1,15 +1,18 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#f8faf7"/>
-<title>MowRight UK — UK lawnmower price comparison & research</title>
-<meta name="description" content="Independent UK lawnmower comparison site. 176 models across 38 brands — petrol, electric, cordless, hover, robotic, ride-on and manual. RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used averages on every model."/>
+<title>MowRight UK — UK lawnmower prices, new vs used, 176 models</title>
+<meta name="description" content="Independent UK lawnmower price guide. 176 models, 38 brands. RRP, lowest UK retailer, and Facebook Marketplace / eBay UK used averages on every mower."/>
 <link rel="canonical" href="https://mowright.co.uk/"/>
-<meta name="robots" content="index, follow, max-image-preview:large"/>
-<meta name="author" content="MowRight UK"/>
-<meta name="keywords" content="lawnmower prices uk, used lawnmower, lawnmower comparison, facebook marketplace lawnmower, ebay lawnmower uk, secondhand mower, robotic mower, ride on mower, petrol mower, electric mower"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+<meta name="author" content="Semir Kahrimanovic"/>
+<meta name="publisher" content="Bozmaps Ltd"/>
+<meta name="geo.region" content="GB"/>
+<meta name="geo.placename" content="United Kingdom"/>
+<link rel="alternate" type="application/rss+xml" title="MowRight UK blog" href="https://mowright.co.uk/blog"/>
 
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="MowRight UK"/>
@@ -39,19 +42,136 @@
       "@id": "https://mowright.co.uk/#website",
       "url": "https://mowright.co.uk/",
       "name": "MowRight UK",
+      "alternateName": "MowRight",
       "description": "UK lawnmower price guide and comparison tool.",
       "inLanguage": "en-GB",
+      "publisher": { "@id": "https://mowright.co.uk/#organization" },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://mowright.co.uk/browse?q={search_term_string}",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://mowright.co.uk/browse?q={search_term_string}"
+        },
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@type": "Organization",
+      "@id": "https://mowright.co.uk/#organization",
       "name": "MowRight UK",
+      "alternateName": "MowRight",
       "url": "https://mowright.co.uk/",
-      "logo": "https://mowright.co.uk/og.png"
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://mowright.co.uk/og.png",
+        "width": 1200,
+        "height": 630
+      },
+      "image": "https://mowright.co.uk/og.png",
+      "email": "hello@mowright.co.uk",
+      "founder": { "@id": "https://mowright.co.uk/#founder" },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Bozmaps Ltd",
+        "url": "https://bozmaps.com/"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "knowsAbout": [
+        "Lawnmowers",
+        "Petrol lawnmowers",
+        "Cordless lawnmowers",
+        "Electric lawnmowers",
+        "Robotic lawnmowers",
+        "Ride-on mowers",
+        "Hover mowers",
+        "Manual cylinder mowers",
+        "UK lawnmower prices",
+        "Facebook Marketplace pricing",
+        "eBay UK used mower pricing",
+        "Honda GCV engines",
+        "Briggs and Stratton engines",
+        "Kawasaki mower engines"
+      ],
+      "sameAs": [
+        "https://bozmaps.com/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mowright.co.uk/#founder",
+      "name": "Semir Kahrimanovic",
+      "jobTitle": "Editor",
+      "worksFor": { "@id": "https://mowright.co.uk/#organization" },
+      "url": "https://mowright.co.uk/about",
+      "sameAs": ["https://bozmaps.com/"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mowright.co.uk/#webpage",
+      "url": "https://mowright.co.uk/",
+      "name": "MowRight UK — UK lawnmower prices, new vs used, 176 models",
+      "isPartOf": { "@id": "https://mowright.co.uk/#website" },
+      "about": { "@id": "https://mowright.co.uk/#organization" },
+      "inLanguage": "en-GB",
+      "primaryImageOfPage": "https://mowright.co.uk/og.png",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", ".hp-lead", "[data-speakable]"]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mowright.co.uk/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the best lawnmower brand in the UK?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most UK lawns under half an acre, the answer depends on power source. Honda is the most reliable petrol brand, lasting 20+ years. Hayter is the premium British alternative. For cordless, EGO has overtaken petrol on cut quality. For budget, Mountfield SP46 is the bestseller. For robotic, Husqvarna Automower has 15-year build quality. MowRight UK compares 176 models across 38 brands with new and used prices on every one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much should I pay for a used lawnmower in the UK?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Used UK lawnmower prices on Facebook Marketplace and eBay UK typically run 40 to 55 percent of new RRP for petrol mowers in good condition, 50 to 60 percent for cordless (battery condition is the main risk), and 60 to 70 percent for robotic mowers. A used Honda HRX 476 VY averages around £550 against an £899 RRP. A used Mountfield SP46 averages £140 against £279. MowRight UK lists three prices on every mower: RRP, lowest UK retailer, and used average."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is MowRight UK independent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. MowRight UK takes no affiliate commissions, no sponsored reviews, and no paid placements. The site is funded by Google AdSense and a £2.99 flat fee on peer-to-peer marketplace listings. Editorial policy is published at mowright.co.uk/editorial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Petrol or cordless mower — which is better for a UK garden?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most UK gardens under a third of an acre, cordless has caught up with petrol on cut quality and beats it on running cost, noise, and storage. Petrol still wins for lawns over half an acre, wet long grass, and anywhere you cannot recharge. The crossover point is roughly 1,000 square metres. Specific picks by lawn size are at mowright.co.uk/buying-guide."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When is the best time to buy a used lawnmower in the UK?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "October and November are the cheapest months on Facebook Marketplace and eBay UK — typical discounts of 15 to 25 percent below the annual average. March and April are the most expensive. The full seasonality breakdown is at mowright.co.uk/seasonality."
+          }
+        }
+      ]
     }
   ]
 }

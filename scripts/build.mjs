@@ -591,7 +591,7 @@ function photoCredit(m) {
 // ogImage may be an absolute URL (e.g. blog hero) or a site-relative path like '/og.png'.
 const absUrl = u => /^https?:\/\//.test(u) ? u : (SITE + u);
 const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'article', ldjson = null, noindex = false }) => `<!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
