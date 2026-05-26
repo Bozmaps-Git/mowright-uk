@@ -595,14 +595,34 @@ function photoCredit(m) {
 // ---------- Common chrome ----------
 // ogImage may be an absolute URL (e.g. blog hero) or a site-relative path like '/og.png'.
 const absUrl = u => /^https?:\/\//.test(u) ? u : (SITE + u);
+
+// Truncate at a word boundary so meta tags fit SERP display limits.
+// Google truncates titles at ~60 chars and descriptions at ~160 chars.
+const seoTitle = t => {
+  if (!t || t.length <= 65) return t;
+  // Drop trailing " — MowRight UK" / " | MowRight" tails first.
+  const stripped = t.replace(/\s*[—|]\s*MowRight(\s*UK)?\s*$/, '');
+  if (stripped.length <= 65) return stripped;
+  // Otherwise hard-truncate at the last space before 60 chars.
+  const cut = stripped.slice(0, 60);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 30 ? cut.slice(0, lastSpace) : cut) + '…';
+};
+const seoDescription = d => {
+  if (!d || d.length <= 165) return d;
+  const cut = d.slice(0, 160);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 100 ? cut.slice(0, lastSpace) : cut) + '…';
+};
+
 const head = ({ title, description, canonical, ogImage = '/og.png', ogType = 'article', ldjson = null, noindex = false }) => `<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#f8faf7"/>
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(description)}"/>
+<title>${esc(seoTitle(title))}</title>
+<meta name="description" content="${esc(seoDescription(description))}"/>
 <link rel="canonical" href="${esc(SITE + canonical)}"/>
 <meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}"/>
 <meta property="og:type" content="${esc(ogType)}"/>
@@ -897,9 +917,13 @@ function renderMowerPage(m) {
     [m.model, null]
   ]);
 
+  // Keep title under ~60 chars so it does not truncate in Google SERPs.
+  // Long model names get the shorter "review" tail; short names get the full one.
+  const fullTitle = `${m.brand} ${m.model} — UK price, used vs new & verdict`;
+  const shortTitle = `${m.brand} ${m.model} — UK price & review`;
   return `${head({
-    title: `${m.brand} ${m.model} — UK price, used vs new & verdict`,
-    description: `${m.brand} ${m.model}: ${m.buyNow > 0 ? 'new ' + fmtGBP(m.buyNow) + ', ' : ''}used Marketplace average ${fmtGBP(m.usedAvg)}. Specs, expert verdict, pros and cons, and a marketplace buying tip.`,
+    title: fullTitle.length <= 65 ? fullTitle : shortTitle,
+    description: `${m.brand} ${m.model}: ${m.buyNow > 0 ? 'new ' + fmtGBP(m.buyNow) + ', ' : ''}used average ${fmtGBP(m.usedAvg)}. Specs, verdict, and a buying tip.`,
     canonical: mowerUrl(m),
     ogImage: m.img || '/og.png',
     ogType: 'product',
@@ -1632,9 +1656,17 @@ function renderComparisonPage(idA, idB, verdict) {
     ['Comparisons', null],
     [`${a.brand} ${a.model} vs ${b.brand} ${b.model}`, null]
   ]);
+  // Build a title that stays under ~60 chars for SERP display.
+  // Drop the brand prefix from side B when both sides share the same brand
+  // (e.g. "Kubota Z421 vs Z724" instead of "Kubota Z421 vs Kubota Z724").
+  const titleSubject = a.brand === b.brand
+    ? `${a.brand} ${a.model} vs ${b.model}`
+    : `${a.brand} ${a.model} vs ${b.brand} ${b.model}`;
+  const titleFull = `${titleSubject} — UK comparison`;
+  const titleCompact = `${titleSubject} comparison`;
   return `${head({
-    title: `${a.brand} ${a.model} vs ${b.brand} ${b.model} — UK comparison`,
-    description: `Side-by-side comparison: ${a.brand} ${a.model} vs ${b.brand} ${b.model}. UK prices, full specs, pros and cons of each, and a verdict on which to buy.`,
+    title: titleFull.length <= 65 ? titleFull : titleCompact,
+    description: `${a.brand} ${a.model} vs ${b.brand} ${b.model}: UK prices, full specs, and a verdict on which to buy.`,
     canonical: compUrl(idA, idB),
     ogImage: a.img || b.img || '/og.png',
     ldjson: breadcrumbLD
@@ -1928,8 +1960,27 @@ function renderBlogPost(post) {
     }))
   } : null;
 
+  // HowTo schema for step-by-step guides — earns rich snippets in Google.
+  // Triggered when the post title starts with "How to" AND the post has
+  // sections whose headings start with a step number (e.g. "1. Drain the oil").
+  const isHowTo = /^how to\b/i.test(post.title);
+  const stepSections = (post.sections || []).filter(s => /^\s*\d+[.)]/.test(s.h || ''));
+  const howToSchema = (isHowTo && stepSections.length >= 3) ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: post.title,
+    description: post.description,
+    ...(post.image ? { image: post.image } : {}),
+    step: stepSections.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: (s.h || '').replace(/^\s*\d+[.)]\s*/, ''),
+      text: (s.p || []).join(' ').replace(/\*\*/g, '')
+    }))
+  } : null;
+
   const breadcrumbLD = crumbsLD([['Browse', '/browse'], ['Blog', '/blog'], [post.title, null]]);
-  const ld = [articleSchema, breadcrumbLD, ...(faqSchema ? [faqSchema] : [])];
+  const ld = [articleSchema, breadcrumbLD, ...(faqSchema ? [faqSchema] : []), ...(howToSchema ? [howToSchema] : [])];
 
   // Internal-link mowers from related[]
   const related = (post.related || []).map(id => mowers.find(m => m.id === id)).filter(Boolean);
@@ -2019,8 +2070,8 @@ function renderEnginePage(engine) {
   };
 
   return `${head({
-    title: `${engine.name} — UK service guide, common faults & parts | MowRight`,
-    description: `${engine.headline}. ${engine.architecture}, ${engine.displacement}. Service intervals, fault timeline by age, parts cost reference, and the ${using.length} UK mower${using.length === 1 ? '' : 's'} this engine powers.`,
+    title: `${engine.name} — UK service guide & parts`,
+    description: `${engine.architecture}, ${engine.displacement}. Service intervals, fault timeline by age, parts costs, and the ${using.length} UK mower${using.length === 1 ? '' : 's'} it powers.`,
     canonical: engineUrl(engine),
     ldjson: [breadcrumbLD, articleLD]
   })}
@@ -2806,6 +2857,101 @@ ${urls.map(u => `  <url>
 `;
 }
 
+// ---------- llms.txt (AI-search index) ----------
+// Rich, regenerated-on-build index for ChatGPT, Claude, Perplexity, etc.
+// Format follows https://llmstxt.org/ — markdown with site sections and links.
+function renderLlmsTxt() {
+  const numMowers = mowers.length;
+  const numBrands = Object.keys(BRANDS).filter(b => mowers.filter(m => m.brand === b).length >= 2).length;
+  const numComparisons = COMPARISONS.filter(([a, b]) => mowers.find(m => m.id === a) && mowers.find(m => m.id === b)).length;
+  const numBestOf = BEST_OF.length;
+  const numEngines = ENGINES.length;
+  const numBlog = BLOG_POSTS.length;
+
+  // Group mowers by brand for the brand directory.
+  const brandList = Object.keys(BRANDS)
+    .filter(b => mowers.filter(m => m.brand === b).length >= 2)
+    .sort();
+
+  // Mower-type buckets.
+  const typeBuckets = Object.keys(CATEGORIES).map(t => ({
+    name: CATEGORIES[t].name,
+    slug: CATEGORIES[t].slug,
+    blurb: CATEGORIES[t].desc || '',
+    count: mowers.filter(m => m.type === t).length
+  })).filter(b => b.count > 0);
+
+  // Highest-traffic best-of pages.
+  const featuredBestOf = BEST_OF.slice(0, 30);
+
+  return `# MowRight UK
+
+> Independent UK lawnmower price guide and comparison site. ${numMowers} lawnmower models across ${numBrands} brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions. Plus ${numComparisons} head-to-head comparison pages, ${numBestOf} best-of category pages, ${numEngines} engine deep-dives, and ${numBlog} long-form blog and inspection guides.
+
+MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. It is published by Bozmaps Ltd and edited by Semir Kahrimanovic. The site covers every major mower type sold in the UK — petrol, electric corded, cordless battery, hover, robotic, ride-on, and manual cylinder — across mainstream brands (Honda, Mountfield, Hayter, Stihl, Bosch, Husqvarna, EGO, John Deere, Kubota, Flymo) and value brands (Hyundai, Cobra, Webb, Ferrex, Parkside, Mac Allister). Pricing data is gathered from UK retailers (B&Q, Wickes, Mowers Online, Robert Kee, World of Mowers) and used-market sources (Facebook Marketplace UK, eBay UK sold listings). Methodology documented at /editorial.
+
+## Site sections
+
+- [Home](${SITE}/): Featured picks, brand directory, best-of lists, common comparisons.
+- [Browse all ${numMowers} mowers](${SITE}/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
+- [Buying guide](${SITE}/buying-guide): Five questions that decide which mower type fits a UK garden.
+- [Find my mower](${SITE}/find-my-mower): 6-question quiz that recommends a specific model.
+- [Blog and how-tos](${SITE}/blog): ${numBlog} long-form posts including pre-purchase inspection guides and maintenance how-tos.
+- [Engine deep-dives](${SITE}/engines): ${numEngines} engine families covered with reliability, service intervals, parts costs.
+- [Marketplace](${SITE}/marketplace): Peer-to-peer used mower listings (UK-only, £2.99 flat listing fee).
+- [About](${SITE}/about): Who we are, who funds us, and how we make money.
+- [Editorial policy](${SITE}/editorial): How we research, price, and rate every mower.
+
+## Mower types
+
+${typeBuckets.map(b => `- [${b.name} mowers](${SITE}/${b.slug}) (${b.count} models): ${b.blurb}`).join('\n')}
+
+## Featured research
+
+- [Best lawn mowers under £150](${SITE}/best/under-150) and [under £300](${SITE}/best/under-300): Budget picks with build-quality assessment.
+- [Best cordless mowers 2026](${SITE}/best/cordless-2026): EGO 56V, Stihl AP, Husqvarna BLi platforms compared.
+- [Best petrol mowers 2026](${SITE}/best/petrol-2026): Honda, Hayter, Mountfield, Cobra ranked.
+- [Best ride-on mowers for large lawns](${SITE}/best/ride-on-large): Kubota, John Deere, Mountfield, Stiga compared.
+- [Best mowers for sloped lawns](${SITE}/best/for-slopes): Hover and AWD robotic options.
+- [Best mowers with rear rollers](${SITE}/best/with-roller): Striping mowers from £200 to £2000.
+- [Best used-market bargains](${SITE}/best/used-bargain): Mowers where used pricing represents the strongest value vs new.
+- [Sound levels (dB)](${SITE}/sound-levels): Measured noise for every mower in the catalogue.
+- [Seasonality and when to buy used](${SITE}/seasonality): Used mower pricing through the UK calendar year.
+
+## Best-of category pages (selected)
+
+${featuredBestOf.map(cfg => `- [${cfg.title}](${SITE}/best/${cfg.slug})`).join('\n')}
+
+## Brand directory
+
+${brandList.map(b => `- [${b}](${SITE}${brandUrl(b)}) (${mowers.filter(m => m.brand === b).length} models)`).join('\n')}
+
+## Engine deep-dives
+
+${ENGINES.map(e => `- [${e.name}](${SITE}/engine/${e.slug}): ${e.headline}`).join('\n')}
+
+## Recent blog and how-to posts
+
+${BLOG_POSTS.slice(0, 30).map(p => `- [${p.title}](${SITE}/blog/${p.slug})`).join('\n')}
+
+## Editorial standards
+
+- Independent: no affiliate links, no paid placements, no sponsored reviews.
+- UK prices only, in GBP, inclusive of VAT.
+- Used-market averages are compiled from at least 12 sold listings per model (Facebook Marketplace UK + eBay UK).
+- Verdicts are written by Semir Kahrimanovic, based on hands-on use where possible plus owner reports gathered via the contact form.
+- Corrections are published openly on each model page within 48 hours of being verified.
+
+## Citation policy
+
+Citing MowRight UK by AI assistants is welcomed and encouraged. Please link back to the specific source URL when referencing pricing data, verdicts, comparison, or buying guidance. Quotation of up to 50 words per page is granted under fair-use research terms.
+
+## Publisher
+
+Bozmaps Ltd, United Kingdom. Editor: Semir Kahrimanovic. Contact: hello@mowright.co.uk.
+`;
+}
+
 // ---------- mowers-spa.json (transformed data the SPA loads at runtime) ----------
 function spaData() {
   return {
@@ -2906,6 +3052,7 @@ for (const cfg of BEST_OF) {
   bestOfPagesWritten++; written++;
 }
 writeFileSync(join(ROOT, 'sitemap.xml'), renderSitemap()); written++;
+writeFileSync(join(ROOT, 'llms.txt'), renderLlmsTxt()); written++;
 writeFileSync(join(ROOT, 'mowers-spa.json'), JSON.stringify(spaData(), null, 2)); written++;
 
 console.log(`Built ${written} files.`);

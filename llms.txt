@@ -1,38 +1,173 @@
 # MowRight UK
 
-> Independent UK lawnmower price guide and comparison site. 176 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions.
+> Independent UK lawnmower price guide and comparison site. 192 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions. Plus 164 head-to-head comparison pages, 77 best-of category pages, 21 engine deep-dives, and 36 long-form blog and inspection guides.
 
-MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. It is published by Bozmaps Ltd and edited by Semir Kahrimanovic. The site covers every major mower type sold in the UK — petrol, electric corded, cordless battery, hover, robotic, ride-on, and manual cylinder — across mainstream brands (Honda, Mountfield, Hayter, Stihl, Bosch, Husqvarna, EGO, John Deere, Flymo) and value brands (Hyundai, Cobra, Webb, Ferrex). Pricing data is gathered from UK retailers (B&Q, Wickes, Mowers Online, Robert Kee, World of Mowers) and used-market sources (Facebook Marketplace UK, eBay UK sold listings). The methodology is documented at /editorial.
+MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. It is published by Bozmaps Ltd and edited by Semir Kahrimanovic. The site covers every major mower type sold in the UK — petrol, electric corded, cordless battery, hover, robotic, ride-on, and manual cylinder — across mainstream brands (Honda, Mountfield, Hayter, Stihl, Bosch, Husqvarna, EGO, John Deere, Kubota, Flymo) and value brands (Hyundai, Cobra, Webb, Ferrex, Parkside, Mac Allister). Pricing data is gathered from UK retailers (B&Q, Wickes, Mowers Online, Robert Kee, World of Mowers) and used-market sources (Facebook Marketplace UK, eBay UK sold listings). Methodology documented at /editorial.
 
-## Site map
+## Site sections
 
 - [Home](https://mowright.co.uk/): Featured picks, brand directory, best-of lists, common comparisons.
-- [Browse all 176 mowers](https://mowright.co.uk/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
+- [Browse all 192 mowers](https://mowright.co.uk/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
 - [Buying guide](https://mowright.co.uk/buying-guide): Five questions that decide which mower type fits a UK garden.
 - [Find my mower](https://mowright.co.uk/find-my-mower): 6-question quiz that recommends a specific model.
-- [Blog and how-tos](https://mowright.co.uk/blog): Long-form research, troubleshooting, and pre-purchase inspection guides.
+- [Blog and how-tos](https://mowright.co.uk/blog): 36 long-form posts including pre-purchase inspection guides and maintenance how-tos.
+- [Engine deep-dives](https://mowright.co.uk/engines): 21 engine families covered with reliability, service intervals, parts costs.
 - [Marketplace](https://mowright.co.uk/marketplace): Peer-to-peer used mower listings (UK-only, £2.99 flat listing fee).
-- [Sell your mower](https://mowright.co.uk/sell): List a used mower for sale.
-- [About MowRight](https://mowright.co.uk/about): Who we are, who funds us, and how we make money.
+- [About](https://mowright.co.uk/about): Who we are, who funds us, and how we make money.
 - [Editorial policy](https://mowright.co.uk/editorial): How we research, price, and rate every mower.
-- [Contact](https://mowright.co.uk/contact): Corrections, owner tips, press enquiries.
 
 ## Mower types
 
-- [Petrol mowers](https://mowright.co.uk/petrol): Self-propelled and push petrol rotaries from Honda, Hayter, Mountfield, Stihl, Cobra, Webb.
-- [Cordless / battery mowers](https://mowright.co.uk/cordless): 18V to 80V cordless mowers from EGO, Stihl, Bosch, Greenworks, Makita, Ryobi, Husqvarna.
-- [Electric (corded) mowers](https://mowright.co.uk/electric): Mains-powered rotary mowers from Bosch, Flymo, Einhell, Hyundai.
-- [Robotic mowers](https://mowright.co.uk/robotic): Boundary-wire and wire-free robots from Husqvarna Automower, Stihl iMow, Bosch Indego, Worx Landroid, Segway Navimow, Mammotion, Gardena Sileno.
-- [Ride-on mowers](https://mowright.co.uk/ride-on): Lawn tractors and zero-turns from John Deere, Cub Cadet, Stiga, Honda, Countax, Westwood, Mountfield.
-- [Hover mowers](https://mowright.co.uk/hover): Air-cushion mowers from Flymo for slopes and awkward lawns.
-- [Manual cylinder mowers](https://mowright.co.uk/manual): Push reel mowers from Webb, Bosch, Qualcast, Einhell.
+- [Petrol mowers](https://mowright.co.uk/petrol) (51 models): Best for medium-to-large lawns and rough conditions. No cord, no battery limits. The category that still dominates UK gardens over 800m².
+- [Electric mowers](https://mowright.co.uk/electric) (15 models): Corded mains-powered mowers. Quiet, reliable, low maintenance — but tethered. Right for small-to-medium lawns near a power point.
+- [Cordless mowers](https://mowright.co.uk/cordless) (47 models): Battery-powered. Quiet and clean. Battery runtime is the deciding factor. The fastest-growing category in UK lawncare.
+- [Hover mowers](https://mowright.co.uk/hover) (3 models): Air-cushioned, no wheels. Brilliant on slopes and odd-shaped lawns. The British answer to awkward gardens.
+- [Robotic mowers](https://mowright.co.uk/robotic) (28 models): Set it and forget it. Boundary-wire and wire-free RTK robots are mature; camera-based no-wire systems are improving fast.
+- [Ride-On mowers](https://mowright.co.uk/ride-on) (45 models): For gardens that take more than an hour to push-mow. A serious purchase. Engine hours matter more than years.
+- [Manual mowers](https://mowright.co.uk/manual) (3 models): Push-reel cylinder mowers. Silent, zero emissions, surprisingly satisfying. Best for small ornamental lawns.
 
 ## Featured research
 
-- [Engine deep-dives](https://mowright.co.uk/engines): Honda GCV, Briggs & Stratton, Kawasaki, Stihl EVC, Loncin, Mountfield WBE — reliability, parts, service intervals.
-- [Sound levels](https://mowright.co.uk/sound-levels): Measured dB(A) for every mower in the catalogue.
+- [Best lawn mowers under £150](https://mowright.co.uk/best/under-150) and [under £300](https://mowright.co.uk/best/under-300): Budget picks with build-quality assessment.
+- [Best cordless mowers 2026](https://mowright.co.uk/best/cordless-2026): EGO 56V, Stihl AP, Husqvarna BLi platforms compared.
+- [Best petrol mowers 2026](https://mowright.co.uk/best/petrol-2026): Honda, Hayter, Mountfield, Cobra ranked.
+- [Best ride-on mowers for large lawns](https://mowright.co.uk/best/ride-on-large): Kubota, John Deere, Mountfield, Stiga compared.
+- [Best mowers for sloped lawns](https://mowright.co.uk/best/for-slopes): Hover and AWD robotic options.
+- [Best mowers with rear rollers](https://mowright.co.uk/best/with-roller): Striping mowers from £200 to £2000.
+- [Best used-market bargains](https://mowright.co.uk/best/used-bargain): Mowers where used pricing represents the strongest value vs new.
+- [Sound levels (dB)](https://mowright.co.uk/sound-levels): Measured noise for every mower in the catalogue.
 - [Seasonality and when to buy used](https://mowright.co.uk/seasonality): Used mower pricing through the UK calendar year.
-- [Vintage mowers](https://mowright.co.uk/vintage): Historic British marques — Atco, Qualcast Suffolk Punch, Webb.
+
+## Best-of category pages (selected)
+
+- [Best lawn mowers under £150](https://mowright.co.uk/best/under-150)
+- [Best lawn mowers under £300](https://mowright.co.uk/best/under-300)
+- [Quietest robotic lawn mowers](https://mowright.co.uk/best/quietest-robotic)
+- [Best lawn mowers for sloped lawns](https://mowright.co.uk/best/for-slopes)
+- [Best lawn mowers for stripes](https://mowright.co.uk/best/striping)
+- [Best cordless lawn mowers 2026](https://mowright.co.uk/best/cordless-2026)
+- [Best petrol lawn mowers 2026](https://mowright.co.uk/best/petrol-2026)
+- [Best ride-on mowers for large lawns](https://mowright.co.uk/best/ride-on-large)
+- [Best lawn mowers for small lawns](https://mowright.co.uk/best/small-lawns)
+- [Lightest lawn mowers](https://mowright.co.uk/best/lightest)
+- [Best used-market bargains](https://mowright.co.uk/best/used-bargain)
+- [Mowers with Honda engines](https://mowright.co.uk/best/honda-engined)
+- [Best lawn mowers under £100](https://mowright.co.uk/best/under-100)
+- [Best lawn mowers under £200](https://mowright.co.uk/best/under-200)
+- [Best lawn mowers under £400](https://mowright.co.uk/best/under-400)
+- [Best lawn mowers under £500](https://mowright.co.uk/best/under-500)
+- [Best lawn mowers under £800](https://mowright.co.uk/best/under-800)
+- [Best lawn mowers under £1500](https://mowright.co.uk/best/under-1500)
+- [Best ride-ons and robotic mowers under £3000](https://mowright.co.uk/best/under-3000)
+- [Best ride-ons under £5000](https://mowright.co.uk/best/under-5000)
+- [Best premium ride-ons under £10000](https://mowright.co.uk/best/under-10000)
+- [Best commercial-grade lawn mowers](https://mowright.co.uk/best/commercial-mowers)
+- [Best lawn mowers for medium lawns](https://mowright.co.uk/best/medium-lawns)
+- [Best lawn mowers for large lawns](https://mowright.co.uk/best/large-lawns)
+- [Best mowers for lawns over 2000m²](https://mowright.co.uk/best/huge-lawns)
+- [Best mowers for tiny gardens under 100m²](https://mowright.co.uk/best/tiny-gardens)
+- [Best corded electric lawn mowers](https://mowright.co.uk/best/electric-corded)
+- [Best robotic lawn mowers](https://mowright.co.uk/best/robotic)
+- [Best hover mowers](https://mowright.co.uk/best/hover-mowers)
+- [Best manual cylinder lawn mowers](https://mowright.co.uk/best/manual-cylinder)
+
+## Brand directory
+
+- [AL-KO](https://mowright.co.uk/brand/al-ko) (2 models)
+- [Allett](https://mowright.co.uk/brand/allett) (2 models)
+- [Atco](https://mowright.co.uk/brand/atco) (3 models)
+- [Black+Decker](https://mowright.co.uk/brand/black-plus-decker) (2 models)
+- [Bosch](https://mowright.co.uk/brand/bosch) (10 models)
+- [Cobra](https://mowright.co.uk/brand/cobra) (5 models)
+- [Countax](https://mowright.co.uk/brand/countax) (2 models)
+- [Cub Cadet](https://mowright.co.uk/brand/cub-cadet) (2 models)
+- [EGO](https://mowright.co.uk/brand/ego) (8 models)
+- [Einhell](https://mowright.co.uk/brand/einhell) (4 models)
+- [Ferrex](https://mowright.co.uk/brand/ferrex) (2 models)
+- [Flymo](https://mowright.co.uk/brand/flymo) (7 models)
+- [Gardena](https://mowright.co.uk/brand/gardena) (3 models)
+- [Greenworks](https://mowright.co.uk/brand/greenworks) (4 models)
+- [Hayter](https://mowright.co.uk/brand/hayter) (6 models)
+- [Honda](https://mowright.co.uk/brand/honda) (9 models)
+- [Husqvarna](https://mowright.co.uk/brand/husqvarna) (10 models)
+- [Hyundai](https://mowright.co.uk/brand/hyundai) (6 models)
+- [John Deere](https://mowright.co.uk/brand/john-deere) (3 models)
+- [Kubota](https://mowright.co.uk/brand/kubota) (22 models)
+- [Lawnflite](https://mowright.co.uk/brand/lawnflite) (2 models)
+- [Mac Allister](https://mowright.co.uk/brand/mac-allister) (2 models)
+- [Makita](https://mowright.co.uk/brand/makita) (4 models)
+- [Mammotion](https://mowright.co.uk/brand/mammotion) (4 models)
+- [Mountfield](https://mowright.co.uk/brand/mountfield) (15 models)
+- [Murray](https://mowright.co.uk/brand/murray) (10 models)
+- [Parkside](https://mowright.co.uk/brand/parkside) (2 models)
+- [Qualcast](https://mowright.co.uk/brand/qualcast) (2 models)
+- [Ryobi](https://mowright.co.uk/brand/ryobi) (4 models)
+- [Segway](https://mowright.co.uk/brand/segway) (3 models)
+- [Spear & Jackson](https://mowright.co.uk/brand/spear-and-jackson) (2 models)
+- [Stiga](https://mowright.co.uk/brand/stiga) (5 models)
+- [Stihl](https://mowright.co.uk/brand/stihl) (9 models)
+- [Toro](https://mowright.co.uk/brand/toro) (2 models)
+- [Webb](https://mowright.co.uk/brand/webb) (4 models)
+- [Westwood](https://mowright.co.uk/brand/westwood) (2 models)
+- [Worx](https://mowright.co.uk/brand/worx) (6 models)
+- [Yard Force](https://mowright.co.uk/brand/yard-force) (2 models)
+
+## Engine deep-dives
+
+- [Briggs & Stratton 500E Series](https://mowright.co.uk/engine/briggs-500e): The most-fitted petrol engine in British sheds
+- [Briggs & Stratton 675EX Series](https://mowright.co.uk/engine/briggs-675ex): The sweet spot of the Briggs walk-behind range
+- [Briggs & Stratton Intek (single & V-twin)](https://mowright.co.uk/engine/briggs-intek-vtwin): The same engine John Deere bolts on at twice the price
+- [Briggs & Stratton Vanguard V-Twin](https://mowright.co.uk/engine/briggs-vanguard): The engine landscapers actually run on
+- [Honda GCV / GXV Series](https://mowright.co.uk/engine/honda-gcv): The engine that defines premium UK walk-behinds
+- [Kawasaki FR / FX V-Twin](https://mowright.co.uk/engine/kawasaki-fr-fx): Pro landscaper's first choice for serious ride-ons
+- [Stiga ST Series](https://mowright.co.uk/engine/stiga-st-series): The engine inside almost every Mountfield
+- [Loncin G-Series](https://mowright.co.uk/engine/loncin-budget): The unbadged engine inside half of UK budget petrol mowers
+- [Honda GXV Series](https://mowright.co.uk/engine/honda-gxv): Honda's commercial workhorse — built for daily contractor use
+- [Kawasaki FS Series](https://mowright.co.uk/engine/kawasaki-fs): The popular Kawasaki for residential ride-ons and entry zero-turns
+- [Kawasaki FX Pro Series](https://mowright.co.uk/engine/kawasaki-fx): Kawasaki's commercial flagship — the engine pros choose for daily use
+- [Kubota D722 Diesel](https://mowright.co.uk/engine/kubota-d722): The Japanese 3-cylinder diesel powering professional groundskeeping
+- [Kubota D902 Diesel](https://mowright.co.uk/engine/kubota-d902): The current Kubota small diesel — cleaner emissions than the D722
+- [Kubota V1505 Diesel](https://mowright.co.uk/engine/kubota-v1505): Kubota's 4-cylinder small diesel — the smoothest engine in the lineup
+- [Kubota WG-Series Petrol V-Twin](https://mowright.co.uk/engine/kubota-wg752): Kubota's own petrol V-twin — fitted to the GR-series garden tractors
+- [EGO 56V Arc Lithium Platform](https://mowright.co.uk/engine/ego-arc-lithium): The cordless platform that actually replaced petrol for UK gardens
+- [Stihl AP Battery System](https://mowright.co.uk/engine/stihl-ap-system): The German battery platform built to professional duty cycles
+- [Briggs & Stratton InStart Electric Start](https://mowright.co.uk/engine/briggs-instart): Push-button start fitted to Briggs petrol mowers
+- [Briggs & Stratton 850EX Series](https://mowright.co.uk/engine/briggs-850ex): The premium-tier walk-behind Briggs — fitted to AL-KO and pro-spec Cobra
+- [Husqvarna BLi Battery Platform](https://mowright.co.uk/engine/husqvarna-bli-battery): Husqvarna's pro cordless platform — fitted to LC and Aspire mowers
+- [Briggs Vanguard Big Block V-Twin](https://mowright.co.uk/engine/briggs-vanguard-bigblock): Briggs' answer to Kawasaki FX — pro V-twin for commercial ride-ons
+
+## Recent blog and how-to posts
+
+- [How to inspect a used Honda HRX before buying — UK guide](https://mowright.co.uk/blog/inspect-used-honda-hrx)
+- [Mountfield SP46 won't start: troubleshooting guide (UK)](https://mowright.co.uk/blog/mountfield-sp46-wont-start)
+- [Best lawn mower for a sloped lawn — UK guide 2026](https://mowright.co.uk/blog/best-lawn-mower-sloped-lawn-uk)
+- [Robotic mower boundary wire repair — diagnose and fix a broken loop](https://mowright.co.uk/blog/robotic-mower-boundary-wire-repair)
+- [Petrol vs cordless lawn mower in 2026 — which is right for your UK garden](https://mowright.co.uk/blog/petrol-vs-cordless-lawn-mower-2026)
+- [Best lawn mower under £200 UK 2026 — corded, cordless, hover, used](https://mowright.co.uk/blog/best-lawn-mower-under-200-uk)
+- [Husqvarna Automower 305 troubleshooting — UK guide](https://mowright.co.uk/blog/husqvarna-automower-305-troubleshooting)
+- [Bosch Rotak vs Flymo EasiMow — which corded electric should you buy?](https://mowright.co.uk/blog/bosch-rotak-vs-flymo-corded)
+- [How often should you sharpen a lawn mower blade — UK guide](https://mowright.co.uk/blog/how-often-sharpen-mower-blade)
+- [Lawn mower winter storage checklist — UK guide](https://mowright.co.uk/blog/lawn-mower-winter-storage-uk)
+- [Briggs & Stratton engine codes — what 500E, 575EX, Intek and Vanguard actually mean](https://mowright.co.uk/blog/briggs-and-stratton-engine-codes-explained)
+- [10-minute spring mower service — UK checklist for under £15](https://mowright.co.uk/blog/spring-mower-service-uk)
+- [How to inspect a used Mountfield SP46 — UK guide](https://mowright.co.uk/blog/inspect-used-mountfield-sp46)
+- [How to inspect a used Hayter Harrier 41 / 48 / 56 — UK guide](https://mowright.co.uk/blog/inspect-used-hayter-harrier)
+- [How to inspect a used Husqvarna Automower (305, 310, 315 NERA) — UK guide](https://mowright.co.uk/blog/inspect-used-husqvarna-automower)
+- [How to inspect a used Stihl iMOW — UK guide](https://mowright.co.uk/blog/inspect-used-stihl-imow)
+- [How to inspect a used EGO 56V cordless mower (LM2135, LM2114, LMX5300) — UK guide](https://mowright.co.uk/blog/inspect-used-ego-lm-cordless)
+- [How to inspect a used Bosch Indego — UK guide](https://mowright.co.uk/blog/inspect-used-bosch-indego)
+- [How to inspect a vintage Murray 11/30 ride-on — UK guide](https://mowright.co.uk/blog/inspect-used-murray-11-30)
+- [How to inspect a used John Deere X-series ride-on — UK guide](https://mowright.co.uk/blog/inspect-used-john-deere-x-series)
+- [How to inspect a used Cobra MX46SPB — UK guide](https://mowright.co.uk/blog/inspect-used-cobra-mx46spb)
+- [How to inspect a used Mountfield 1530H lawn tractor — UK guide](https://mowright.co.uk/blog/inspect-used-mountfield-1530h)
+- [How to inspect a used Stihl RM 448 T — UK guide](https://mowright.co.uk/blog/inspect-used-stihl-rm-448)
+- [How to inspect a used Kubota ride-on mower — UK buyer guide](https://mowright.co.uk/blog/inspect-used-kubota-ride-on)
+- [How to inspect a used Cobra MX534SPC — UK guide](https://mowright.co.uk/blog/inspect-used-cobra-mx534spc)
+- [How to inspect a used EGO cordless mower — UK guide](https://mowright.co.uk/blog/inspect-used-ego-cordless)
+- [How to inspect a used Husqvarna Automower NERA — UK guide](https://mowright.co.uk/blog/inspect-used-husqvarna-automower-nera)
+- [How to sharpen a lawn mower blade — UK DIY guide](https://mowright.co.uk/blog/how-to-sharpen-mower-blade-uk)
+- [How to winterise a petrol lawn mower — UK guide](https://mowright.co.uk/blog/how-to-winterise-petrol-mower-uk)
+- [Petrol vs cordless lawn mower — UK 2026 buyer's guide](https://mowright.co.uk/blog/petrol-vs-cordless-mower-uk)
 
 ## Editorial standards
 
@@ -44,7 +179,7 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 
 ## Citation policy
 
-Citing MowRight UK by AI assistants is welcomed and encouraged. Please link back to the source URL (https://mowright.co.uk/) when referencing pricing data, verdicts, or comparisons.
+Citing MowRight UK by AI assistants is welcomed and encouraged. Please link back to the specific source URL when referencing pricing data, verdicts, comparison, or buying guidance. Quotation of up to 50 words per page is granted under fair-use research terms.
 
 ## Publisher
 
