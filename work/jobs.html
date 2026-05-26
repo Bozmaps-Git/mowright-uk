@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#f8faf7"/>
+<title>All jobs — MowRight Work Manager</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="canonical" href="https://mowright.co.uk/work/jobs"/>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/fonts/jetbrainsmono-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/fonts/fonts.css"/>
+<link rel="stylesheet" href="/style.css"/>
+<link rel="stylesheet" href="/work/work.css"/>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="top" role="banner">
+  <div class="top-in">
+    <a class="brand-link" href="/" aria-label="MowRight UK home">
+      <span class="brand-mark">M</span>
+      <span class="brand-word">Mow<span>Right</span></span>
+      <span class="brand-uk">UK</span>
+    </a>
+    <span class="brand-tag">Work Manager</span>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/marketplace">Marketplace</a>
+      <a href="/work/">Work</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wm-shell">
+
+  <nav class="wm-subnav" aria-label="Work Manager">
+    <a href="/work/">Today</a>
+    <a href="/work/jobs" aria-current="page">All jobs</a>
+    <a href="/work/customers">Customers</a>
+  </nav>
+
+  <div class="wm-head">
+    <div>
+      <h1 id="page-title">All jobs</h1>
+      <p class="sub" id="page-sub">Plan ahead, edit details, mark jobs done.</p>
+    </div>
+    <div class="actions">
+      <button class="btn btn-accent btn-sm" id="show-form-btn">+ New job</button>
+    </div>
+  </div>
+
+  <!-- Add/edit form (hidden by default; opens with ?new=1) -->
+  <section class="wm-form" id="job-form" hidden>
+    <h2 style="margin:0 0 14px;font-size:18px;color:var(--ink)" id="form-title">New job</h2>
+    <form id="form">
+      <input type="hidden" id="f-id"/>
+      <div class="wm-form-grid">
+        <div class="wm-field full">
+          <label for="f-title">Job title <span class="req">*</span></label>
+          <input type="text" id="f-title" required maxlength="160" placeholder="e.g. Lawn cut + hedge trim"/>
+        </div>
+        <div class="wm-field">
+          <label for="f-customer">Customer</label>
+          <select id="f-customer">
+            <option value="">— None / new visit —</option>
+          </select>
+          <span class="hint"><a href="/work/customers" style="color:var(--accent-deep);text-decoration:underline">Add a customer →</a></span>
+        </div>
+        <div class="wm-field">
+          <label for="f-date">Date <span class="req">*</span></label>
+          <input type="date" id="f-date" required/>
+        </div>
+        <div class="wm-field full">
+          <label for="f-address">Address <span class="req">*</span></label>
+          <input type="text" id="f-address" required placeholder="Full UK address with postcode for best routing"/>
+          <span class="hint">Auto-filled from the customer when one is selected. Geocoded against OpenStreetMap.</span>
+        </div>
+        <div class="wm-field">
+          <label for="f-est">Estimated time on site</label>
+          <select id="f-est">
+            <option value="15">15 min</option>
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>1 hour</option>
+            <option value="90">1.5 hours</option>
+            <option value="120">2 hours</option>
+            <option value="180">3 hours</option>
+            <option value="240">4 hours</option>
+            <option value="360">6 hours (half day)</option>
+            <option value="480">8 hours (full day)</option>
+          </select>
+        </div>
+        <div class="wm-field">
+          <label for="f-priority">Scheduling priority</label>
+          <select id="f-priority">
+            <option value="0">Flexible — any time</option>
+            <option value="1">Morning only (before 12:00)</option>
+            <option value="2">Afternoon only (after 12:00)</option>
+            <option value="3">Fixed appointment time</option>
+          </select>
+        </div>
+        <div class="wm-field" id="fixed-time-field" hidden>
+          <label for="f-time">Fixed time</label>
+          <input type="time" id="f-time"/>
+        </div>
+        <div class="wm-field">
+          <label for="f-price">Price (£, optional)</label>
+          <input type="number" id="f-price" min="0" step="0.01" placeholder="40.00"/>
+        </div>
+        <div class="wm-field full">
+          <label for="f-notes">Notes</label>
+          <textarea id="f-notes" placeholder="Gate code, dog in garden, side access only…"></textarea>
+        </div>
+      </div>
+      <div class="wm-form-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-accent btn-sm" id="save-btn">Save job</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Filters bar -->
+  <div class="wm-filters">
+    <input type="search" id="q" placeholder="Search title, address, customer…"/>
+    <select id="f-status">
+      <option value="">All statuses</option>
+      <option value="scheduled">Scheduled</option>
+      <option value="in_progress">In progress</option>
+      <option value="complete">Complete</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+    <select id="f-when">
+      <option value="all">All dates</option>
+      <option value="today">Today</option>
+      <option value="tomorrow">Tomorrow</option>
+      <option value="this_week">This week</option>
+      <option value="future">Future only</option>
+      <option value="past">Past only</option>
+    </select>
+  </div>
+
+  <table class="wm-table" id="jobs-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Job</th>
+        <th>Customer</th>
+        <th>Address</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="jobs-body"></tbody>
+  </table>
+  <div id="empty-state" class="wm-empty" hidden>
+    <h3>No jobs yet</h3>
+    <p>Add a job for any date — give it an address, an estimate, and let the route planner do the rest.</p>
+    <button class="btn btn-accent" id="empty-add">+ Add your first job</button>
+  </div>
+
+</main>
+
+<script type="module">
+import {
+  db, ensureCoords, escapeHtml, fmtDate, fmtMinutes, fmtGBP,
+  todayISO, toast,
+} from '/work/work.js';
+
+const $ = (s) => document.querySelector(s);
+
+const state = {
+  jobs: [],
+  customers: [],
+  filters: { q: '', status: '', when: 'all' },
+};
+
+async function loadAll() {
+  state.jobs = await db.list('wm_jobs');
+  state.customers = await db.list('wm_customers');
+  populateCustomerOptions();
+  render();
+}
+
+function populateCustomerOptions() {
+  const select = $('#f-customer');
+  const cur = select.value;
+  select.innerHTML = '<option value="">— None / new visit —</option>' +
+    state.customers
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map(c => `<option value="${c.id}">${escapeHtml(c.name)}${c.company ? ' · ' + escapeHtml(c.company) : ''}</option>`)
+      .join('');
+  if (cur) select.value = cur;
+}
+
+function filterJobs() {
+  const q = state.filters.q.toLowerCase();
+  const today = todayISO();
+  const tomorrow = (() => { const d = new Date(); d.setDate(d.getDate() + 1); return d.toISOString().slice(0, 10); })();
+  const weekStart = (() => { const d = new Date(); const day = (d.getDay() + 6) % 7; d.setDate(d.getDate() - day); return d.toISOString().slice(0, 10); })();
+  const weekEnd = (() => { const d = new Date(weekStart); d.setDate(d.getDate() + 6); return d.toISOString().slice(0, 10); })();
+
+  return state.jobs.filter(j => {
+    if (state.filters.status && j.status !== state.filters.status) return false;
+    if (state.filters.when === 'today' && j.scheduled_date !== today) return false;
+    if (state.filters.when === 'tomorrow' && j.scheduled_date !== tomorrow) return false;
+    if (state.filters.when === 'this_week' && (j.scheduled_date < weekStart || j.scheduled_date > weekEnd)) return false;
+    if (state.filters.when === 'future' && j.scheduled_date <= today) return false;
+    if (state.filters.when === 'past' && j.scheduled_date >= today) return false;
+    if (q) {
+      const cust = state.customers.find(c => c.id === j.customer_id);
+      const blob = [j.title, j.address, j.notes, cust?.name, cust?.company].filter(Boolean).join(' ').toLowerCase();
+      if (!blob.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function render() {
+  const rows = filterJobs().sort((a, b) =>
+    a.scheduled_date.localeCompare(b.scheduled_date)
+    || (a.fixed_time || '99:99').localeCompare(b.fixed_time || '99:99')
+  );
+  const tbody = $('#jobs-body');
+  const empty = $('#empty-state');
+  if (!rows.length && !state.jobs.length) {
+    $('#jobs-table').hidden = true;
+    empty.hidden = false;
+    return;
+  }
+  $('#jobs-table').hidden = false;
+  empty.hidden = true;
+
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px">No jobs match those filters.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = rows.map(j => {
+    const cust = state.customers.find(c => c.id === j.customer_id);
+    const time = j.fixed_time ? j.fixed_time.slice(0, 5) : '';
+    return `
+      <tr>
+        <td>${fmtDate(j.scheduled_date)}</td>
+        <td>
+          <div style="font-weight:600">${escapeHtml(j.title)}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">
+            ${fmtMinutes(j.estimated_minutes)}${j.price_pence ? ' · ' + fmtGBP(j.price_pence) : ''}
+          </div>
+        </td>
+        <td>${cust ? escapeHtml(cust.name) : '—'}</td>
+        <td style="max-width:280px"><span style="font-size:13px;color:var(--ink-sub)">${escapeHtml(j.address || '')}</span></td>
+        <td>${time || (j.priority === 1 ? 'AM' : j.priority === 2 ? 'PM' : '—')}</td>
+        <td><span class="wm-badge wm-badge--${j.status}">${j.status.replace('_', ' ')}</span></td>
+        <td class="row-actions">
+          <button data-act="edit" data-id="${j.id}">Edit</button>
+          ${j.status !== 'complete' ? `<button data-act="done" data-id="${j.id}">Done</button>` : ''}
+          <button data-act="delete" data-id="${j.id}" class="danger">Delete</button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+// ----- Form ---------------------------------------------------------------
+function openForm(job) {
+  $('#job-form').hidden = false;
+  $('#job-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  $('#form-title').textContent = job ? 'Edit job' : 'New job';
+  $('#f-id').value = job?.id || '';
+  $('#f-title').value = job?.title || '';
+  $('#f-customer').value = job?.customer_id || '';
+  $('#f-date').value = job?.scheduled_date || todayISO();
+  $('#f-address').value = job?.address || '';
+  $('#f-est').value = String(job?.estimated_minutes || 60);
+  $('#f-priority').value = String(job?.priority ?? 0);
+  $('#f-time').value = job?.fixed_time || '';
+  $('#f-price').value = job?.price_pence != null ? (job.price_pence / 100).toFixed(2) : '';
+  $('#f-notes').value = job?.notes || '';
+  togglefixedTime();
+}
+function closeForm() {
+  $('#job-form').hidden = true;
+}
+function togglefixedTime() {
+  $('#fixed-time-field').hidden = $('#f-priority').value !== '3';
+}
+
+$('#show-form-btn').addEventListener('click', () => openForm(null));
+$('#empty-add')?.addEventListener('click', () => openForm(null));
+$('#cancel-btn').addEventListener('click', closeForm);
+$('#f-priority').addEventListener('change', togglefixedTime);
+$('#f-customer').addEventListener('change', e => {
+  const c = state.customers.find(x => x.id === e.target.value);
+  if (c && !$('#f-address').value) {
+    $('#f-address').value = c.address || '';
+  }
+});
+
+$('#form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const id = $('#f-id').value;
+  const data = {
+    user_id: 'local',
+    title: $('#f-title').value.trim(),
+    customer_id: $('#f-customer').value || null,
+    scheduled_date: $('#f-date').value,
+    address: $('#f-address').value.trim(),
+    estimated_minutes: parseInt($('#f-est').value, 10),
+    priority: parseInt($('#f-priority').value, 10),
+    fixed_time: $('#f-priority').value === '3' ? $('#f-time').value : null,
+    price_pence: $('#f-price').value ? Math.round(parseFloat($('#f-price').value) * 100) : null,
+    notes: $('#f-notes').value.trim() || null,
+    status: 'scheduled',
+  };
+  $('#save-btn').disabled = true;
+  $('#save-btn').textContent = 'Geocoding…';
+  try {
+    // If editing and address changed, drop existing coords so we re-geocode.
+    const existing = id ? state.jobs.find(j => j.id === id) : null;
+    if (existing && existing.address === data.address) {
+      data.lat = existing.lat; data.lng = existing.lng;
+    }
+    const withCoords = await ensureCoords(data);
+    if (id) {
+      await db.update('wm_jobs', id, withCoords);
+      toast('Job updated ✓', 'ok');
+    } else {
+      await db.insert('wm_jobs', withCoords);
+      toast('Job added ✓', 'ok');
+    }
+    closeForm();
+    await loadAll();
+  } catch (err) {
+    console.error(err);
+    toast('Could not save job — check console', 'err');
+  } finally {
+    $('#save-btn').disabled = false;
+    $('#save-btn').textContent = 'Save job';
+  }
+});
+
+// ----- Row actions --------------------------------------------------------
+$('#jobs-body').addEventListener('click', async e => {
+  const btn = e.target.closest('button[data-act]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const act = btn.dataset.act;
+  if (act === 'edit') {
+    openForm(state.jobs.find(j => j.id === id));
+  } else if (act === 'done') {
+    await db.update('wm_jobs', id, { status: 'complete' });
+    toast('Marked complete ✓', 'ok');
+    await loadAll();
+  } else if (act === 'delete') {
+    if (!confirm('Delete this job? This cannot be undone.')) return;
+    await db.remove('wm_jobs', id);
+    toast('Deleted', 'ok');
+    await loadAll();
+  }
+});
+
+// ----- Filters ------------------------------------------------------------
+$('#q').addEventListener('input', e => { state.filters.q = e.target.value; render(); });
+$('#f-status').addEventListener('change', e => { state.filters.status = e.target.value; render(); });
+$('#f-when').addEventListener('change', e => { state.filters.when = e.target.value; render(); });
+
+// ----- Init ---------------------------------------------------------------
+const params = new URLSearchParams(location.search);
+loadAll().then(() => {
+  if (params.get('new') === '1') {
+    openForm(null);
+    const preCustomer = params.get('customer');
+    if (preCustomer) {
+      $('#f-customer').value = preCustomer;
+      const c = state.customers.find(x => x.id === preCustomer);
+      if (c && !$('#f-address').value) $('#f-address').value = c.address || '';
+    }
+  }
+  if (params.get('edit')) {
+    const j = state.jobs.find(x => x.id === params.get('edit'));
+    if (j) openForm(j);
+  }
+});
+</script>
+
+</body>
+</html>

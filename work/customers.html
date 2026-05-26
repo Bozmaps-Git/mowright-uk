@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#f8faf7"/>
+<title>Customers — MowRight Work Manager</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="canonical" href="https://mowright.co.uk/work/customers"/>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/fonts/jetbrainsmono-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/fonts/fonts.css"/>
+<link rel="stylesheet" href="/style.css"/>
+<link rel="stylesheet" href="/work/work.css"/>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="top" role="banner">
+  <div class="top-in">
+    <a class="brand-link" href="/" aria-label="MowRight UK home">
+      <span class="brand-mark">M</span>
+      <span class="brand-word">Mow<span>Right</span></span>
+      <span class="brand-uk">UK</span>
+    </a>
+    <span class="brand-tag">Work Manager</span>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/marketplace">Marketplace</a>
+      <a href="/work/">Work</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wm-shell">
+
+  <nav class="wm-subnav" aria-label="Work Manager">
+    <a href="/work/">Today</a>
+    <a href="/work/jobs">All jobs</a>
+    <a href="/work/customers" aria-current="page">Customers</a>
+  </nav>
+
+  <div class="wm-head">
+    <div>
+      <h1>Customers</h1>
+      <p class="sub">Your address book. Linked customers auto-fill job addresses and group their history.</p>
+    </div>
+    <div class="actions">
+      <button class="btn btn-accent btn-sm" id="show-form-btn">+ New customer</button>
+    </div>
+  </div>
+
+  <section class="wm-form" id="cust-form" hidden>
+    <h2 style="margin:0 0 14px;font-size:18px" id="form-title">New customer</h2>
+    <form id="form">
+      <input type="hidden" id="f-id"/>
+      <div class="wm-form-grid">
+        <div class="wm-field">
+          <label for="f-name">Name <span class="req">*</span></label>
+          <input type="text" id="f-name" required maxlength="120" placeholder="Mrs Patel"/>
+        </div>
+        <div class="wm-field">
+          <label for="f-company">Company (optional)</label>
+          <input type="text" id="f-company" placeholder="Acorn Care Home Ltd"/>
+        </div>
+        <div class="wm-field full">
+          <label for="f-address">Address</label>
+          <input type="text" id="f-address" placeholder="12 Park Road, Hounslow TW3 1AB"/>
+          <span class="hint">A UK postcode is enough for routing. We'll geocode it for you.</span>
+        </div>
+        <div class="wm-field">
+          <label for="f-phone">Phone</label>
+          <input type="tel" id="f-phone" placeholder="07700 900111"/>
+        </div>
+        <div class="wm-field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" placeholder="name@example.com"/>
+        </div>
+        <div class="wm-field full">
+          <label for="f-notes">Notes</label>
+          <textarea id="f-notes" placeholder="Lawn at back. Side gate, dog friendly. Prefers Mondays."></textarea>
+        </div>
+      </div>
+      <div class="wm-form-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-accent btn-sm" id="save-btn">Save customer</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="wm-filters">
+    <input type="search" id="q" placeholder="Search name, company, address, phone…"/>
+  </div>
+
+  <table class="wm-table" id="cust-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>Jobs</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="cust-body"></tbody>
+  </table>
+  <div id="empty-state" class="wm-empty" hidden>
+    <h3>No customers yet</h3>
+    <p>Add the people and businesses you work for — then job addresses fill in automatically and you can see every visit history.</p>
+    <button class="btn btn-accent" id="empty-add">+ Add your first customer</button>
+  </div>
+
+</main>
+
+<script type="module">
+import { db, ensureCoords, escapeHtml, toast } from '/work/work.js';
+
+const $ = (s) => document.querySelector(s);
+
+const state = { customers: [], jobs: [], q: '' };
+
+async function loadAll() {
+  state.customers = await db.list('wm_customers');
+  state.jobs = await db.list('wm_jobs');
+  render();
+}
+
+function render() {
+  const q = state.q.toLowerCase();
+  const rows = state.customers
+    .filter(c => !q || [c.name, c.company, c.address, c.phone, c.email].filter(Boolean).some(v => v.toLowerCase().includes(q)))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const tbody = $('#cust-body');
+  if (!state.customers.length) {
+    $('#cust-table').hidden = true;
+    $('#empty-state').hidden = false;
+    return;
+  }
+  $('#cust-table').hidden = false;
+  $('#empty-state').hidden = true;
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px">No customers match "${escapeHtml(state.q)}".</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map(c => {
+    const jobCount = state.jobs.filter(j => j.customer_id === c.id).length;
+    return `
+      <tr>
+        <td><strong>${escapeHtml(c.name)}</strong></td>
+        <td>${escapeHtml(c.company || '—')}</td>
+        <td style="max-width:280px"><span style="font-size:13px;color:var(--ink-sub)">${escapeHtml(c.address || '—')}</span></td>
+        <td style="font-size:13px;color:var(--ink-sub)">
+          ${c.phone ? escapeHtml(c.phone) + '<br/>' : ''}
+          ${c.email ? `<a href="mailto:${escapeHtml(c.email)}" style="color:var(--accent-deep);text-decoration:underline">${escapeHtml(c.email)}</a>` : ''}
+        </td>
+        <td><strong>${jobCount}</strong></td>
+        <td class="row-actions">
+          <button data-act="edit" data-id="${c.id}">Edit</button>
+          <button data-act="new-job" data-id="${c.id}">+ Job</button>
+          <button data-act="delete" data-id="${c.id}" class="danger">Delete</button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+function openForm(cust) {
+  $('#cust-form').hidden = false;
+  $('#cust-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  $('#form-title').textContent = cust ? 'Edit customer' : 'New customer';
+  $('#f-id').value = cust?.id || '';
+  $('#f-name').value = cust?.name || '';
+  $('#f-company').value = cust?.company || '';
+  $('#f-address').value = cust?.address || '';
+  $('#f-phone').value = cust?.phone || '';
+  $('#f-email').value = cust?.email || '';
+  $('#f-notes').value = cust?.notes || '';
+}
+function closeForm() { $('#cust-form').hidden = true; }
+
+$('#show-form-btn').addEventListener('click', () => openForm(null));
+$('#empty-add')?.addEventListener('click', () => openForm(null));
+$('#cancel-btn').addEventListener('click', closeForm);
+
+$('#form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const id = $('#f-id').value;
+  const data = {
+    user_id: 'local',
+    name: $('#f-name').value.trim(),
+    company: $('#f-company').value.trim() || null,
+    address: $('#f-address').value.trim() || null,
+    phone: $('#f-phone').value.trim() || null,
+    email: $('#f-email').value.trim() || null,
+    notes: $('#f-notes').value.trim() || null,
+  };
+  $('#save-btn').disabled = true;
+  $('#save-btn').textContent = 'Geocoding…';
+  try {
+    // Keep existing coords if address unchanged.
+    const existing = id ? state.customers.find(c => c.id === id) : null;
+    if (existing && existing.address === data.address && data.address) {
+      data.lat = existing.lat; data.lng = existing.lng;
+    }
+    const withCoords = await ensureCoords(data);
+    if (id) {
+      await db.update('wm_customers', id, withCoords);
+      toast('Customer updated ✓', 'ok');
+    } else {
+      await db.insert('wm_customers', withCoords);
+      toast('Customer added ✓', 'ok');
+    }
+    closeForm();
+    await loadAll();
+  } catch (err) {
+    console.error(err);
+    toast('Could not save — check console', 'err');
+  } finally {
+    $('#save-btn').disabled = false;
+    $('#save-btn').textContent = 'Save customer';
+  }
+});
+
+$('#cust-body').addEventListener('click', async e => {
+  const btn = e.target.closest('button[data-act]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const act = btn.dataset.act;
+  if (act === 'edit') {
+    openForm(state.customers.find(c => c.id === id));
+  } else if (act === 'new-job') {
+    location.href = '/work/jobs?new=1&customer=' + encodeURIComponent(id);
+  } else if (act === 'delete') {
+    const jobCount = state.jobs.filter(j => j.customer_id === id).length;
+    const msg = jobCount
+      ? `Delete this customer? ${jobCount} job(s) will keep their address but lose the link.`
+      : 'Delete this customer?';
+    if (!confirm(msg)) return;
+    await db.remove('wm_customers', id);
+    toast('Deleted', 'ok');
+    await loadAll();
+  }
+});
+
+$('#q').addEventListener('input', e => { state.q = e.target.value; render(); });
+
+loadAll();
+</script>
+
+</body>
+</html>

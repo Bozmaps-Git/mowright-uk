@@ -27,6 +27,7 @@ Single-page web app for buyers checking secondhand lawnmower listings on Faceboo
 - **`/cookies`** — cookie policy with full named-cookie table
 - **`/terms`** — terms of use
 - **`/credits`** — image attributions (Wikimedia CC BY-SA)
+- **`/work/`** — Work Manager: lightweight CRM + day-route planner for tradespeople (gardeners, mower service techs). `noindex`. See `WORK_MANAGER.md` for details.
 
 The site ships with a cookie-consent banner (`mw_consent` cookie, 12-month lifetime) that defaults to no advertising cookies until accepted.
 

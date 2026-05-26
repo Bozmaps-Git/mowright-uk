@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#f8faf7"/>
+<title>Today's route — MowRight Work Manager</title>
+<meta name="description" content="MowRight Work Manager: plan today's gardening or service jobs, drop them on a map, and get the most efficient route between every stop."/>
+<link rel="canonical" href="https://mowright.co.uk/work/"/>
+<meta name="robots" content="noindex, nofollow"/>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/fonts/jetbrainsmono-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/fonts/fonts.css"/>
+<link rel="stylesheet" href="/style.css"/>
+<link rel="stylesheet" href="/work/work.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="top" role="banner">
+  <div class="top-in">
+    <a class="brand-link" href="/" aria-label="MowRight UK home">
+      <span class="brand-mark">M</span>
+      <span class="brand-word">Mow<span>Right</span></span>
+      <span class="brand-uk">UK</span>
+    </a>
+    <span class="brand-tag">Work Manager</span>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/marketplace">Marketplace</a>
+      <a href="/work/" aria-current="page">Work</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wm-shell">
+
+  <nav class="wm-subnav" aria-label="Work Manager">
+    <a href="/work/" aria-current="page">Today</a>
+    <a href="/work/jobs">All jobs</a>
+    <a href="/work/customers">Customers</a>
+  </nav>
+
+  <div class="wm-head">
+    <div>
+      <h1 id="page-title">Today's route</h1>
+      <p class="sub" id="page-sub">Loading…</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-secondary btn-sm" href="/work/jobs?new=1">+ Add job</a>
+      <button class="btn btn-accent btn-sm" id="optimise-btn">Optimise route</button>
+    </div>
+  </div>
+
+  <div class="wm-controls" role="region" aria-label="Day plan controls">
+    <div class="field">
+      <label for="ctrl-date">Date</label>
+      <input type="date" id="ctrl-date"/>
+    </div>
+    <div class="field grow">
+      <label for="ctrl-start">Start from</label>
+      <input type="text" id="ctrl-start" placeholder="Your depot or home address (e.g. TW3 1AB)"/>
+    </div>
+    <div class="field">
+      <label for="ctrl-time">Leave at</label>
+      <input type="time" id="ctrl-time" value="08:00"/>
+    </div>
+    <div class="field">
+      <label for="ctrl-return">Return to start?</label>
+      <select id="ctrl-return">
+        <option value="yes">Yes (round trip)</option>
+        <option value="no">No (one-way)</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="fallback-note" class="wm-note" hidden>
+    <strong>Note:</strong>
+    <span>Live routing was unavailable so distances are approximate (straight-line × 1.3). Try again in a minute.</span>
+  </div>
+
+  <div id="unlocated-note" class="wm-note" hidden>
+    <strong>Heads up:</strong>
+    <span id="unlocated-msg"></span>
+  </div>
+
+  <div class="wm-today-grid">
+    <section class="wm-panel" aria-label="Route summary">
+      <div class="wm-summary" id="summary">
+        <div><div class="num" id="sum-jobs">—</div><div class="lab">Jobs</div></div>
+        <div><div class="num" id="sum-km">—</div><div class="lab">Driving</div></div>
+        <div><div class="num" id="sum-time">—</div><div class="lab">On the road</div></div>
+      </div>
+      <h2>Stops in order</h2>
+      <ol class="wm-stops" id="stops"></ol>
+      <div id="empty-state" class="wm-empty" hidden>
+        <h3>No jobs scheduled</h3>
+        <p>Add jobs for today, set your start address above, then hit "Optimise route" to see the fastest order to visit them all.</p>
+        <a class="btn btn-accent" href="/work/jobs?new=1">+ Add your first job</a>
+        <p style="margin-top:18px;font-size:12px"><a href="#" id="seed-link" style="color:var(--accent-deep);text-decoration:underline">Or try sample data →</a></p>
+      </div>
+    </section>
+
+    <section aria-label="Route map">
+      <div class="wm-map-wrap">
+        <div id="map" class="wm-map"></div>
+        <div id="map-empty" class="wm-map-empty">
+          <strong>No stops on the map yet</strong>
+          <span>Add jobs with addresses, then optimise.</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<script type="module">
+import {
+  db, settings, geocode, ensureCoords, optimiseDay, routeLine, toast,
+  todayISO, fmtDate, fmtMinutes, fmtKm, escapeHtml, maybeSeedDemo,
+} from '/work/work.js';
+
+// ----- State ---------------------------------------------------------------
+const state = {
+  date: todayISO(),
+  start: null, // { address, lat, lng }
+  end: null,
+  startTime: '08:00',
+  returnToStart: true,
+  jobs: [],
+  result: null,
+  map: null,
+  layers: { markers: [], route: null },
+};
+
+// ----- Wait for Leaflet ---------------------------------------------------
+function whenLeafletReady() {
+  return new Promise(r => {
+    if (window.L) return r();
+    const id = setInterval(() => { if (window.L) { clearInterval(id); r(); } }, 50);
+  });
+}
+
+// ----- Init ---------------------------------------------------------------
+async function init() {
+  // Settings
+  const s = settings.get();
+  state.start = s.start || null;
+  state.startTime = s.startTime || '08:00';
+  state.returnToStart = s.returnToStart !== false;
+  document.getElementById('ctrl-date').value = state.date;
+  document.getElementById('ctrl-time').value = state.startTime;
+  document.getElementById('ctrl-return').value = state.returnToStart ? 'yes' : 'no';
+  document.getElementById('ctrl-start').value = state.start?.address || '';
+
+  // Map
+  await whenLeafletReady();
+  state.map = L.map('map', { zoomControl: true }).setView([52.5, -1.5], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19,
+  }).addTo(state.map);
+
+  // Listeners
+  document.getElementById('ctrl-date').addEventListener('change', e => {
+    state.date = e.target.value;
+    render();
+  });
+  document.getElementById('ctrl-time').addEventListener('change', e => {
+    state.startTime = e.target.value;
+    settings.set({ startTime: state.startTime });
+  });
+  document.getElementById('ctrl-return').addEventListener('change', e => {
+    state.returnToStart = e.target.value === 'yes';
+    settings.set({ returnToStart: state.returnToStart });
+  });
+  document.getElementById('ctrl-start').addEventListener('change', async e => {
+    const address = e.target.value.trim();
+    if (!address) { state.start = null; settings.set({ start: null }); return; }
+    try {
+      const pt = await geocode(address);
+      if (pt) {
+        state.start = { address, lat: pt.lat, lng: pt.lng };
+        settings.set({ start: state.start });
+        toast('Start address found ✓', 'ok');
+      } else {
+        toast('Could not find that address — try a postcode', 'warn');
+      }
+    } catch (err) { toast('Geocoding failed — try again', 'err'); }
+  });
+  document.getElementById('optimise-btn').addEventListener('click', optimise);
+  document.getElementById('seed-link').addEventListener('click', async e => {
+    e.preventDefault();
+    const added = await maybeSeedDemo();
+    if (added) toast('Sample data loaded ✓', 'ok');
+    await render();
+  });
+
+  await render();
+}
+
+// ----- Render: load jobs for the day and any cached plan -----------------
+async function render() {
+  state.jobs = (await db.list('wm_jobs', { where: { scheduled_date: state.date } }))
+    .filter(j => j.status !== 'cancelled');
+  state.result = null;
+  drawList();
+  drawMap();
+  document.getElementById('page-sub').textContent =
+    state.jobs.length
+      ? `${state.jobs.length} job${state.jobs.length === 1 ? '' : 's'} on ${fmtDate(state.date)}`
+      : `Nothing scheduled for ${fmtDate(state.date)}`;
+}
+
+function drawList() {
+  const stops = document.getElementById('stops');
+  const empty = document.getElementById('empty-state');
+  document.getElementById('fallback-note').hidden = true;
+  document.getElementById('unlocated-note').hidden = true;
+
+  if (!state.jobs.length) {
+    stops.innerHTML = '';
+    empty.hidden = false;
+    document.getElementById('sum-jobs').textContent = '0';
+    document.getElementById('sum-km').textContent = '—';
+    document.getElementById('sum-time').textContent = '—';
+    return;
+  }
+  empty.hidden = true;
+
+  const items = (state.result?.legs || state.jobs.map(j => ({ job: j })));
+  stops.innerHTML = items.map((leg, i) => {
+    const j = leg.job;
+    const isFixed = j.priority === 3 && j.fixed_time;
+    const seqClass = isFixed ? 'wm-stop-seq fixed' : 'wm-stop-seq';
+    return `
+      <li class="wm-stop">
+        <span class="${seqClass}">${i + 1}</span>
+        <div class="wm-stop-body">
+          <div class="name">${escapeHtml(j.title)}</div>
+          <div class="meta">
+            ${escapeHtml(j.address || '')}
+            ${j.estimated_minutes ? `<span class="sep">·</span>${fmtMinutes(j.estimated_minutes)}` : ''}
+            ${isFixed ? `<span class="sep">·</span>fixed ${j.fixed_time.slice(0,5)}` : ''}
+          </div>
+        </div>
+        <div class="wm-stop-time">
+          ${leg.arrive ? `<div class="arrive">${leg.arrive}</div>` : ''}
+          ${leg.legMinutes != null ? `<span class="drive">↓ ${fmtMinutes(leg.legMinutes)} · ${fmtKm(leg.legKm)}</span>` : ''}
+        </div>
+      </li>`;
+  }).join('');
+
+  if (state.result) {
+    document.getElementById('sum-jobs').textContent = state.result.sequence.length;
+    document.getElementById('sum-km').textContent = fmtKm(state.result.totalDistanceKm);
+    document.getElementById('sum-time').textContent = fmtMinutes(state.result.totalDriveMinutes);
+    if (state.result.usedFallback) document.getElementById('fallback-note').hidden = false;
+    if (state.result.unlocated?.length) {
+      document.getElementById('unlocated-msg').textContent =
+        `${state.result.unlocated.length} job(s) couldn't be placed on the map — open them and re-enter the address.`;
+      document.getElementById('unlocated-note').hidden = false;
+    }
+  } else {
+    document.getElementById('sum-jobs').textContent = state.jobs.length;
+    document.getElementById('sum-km').textContent = '—';
+    document.getElementById('sum-time').textContent = '—';
+  }
+}
+
+function clearMapLayers() {
+  state.layers.markers.forEach(m => state.map.removeLayer(m));
+  state.layers.markers = [];
+  if (state.layers.route) { state.map.removeLayer(state.layers.route); state.layers.route = null; }
+}
+
+function drawMap() {
+  if (!state.map) return;
+  clearMapLayers();
+
+  const points = [];
+  if (state.start) {
+    const m = L.marker([state.start.lat, state.start.lng], {
+      icon: L.divIcon({ className: '', html: '<div class="wm-marker wm-marker--start">S</div>', iconSize: [30, 30], iconAnchor: [15, 15] }),
+    }).addTo(state.map).bindPopup('<strong>Start</strong><br/>' + (state.start.address || ''));
+    state.layers.markers.push(m);
+    points.push([state.start.lat, state.start.lng]);
+  }
+  const seq = state.result?.sequence || state.jobs.filter(j => j.lat != null && j.lng != null);
+  seq.forEach((j, i) => {
+    if (j.lat == null || j.lng == null) return;
+    const fixed = j.priority === 3 && j.fixed_time;
+    const m = L.marker([j.lat, j.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="wm-marker ${fixed ? 'wm-marker--fixed' : ''}">${i + 1}</div>`,
+        iconSize: [30, 30], iconAnchor: [15, 15],
+      }),
+    }).addTo(state.map).bindPopup(`<strong>${escapeHtml(j.title)}</strong><br/>${escapeHtml(j.address || '')}`);
+    state.layers.markers.push(m);
+    points.push([j.lat, j.lng]);
+  });
+
+  document.getElementById('map-empty').hidden = points.length > 0;
+
+  if (points.length) state.map.fitBounds(points, { padding: [40, 40], maxZoom: 14 });
+}
+
+// ----- Optimise ----------------------------------------------------------
+async function optimise() {
+  if (!state.start) { toast('Set a start address first', 'warn'); return; }
+  if (!state.jobs.length) { toast('No jobs to optimise', 'warn'); return; }
+
+  // Make sure every job has coordinates (geocode any missing).
+  const btn = document.getElementById('optimise-btn');
+  btn.disabled = true; btn.textContent = 'Optimising…';
+  try {
+    for (const j of state.jobs) {
+      if (j.lat == null || j.lng == null) {
+        const updated = await ensureCoords({ ...j });
+        if (updated.lat != null) {
+          await db.update('wm_jobs', j.id, { lat: updated.lat, lng: updated.lng });
+          j.lat = updated.lat; j.lng = updated.lng;
+        }
+      }
+    }
+    const result = await optimiseDay({
+      start: state.start,
+      end: state.returnToStart ? state.start : null,
+      jobs: state.jobs,
+      startTime: state.startTime,
+    });
+    state.result = result;
+    drawList();
+    drawMap();
+
+    // Draw the route geometry on the map.
+    if (result.sequence.length) {
+      const pts = [state.start, ...result.sequence];
+      if (state.returnToStart) pts.push(state.start);
+      const geom = await routeLine(pts);
+      if (geom) {
+        state.layers.route = L.geoJSON(geom, {
+          style: { color: '#0f3d2e', weight: 4, opacity: 0.75, dashArray: '4 6' },
+        }).addTo(state.map);
+      }
+    }
+    toast('Route optimised ✓', 'ok');
+  } catch (err) {
+    console.error(err);
+    toast('Optimisation failed — check console', 'err');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Optimise route';
+  }
+}
+
+init();
+</script>
+
+</body>
+</html>
