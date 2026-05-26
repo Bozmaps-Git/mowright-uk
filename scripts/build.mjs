@@ -8,12 +8,17 @@ import { fileURLToPath } from 'node:url';
 
 import { BLOG_POSTS as BASE_BLOG_POSTS } from './blog-posts.mjs';
 import { INSPECTION_GUIDES } from './inspection-guides.mjs';
-import { ENGINES } from './engines.mjs';
+import { INSPECTION_GUIDES_EXTRA } from './inspection-guides-extras.mjs';
+import { ENGINES as BASE_ENGINES } from './engines.mjs';
+import { ENGINES_EXTRA } from './engines-extras.mjs';
+import { COMPARISONS_EXTRA } from './comparisons-extras.mjs';
+import { BEST_OF_EXTRA } from './best-of-extras.mjs';
 
 // Inspection guides are blog posts in their own right — concat into the
 // main BLOG_POSTS list so they appear in the index, the sitemap and the
 // blog index page automatically.
-const BLOG_POSTS = [...BASE_BLOG_POSTS, ...INSPECTION_GUIDES];
+const BLOG_POSTS = [...BASE_BLOG_POSTS, ...INSPECTION_GUIDES, ...INSPECTION_GUIDES_EXTRA];
+const ENGINES = [...BASE_ENGINES, ...ENGINES_EXTRA];
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mowright.co.uk';
@@ -1598,7 +1603,8 @@ const COMPARISONS = [
   ['parkside-prma-20-li-a1', 'ferrex-40v-cordless-36cm', 'Lidl vs Aldi cordless. Parkside 20V is cheaper and has the bigger cordless ecosystem; Ferrex 40V has more torque and a wider cut. Parkside if you already own Parkside tools; Ferrex if you want the standalone better mower.'],
 
   // Premium SP petrol
-  ['husqvarna-lc-247sp', 'honda-hrg-466-sk', 'Premium walk-behind petrol SPs. Honda wins on engine longevity (15+ years typical); Husqvarna wins on build quality outside the engine. Honda for one-mower-forever buyers; Husqvarna for buyers with a local Husqvarna dealer.']
+  ['husqvarna-lc-247sp', 'honda-hrg-466-sk', 'Premium walk-behind petrol SPs. Honda wins on engine longevity (15+ years typical); Husqvarna wins on build quality outside the engine. Honda for one-mower-forever buyers; Husqvarna for buyers with a local Husqvarna dealer.'],
+  ...COMPARISONS_EXTRA
 ];
 
 const compSlug = (a, b) => `${a}-vs-${b}`;
@@ -1769,7 +1775,8 @@ const BEST_OF = [
     pick: m => m.rrp > 0 && m.usedAvg > 0 && (m.usedAvg / m.rrp) < 0.45, sortBy: m => -(m.usedAvg / m.rrp), take: 10 },
   { slug: 'honda-engined', title: 'Mowers with Honda engines',
     intro: 'Honda\'s GCV and GXV engines are the most reliable in residential mowing — fitted to the entire Honda range, the Hayter Harriers, and the Mountfield SP46H. If engine longevity is the priority, these are the mowers to consider.',
-    pick: m => m.engine && m.engine.toLowerCase().includes('honda'), sortBy: m => m.valueScore, take: 10 }
+    pick: m => m.engine && m.engine.toLowerCase().includes('honda'), sortBy: m => m.valueScore, take: 10 },
+  ...BEST_OF_EXTRA
 ];
 
 const bestOfUrl = slug => `/best/${slug}`;
