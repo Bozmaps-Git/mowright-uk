@@ -785,6 +785,8 @@ const siteFooter = () => `
         <span>Edited by Semir Kahrimanovic</span>
         <span class="sep">·</span>
         <span>${mowers.length} models · ${Object.keys(BRANDS).length} brands</span>
+        <span class="sep">·</span>
+        <span>Built by <a href="https://bozapps.co.uk" target="_blank" rel="noopener">BozApps</a></span>
       </div>
       <p class="footer-disclaim">Reader-supported. Prices are indicative — verify with the retailer before buying. Used-market averages compiled from Facebook Marketplace and eBay UK sold listings. MowRight UK is published by Bozmaps and is not affiliated with any lawnmower manufacturer or retailer.</p>
     </div>
