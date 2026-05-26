@@ -119,7 +119,9 @@
 </main>
 
 <script type="module">
-import { db, ensureCoords, escapeHtml, toast } from '/work/work.js';
+import { db, ensureCoords, mountAddressAutocomplete, escapeHtml, toast } from '/work/work.js';
+
+mountAddressAutocomplete(document.getElementById('f-address'));
 
 const $ = (s) => document.querySelector(s);
 

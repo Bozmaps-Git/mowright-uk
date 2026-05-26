@@ -167,6 +167,124 @@ export function geocode(address) {
   return geoQueue;
 }
 
+// Autocomplete-friendly search: returns up to 5 candidate addresses.
+// Separate queue from geocode() so user typing doesn't get blocked behind
+// a forward geocode for a previously-saved address.
+const SUGGEST_CACHE_KEY = 'wm_suggest_cache_v1';
+const suggestCache = (() => {
+  try { return JSON.parse(sessionStorage.getItem(SUGGEST_CACHE_KEY) || '{}'); }
+  catch { return {}; }
+})();
+let suggestSeq = 0;
+export async function searchAddresses(query) {
+  const q = (query || '').trim();
+  if (q.length < 3) return [];
+  const key = q.toLowerCase();
+  if (suggestCache[key]) return suggestCache[key];
+  const mySeq = ++suggestSeq;
+  const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&countrycodes=gb&q=' + encodeURIComponent(q);
+  try {
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok || mySeq !== suggestSeq) return [];
+    const json = await res.json();
+    const out = json.map(r => ({
+      lat: parseFloat(r.lat),
+      lng: parseFloat(r.lon),
+      display_name: r.display_name,
+      label: shortLabel(r),
+      sub: r.display_name,
+    }));
+    suggestCache[key] = out;
+    try { sessionStorage.setItem(SUGGEST_CACHE_KEY, JSON.stringify(suggestCache)); } catch {}
+    return out;
+  } catch (err) {
+    console.warn('[work] address search failed', err);
+    return [];
+  }
+}
+function shortLabel(r) {
+  const a = r.address || {};
+  const num = a.house_number || '';
+  const street = a.road || a.pedestrian || a.footway || a.path || '';
+  const town = a.city || a.town || a.village || a.suburb || a.hamlet || a.county || '';
+  const post = a.postcode || '';
+  const head = [num, street].filter(Boolean).join(' ').trim();
+  const tail = [town, post].filter(Boolean).join(' ').trim();
+  return [head, tail].filter(Boolean).join(', ') || r.display_name.split(',').slice(0, 2).join(',');
+}
+
+// Wire a debounced autocomplete dropdown to an <input type="text">.
+// onPick(suggestion) is called when the user selects an item — both lat/lng
+// and display_name are warmed into the geocode cache so the eventual
+// `ensureCoords` call on save is a free cache hit.
+export function mountAddressAutocomplete(input, { onPick } = {}) {
+  if (!input || input.dataset.wmAcMounted) return;
+  input.dataset.wmAcMounted = '1';
+  input.setAttribute('autocomplete', 'off');
+  input.setAttribute('spellcheck', 'false');
+
+  const wrap = document.createElement('div');
+  wrap.className = 'wm-ac';
+  input.parentNode.insertBefore(wrap, input);
+  wrap.appendChild(input);
+  const list = document.createElement('div');
+  list.className = 'wm-ac-list';
+  list.setAttribute('role', 'listbox');
+  list.hidden = true;
+  wrap.appendChild(list);
+
+  let debounce = null;
+  let activeIdx = -1;
+  let items = [];
+
+  const close = () => { list.hidden = true; activeIdx = -1; };
+  const render = () => {
+    if (!items.length) { close(); return; }
+    list.innerHTML = items.map((it, i) => `
+      <div class="wm-ac-item${i === activeIdx ? ' is-active' : ''}" role="option" data-i="${i}">
+        <div class="wm-ac-main">${escapeHtml(it.label)}</div>
+        <div class="wm-ac-sub">${escapeHtml(it.sub)}</div>
+      </div>
+    `).join('');
+    list.hidden = false;
+  };
+  const pick = (it) => {
+    input.value = it.display_name;
+    // Warm the geocode cache so save-time ensureCoords is free.
+    geoCache[it.display_name.trim().toLowerCase()] = { lat: it.lat, lng: it.lng, display_name: it.display_name };
+    persistGeoCache();
+    close();
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    onPick && onPick(it);
+  };
+
+  input.addEventListener('input', () => {
+    clearTimeout(debounce);
+    const q = input.value;
+    if (q.length < 3) { close(); return; }
+    debounce = setTimeout(async () => {
+      items = await searchAddresses(q);
+      activeIdx = -1;
+      render();
+    }, 350);
+  });
+  input.addEventListener('keydown', (e) => {
+    if (list.hidden) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = Math.min(items.length - 1, activeIdx + 1); render(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = Math.max(0, activeIdx - 1); render(); }
+    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); pick(items[activeIdx]); }
+    else if (e.key === 'Escape') { close(); }
+  });
+  list.addEventListener('mousedown', (e) => {
+    // mousedown (not click) so it fires before the input blur closes the list.
+    const item = e.target.closest('.wm-ac-item');
+    if (!item) return;
+    e.preventDefault();
+    pick(items[parseInt(item.dataset.i, 10)]);
+  });
+  input.addEventListener('blur', () => setTimeout(close, 150));
+}
+
 // ----- Routing (OSRM) --------------------------------------------------------
 // We use the public OSRM demo server. For production, swap in your own
 // OSRM/OpenRouteService endpoint via this constant.
@@ -415,6 +533,27 @@ export async function ensureCoords(row) {
     console.warn('[work] geocode failed for', row.address, err);
   }
   return row;
+}
+
+// ----- Google Maps directions URL ------------------------------------------
+// Google's directions deep link supports ~9 waypoints. We always pass coords
+// so it doesn't have to re-geocode (faster and more reliable).
+//   start  : { lat, lng } | null  — falls back to "My Location"
+//   sequence: array of { lat, lng } (the optimised job stops)
+//   end    : { lat, lng } | null  — if null, last stop is the destination
+export function googleMapsDirectionsUrl({ start, sequence, end }) {
+  const pt = (p) => `${p.lat.toFixed(6)},${p.lng.toFixed(6)}`;
+  const stops = sequence.filter(s => s.lat != null && s.lng != null);
+  if (!stops.length && !end) return null;
+  const params = new URLSearchParams();
+  params.set('api', '1');
+  params.set('travelmode', 'driving');
+  params.set('origin', start ? pt(start) : '');
+  const destination = end || stops[stops.length - 1];
+  const waypoints = end ? stops : stops.slice(0, -1);
+  params.set('destination', pt(destination));
+  if (waypoints.length) params.set('waypoints', waypoints.map(pt).join('|'));
+  return 'https://www.google.com/maps/dir/?' + params.toString();
 }
 
 // ----- UI helpers ------------------------------------------------------------

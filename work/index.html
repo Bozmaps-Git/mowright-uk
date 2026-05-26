@@ -121,11 +121,24 @@
     </section>
   </div>
 
+  <section class="wm-itinerary" id="itinerary" hidden aria-label="Written itinerary">
+    <header>
+      <h2 id="iti-title">Route itinerary</h2>
+      <div class="iti-actions">
+        <a class="btn btn-accent btn-sm" id="gmaps-btn" href="#" target="_blank" rel="noopener">Start in Google Maps →</a>
+        <button class="btn btn-secondary btn-sm" id="copy-btn" type="button">Copy as text</button>
+        <button class="btn btn-secondary btn-sm" id="print-btn" type="button">Print</button>
+      </div>
+    </header>
+    <ol class="wm-iti-list" id="iti-list"></ol>
+  </section>
+
 </main>
 
 <script type="module">
 import {
-  db, settings, geocode, ensureCoords, optimiseDay, routeLine, toast,
+  db, settings, geocode, ensureCoords, optimiseDay, routeLine,
+  googleMapsDirectionsUrl, mountAddressAutocomplete, toast,
   todayISO, fmtDate, fmtMinutes, fmtKm, escapeHtml, maybeSeedDemo,
 } from '/work/work.js';
 
@@ -170,6 +183,16 @@ async function init() {
     maxZoom: 19,
   }).addTo(state.map);
 
+  // Autocomplete on start address
+  mountAddressAutocomplete(document.getElementById('ctrl-start'), {
+    onPick: (it) => {
+      state.start = { address: it.display_name, lat: it.lat, lng: it.lng };
+      settings.set({ start: state.start });
+      drawMap();
+      toast('Start address set ✓', 'ok');
+    },
+  });
+
   // Listeners
   document.getElementById('ctrl-date').addEventListener('change', e => {
     state.date = e.target.value;
@@ -198,6 +221,8 @@ async function init() {
     } catch (err) { toast('Geocoding failed — try again', 'err'); }
   });
   document.getElementById('optimise-btn').addEventListener('click', optimise);
+  document.getElementById('copy-btn').addEventListener('click', copyItinerary);
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
   document.getElementById('seed-link').addEventListener('click', async e => {
     e.preventDefault();
     const added = await maybeSeedDemo();
@@ -215,6 +240,7 @@ async function render() {
   state.result = null;
   drawList();
   drawMap();
+  drawItinerary();
   document.getElementById('page-sub').textContent =
     state.jobs.length
       ? `${state.jobs.length} job${state.jobs.length === 1 ? '' : 's'} on ${fmtDate(state.date)}`
@@ -274,6 +300,119 @@ function drawList() {
     document.getElementById('sum-jobs').textContent = state.jobs.length;
     document.getElementById('sum-km').textContent = '—';
     document.getElementById('sum-time').textContent = '—';
+  }
+}
+
+// ----- Itinerary (written below the map) ---------------------------------
+function drawItinerary() {
+  const sec = document.getElementById('itinerary');
+  const list = document.getElementById('iti-list');
+  const title = document.getElementById('iti-title');
+  const gmaps = document.getElementById('gmaps-btn');
+
+  if (!state.result || !state.result.sequence.length) {
+    sec.hidden = true;
+    return;
+  }
+  sec.hidden = false;
+  title.textContent = `Route itinerary — ${fmtDate(state.date)}`;
+
+  const r = state.result;
+  const html = [];
+
+  // Step 0 — start
+  html.push(`
+    <li class="wm-iti-step">
+      <span class="wm-iti-marker start">S</span>
+      <div class="wm-iti-body">
+        <div><span class="iti-time">${state.startTime}</span><span class="iti-name">Leave start</span></div>
+        <div class="iti-addr">${escapeHtml(state.start?.address || '')}</div>
+      </div>
+    </li>
+  `);
+
+  // Each leg
+  r.legs.forEach((leg, i) => {
+    const j = leg.job;
+    const fixed = j.priority === 3 && j.fixed_time;
+    html.push(`
+      <li class="wm-iti-leg">${fmtMinutes(leg.legMinutes)} driving · ${fmtKm(leg.legKm)}</li>
+      <li class="wm-iti-step">
+        <span class="wm-iti-marker ${fixed ? 'fixed' : ''}">${i + 1}</span>
+        <div class="wm-iti-body">
+          <div><span class="iti-time">${leg.arrive}</span><span class="iti-name">${escapeHtml(j.title)}</span></div>
+          <div class="iti-addr">${escapeHtml(j.address || '')}</div>
+          <div class="iti-meta">
+            On site ${fmtMinutes(j.estimated_minutes)}
+            <span class="sep">·</span>Depart ${leg.depart}
+            ${fixed ? `<span class="sep">·</span>Fixed appt ${j.fixed_time.slice(0,5)}` : ''}
+          </div>
+          ${j.notes ? `<div class="iti-notes">${escapeHtml(j.notes)}</div>` : ''}
+        </div>
+      </li>
+    `);
+  });
+
+  // Return leg
+  if (r.returnLeg) {
+    html.push(`
+      <li class="wm-iti-leg">${fmtMinutes(r.returnLeg.minutes)} driving · ${fmtKm(r.returnLeg.km)}</li>
+      <li class="wm-iti-step">
+        <span class="wm-iti-marker end">E</span>
+        <div class="wm-iti-body">
+          <div><span class="iti-name">Return to start</span></div>
+          <div class="iti-addr">${escapeHtml(state.start?.address || '')}</div>
+        </div>
+      </li>
+    `);
+  }
+
+  list.innerHTML = html.join('');
+
+  // Google Maps deep link
+  const url = googleMapsDirectionsUrl({
+    start: state.start,
+    sequence: r.sequence,
+    end: state.returnToStart ? state.start : null,
+  });
+  if (url) {
+    gmaps.href = url;
+    gmaps.hidden = false;
+  } else {
+    gmaps.hidden = true;
+  }
+}
+
+function itineraryAsText() {
+  if (!state.result) return '';
+  const r = state.result;
+  const lines = [];
+  lines.push(`Route — ${fmtDate(state.date)}`);
+  lines.push(`Total: ${fmtKm(r.totalDistanceKm)}, ${fmtMinutes(r.totalDriveMinutes)} driving across ${r.sequence.length} stops`);
+  lines.push('');
+  lines.push(`${state.startTime}  Leave ${state.start?.address || 'start'}`);
+  r.legs.forEach((leg, i) => {
+    const j = leg.job;
+    lines.push(`        ↓ ${fmtMinutes(leg.legMinutes)} · ${fmtKm(leg.legKm)}`);
+    lines.push(`${leg.arrive}  ${i + 1}. ${j.title}`);
+    lines.push(`        ${j.address}`);
+    lines.push(`        on site ${fmtMinutes(j.estimated_minutes)} · depart ${leg.depart}${j.notes ? '\n        ' + j.notes : ''}`);
+  });
+  if (r.returnLeg) {
+    lines.push(`        ↓ ${fmtMinutes(r.returnLeg.minutes)} · ${fmtKm(r.returnLeg.km)}`);
+    lines.push(`        Return to ${state.start?.address || 'start'}`);
+  }
+  return lines.join('\n');
+}
+
+async function copyItinerary() {
+  const txt = itineraryAsText();
+  if (!txt) return;
+  try {
+    await navigator.clipboard.writeText(txt);
+    toast('Route copied — paste into WhatsApp or Notes ✓', 'ok');
+  } catch (err) {
+    toast('Copy failed — long-press the itinerary to select', 'err');
   }
 }
 
@@ -342,6 +481,7 @@ async function optimise() {
     state.result = result;
     drawList();
     drawMap();
+    drawItinerary();
 
     // Draw the route geometry on the map.
     if (result.sequence.length) {

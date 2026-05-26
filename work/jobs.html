@@ -169,9 +169,11 @@
 
 <script type="module">
 import {
-  db, ensureCoords, escapeHtml, fmtDate, fmtMinutes, fmtGBP,
-  todayISO, toast,
+  db, ensureCoords, mountAddressAutocomplete, escapeHtml,
+  fmtDate, fmtMinutes, fmtGBP, todayISO, toast,
 } from '/work/work.js';
+
+mountAddressAutocomplete(document.getElementById('f-address'));
 
 const $ = (s) => document.querySelector(s);
 
