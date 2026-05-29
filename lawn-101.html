@@ -105,14 +105,19 @@
   .l101-lead{font-size:18px;line-height:1.65;color:var(--ink);max-width:720px;margin:0 0 8px}
   .l101-sub{font-size:15px;color:var(--ink-sub);max-width:720px;margin:0 0 40px}
   .l101-eqgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0 8px}
-  .l101-eqcard{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
-  .l101-eqcard .top{display:flex;align-items:center;gap:12px}
-  .l101-eqicon{width:44px;height:44px;flex:0 0 44px;background:#e8f0e3;border-radius:10px;padding:7px}
+  .l101-eqcard{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+  .l101-eqphoto{aspect-ratio:16/10;background:#e8f0e3;overflow:hidden}
+  .l101-eqphoto img{width:100%;height:100%;object-fit:cover;display:block}
+  .l101-eqbody{padding:16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
   .l101-eqcard h3{font-size:16px;margin:0;line-height:1.25}
   .l101-eqcard .price{font-family:var(--mono,monospace);font-size:12.5px;color:var(--accent);font-weight:600}
   .l101-eqcard p{font-size:13.5px;line-height:1.55;color:var(--ink-sub);margin:0}
-  .l101-eqcard .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:auto}
+  .l101-eqcard .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:auto;padding-top:4px}
   .l101-eqcard a.eqlink{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none}
+  .l101-credits{margin-top:14px;font-size:13px;color:var(--ink-sub)}
+  .l101-credits summary{cursor:pointer;font-weight:600;color:var(--ink-sub)}
+  .l101-credits ul{margin:8px 0 0 18px;line-height:1.7}
+  .l101-credits a{color:var(--accent)}
   .l101-steps{display:flex;flex-direction:column;gap:18px;margin-top:24px}
   .l101-step{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center;border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface)}
   .l101-ill{border-radius:12px;overflow:hidden}
@@ -155,126 +160,133 @@
   <div class="l101-eqgrid">
     
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M30 8 L18 26" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="8" y="24" width="22" height="4" rx="2" fill="#444"/><g stroke="#444" stroke-width="2.5" stroke-linecap="round"><path d="M11 28v10"/><path d="M17 28v12"/><path d="M23 28v11"/><path d="M29 28v12"/></g></svg></span>
-        <div>
-          <h3>Spring-tine rake or scarifier</h3>
-          <div class="price">£12–£25 rake · £80–£160 electric</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Electric%20Dethatcher.jpg?width=640" alt="Spring-tine rake or scarifier" loading="lazy" decoding="async"/>
       </div>
-      <p>Pulls out dead thatch and moss. A hand rake is fine for small lawns; a powered scarifier saves your back on anything over ~150m².</p>
-      
-      <div class="tag">For: Scarifying</div>
+      <div class="l101-eqbody">
+        <h3>Spring-tine rake or scarifier</h3>
+        <div class="price">£12–£25 rake · £80–£160 electric</div>
+        <p>Pulls out dead thatch and moss. A hand rake is fine for small lawns; a powered scarifier saves your back on anything over ~150m².</p>
+        
+        <div class="tag">For: Scarifying</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6v18" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="12" y="22" width="24" height="4" rx="2" fill="#444"/><g stroke="#444" stroke-width="2.5" stroke-linecap="round"><path d="M15 26v14"/><path d="M21 26v14"/><path d="M27 26v14"/><path d="M33 26v14"/></g></svg></span>
-        <div>
-          <h3>Garden fork or hollow-tine aerator</h3>
-          <div class="price">£18–£35 fork · £90+ powered</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Garden%20fork.JPG?width=640" alt="Garden fork or hollow-tine aerator" loading="lazy" decoding="async"/>
       </div>
-      <p>Opens up compacted soil so air, water and feed reach the roots. A sturdy fork does the job; a hollow-tine tool pulls cleaner cores.</p>
-      
-      <div class="tag">For: Aerating</div>
+      <div class="l101-eqbody">
+        <h3>Garden fork or hollow-tine aerator</h3>
+        <div class="price">£18–£35 fork · £90+ powered</div>
+        <p>Opens up compacted soil so air, water and feed reach the roots. A sturdy fork does the job; a hollow-tine tool pulls cleaner cores.</p>
+        
+        <div class="tag">For: Aerating</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 8 L24 22" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="22" y="20" width="20" height="5" rx="2" fill="#2f7d4f"/><rect x="20" y="30" width="24" height="4" fill="#c89b6a"/></svg></span>
-        <div>
-          <h3>Lawn lute (levelling rake)</h3>
-          <div class="price">£30–£70</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Metal%20Rake.jpg?width=640" alt="Lawn lute (levelling rake)" loading="lazy" decoding="async"/>
       </div>
-      <p>A flat, toothless frame that drags top dressing level and works it into hollows. The tool that turns a bumpy lawn into a flat one.</p>
-      
-      <div class="tag">For: Top dressing</div>
+      <div class="l101-eqbody">
+        <h3>Lawn lute (levelling rake)</h3>
+        <div class="price">£30–£70</div>
+        <p>A flat, toothless frame that drags top dressing level and works it into hollows. The tool that turns a bumpy lawn into a flat one.</p>
+        
+        <div class="tag">For: Top dressing</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="10" width="20" height="14" rx="3" fill="#d97706"/><path d="M14 24 L9 36 L39 36 L34 24 Z" fill="#b45f04" opacity=".7"/><circle cx="16" cy="40" r="4" fill="#1a1a1a"/><circle cx="32" cy="40" r="4" fill="#1a1a1a"/></svg></span>
-        <div>
-          <h3>Broadcast or drop spreader</h3>
-          <div class="price">£20–£55</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Broadcast%20spreader.jpg?width=640" alt="Broadcast or drop spreader" loading="lazy" decoding="async"/>
       </div>
-      <p>Spreads feed and seed evenly so you avoid stripes of burnt grass and bald patches. Far more even than scattering by hand.</p>
-      
-      <div class="tag">For: Feeding &amp; overseeding</div>
+      <div class="l101-eqbody">
+        <h3>Broadcast or drop spreader</h3>
+        <div class="price">£20–£55</div>
+        <p>Spreads feed and seed evenly so you avoid stripes of burnt grass and bald patches. Far more even than scattering by hand.</p>
+        
+        <div class="tag">For: Feeding &amp; overseeding</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="20" width="22" height="12" rx="3" fill="#2f7d4f"/><path d="M31 22 L42 11" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/><circle cx="15" cy="36" r="5" fill="#1a1a1a"/><circle cx="28" cy="36" r="5" fill="#1a1a1a"/></svg></span>
-        <div>
-          <h3>A mower suited to your lawn</h3>
-          <div class="price">From £79</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mountfield%20725M.jpg?width=640" alt="A mower suited to your lawn" loading="lazy" decoding="async"/>
       </div>
-      <p>The right cut is half the battle. Match the mower to your lawn size and whether you want stripes. We compare 176 of them.</p>
-      <a class="eqlink" href="/browse">Compare mowers →</a>
-      <div class="tag">For: Mowing</div>
+      <div class="l101-eqbody">
+        <h3>A mower suited to your lawn</h3>
+        <div class="price">From £79</div>
+        <p>The right cut is half the battle. Match the mower to your lawn size and whether you want stripes. We compare 176 of them.</p>
+        <a class="eqlink" href="/browse">Compare mowers →</a>
+        <div class="tag">For: Mowing</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8c-9 0-14 7-14 15 0 6 4 10 8 13l6 4 6-4c4-3 8-7 8-13 0-8-5-15-14-15z" fill="#f2d2a0"/><circle cx="24" cy="22" r="3" fill="#5a3d1e"/></svg></span>
-        <div>
-          <h3>Grass seed</h3>
-          <div class="price">£10–£25 per bag</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Seeds%20of%20ryegrass%20pasture-MS.jpg?width=640" alt="Grass seed" loading="lazy" decoding="async"/>
       </div>
-      <p>For overseeding thin and bare patches. Match the mix to your sun/shade and how much wear the lawn takes (family vs ornamental).</p>
-      
-      <div class="tag">For: Overseeding</div>
+      <div class="l101-eqbody">
+        <h3>Grass seed</h3>
+        <div class="price">£10–£25 per bag</div>
+        <p>For overseeding thin and bare patches. Match the mix to your sun/shade and how much wear the lawn takes (family vs ornamental).</p>
+        
+        <div class="tag">For: Overseeding</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 30 C16 22 32 22 40 30 L40 40 L8 40 Z" fill="#c89b6a"/><g fill="#8a5a2b"><circle cx="16" cy="30" r="2"/><circle cx="26" cy="28" r="2"/><circle cx="34" cy="31" r="2"/></g></svg></span>
-        <div>
-          <h3>Top dressing (sand/soil/compost)</h3>
-          <div class="price">£8–£15 per bag</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2010%20%2C%20Heap%20of%20topsoil%20on%20what%20may%20be%20a%20drove%20road%20-%20geograph.org.uk%20-%201991321.jpg?width=640" alt="Top dressing (sand/soil/compost)" loading="lazy" decoding="async"/>
       </div>
-      <p>A thin layer worked in with the lute fills holes, smooths bumps and improves the soil over time. Buy a ready-mixed lawn dressing.</p>
-      
-      <div class="tag">For: Top dressing</div>
+      <div class="l101-eqbody">
+        <h3>Top dressing (sand/soil/compost)</h3>
+        <div class="price">£8–£15 per bag</div>
+        <p>A thin layer worked in with the lute fills holes, smooths bumps and improves the soil over time. Buy a ready-mixed lawn dressing.</p>
+        
+        <div class="tag">For: Top dressing</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><rect x="16" y="8" width="16" height="32" rx="3" fill="#5fb878"/><rect x="20" y="4" width="8" height="6" rx="2" fill="#2f7d4f"/><rect x="18" y="16" width="12" height="12" rx="2" fill="#fff" opacity=".7"/></svg></span>
-        <div>
-          <h3>Spring &amp; autumn lawn feed</h3>
-          <div class="price">£15–£30 each</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/DAP%20(Diammonium%20Phosphate)%20Granules%20(1).jpg?width=640" alt="Spring &amp; autumn lawn feed" loading="lazy" decoding="async"/>
       </div>
-      <p>Spring feed (high nitrogen) drives green growth; autumn feed (high potassium, low nitrogen) hardens roots for winter. Never swap them round.</p>
-      
-      <div class="tag">For: Feeding</div>
+      <div class="l101-eqbody">
+        <h3>Spring &amp; autumn lawn feed</h3>
+        <div class="price">£15–£30 each</div>
+        <p>Spring feed (high nitrogen) drives green growth; autumn feed (high potassium, low nitrogen) hardens roots for winter. Never swap them round.</p>
+        
+        <div class="tag">For: Feeding</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 24 H30 a8 8 0 0 1 8 8 v6 H10 Z" fill="#3b82f6"/><path d="M38 28 L44 26 L44 34 L38 32 Z" fill="#3b82f6"/><path d="M10 24 c0-6 4-10 10-10" fill="none" stroke="#3b82f6" stroke-width="3"/></svg></span>
-        <div>
-          <h3>Hose &amp; sprinkler (or water butt)</h3>
-          <div class="price">£15–£40</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Irrigation%20sprinkler%2C%20New%20Zealand.jpg?width=640" alt="Hose &amp; sprinkler (or water butt)" loading="lazy" decoding="async"/>
       </div>
-      <p>A deep soak twice a week beats a daily sprinkle, because it grows deeper roots. A water butt keeps it cheap and through hosepipe bans.</p>
-      
-      <div class="tag">For: Watering</div>
+      <div class="l101-eqbody">
+        <h3>Hose &amp; sprinkler (or water butt)</h3>
+        <div class="price">£15–£40</div>
+        <p>A deep soak twice a week beats a daily sprinkle, because it grows deeper roots. A water butt keeps it cheap and through hosepipe bans.</p>
+        
+        <div class="tag">For: Watering</div>
+      </div>
     </div>
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon"><svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40 C22 22 14 16 8 12 C18 14 24 20 24 28 C24 18 30 14 40 11 C30 18 26 26 26 40 Z" fill="#7a9a4a"/></svg></span>
-        <div>
-          <h3>Weed &amp; moss treatment (optional)</h3>
-          <div class="price">£10–£20</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mos%20in%20gazon%20(Moss%20in%20lawn).jpg?width=640" alt="Weed &amp; moss treatment (optional)" loading="lazy" decoding="async"/>
       </div>
-      <p>A combined &quot;weed, feed &amp; moss-killer&quot; in spring handles all three at once. Rake out the blackened moss a couple of weeks after.</p>
-      
-      <div class="tag">For: Weed &amp; moss control</div>
+      <div class="l101-eqbody">
+        <h3>Weed &amp; moss treatment (optional)</h3>
+        <div class="price">£10–£20</div>
+        <p>A combined &quot;weed, feed &amp; moss-killer&quot; in spring handles all three at once. Rake out the blackened moss a couple of weeks after.</p>
+        
+        <div class="tag">For: Weed &amp; moss control</div>
+      </div>
     </div>
   </div>
+  <details class="l101-credits">
+    <summary>Photo credits</summary>
+    <p>Equipment photos from <a href="https://commons.wikimedia.org" rel="nofollow noopener" target="_blank">Wikimedia Commons</a>, used under their respective licences:</p>
+    <ul>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Electric_Dethatcher.jpg" rel="nofollow noopener" target="_blank">Spring-tine rake or scarifier</a> — Wikimedia Commons (CC0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Garden_fork.JPG" rel="nofollow noopener" target="_blank">Garden fork or hollow-tine aerator</a> — The Banner (CC BY-SA 4.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Metal_Rake.jpg" rel="nofollow noopener" target="_blank">Lawn lute (levelling rake)</a> — Nabunje Leticia (CC BY-SA 4.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Broadcast_spreader.jpg" rel="nofollow noopener" target="_blank">Broadcast or drop spreader</a> — Gmihail (CC BY-SA 3.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Mountfield_725M.jpg" rel="nofollow noopener" target="_blank">A mower suited to your lawn</a> — Oplu7 (CC BY-SA 4.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Seeds_of_ryegrass_pasture-MS.jpg" rel="nofollow noopener" target="_blank">Grass seed</a> — Mahsa-110 (CC BY 4.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:2010_%2C_Heap_of_topsoil_on_what_may_be_a_drove_road_-_geograph.org.uk_-_1991321.jpg" rel="nofollow noopener" target="_blank">Top dressing (sand/soil/compost)</a> — Maurice Pullin (CC BY-SA 2.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:DAP_(Diammonium_Phosphate)_Granules_(1).jpg" rel="nofollow noopener" target="_blank">Spring &amp; autumn lawn feed</a> — Suyash Dwivedi (CC BY-SA 4.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Irrigation_sprinkler%2C_New_Zealand.jpg" rel="nofollow noopener" target="_blank">Hose &amp; sprinkler (or water butt)</a> — Michal Klajban (CC BY-SA 4.0)</li><li><a href="https://commons.wikimedia.org/wiki/File:Mos_in_gazon_(Moss_in_lawn).jpg" rel="nofollow noopener" target="_blank">Weed &amp; moss treatment (optional)</a> — Rasbak (CC BY-SA 3.0)</li>
+    </ul>
+  </details>
 
   <h2 class="section-h2" style="margin-top:52px">The step-by-step routine</h2>
   <div class="l101-steps">

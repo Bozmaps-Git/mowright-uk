@@ -1259,30 +1259,32 @@ function renderLawn101Page() {
     <circle cx="170" cy="74" r="26" fill="none" stroke="#dc2626" stroke-width="6"/>
     <path d="M152 92 L188 56" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/>`);
 
-  // Equipment icon helper (compact)
-  const ei = inner => `<svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true">${inner}</svg>`;
+  // Real, CC-licensed photos from Wikimedia Commons. Special:FilePath stays stable
+  // even if Commons rearranges storage; ?width keeps the payload small.
+  const wImg = file => 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(file) + '?width=640';
+  const wPage = file => 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(file.replace(/ /g, '_'));
 
   const equipment = [
     { name: 'Spring-tine rake or scarifier', price: '£12–£25 rake · £80–£160 electric', use: 'Pulls out dead thatch and moss. A hand rake is fine for small lawns; a powered scarifier saves your back on anything over ~150m².', step: 'Scarifying',
-      icon: ei('<path d="M30 8 L18 26" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="8" y="24" width="22" height="4" rx="2" fill="#444"/><g stroke="#444" stroke-width="2.5" stroke-linecap="round"><path d="M11 28v10"/><path d="M17 28v12"/><path d="M23 28v11"/><path d="M29 28v12"/></g>') },
+      file: 'Electric Dethatcher.jpg', credit: 'Wikimedia Commons', lic: 'CC0' },
     { name: 'Garden fork or hollow-tine aerator', price: '£18–£35 fork · £90+ powered', use: 'Opens up compacted soil so air, water and feed reach the roots. A sturdy fork does the job; a hollow-tine tool pulls cleaner cores.', step: 'Aerating',
-      icon: ei('<path d="M24 6v18" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="12" y="22" width="24" height="4" rx="2" fill="#444"/><g stroke="#444" stroke-width="2.5" stroke-linecap="round"><path d="M15 26v14"/><path d="M21 26v14"/><path d="M27 26v14"/><path d="M33 26v14"/></g>') },
+      file: 'Garden fork.JPG', credit: 'The Banner', lic: 'CC BY-SA 4.0' },
     { name: 'Lawn lute (levelling rake)', price: '£30–£70', use: 'A flat, toothless frame that drags top dressing level and works it into hollows. The tool that turns a bumpy lawn into a flat one.', step: 'Top dressing',
-      icon: ei('<path d="M10 8 L24 22" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="22" y="20" width="20" height="5" rx="2" fill="#2f7d4f"/><rect x="20" y="30" width="24" height="4" fill="#c89b6a"/>') },
+      file: 'Metal Rake.jpg', credit: 'Nabunje Leticia', lic: 'CC BY-SA 4.0' },
     { name: 'Broadcast or drop spreader', price: '£20–£55', use: 'Spreads feed and seed evenly so you avoid stripes of burnt grass and bald patches. Far more even than scattering by hand.', step: 'Feeding & overseeding',
-      icon: ei('<rect x="14" y="10" width="20" height="14" rx="3" fill="#d97706"/><path d="M14 24 L9 36 L39 36 L34 24 Z" fill="#b45f04" opacity=".7"/><circle cx="16" cy="40" r="4" fill="#1a1a1a"/><circle cx="32" cy="40" r="4" fill="#1a1a1a"/>') },
+      file: 'Broadcast spreader.jpg', credit: 'Gmihail', lic: 'CC BY-SA 3.0' },
     { name: 'A mower suited to your lawn', price: 'From £79', use: 'The right cut is half the battle. Match the mower to your lawn size and whether you want stripes. We compare 176 of them.', step: 'Mowing', link: '/browse',
-      icon: ei('<rect x="10" y="20" width="22" height="12" rx="3" fill="#2f7d4f"/><path d="M31 22 L42 11" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/><circle cx="15" cy="36" r="5" fill="#1a1a1a"/><circle cx="28" cy="36" r="5" fill="#1a1a1a"/>') },
+      file: 'Mountfield 725M.jpg', credit: 'Oplu7', lic: 'CC BY-SA 4.0' },
     { name: 'Grass seed', price: '£10–£25 per bag', use: 'For overseeding thin and bare patches. Match the mix to your sun/shade and how much wear the lawn takes (family vs ornamental).', step: 'Overseeding',
-      icon: ei('<path d="M24 8c-9 0-14 7-14 15 0 6 4 10 8 13l6 4 6-4c4-3 8-7 8-13 0-8-5-15-14-15z" fill="#f2d2a0"/><circle cx="24" cy="22" r="3" fill="#5a3d1e"/>') },
+      file: 'Seeds of ryegrass pasture-MS.jpg', credit: 'Mahsa-110', lic: 'CC BY 4.0' },
     { name: 'Top dressing (sand/soil/compost)', price: '£8–£15 per bag', use: 'A thin layer worked in with the lute fills holes, smooths bumps and improves the soil over time. Buy a ready-mixed lawn dressing.', step: 'Top dressing',
-      icon: ei('<path d="M8 30 C16 22 32 22 40 30 L40 40 L8 40 Z" fill="#c89b6a"/><g fill="#8a5a2b"><circle cx="16" cy="30" r="2"/><circle cx="26" cy="28" r="2"/><circle cx="34" cy="31" r="2"/></g>') },
+      file: '2010 , Heap of topsoil on what may be a drove road - geograph.org.uk - 1991321.jpg', credit: 'Maurice Pullin', lic: 'CC BY-SA 2.0' },
     { name: 'Spring & autumn lawn feed', price: '£15–£30 each', use: 'Spring feed (high nitrogen) drives green growth; autumn feed (high potassium, low nitrogen) hardens roots for winter. Never swap them round.', step: 'Feeding',
-      icon: ei('<rect x="16" y="8" width="16" height="32" rx="3" fill="#5fb878"/><rect x="20" y="4" width="8" height="6" rx="2" fill="#2f7d4f"/><rect x="18" y="16" width="12" height="12" rx="2" fill="#fff" opacity=".7"/>') },
+      file: 'DAP (Diammonium Phosphate) Granules (1).jpg', credit: 'Suyash Dwivedi', lic: 'CC BY-SA 4.0' },
     { name: 'Hose & sprinkler (or water butt)', price: '£15–£40', use: 'A deep soak twice a week beats a daily sprinkle, because it grows deeper roots. A water butt keeps it cheap and through hosepipe bans.', step: 'Watering',
-      icon: ei('<path d="M10 24 H30 a8 8 0 0 1 8 8 v6 H10 Z" fill="#3b82f6"/><path d="M38 28 L44 26 L44 34 L38 32 Z" fill="#3b82f6"/><path d="M10 24 c0-6 4-10 10-10" fill="none" stroke="#3b82f6" stroke-width="3"/>') },
+      file: 'Irrigation sprinkler, New Zealand.jpg', credit: 'Michal Klajban', lic: 'CC BY-SA 4.0' },
     { name: 'Weed & moss treatment (optional)', price: '£10–£20', use: 'A combined "weed, feed & moss-killer" in spring handles all three at once. Rake out the blackened moss a couple of weeks after.', step: 'Weed & moss control',
-      icon: ei('<path d="M24 40 C22 22 14 16 8 12 C18 14 24 20 24 28 C24 18 30 14 40 11 C30 18 26 26 26 40 Z" fill="#7a9a4a"/>') }
+      file: 'Mos in gazon (Moss in lawn).jpg', credit: 'Rasbak', lic: 'CC BY-SA 3.0' }
   ];
 
   const steps = [
@@ -1344,14 +1346,19 @@ ${siteHeader('lawn101')}
   .l101-lead{font-size:18px;line-height:1.65;color:var(--ink);max-width:720px;margin:0 0 8px}
   .l101-sub{font-size:15px;color:var(--ink-sub);max-width:720px;margin:0 0 40px}
   .l101-eqgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0 8px}
-  .l101-eqcard{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
-  .l101-eqcard .top{display:flex;align-items:center;gap:12px}
-  .l101-eqicon{width:44px;height:44px;flex:0 0 44px;background:#e8f0e3;border-radius:10px;padding:7px}
+  .l101-eqcard{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+  .l101-eqphoto{aspect-ratio:16/10;background:#e8f0e3;overflow:hidden}
+  .l101-eqphoto img{width:100%;height:100%;object-fit:cover;display:block}
+  .l101-eqbody{padding:16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
   .l101-eqcard h3{font-size:16px;margin:0;line-height:1.25}
   .l101-eqcard .price{font-family:var(--mono,monospace);font-size:12.5px;color:var(--accent);font-weight:600}
   .l101-eqcard p{font-size:13.5px;line-height:1.55;color:var(--ink-sub);margin:0}
-  .l101-eqcard .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:auto}
+  .l101-eqcard .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:auto;padding-top:4px}
   .l101-eqcard a.eqlink{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none}
+  .l101-credits{margin-top:14px;font-size:13px;color:var(--ink-sub)}
+  .l101-credits summary{cursor:pointer;font-weight:600;color:var(--ink-sub)}
+  .l101-credits ul{margin:8px 0 0 18px;line-height:1.7}
+  .l101-credits a{color:var(--accent)}
   .l101-steps{display:flex;flex-direction:column;gap:18px;margin-top:24px}
   .l101-step{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center;border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface)}
   .l101-ill{border-radius:12px;overflow:hidden}
@@ -1394,18 +1401,25 @@ ${siteHeader('lawn101')}
   <div class="l101-eqgrid">
     ${equipment.map(e => `
     <div class="l101-eqcard">
-      <div class="top">
-        <span class="l101-eqicon">${e.icon}</span>
-        <div>
-          <h3>${esc(e.name)}</h3>
-          <div class="price">${esc(e.price)}</div>
-        </div>
+      <div class="l101-eqphoto">
+        <img src="${esc(wImg(e.file))}" alt="${esc(e.name)}" loading="lazy" decoding="async"/>
       </div>
-      <p>${esc(e.use)}</p>
-      ${e.link ? `<a class="eqlink" href="${esc(e.link)}">Compare mowers →</a>` : ''}
-      <div class="tag">For: ${esc(e.step)}</div>
+      <div class="l101-eqbody">
+        <h3>${esc(e.name)}</h3>
+        <div class="price">${esc(e.price)}</div>
+        <p>${esc(e.use)}</p>
+        ${e.link ? `<a class="eqlink" href="${esc(e.link)}">Compare mowers →</a>` : ''}
+        <div class="tag">For: ${esc(e.step)}</div>
+      </div>
     </div>`).join('')}
   </div>
+  <details class="l101-credits">
+    <summary>Photo credits</summary>
+    <p>Equipment photos from <a href="https://commons.wikimedia.org" rel="nofollow noopener" target="_blank">Wikimedia Commons</a>, used under their respective licences:</p>
+    <ul>
+      ${equipment.map(e => `<li><a href="${esc(wPage(e.file))}" rel="nofollow noopener" target="_blank">${esc(e.name)}</a> — ${esc(e.credit)} (${esc(e.lic)})</li>`).join('')}
+    </ul>
+  </details>
 
   <h2 class="section-h2" style="margin-top:52px">The step-by-step routine</h2>
   <div class="l101-steps">
