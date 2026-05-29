@@ -703,6 +703,7 @@ const siteHeader = (active = '') => `
       <a href="/marketplace"${active === 'marketplace' ? ' aria-current="page"' : ''}>Marketplace</a>
       <a href="/sell"${active === 'sell' ? ' aria-current="page"' : ''}>Sell</a>
       <a href="/buying-guide"${active === 'guide' ? ' aria-current="page"' : ''}>Buying Guide</a>
+      <a href="/lawn-101"${active === 'lawn101' ? ' aria-current="page"' : ''}>Lawn 101</a>
       <a href="/blog"${active === 'blog' ? ' aria-current="page"' : ''}>Blog</a>
       <a href="/about"${active === 'about' ? ' aria-current="page"' : ''}>About</a>
     </nav>
@@ -753,6 +754,7 @@ const siteFooter = () => `
         <h4 style="margin-top:18px">Resources</h4>
         <ul>
           <li><a href="/buying-guide">Buying guide</a></li>
+          <li><a href="/lawn-101">Lawn 101 (lawn care)</a></li>
           <li><a href="/blog">Blog &amp; how-tos</a></li>
           <li><a href="/engines">Engine deep-dives</a></li>
           <li><a href="/sound-levels">Sound levels (dB)</a></li>
@@ -1204,6 +1206,234 @@ ${siteHeader('guide')}
     </div>
   </div>
 </section>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Lawn 101 — lawn-care how-to ----------
+function renderLawn101Page() {
+  // Small schematic illustration helper. Inline SVG so it never 404s and stays on-brand.
+  const ill = (bg, inner) => `<div class="l101-ill" style="background:${bg}" aria-hidden="true"><svg viewBox="0 0 240 150">${inner}</svg></div>`;
+  const ground = '<rect x="0" y="118" width="240" height="32" fill="#8a5a2b" opacity=".55"/><rect x="0" y="112" width="240" height="8" fill="#5fb878"/>';
+
+  // Step illustrations
+  const illMow = ill('#e8f0e3', `${ground}
+    <rect x="150" y="60" width="60" height="34" rx="6" fill="#2f7d4f"/>
+    <rect x="150" y="60" width="60" height="10" rx="6" fill="#256340"/>
+    <path d="M208 64 L232 40" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="162" cy="100" r="13" fill="#1a1a1a"/><circle cx="162" cy="100" r="5" fill="#3a3a3a"/>
+    <circle cx="198" cy="100" r="13" fill="#1a1a1a"/><circle cx="198" cy="100" r="5" fill="#3a3a3a"/>
+    <g stroke="#5fb878" stroke-width="3" stroke-linecap="round"><path d="M30 112V96"/><path d="M44 112V92"/><path d="M58 112V98"/><path d="M120 112v-4"/><path d="M134 112v-3"/></g>`);
+  const illScarify = ill('#fef3e2', `${ground}
+    <path d="M150 40 L120 86" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+    <rect x="96" y="84" width="56" height="9" rx="3" fill="#444"/>
+    <g stroke="#444" stroke-width="3" stroke-linecap="round"><path d="M102 93v14"/><path d="M114 93v16"/><path d="M126 93v15"/><path d="M138 93v16"/><path d="M150 93v14"/></g>
+    <g fill="#8a5a2b" opacity=".7"><circle cx="40" cy="104" r="4"/><circle cx="54" cy="110" r="3"/><circle cx="66" cy="102" r="4"/><circle cx="78" cy="109" r="3"/></g>`);
+  const illAerate = ill('#e0ecff', `${ground}
+    <path d="M150 30 L150 84" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+    <rect x="120" y="80" width="60" height="8" rx="2" fill="#444"/>
+    <g stroke="#444" stroke-width="4" stroke-linecap="round"><path d="M128 88v30"/><path d="M144 88v30"/><path d="M160 88v30"/><path d="M176 88v30"/></g>
+    <g fill="#1a1a1a"><circle cx="40" cy="124" r="4"/><circle cx="62" cy="124" r="4"/><circle cx="84" cy="124" r="4"/></g>
+    <g fill="#8a5a2b"><rect x="36" y="100" width="8" height="14" rx="3"/><rect x="58" y="102" width="8" height="12" rx="3"/></g>`);
+  const illLute = ill('#dff4f8', `${ground}
+    <path d="M40 38 L96 86" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+    <rect x="92" y="84" width="96" height="11" rx="3" fill="#2f7d4f"/>
+    <rect x="92" y="100" width="120" height="10" fill="#c89b6a" opacity=".8"/>
+    <g fill="#c89b6a" opacity=".5"><circle cx="120" cy="98" r="3"/><circle cx="150" cy="98" r="3"/><circle cx="180" cy="98" r="3"/></g>`);
+  const illSeed = ill('#e8f0e3', `${ground}
+    <path d="M150 36c-14 0-22 10-22 22 0 8 6 14 12 18l10 8 10-8c6-4 12-10 12-18 0-12-8-22-22-22z" fill="#f2d2a0" opacity=".9"/>
+    <g fill="#5a3d1e"><circle cx="120" cy="104" r="3"/><circle cx="135" cy="110" r="2.5"/><circle cx="150" cy="106" r="3"/><circle cx="166" cy="111" r="2.5"/><circle cx="180" cy="105" r="3"/><circle cx="108" cy="111" r="2.5"/></g>`);
+  const illFeed = ill('#fef3e2', `${ground}
+    <rect x="120" y="44" width="56" height="40" rx="6" fill="#d97706"/>
+    <path d="M120 84 L112 110 L184 110 L176 84 Z" fill="#b45f04" opacity=".6"/>
+    <rect x="150" y="20" width="8" height="26" rx="3" fill="#1a1a1a"/>
+    <circle cx="124" cy="120" r="10" fill="#1a1a1a"/><circle cx="172" cy="120" r="10" fill="#1a1a1a"/>
+    <g fill="#e8a13a"><circle cx="128" cy="108" r="2.5"/><circle cx="140" cy="111" r="2"/><circle cx="155" cy="108" r="2.5"/><circle cx="168" cy="111" r="2"/></g>`);
+  const illWater = ill('#e0ecff', `${ground}
+    <path d="M150 40 c-16 24 -26 38 -26 52 a26 26 0 0 0 52 0 c0 -14 -10 -28 -26 -52z" fill="#3b82f6" opacity=".85"/>
+    <g fill="#3b82f6" opacity=".5"><path d="M60 70c-6 10-10 15-10 21a10 10 0 0 0 20 0c0-6-4-11-10-21z"/><path d="M92 84c-5 8-8 12-8 16a8 8 0 0 0 16 0c0-4-3-8-8-16z"/></g>`);
+  const illWeed = ill('#eef0ec', `${ground}
+    <path d="M110 110 C108 84 96 76 86 70 C100 72 108 80 110 92 C112 78 120 70 134 66 C122 76 114 86 112 110 Z" fill="#7a9a4a"/>
+    <circle cx="170" cy="74" r="26" fill="none" stroke="#dc2626" stroke-width="6"/>
+    <path d="M152 92 L188 56" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/>`);
+
+  // Equipment icon helper (compact)
+  const ei = inner => `<svg class="l101-eqicon" viewBox="0 0 48 48" aria-hidden="true">${inner}</svg>`;
+
+  const equipment = [
+    { name: 'Spring-tine rake or scarifier', price: '£12–£25 rake · £80–£160 electric', use: 'Pulls out dead thatch and moss. A hand rake is fine for small lawns; a powered scarifier saves your back on anything over ~150m².', step: 'Scarifying',
+      icon: ei('<path d="M30 8 L18 26" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="8" y="24" width="22" height="4" rx="2" fill="#444"/><g stroke="#444" stroke-width="2.5" stroke-linecap="round"><path d="M11 28v10"/><path d="M17 28v12"/><path d="M23 28v11"/><path d="M29 28v12"/></g>') },
+    { name: 'Garden fork or hollow-tine aerator', price: '£18–£35 fork · £90+ powered', use: 'Opens up compacted soil so air, water and feed reach the roots. A sturdy fork does the job; a hollow-tine tool pulls cleaner cores.', step: 'Aerating',
+      icon: ei('<path d="M24 6v18" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="12" y="22" width="24" height="4" rx="2" fill="#444"/><g stroke="#444" stroke-width="2.5" stroke-linecap="round"><path d="M15 26v14"/><path d="M21 26v14"/><path d="M27 26v14"/><path d="M33 26v14"/></g>') },
+    { name: 'Lawn lute (levelling rake)', price: '£30–£70', use: 'A flat, toothless frame that drags top dressing level and works it into hollows. The tool that turns a bumpy lawn into a flat one.', step: 'Top dressing',
+      icon: ei('<path d="M10 8 L24 22" stroke="#2f7d4f" stroke-width="3" stroke-linecap="round"/><rect x="22" y="20" width="20" height="5" rx="2" fill="#2f7d4f"/><rect x="20" y="30" width="24" height="4" fill="#c89b6a"/>') },
+    { name: 'Broadcast or drop spreader', price: '£20–£55', use: 'Spreads feed and seed evenly so you avoid stripes of burnt grass and bald patches. Far more even than scattering by hand.', step: 'Feeding & overseeding',
+      icon: ei('<rect x="14" y="10" width="20" height="14" rx="3" fill="#d97706"/><path d="M14 24 L9 36 L39 36 L34 24 Z" fill="#b45f04" opacity=".7"/><circle cx="16" cy="40" r="4" fill="#1a1a1a"/><circle cx="32" cy="40" r="4" fill="#1a1a1a"/>') },
+    { name: 'A mower suited to your lawn', price: 'From £79', use: 'The right cut is half the battle. Match the mower to your lawn size and whether you want stripes. We compare 176 of them.', step: 'Mowing', link: '/browse',
+      icon: ei('<rect x="10" y="20" width="22" height="12" rx="3" fill="#2f7d4f"/><path d="M31 22 L42 11" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/><circle cx="15" cy="36" r="5" fill="#1a1a1a"/><circle cx="28" cy="36" r="5" fill="#1a1a1a"/>') },
+    { name: 'Grass seed', price: '£10–£25 per bag', use: 'For overseeding thin and bare patches. Match the mix to your sun/shade and how much wear the lawn takes (family vs ornamental).', step: 'Overseeding',
+      icon: ei('<path d="M24 8c-9 0-14 7-14 15 0 6 4 10 8 13l6 4 6-4c4-3 8-7 8-13 0-8-5-15-14-15z" fill="#f2d2a0"/><circle cx="24" cy="22" r="3" fill="#5a3d1e"/>') },
+    { name: 'Top dressing (sand/soil/compost)', price: '£8–£15 per bag', use: 'A thin layer worked in with the lute fills holes, smooths bumps and improves the soil over time. Buy a ready-mixed lawn dressing.', step: 'Top dressing',
+      icon: ei('<path d="M8 30 C16 22 32 22 40 30 L40 40 L8 40 Z" fill="#c89b6a"/><g fill="#8a5a2b"><circle cx="16" cy="30" r="2"/><circle cx="26" cy="28" r="2"/><circle cx="34" cy="31" r="2"/></g>') },
+    { name: 'Spring & autumn lawn feed', price: '£15–£30 each', use: 'Spring feed (high nitrogen) drives green growth; autumn feed (high potassium, low nitrogen) hardens roots for winter. Never swap them round.', step: 'Feeding',
+      icon: ei('<rect x="16" y="8" width="16" height="32" rx="3" fill="#5fb878"/><rect x="20" y="4" width="8" height="6" rx="2" fill="#2f7d4f"/><rect x="18" y="16" width="12" height="12" rx="2" fill="#fff" opacity=".7"/>') },
+    { name: 'Hose & sprinkler (or water butt)', price: '£15–£40', use: 'A deep soak twice a week beats a daily sprinkle, because it grows deeper roots. A water butt keeps it cheap and through hosepipe bans.', step: 'Watering',
+      icon: ei('<path d="M10 24 H30 a8 8 0 0 1 8 8 v6 H10 Z" fill="#3b82f6"/><path d="M38 28 L44 26 L44 34 L38 32 Z" fill="#3b82f6"/><path d="M10 24 c0-6 4-10 10-10" fill="none" stroke="#3b82f6" stroke-width="3"/>') },
+    { name: 'Weed & moss treatment (optional)', price: '£10–£20', use: 'A combined "weed, feed & moss-killer" in spring handles all three at once. Rake out the blackened moss a couple of weeks after.', step: 'Weed & moss control',
+      icon: ei('<path d="M24 40 C22 22 14 16 8 12 C18 14 24 20 24 28 C24 18 30 14 40 11 C30 18 26 26 26 40 Z" fill="#7a9a4a"/>') }
+  ];
+
+  const steps = [
+    { n: '01', title: 'Mow it right', ill: illMow, when: 'Weekly in the growing season',
+      body: 'Good mowing is the foundation. Never cut more than one third of the height in a single pass, keep the blades sharp so they slice instead of tearing (torn tips go brown), and raise the cut in summer so longer grass holds moisture. Mow when the grass is dry.' },
+    { n: '02', title: 'Scarify out the thatch', ill: illScarify, when: 'Early autumn (Sept) or mid spring (April)',
+      body: 'Thatch is the dead, matted layer of old grass and moss sitting at soil level. Too much of it blocks water, air and feed. Rake hard with a spring-tine rake, or use a powered scarifier, until you can see soil between the grass. It looks scruffy straight after, that is normal, it bounces back in a few weeks. Bin all the debris.' },
+    { n: '03', title: 'Aerate the soil', ill: illAerate, when: 'Autumn, just after scarifying',
+      body: 'Compacted soil starves the roots. Push a garden fork about 10cm deep and rock it gently, repeating every 10 to 15cm across the whole lawn. On bigger lawns a hollow-tine aerator pulls out small soil plugs, leave them to dry then rake them up. Do not skip this on a lawn that gets walked on a lot.' },
+    { n: '04', title: 'Top dress and level with a lute', ill: illLute, when: 'Right after aerating',
+      body: 'Spread a thin layer of top dressing (a sand, soil and compost mix) over the lawn, then drag it level with the lute, working it down into the aeration holes and any dips. Aim for a flat surface with the grass tips still poking through, do not bury the grass. This fills holes, smooths bumps and steadily improves the soil.' },
+    { n: '05', title: 'Overseed the thin patches', ill: illSeed, when: 'After scarifying & aerating',
+      body: 'Scatter fresh grass seed over the worked surface, concentrating on thin and bare areas. Choose a mix that matches your sun, shade and wear. Lightly rake it in so it sits in contact with the soil, water gently, and keep off it until the new grass establishes (a few weeks).' },
+    { n: '06', title: 'Feed it', ill: illFeed, when: 'Spring, summer & autumn',
+      body: 'This is what gives the deep green colour. Spring (Mar to May): high-nitrogen feed to push growth. Summer: a lighter balanced feed. Autumn (Sept to Oct): an autumn feed (low nitrogen, high potassium) to strengthen roots for winter. Never use spring feed in autumn, it forces soft growth that frost kills. Spread it evenly and water it in.' },
+    { n: '07', title: 'Water deeply, not often', ill: illWater, when: 'Dry spells',
+      body: 'A good soak twice a week beats a light daily sprinkle, because it encourages deep roots. Water early morning or evening to lose less to evaporation. If the lawn goes straw-coloured in a drought, do not panic, it almost always recovers when the rain returns.' },
+    { n: '08', title: 'Control weeds and moss', ill: illWeed, when: 'As they appear, mainly spring',
+      body: 'Spot-treat weeds and moss as they show up, which is gentler than blanket treatment. A combined weed, feed and moss-killer in spring handles all three at once. Rake out the dead, blackened moss a couple of weeks after treating it.' }
+  ];
+
+  const calendar = [
+    { season: 'Spring', months: 'Mar – May', jobs: 'Light scarify, overseed bare patches, spring feed, start mowing regularly, treat weeds & moss.' },
+    { season: 'Summer', months: 'Jun – Aug', jobs: 'Mow high, water deeply, light summer feed, spot-treat weeds.' },
+    { season: 'Autumn', months: 'Sep – Oct', jobs: 'The big one: scarify, aerate, top dress & lute, overseed, autumn feed.' },
+    { season: 'Winter', months: 'Nov – Feb', jobs: 'Stay off frosty grass, keep it clear of leaves, mower away for service.' }
+  ];
+
+  // HowTo + breadcrumb structured data
+  const howToLD = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to keep a lawn green',
+    description: 'A step-by-step UK guide to a thick, green lawn: mowing, scarifying, aerating, top dressing with a lute, overseeding, feeding, watering and weed control.',
+    totalTime: 'P1Y',
+    supply: equipment.map(e => ({ '@type': 'HowToSupply', name: e.name })),
+    tool: [{ '@type': 'HowToTool', name: 'Lawn mower' }, { '@type': 'HowToTool', name: 'Spring-tine rake or scarifier' }, { '@type': 'HowToTool', name: 'Garden fork or aerator' }, { '@type': 'HowToTool', name: 'Lawn lute' }, { '@type': 'HowToTool', name: 'Spreader' }],
+    step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.body, url: SITE + '/lawn-101#step-' + s.n }))
+  };
+  const breadcrumbLD = crumbsLD([['Buying Guide', '/buying-guide'], ['Lawn 101', null]]);
+
+  return `${head({
+    title: 'Lawn 101 — how to keep a lawn green (UK step-by-step guide)',
+    description: 'A plain-English UK guide to keeping a lawn green: what equipment to buy, and how to mow, scarify, aerate, top dress with a lute, overseed, feed and water through the year.',
+    canonical: '/lawn-101',
+    ldjson: [howToLD, breadcrumbLD]
+  })}
+${siteHeader('lawn101')}
+
+<style>
+  .l101-hero{position:relative;padding:0;overflow:hidden;border-bottom:1px solid var(--border)}
+  .l101-hero img{width:100%;height:340px;object-fit:cover;display:block}
+  .l101-hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,31,15,.15),rgba(15,31,15,.72))}
+  .l101-hero .inner{position:absolute;left:0;right:0;bottom:0;padding:32px;max-width:1100px;margin:0 auto}
+  .l101-hero .eyebrow{font-family:var(--mono,monospace);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#cfe8d4;margin-bottom:10px}
+  .l101-hero h1{color:#fff;font-size:clamp(30px,5vw,46px);line-height:1.05;margin:0 0 10px;font-weight:800}
+  .l101-hero p{color:#eaf3ec;font-size:17px;max-width:620px;margin:0;line-height:1.55}
+  .l101-wrap{max-width:1100px;margin:0 auto;padding:48px 32px 80px}
+  .l101-lead{font-size:18px;line-height:1.65;color:var(--ink);max-width:720px;margin:0 0 8px}
+  .l101-sub{font-size:15px;color:var(--ink-sub);max-width:720px;margin:0 0 40px}
+  .l101-eqgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0 8px}
+  .l101-eqcard{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+  .l101-eqcard .top{display:flex;align-items:center;gap:12px}
+  .l101-eqicon{width:44px;height:44px;flex:0 0 44px;background:#e8f0e3;border-radius:10px;padding:7px}
+  .l101-eqcard h3{font-size:16px;margin:0;line-height:1.25}
+  .l101-eqcard .price{font-family:var(--mono,monospace);font-size:12.5px;color:var(--accent);font-weight:600}
+  .l101-eqcard p{font-size:13.5px;line-height:1.55;color:var(--ink-sub);margin:0}
+  .l101-eqcard .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:auto}
+  .l101-eqcard a.eqlink{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none}
+  .l101-steps{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .l101-step{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center;border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface)}
+  .l101-ill{border-radius:12px;overflow:hidden}
+  .l101-ill svg{display:block;width:100%;height:auto}
+  .l101-step .num{font-family:var(--mono,monospace);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em}
+  .l101-step h2{font-size:21px;margin:4px 0 6px;line-height:1.2}
+  .l101-step .when{display:inline-block;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);background:#e8f0e3;border-radius:999px;padding:3px 10px;margin-bottom:10px}
+  .l101-step p{font-size:15px;line-height:1.65;color:var(--ink);margin:0}
+  .l101-cal{width:100%;border-collapse:collapse;margin-top:18px;font-size:14.5px}
+  .l101-cal th,.l101-cal td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  .l101-cal th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .l101-cal td .s{font-weight:700;color:var(--ink)}
+  .l101-cal td .m{font-family:var(--mono,monospace);font-size:12.5px;color:var(--accent)}
+  @media(max-width:640px){.l101-step{grid-template-columns:1fr}.l101-hero img{height:240px}}
+</style>
+
+<div class="page page--narrow" style="max-width:1100px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/buying-guide">Buying Guide</a><span class="sep">›</span>
+    <span aria-current="page">Lawn 101</span>
+  </nav>
+</div>
+
+<section class="l101-hero">
+  <img src="https://images.unsplash.com/photo-1731082686849-d2e0a4d2c70c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600" alt="A freshly cut, healthy green lawn" loading="eager" fetchpriority="high"/>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="eyebrow">Lawn 101 · The basics</div>
+    <h1>How to keep a lawn green.</h1>
+    <p>The full year, in plain English. What kit to buy, then the order to do it in: scarify, aerate, feed, level with a lute, overseed and water. No jargon.</p>
+  </div>
+</section>
+
+<div class="l101-wrap">
+  <p class="l101-lead">A green lawn is not luck, it is a routine. Do these jobs in roughly this order and the grass stays thick and green year after year. Most of the year is just mowing, feeding and watering, the heavy lifting happens once, in autumn.</p>
+  <p class="l101-sub">New to it? Read top to bottom. Already mowing and just want the deep-green upgrade? Skip to the autumn cycle: scarify, aerate, top dress with a lute, overseed and feed.</p>
+
+  <h2 class="section-h2" style="margin-top:40px">What equipment to buy</h2>
+  <p style="font-size:15px;color:var(--ink-sub);max-width:720px;margin:6px 0 0">You do not need everything at once. The first four lines below cover the autumn cycle that makes the biggest difference. Prices are rough UK 2026 ballparks for home-garden kit.</p>
+  <div class="l101-eqgrid">
+    ${equipment.map(e => `
+    <div class="l101-eqcard">
+      <div class="top">
+        <span class="l101-eqicon">${e.icon}</span>
+        <div>
+          <h3>${esc(e.name)}</h3>
+          <div class="price">${esc(e.price)}</div>
+        </div>
+      </div>
+      <p>${esc(e.use)}</p>
+      ${e.link ? `<a class="eqlink" href="${esc(e.link)}">Compare mowers →</a>` : ''}
+      <div class="tag">For: ${esc(e.step)}</div>
+    </div>`).join('')}
+  </div>
+
+  <h2 class="section-h2" style="margin-top:52px">The step-by-step routine</h2>
+  <div class="l101-steps">
+    ${steps.map(s => `
+    <article class="l101-step" id="step-${s.n}">
+      ${s.ill}
+      <div>
+        <div class="num">STEP ${s.n}</div>
+        <h2 style="margin:4px 0 6px">${esc(s.title)}</h2>
+        <span class="when">${esc(s.when)}</span>
+        <p>${esc(s.body)}</p>
+      </div>
+    </article>`).join('')}
+  </div>
+
+  <h2 class="section-h2" style="margin-top:52px">The simple yearly calendar</h2>
+  <p style="font-size:15px;color:var(--ink-sub);max-width:720px;margin:6px 0 0">Get autumn right and the rest of the year looks after itself.</p>
+  <table class="l101-cal">
+    <thead><tr><th>Season</th><th>Months</th><th>What to do</th></tr></thead>
+    <tbody>
+      ${calendar.map(c => `<tr><td><span class="s">${esc(c.season)}</span></td><td><span class="m">${esc(c.months)}</span></td><td>${esc(c.jobs)}</td></tr>`).join('')}
+    </tbody>
+  </table>
+
+  <div style="margin-top:44px">
+    ${ctaStrip('Need a mower to match your lawn?', `Browse all ${mowers.length} UK mowers with three prices apiece, or answer six quick questions and we'll match you to the right one.`, 'Find my mower', '/find-my-mower')}
+  </div>
+</div>
 
 ${siteFooter()}
 </body>
@@ -2821,6 +3051,7 @@ function renderSitemap() {
     { loc: '/browse', priority: '0.95', changefreq: 'weekly' },
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/lawn-101', priority: '0.8', changefreq: 'monthly' },
     { loc: '/engines', priority: '0.7', changefreq: 'monthly' },
     { loc: '/vintage', priority: '0.7', changefreq: 'monthly' },
     { loc: '/sound-levels', priority: '0.7', changefreq: 'monthly' },
@@ -3003,6 +3234,7 @@ for (const b of Object.keys(BRANDS)) {
 }
 writeFileSync(join(ROOT, 'about.html'), renderAboutPage()); written++;
 writeFileSync(join(ROOT, 'buying-guide.html'), renderGuideHub()); written++;
+writeFileSync(join(ROOT, 'lawn-101.html'), renderLawn101Page()); written++;
 writeFileSync(join(ROOT, 'credits.html'), renderCreditsPage()); written++;
 writeFileSync(join(ROOT, 'engines.html'), renderEnginesPage()); written++;
 writeFileSync(join(ROOT, 'vintage.html'), renderVintagePage()); written++;
@@ -3065,4 +3297,4 @@ console.log(`  ${comparisonPagesWritten} comparison pages`);
 console.log(`  ${bestOfPagesWritten} best-of pages`);
 console.log(`  ${blogPostsWritten} blog posts + 1 index`);
 console.log(`  ${enginePagesWritten} engine deep-dives + 1 hub`);
-console.log(`  12 misc (about, buying-guide, credits, contact, editorial, privacy, cookies, terms, find-my-mower, sitemap, mowers-spa.json, robots.txt)`);
+console.log(`  13 misc (about, buying-guide, lawn-101, credits, contact, editorial, privacy, cookies, terms, find-my-mower, sitemap, mowers-spa.json, robots.txt)`);
