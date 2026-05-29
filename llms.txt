@@ -1,6 +1,6 @@
 # MowRight UK
 
-> Independent UK lawnmower price guide and comparison site. 192 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions. Plus 164 head-to-head comparison pages, 77 best-of category pages, 21 engine deep-dives, and 36 long-form blog and inspection guides.
+> Independent UK lawnmower price guide and comparison site. 192 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions. Plus 164 head-to-head comparison pages, 77 best-of category pages, 21 engine deep-dives, and 37 long-form blog and inspection guides.
 
 MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. It is published by Bozmaps Ltd and edited by Semir Kahrimanovic. The site covers every major mower type sold in the UK — petrol, electric corded, cordless battery, hover, robotic, ride-on, and manual cylinder — across mainstream brands (Honda, Mountfield, Hayter, Stihl, Bosch, Husqvarna, EGO, John Deere, Kubota, Flymo) and value brands (Hyundai, Cobra, Webb, Ferrex, Parkside, Mac Allister). Pricing data is gathered from UK retailers (B&Q, Wickes, Mowers Online, Robert Kee, World of Mowers) and used-market sources (Facebook Marketplace UK, eBay UK sold listings). Methodology documented at /editorial.
 
@@ -10,7 +10,7 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 - [Browse all 192 mowers](https://mowright.co.uk/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
 - [Buying guide](https://mowright.co.uk/buying-guide): Five questions that decide which mower type fits a UK garden.
 - [Find my mower](https://mowright.co.uk/find-my-mower): 6-question quiz that recommends a specific model.
-- [Blog and how-tos](https://mowright.co.uk/blog): 36 long-form posts including pre-purchase inspection guides and maintenance how-tos.
+- [Blog and how-tos](https://mowright.co.uk/blog): 37 long-form posts including pre-purchase inspection guides and maintenance how-tos.
 - [Engine deep-dives](https://mowright.co.uk/engines): 21 engine families covered with reliability, service intervals, parts costs.
 - [Marketplace](https://mowright.co.uk/marketplace): Peer-to-peer used mower listings (UK-only, £2.99 flat listing fee).
 - [About](https://mowright.co.uk/about): Who we are, who funds us, and how we make money.
@@ -138,6 +138,7 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 
 ## Recent blog and how-to posts
 
+- [How to keep your lawn green: a UK year-round care guide](https://mowright.co.uk/blog/how-to-keep-lawn-green-uk)
 - [How to inspect a used Honda HRX before buying — UK guide](https://mowright.co.uk/blog/inspect-used-honda-hrx)
 - [Mountfield SP46 won't start: troubleshooting guide (UK)](https://mowright.co.uk/blog/mountfield-sp46-wont-start)
 - [Best lawn mower for a sloped lawn — UK guide 2026](https://mowright.co.uk/blog/best-lawn-mower-sloped-lawn-uk)
@@ -167,7 +168,6 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 - [How to inspect a used Husqvarna Automower NERA — UK guide](https://mowright.co.uk/blog/inspect-used-husqvarna-automower-nera)
 - [How to sharpen a lawn mower blade — UK DIY guide](https://mowright.co.uk/blog/how-to-sharpen-mower-blade-uk)
 - [How to winterise a petrol lawn mower — UK guide](https://mowright.co.uk/blog/how-to-winterise-petrol-mower-uk)
-- [Petrol vs cordless lawn mower — UK 2026 buyer's guide](https://mowright.co.uk/blog/petrol-vs-cordless-mower-uk)
 
 ## Editorial standards
 

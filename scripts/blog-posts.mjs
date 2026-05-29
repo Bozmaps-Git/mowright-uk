@@ -4,6 +4,116 @@
 export const BLOG_POSTS = [
   // ============================================================
   {
+    slug: 'how-to-keep-lawn-green-uk',
+    image: 'https://images.unsplash.com/photo-1731082686849-d2e0a4d2c70c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
+    imageAlt: 'A healthy, freshly cut green lawn in a UK garden',
+    imageCredit: 'Unsplash',
+
+    title: 'How to keep your lawn green: a UK year-round care guide',
+    description: 'A plain-English UK guide to a thick, green lawn. The equipment to buy, then how to mow, scarify, aerate, top dress with a lute, overseed, feed and water through the year.',
+    keyword: 'how to keep a lawn green',
+    date: '2026-05-29',
+    related: ['mountfield-sp46', 'ego-lm2135e-sp', 'bosch-rotak-36-r', 'hayter-harrier-41-ad'],
+    lead: "A green lawn is not luck, it is a routine. Most people think the secret is some expensive feed or a fancy mower, but the truth is duller and far cheaper: a handful of jobs done in the right order, at the right time of year. Get the autumn cycle right and the rest of the year is mostly mowing and the occasional water. Here is the whole thing in plain English, with what to buy and roughly what it costs, plus a link to our photo-by-photo Lawn 101 checklist at the end.",
+    sections: [
+      {
+        h: 'The short version',
+        p: [
+          "If you only remember one thing, remember this: the heavy lifting happens once a year, in autumn, and it is the same five jobs every time. Scarify out the dead thatch, aerate the soil, top dress and level with a lute, overseed the thin patches, then feed. The spring and summer jobs (mowing, the odd feed, watering in a dry spell) are the easy part that keeps it ticking over.",
+          "None of it needs a professional. A weekend gardener with a fork, a rake, a spreader and a bag of seed can get results that look like a groundsman did them. The order matters more than the kit, so we have laid it out in the sequence you should actually do it."
+        ]
+      },
+      {
+        h: 'What you will need',
+        p: [
+          "You do not need everything at once. The first few items below cover the autumn cycle that makes the biggest difference. Prices are rough UK 2026 ballparks for home-garden kit.",
+          "A spring-tine rake or scarifier (£12 to £25 for a rake, £80 to £160 for an electric scarifier) pulls out dead thatch and moss. A garden fork or hollow-tine aerator (£18 to £35 for a fork) opens up compacted soil. A lawn lute, which is a flat toothless levelling rake (£30 to £70), drags top dressing level and works it into hollows.",
+          "A broadcast or drop spreader (£20 to £55) spreads feed and seed evenly so you avoid stripes of burnt grass. Add a bag of grass seed (£10 to £25), a bag of top dressing (£8 to £15), spring and autumn lawn feed (£15 to £30 each), and a hose and sprinkler or a water butt (£15 to £40). A combined weed, feed and moss-killer (£10 to £20) is optional but handy in spring.",
+          "And of course a mower suited to your lawn. The right cut is half the battle, and matching the mower to your lawn size and whether you want stripes is worth getting right. We compare 176 of them across every type and budget."
+        ]
+      },
+      {
+        h: '1. Mow it right',
+        p: [
+          "Good mowing is the foundation, and most patchy lawns are really just badly mown ones. The golden rule is never to cut more than one third of the grass height in a single pass. Scalping it down to the soil stresses the grass, weakens the roots and lets weeds and moss move into the gaps.",
+          "Keep the blades sharp so they slice the grass cleanly instead of tearing it. Torn tips go brown and give the whole lawn a dull, greyish cast a day or two after cutting. Raise the cutting height in summer, because longer grass shades its own roots and holds moisture far better in dry spells. Drop it slightly in spring and autumn. Mow when the grass is dry, ideally once a week through the growing season."
+        ]
+      },
+      {
+        h: '2. Scarify out the thatch',
+        p: [
+          "Thatch is the dead, matted layer of old grass clippings and moss that builds up at soil level. A thin layer is normal and even helpful, but too much of it acts like a thatched roof over the soil, blocking water, air and feed from ever reaching the roots. Scarifying is simply combing it out.",
+          "Do this in early autumn (September) or mid spring (April), when the grass is growing strongly and can recover. Rake hard with a spring-tine rake, or run an electric scarifier over it on anything bigger than a small lawn, until you can see soil between the blades of grass. Collect and bin everything you pull up.",
+          "A freshly scarified lawn looks thin and scruffy, and that is completely normal. It is not damaged, it is decluttered. Give it a few weeks and it bounces back thicker than before."
+        ]
+      },
+      {
+        h: '3. Aerate the soil',
+        p: [
+          "Over time, foot traffic and heavy rain squash the soil down hard. Compacted soil starves the roots of air and stops water soaking in, which is why a tired lawn often has puddles and bare patches in the busiest spots. Aerating opens it back up.",
+          "Autumn, just after scarifying, is the ideal time. Push a garden fork about 10cm (4 inches) into the soil and rock it gently to open the holes, then repeat every 10 to 15cm across the whole lawn. On a larger lawn, a hollow-tine aerator pulls out small plugs of soil instead, which works even better. Leave the plugs to dry, then rake them up or break them in.",
+          "Do not skip this on a lawn that gets walked on a lot. Compaction is one of the most common reasons a lawn turns thin and yellow no matter how much you feed it."
+        ]
+      },
+      {
+        h: '4. Top dress and level with a lute',
+        p: [
+          "This is the step most people have never heard of, and it is the one that turns a bumpy, uneven lawn into a flat, professional-looking one. Top dressing is a thin layer of a sand, soil and compost mix spread over the surface. The lute is the flat levelling tool you use to spread it.",
+          "Spread the dressing thinly over the lawn, then drag the lute back and forth to level it, working the mix down into the aeration holes and into any dips and hollows. Aim for a flat surface with the grass tips still poking through. Do not bury the grass completely.",
+          "Done once a year, top dressing fills holes, smooths out the bumps that scalp under the mower, and slowly improves the quality of the soil itself. It is the single biggest upgrade to how a lawn looks and feels underfoot."
+        ]
+      },
+      {
+        h: '5. Overseed the thin patches',
+        p: [
+          "Scarifying and aerating leave the surface open and ideal for new seed, so this is the moment to thicken things up. Scatter fresh grass seed over the worked surface, concentrating on the thin and bare areas.",
+          "Choose a seed mix that matches your lawn. A hard-wearing rye mix suits a family garden that takes football and paddling pools, while a finer fescue mix suits an ornamental lawn you want to look immaculate. Match it to your sun and shade too.",
+          "Lightly rake the seed in so it sits in contact with the soil rather than on top of it, then water gently. Keep it moist and stay off the new growth until it has established, which takes a few weeks. The top dressing you have just laid down makes a perfect seed bed."
+        ]
+      },
+      {
+        h: '6. Feed it',
+        p: [
+          "Feeding is what gives a lawn that deep, even green. The key thing to understand is that the lawn wants different things at different times of year, and using the wrong feed at the wrong time does more harm than good.",
+          "In spring (March to May), use a high-nitrogen feed to push lush green growth after winter. Through summer, a lighter balanced feed keeps the colour without forcing too much soft growth in the heat. In autumn (September to October), switch to an autumn feed, which is low in nitrogen and high in potassium, to harden the roots off for winter.",
+          "Never use spring feed in autumn. The high nitrogen forces soft new growth right before the frosts arrive, and that growth gets damaged and turns the lawn yellow. Spread feed evenly with a spreader to avoid stripes of scorched grass, and water it in unless rain is forecast."
+        ]
+      },
+      {
+        h: '7. Water deeply, not often',
+        p: [
+          "When it comes to watering, a good soak twice a week beats a light daily sprinkle every time. A quick splash only wets the surface, which trains the roots to stay shallow. A proper soak draws the roots down deep, where the soil stays damp for longer and the lawn becomes far more drought-resistant.",
+          "Water early in the morning or in the evening, so less is lost to evaporation in the midday sun. A water butt keeps it cheap and keeps you going through a hosepipe ban.",
+          "And do not panic if the lawn goes straw-coloured in a heatwave. UK grass is tougher than it looks. It is dormant, not dead, and it almost always greens back up within a week or two of the rain returning."
+        ]
+      },
+      {
+        h: '8. Keep weeds and moss in check',
+        p: [
+          "Spot-treat weeds and moss as they appear, which is gentler on the lawn than a blanket treatment over the whole thing. A dense, well-fed lawn naturally crowds most weeds out, so good feeding is half the battle.",
+          "A combined weed, feed and moss-killer applied in spring handles all three jobs in one pass. Whatever you use, rake out the dead, blackened moss a couple of weeks after treating it, otherwise it just mats back down into thatch and you are back where you started."
+        ]
+      },
+      {
+        h: 'The simple yearly calendar',
+        p: [
+          "Put it all together and the year looks like this. Spring (March to May): a light scarify, overseed any bare patches, spring feed, start mowing regularly, and treat weeds and moss. Summer (June to August): mow high, water deeply in dry spells, a light summer feed, and spot-treat weeds.",
+          "Autumn (September to October) is the big one: scarify, aerate, top dress and lute, overseed, and autumn feed. Winter (November to February): stay off frosty grass because walking on it damages the blades, keep it clear of fallen leaves, and send the mower for a service.",
+          "Get autumn right and the rest of the year genuinely looks after itself. For the same routine laid out as a quick checklist with a photo of every tool and rough prices, head to our [Lawn 101 guide](/lawn-101)."
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'How often should I really mow?', a: "Once a week through the growing season (roughly April to October), and never taking off more than a third of the height in one cut. In a fast-growing spell you might go twice a week. In high summer, raise the cut and ease off so the longer grass can shade and protect its own roots." },
+      { q: 'When is the best time to scarify and aerate?', a: "Early autumn (September) is ideal, with mid spring (April) as the backup. You want the grass actively growing so it recovers quickly, but not in the peak heat or hard frost. Doing both jobs in the same autumn session, scarify first then aerate, is the most efficient approach." },
+      { q: 'Do I really need a lute, or can I skip top dressing?', a: "You can keep a lawn green without it, but top dressing with a lute is the single biggest upgrade for an uneven, bumpy lawn. It fills hollows, stops the mower scalping the high spots, and improves the soil over time. If your lawn is already flat and healthy, it is optional. If it is lumpy, it is the fix." },
+      { q: 'Why is my lawn green but full of moss?', a: "Moss thrives where grass struggles: compacted soil, heavy shade, poor drainage and a lawn that is mown too short. Killing the moss is only half the job. Scarify it out, aerate to fix the compaction, raise your cutting height, and feed the grass so it can outcompete the moss next time." },
+      { q: 'My lawn went brown in summer, have I killed it?', a: "Almost certainly not. UK lawns go dormant and straw-coloured in a drought to protect themselves, and they recover within a week or two once the rain returns. Avoid feeding or heavy use while it is dormant, and resist the urge to scalp it. Deep, infrequent watering helps it bounce back faster." }
+    ]
+  },
+
+  // ============================================================
+  {
     slug: 'inspect-used-honda-hrx',
     image: 'https://images.unsplash.com/photo-1458245201577-fc8a130b8829?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600',
     imageAlt: "Lawn mower close-up on freshly cut grass",

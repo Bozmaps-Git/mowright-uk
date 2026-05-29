@@ -248,10 +248,14 @@ const FEATURED_BRANDS = ['Honda', 'Mountfield', 'Bosch'];
 // ---------- HTML helpers ----------
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-// Inline-markdown: escape HTML first, then convert **bold** and *italic*. Safe for blog body text.
+// Inline-markdown: escape HTML first, then convert **bold**, *italic* and
+// [text](url) links. Only internal (/path) or http(s) hrefs are linkified, so
+// escaped body text can't smuggle in javascript: URLs. Safe for blog body text.
 const inlineMd = s => esc(s)
   .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-  .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;!?]|$)/g, '$1<em>$2</em>');
+  .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;!?]|$)/g, '$1<em>$2</em>')
+  .replace(/\[([^\]]+)\]\((\/[^)\s]*|https?:\/\/[^)\s]+)\)/g,
+    (_, text, url) => `<a href="${url}"${url.startsWith('http') ? ' rel="noopener" target="_blank"' : ''} style="color:var(--accent);font-weight:600">${text}</a>`);
 
 // JSON-LD helpers — return raw objects to be combined by callers.
 // crumbs: array of [name, urlPath] tuples ordered root → leaf. Last item omits url (current page).
