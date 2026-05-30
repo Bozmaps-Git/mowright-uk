@@ -759,6 +759,7 @@ const siteFooter = () => `
         <ul>
           <li><a href="/buying-guide">Buying guide</a></li>
           <li><a href="/lawn-101">Lawn 101 (lawn care)</a></li>
+          <li><a href="/lawn-101#creators">Creators we rate</a></li>
           <li><a href="/blog">Blog &amp; how-tos</a></li>
           <li><a href="/engines">Engine deep-dives</a></li>
           <li><a href="/sound-levels">Sound levels (dB)</a></li>
@@ -1447,6 +1448,33 @@ ${siteHeader('lawn101')}
       ${calendar.map(c => `<tr><td><span class="s">${esc(c.season)}</span></td><td><span class="m">${esc(c.months)}</span></td><td>${esc(c.jobs)}</td></tr>`).join('')}
     </tbody>
   </table>
+
+  <h2 class="section-h2" style="margin-top:52px" id="creators">UK lawn-care creators we rate</h2>
+  <p style="font-size:15px;color:var(--ink-sub);max-width:720px;margin:6px 0 0">The routine above is the foundation, but the best way to keep learning is to follow people doing it week in, week out on a real UK lawn. These are independent creators we genuinely rate. We take no payment to list them, and earn nothing if you use their codes.</p>
+
+  <div class="creator-grid" style="margin-top:24px">
+    <article class="creator-card">
+      <div class="creator-logo">
+        <img src="/assets/creators/iclawnhub-logo.jpg" alt="ICLawnHub logo" loading="lazy" decoding="async"/>
+      </div>
+      <div class="creator-body">
+        <div class="creator-eyebrow">DIY lawn care · UK</div>
+        <h3>ICLawnHub <span class="creator-by">· Ian Carter</span></h3>
+        <p>Honest, no-nonsense UK DIY lawn care: feeds, seeds, scarifying and the autumn cycle, shown on a real garden. A great follow if you want to watch the routine on this page actually play out through the seasons.</p>
+        <div class="creator-meta">
+          <span class="creator-tag">Feeds &amp; seeds</span>
+          <span class="creator-tag">Scarify &amp; overseed</span>
+          <span class="creator-tag">Real UK lawn</span>
+        </div>
+        <div class="creator-offer"><strong>Their discount:</strong> use code <code>ICLAWNHUB10</code> for money off at A1 Lawn checkout. It is their own code, MowRight earns nothing from it.</div>
+        <div class="creator-links">
+          <a href="https://www.instagram.com/iclawnhub/" rel="noopener nofollow" target="_blank">Instagram</a>
+          <a href="https://www.tiktok.com/@ICLawnHub" rel="noopener nofollow" target="_blank">TikTok</a>
+          <a href="https://linktr.ee/ICLawnHub" rel="noopener nofollow" target="_blank">All links →</a>
+        </div>
+      </div>
+    </article>
+  </div>
 
   <div style="margin-top:44px">
     ${ctaStrip('Need a mower to match your lawn?', `Browse all ${mowers.length} UK mowers with three prices apiece, or answer six quick questions and we'll match you to the right one.`, 'Find my mower', '/find-my-mower')}
