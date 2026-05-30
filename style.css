@@ -2568,3 +2568,54 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .creator-card { grid-template-columns: 1fr; }
   .creator-logo { padding: 22px; }
 }
+
+/* ---- Creator profile page + hub ---- */
+.creator-card h3 a { color: var(--ink); }
+.creator-card h3 a:hover { color: var(--accent-deep); }
+a.creator-logo { cursor: pointer; }
+.creator-profile-link { background: var(--accent-soft) !important; border-color: var(--accent) !important; color: var(--accent-deep) !important; }
+.creator-hero {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 1px 2px rgba(15,31,15,.04);
+}
+.creator-hero-logo {
+  background: #0d0d0d;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.creator-hero-logo img { width: 100%; height: auto; border-radius: 8px; }
+.creator-hero-text h1 { margin: 4px 0 4px; font-size: 32px; line-height: 1.1; color: var(--ink); }
+.creator-hero-by { margin: 0 0 10px; font-size: 14px; color: var(--muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.creator-hero-blurb { margin: 0 0 16px; font-size: 15.5px; color: var(--ink-sub); line-height: 1.55; max-width: 560px; }
+.creator-links--hero { gap: 10px; }
+.creator-offer--wide { max-width: 760px; margin-top: 22px; font-size: 14px; }
+.creator-topics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.creator-topic {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+.creator-topic h3 { margin: 0 0 6px; font-size: 15px; color: var(--ink); }
+.creator-topic p { margin: 0; font-size: 13.5px; color: var(--ink-sub); line-height: 1.5; }
+.creator-links--big { gap: 12px; margin-top: 8px; }
+.creator-links--big a { font-size: 14px; padding: 10px 18px; }
+@media (max-width: 620px) {
+  .creator-hero { grid-template-columns: 1fr; text-align: left; }
+  .creator-hero-logo { max-width: 200px; }
+  .creator-hero-text h1 { font-size: 26px; }
+}

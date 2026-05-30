@@ -759,7 +759,7 @@ const siteFooter = () => `
         <ul>
           <li><a href="/buying-guide">Buying guide</a></li>
           <li><a href="/lawn-101">Lawn 101 (lawn care)</a></li>
-          <li><a href="/lawn-101#creators">Creators we rate</a></li>
+          <li><a href="/creators">Creators we rate</a></li>
           <li><a href="/blog">Blog &amp; how-tos</a></li>
           <li><a href="/engines">Engine deep-dives</a></li>
           <li><a href="/sound-levels">Sound levels (dB)</a></li>
@@ -1449,31 +1449,16 @@ ${siteHeader('lawn101')}
     </tbody>
   </table>
 
-  <h2 class="section-h2" style="margin-top:52px" id="creators">UK lawn-care creators we rate</h2>
+  <div class="section-head" style="margin-top:52px">
+    <div>
+      <h2 class="section-h2" id="creators" style="margin:0">UK lawn-care creators we rate</h2>
+    </div>
+    <a class="section-head-link" href="/creators">See all creators →</a>
+  </div>
   <p style="font-size:15px;color:var(--ink-sub);max-width:720px;margin:6px 0 0">The routine above is the foundation, but the best way to keep learning is to follow people doing it week in, week out on a real UK lawn. These are independent creators we genuinely rate. We take no payment to list them, and earn nothing if you use their codes.</p>
 
   <div class="creator-grid" style="margin-top:24px">
-    <article class="creator-card">
-      <div class="creator-logo">
-        <img src="/assets/creators/iclawnhub-logo.jpg" alt="ICLawnHub logo" loading="lazy" decoding="async"/>
-      </div>
-      <div class="creator-body">
-        <div class="creator-eyebrow">DIY lawn care · UK</div>
-        <h3>ICLawnHub <span class="creator-by">· Ian Carter</span></h3>
-        <p>Honest, no-nonsense UK DIY lawn care: feeds, seeds, scarifying and the autumn cycle, shown on a real garden. A great follow if you want to watch the routine on this page actually play out through the seasons.</p>
-        <div class="creator-meta">
-          <span class="creator-tag">Feeds &amp; seeds</span>
-          <span class="creator-tag">Scarify &amp; overseed</span>
-          <span class="creator-tag">Real UK lawn</span>
-        </div>
-        <div class="creator-offer"><strong>Their discount:</strong> use code <code>ICLAWNHUB10</code> for money off at A1 Lawn checkout. It is their own code, MowRight earns nothing from it.</div>
-        <div class="creator-links">
-          <a href="https://www.instagram.com/iclawnhub/" rel="noopener nofollow" target="_blank">Instagram</a>
-          <a href="https://www.tiktok.com/@ICLawnHub" rel="noopener nofollow" target="_blank">TikTok</a>
-          <a href="https://linktr.ee/ICLawnHub" rel="noopener nofollow" target="_blank">All links →</a>
-        </div>
-      </div>
-    </article>
+    ${CREATORS.map(creatorCard).join('\n')}
   </div>
 
   <div style="margin-top:44px">
@@ -1808,6 +1793,191 @@ ${siteHeader()}
     <p>If you are the photographer of an image used here and would prefer different attribution, or if your file is mislabelled, please email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a> and we will correct it within 24 hours.</p>
   </div>
 </section>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Creators we rate ----------
+// Independent UK lawn-care creators we feature as unpaid editorial shout-outs.
+// Data-driven so each gets a card on /lawn-101, the /creators hub, and its own
+// /creators/<slug> profile page. We take no payment and earn nothing on codes.
+const CREATORS = [
+  {
+    slug: 'iclawnhub',
+    name: 'ICLawnHub',
+    person: 'Ian Carter',
+    logo: '/assets/creators/iclawnhub-logo.jpg',
+    tagline: 'UK DIY lawn care',
+    location: 'United Kingdom',
+    handle: '@ICLawnHub',
+    blurb: 'Honest, no-nonsense UK DIY lawn care: feeds, seeds, scarifying and the autumn cycle, shown on a real garden. A great follow if you want to watch the routine on our Lawn 101 page actually play out through the seasons.',
+    about: [
+      'ICLawnHub is Ian Carter, a UK DIY lawn-care creator who documents the whole year of looking after a real British lawn — not a show garden, not a sponsored test plot, just the steady routine of feeding, seeding, scarifying, aerating and overseeding that turns a tired lawn into a thick green one.',
+      'If you have read our Lawn 101 guide and want to see the steps in action — what scarified thatch actually looks like, how much seed to throw down, when to feed and when to leave it alone — Ian\'s feed is one of the clearest UK voices doing exactly that, week in and week out.'
+    ],
+    topics: [
+      ['Feeds &amp; seeds', 'Which lawn feeds and grass-seed mixes to use, and when through the year.'],
+      ['Scarify &amp; overseed', 'Pulling out thatch and moss, then overseeding the thin patches back to thick.'],
+      ['Top dressing &amp; levelling', 'Working top dressing into a bumpy lawn to flatten and improve the soil.'],
+      ['The seasonal routine', 'A real UK lawn taken through spring, summer, autumn and winter on camera.']
+    ],
+    discount: { code: 'ICLAWNHUB10', detail: 'for money off at A1 Lawn checkout', retailer: 'A1 Lawn' },
+    links: [
+      { label: 'Instagram', href: 'https://www.instagram.com/iclawnhub/' },
+      { label: 'TikTok', href: 'https://www.tiktok.com/@ICLawnHub' },
+      { label: 'All links (Linktree)', href: 'https://linktr.ee/ICLawnHub' }
+    ]
+  }
+];
+const creatorUrl = c => '/creators/' + c.slug;
+
+// Compact creator card used on /lawn-101 and the /creators hub.
+const creatorCard = c => `
+    <article class="creator-card">
+      <a class="creator-logo" href="${esc(creatorUrl(c))}" aria-label="${esc(c.name)} profile">
+        <img src="${esc(c.logo)}" alt="${esc(c.name)} logo" loading="lazy" decoding="async"/>
+      </a>
+      <div class="creator-body">
+        <div class="creator-eyebrow">${esc(c.tagline)} · UK</div>
+        <h3><a href="${esc(creatorUrl(c))}">${esc(c.name)}</a> <span class="creator-by">· ${esc(c.person)}</span></h3>
+        <p>${esc(c.blurb)}</p>
+        <div class="creator-meta">
+          ${c.topics.slice(0, 3).map(t => `<span class="creator-tag">${t[0]}</span>`).join('\n          ')}
+        </div>
+        <div class="creator-offer"><strong>Their discount:</strong> use code <code>${esc(c.discount.code)}</code> ${c.discount.detail}. It is their own code, MowRight earns nothing from it.</div>
+        <div class="creator-links">
+          <a class="creator-profile-link" href="${esc(creatorUrl(c))}">View profile →</a>
+          ${c.links.map(l => `<a href="${esc(l.href)}" rel="noopener nofollow" target="_blank">${esc(l.label.replace(/ \(.*\)$/, ''))}</a>`).join('\n          ')}
+        </div>
+      </div>
+    </article>`;
+
+// ---------- Creators hub (/creators) ----------
+function renderCreatorsHub() {
+  const ld = [
+    crumbsLD([['Lawn 101', '/lawn-101'], ['Creators we rate', null]]),
+    itemListLD('UK lawn-care creators MowRight rates', CREATORS.map(c => ({ name: c.name, url: SITE + creatorUrl(c) })))
+  ];
+  return `${head({
+    title: 'UK lawn-care creators we rate — MowRight UK',
+    description: 'Independent UK lawn-care creators worth following, featured by MowRight UK. Unpaid editorial recommendations — we take no payment and earn nothing on their discount codes.',
+    canonical: '/creators',
+    ldjson: ld
+  })}
+${siteHeader()}
+
+<div class="page page--wide" style="max-width:1100px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/lawn-101">Lawn 101</a><span class="sep">›</span>
+    <span aria-current="page">Creators we rate</span>
+  </nav>
+
+  <header style="margin:8px 0 4px">
+    <div class="brand-eyebrow">Community</div>
+    <h1 class="about-h1" style="margin-top:6px">UK lawn-care creators we rate</h1>
+    <p class="lead" style="max-width:760px">The fastest way to get better at your lawn is to watch someone do it on a real garden, all year round. These are independent UK creators we genuinely rate. We take no payment to list them, and we earn nothing if you use their discount codes — it is an editorial shout-out, nothing more.</p>
+  </header>
+
+  <div class="creator-grid" style="margin-top:24px">
+    ${CREATORS.map(creatorCard).join('\n')}
+  </div>
+
+  <div style="margin-top:44px">
+    ${ctaStrip('Want the routine itself?', 'Our Lawn 101 guide walks the whole year in plain English: mow, scarify, aerate, top dress, overseed, feed and water.', 'Read Lawn 101', '/lawn-101')}
+  </div>
+
+  <p style="margin-top:28px;font-size:13px;color:var(--muted);max-width:760px">Are you a UK lawn-care creator and want to be featured, or listed here and would rather not be? Email <a href="mailto:editor@mowright.uk" style="color:var(--accent);font-weight:600">editor@mowright.uk</a>. Listings are free and editorial — we never charge for inclusion.</p>
+</div>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- Individual creator profile (/creators/<slug>) ----------
+function renderCreatorPage(c) {
+  const profileLD = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: {
+      '@type': 'Person',
+      name: c.person,
+      alternateName: c.name,
+      description: c.blurb,
+      image: absUrl(c.logo),
+      knowsAbout: ['Lawn care', 'UK lawns', 'Lawn feeding', 'Overseeding', 'Scarifying'],
+      sameAs: c.links.map(l => l.href)
+    }
+  };
+  const ld = [
+    crumbsLD([['Lawn 101', '/lawn-101'], ['Creators we rate', '/creators'], [c.name, null]]),
+    profileLD
+  ];
+  return `${head({
+    title: `${c.name} (${c.person}) — UK lawn-care creator we rate`,
+    description: `${c.name} by ${c.person}: ${c.tagline}. Why MowRight UK rates this independent UK lawn-care creator, what to follow them for, and where to find them. Unpaid editorial feature.`,
+    canonical: creatorUrl(c),
+    ogImage: c.logo,
+    ogType: 'profile',
+    ldjson: ld
+  })}
+${siteHeader()}
+
+<div class="page page--wide" style="max-width:980px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/lawn-101">Lawn 101</a><span class="sep">›</span>
+    <a href="/creators">Creators we rate</a><span class="sep">›</span>
+    <span aria-current="page">${esc(c.name)}</span>
+  </nav>
+
+  <section class="creator-hero">
+    <div class="creator-hero-logo">
+      <img src="${esc(c.logo)}" alt="${esc(c.name)} logo" width="200" height="167" fetchpriority="high"/>
+    </div>
+    <div class="creator-hero-text">
+      <div class="creator-eyebrow">${esc(c.tagline)} · ${esc(c.location)}</div>
+      <h1>${esc(c.name)}</h1>
+      <p class="creator-hero-by">by ${esc(c.person)} · ${esc(c.handle)}</p>
+      <p class="creator-hero-blurb">${esc(c.blurb)}</p>
+      <div class="creator-links creator-links--hero">
+        ${c.links.map(l => `<a href="${esc(l.href)}" rel="noopener nofollow" target="_blank">${esc(l.label)}</a>`).join('\n        ')}
+      </div>
+    </div>
+  </section>
+
+  <div class="creator-offer creator-offer--wide"><strong>Their discount:</strong> use code <code>${esc(c.discount.code)}</code> ${c.discount.detail}. It is ${esc(c.person)}'s own code — MowRight takes no payment for this feature and earns nothing if you use it.</div>
+
+  <section style="margin-top:36px">
+    <h2 class="section-h2">Why we rate them</h2>
+    ${c.about.map(p => `<p style="font-size:15.5px;color:var(--ink-sub);line-height:1.6;max-width:760px;margin:12px 0 0">${esc(p)}</p>`).join('\n    ')}
+  </section>
+
+  <section style="margin-top:36px">
+    <h2 class="section-h2">What to follow them for</h2>
+    <div class="creator-topics">
+      ${c.topics.map(t => `
+      <div class="creator-topic">
+        <h3>${t[0]}</h3>
+        <p>${esc(t[1])}</p>
+      </div>`).join('')}
+    </div>
+  </section>
+
+  <section style="margin-top:36px">
+    <h2 class="section-h2">Find ${esc(c.name)}</h2>
+    <div class="creator-links creator-links--big">
+      ${c.links.map(l => `<a href="${esc(l.href)}" rel="noopener nofollow" target="_blank">${esc(l.label)} →</a>`).join('\n      ')}
+    </div>
+  </section>
+
+  <div style="margin-top:44px">
+    ${ctaStrip('Need a mower to match your lawn?', `Once the lawn-care routine is sorted, the right mower keeps it that way. Browse all ${mowers.length} UK mowers with three prices apiece, or take the 6-question quiz.`, 'Find my mower', '/find-my-mower')}
+  </div>
+
+  <p style="margin-top:24px;font-size:13px;color:var(--muted);max-width:760px"><a href="/creators" style="color:var(--accent);font-weight:600">← All creators we rate</a> · This is an unpaid editorial feature. ${esc(c.name)} is an independent creator and is not affiliated with MowRight UK or Bozmaps.</p>
+</div>
 
 ${siteFooter()}
 </body>
@@ -3098,6 +3268,8 @@ function renderSitemap() {
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
     { loc: '/lawn-101', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/creators', priority: '0.6', changefreq: 'monthly' },
+    ...CREATORS.map(c => ({ loc: creatorUrl(c), priority: '0.5', changefreq: 'monthly' })),
     { loc: '/engines', priority: '0.7', changefreq: 'monthly' },
     { loc: '/vintage', priority: '0.7', changefreq: 'monthly' },
     { loc: '/sound-levels', priority: '0.7', changefreq: 'monthly' },
@@ -3293,6 +3465,15 @@ writeFileSync(join(ROOT, 'privacy.html'), renderPrivacyPage()); written++;
 writeFileSync(join(ROOT, 'cookies.html'), renderCookiesPage()); written++;
 writeFileSync(join(ROOT, 'terms.html'), renderTermsPage()); written++;
 writeFileSync(join(ROOT, 'find-my-mower.html'), renderFindMyMowerPage()); written++;
+
+clean(join(ROOT, 'creators'));
+ensureDir(join(ROOT, 'creators'));
+writeFileSync(join(ROOT, 'creators.html'), renderCreatorsHub()); written++;
+let creatorPagesWritten = 0;
+for (const c of CREATORS) {
+  writeFileSync(join(ROOT, 'creators', `${c.slug}.html`), renderCreatorPage(c));
+  creatorPagesWritten++; written++;
+}
 
 clean(join(ROOT, 'vs'));
 clean(join(ROOT, 'best'));
