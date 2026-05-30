@@ -1934,6 +1934,25 @@ const creatorPageCSS = `<style>
 </style>`;
 const creatorUrl = c => '/creators/' + c.slug;
 
+// Shared defaults so EVERY creator gets the full rich page treatment even
+// without custom fields. Per-creator `badge`/`heroPhoto`/`gallery` override.
+// All Unsplash IDs HTTP-checked 200.
+const DEFAULT_CREATOR_BADGE = 'Creator we rate';
+const DEFAULT_HERO_PHOTO = { id: '1731082686849-d2e0a4d2c70c', alt: 'A freshly cut, healthy green UK lawn' };
+const DEFAULT_GALLERY = [
+  { id: '1731082686849-d2e0a4d2c70c', cap: 'Freshly cut, deep green' },
+  { id: '1773917735999-2a89191afc55', cap: 'Crisp ornamental stripes' },
+  { id: '1689728318937-17d24bc0a65c', cap: 'Mid-cut, fresh lines' },
+  { id: '1741326757602-186060c5d5b5', cap: 'Manicured to perfection' }
+];
+// Resolve a creator to a fully-populated object (defaults + overrides).
+const withCreatorDefaults = c => ({
+  ...c,
+  badge: c.badge || DEFAULT_CREATOR_BADGE,
+  heroPhoto: c.heroPhoto || DEFAULT_HERO_PHOTO,
+  gallery: (c.gallery && c.gallery.length) ? c.gallery : DEFAULT_GALLERY
+});
+
 // Compact creator card used on /lawn-101 and the /creators hub.
 const creatorCard = c => `
     <article class="creator-card">
@@ -1998,7 +2017,8 @@ ${siteFooter()}
 }
 
 // ---------- Individual creator profile (/creators/<slug>) ----------
-function renderCreatorPage(c) {
+function renderCreatorPage(creator) {
+  const c = withCreatorDefaults(creator);
   const profileLD = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
