@@ -1824,6 +1824,14 @@ const CREATORS = [
       ['The seasonal routine', 'A real UK lawn taken through spring, summer, autumn and winter on camera.']
     ],
     discount: { code: 'ICLAWNHUB10', detail: 'for money off at A1 Lawn checkout', retailer: 'A1 Lawn' },
+    badge: 'The grass guy',
+    heroPhoto: { id: '1590820292118-e256c3ac2676', alt: 'Petrol mower parked on a freshly cut green lawn' },
+    gallery: [
+      { id: '1731082686849-d2e0a4d2c70c', cap: 'Freshly cut, deep green' },
+      { id: '1773917735999-2a89191afc55', cap: 'Crisp ornamental stripes' },
+      { id: '1689728318937-17d24bc0a65c', cap: 'Mid-cut, fresh lines' },
+      { id: '1741326757602-186060c5d5b5', cap: 'Manicured to perfection' }
+    ],
     links: [
       { label: 'Instagram', href: 'https://www.instagram.com/iclawnhub/' },
       { label: 'TikTok', href: 'https://www.tiktok.com/@ICLawnHub' },
@@ -1831,6 +1839,99 @@ const CREATORS = [
     ]
   }
 ];
+// Unsplash URL builder for creator imagery (all IDs HTTP-checked 200).
+const uns = (id, w) => `https://images.unsplash.com/photo-${id}?ixlib=rb-4.1.0&q=80&fm=jpg&crop=entropy&cs=srgb&w=${w}`;
+// Decorative swaying-grass SVG strip for the bottom of the creator hero.
+const grassStrip = `<svg class="cr-grass" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <g fill="#0a2c20">
+    <path class="cr-blade cr-b1" d="M40 80 C 36 50 30 40 22 20 C 34 42 44 54 52 80 Z"/>
+    <path class="cr-blade cr-b2" d="M120 80 C 118 46 124 30 134 8 C 128 36 132 58 138 80 Z"/>
+    <path class="cr-blade cr-b1" d="M210 80 C 204 48 196 36 188 16 C 202 40 214 56 222 80 Z"/>
+    <path class="cr-blade cr-b3" d="M300 80 C 300 44 308 26 320 6 C 310 34 312 56 316 80 Z"/>
+    <path class="cr-blade cr-b2" d="M400 80 C 392 50 384 38 374 18 C 390 42 404 58 412 80 Z"/>
+    <path class="cr-blade cr-b1" d="M500 80 C 500 42 510 24 524 4 C 512 32 514 56 518 80 Z"/>
+    <path class="cr-blade cr-b3" d="M600 80 C 592 48 584 36 574 14 C 590 40 604 56 612 80 Z"/>
+    <path class="cr-blade cr-b2" d="M700 80 C 700 44 710 26 722 8 C 712 34 714 56 718 80 Z"/>
+    <path class="cr-blade cr-b1" d="M800 80 C 792 50 784 38 776 18 C 790 42 804 58 812 80 Z"/>
+    <path class="cr-blade cr-b3" d="M900 80 C 900 42 910 24 924 4 C 912 32 914 56 918 80 Z"/>
+    <path class="cr-blade cr-b2" d="M1000 80 C 992 48 984 36 974 16 C 990 40 1004 56 1012 80 Z"/>
+    <path class="cr-blade cr-b1" d="M1090 80 C 1090 44 1100 26 1112 6 C 1102 34 1104 56 1108 80 Z"/>
+    <path class="cr-blade cr-b3" d="M1160 80 C 1152 50 1146 38 1138 18 C 1152 42 1164 58 1172 80 Z"/>
+  </g>
+  <rect x="0" y="64" width="1200" height="16" fill="#0a2c20"/>
+</svg>`;
+
+// Scoped, animated styling for individual creator profile pages.
+const creatorPageCSS = `<style>
+  .cr-hero{position:relative;overflow:hidden;border-radius:26px;margin-top:14px;color:#fff;isolation:isolate;
+    background:
+      repeating-linear-gradient(118deg, rgba(255,255,255,.045) 0 44px, rgba(0,0,0,.04) 44px 88px),
+      linear-gradient(155deg,#247048 0%,#155d36 42%,#0e3f2b 78%,#0a2c20 100%);
+    box-shadow:0 30px 60px -28px rgba(14,63,43,.7),inset 0 1px 0 rgba(255,255,255,.12);}
+  .cr-hero-glow{position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(60% 70% at 78% 12%,rgba(120,231,154,.38),transparent 60%),
+               radial-gradient(50% 60% at 8% 90%,rgba(95,184,120,.3),transparent 60%);}
+  .cr-hero-in{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;padding:44px 44px 96px;position:relative;z-index:2;}
+  .cr-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+    padding:6px 14px;border-radius:999px;margin-bottom:14px;color:#0a2c20;
+    background:linear-gradient(90deg,#d9ffe6,#7be8a3);box-shadow:0 6px 18px -6px rgba(123,232,163,.8);}
+  .cr-eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#9be8b6;margin-bottom:10px;}
+  .cr-h1{font-size:clamp(38px,6vw,62px);line-height:1.02;margin:0 0 8px;font-weight:800;letter-spacing:-.02em;
+    background:linear-gradient(92deg,#ffffff 0%,#bff7d2 55%,#6ee79a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .cr-by{margin:0 0 14px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#cdeed8;}
+  .cr-blurb{margin:0 0 20px;font-size:16px;line-height:1.6;color:#eafff1;max-width:520px;}
+  .cr-links{display:flex;flex-wrap:wrap;gap:10px;}
+  .cr-links a{font-size:13.5px;font-weight:700;color:#0a2c20;background:#eafff1;border-radius:999px;padding:9px 18px;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;}
+  .cr-links a:hover{transform:translateY(-2px);background:#fff;box-shadow:0 10px 22px -10px rgba(0,0,0,.5);}
+  .cr-hero-logo{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .cr-logo-tile{background:#0c0c0c;border-radius:18px;padding:20px 24px;width:100%;max-width:300px;
+    box-shadow:0 22px 40px -18px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08);transform:perspective(900px) rotateX(4deg);}
+  .cr-logo-tile img{width:100%;height:auto;}
+  .cr-hero-mower{margin:0;width:78%;max-width:260px;border-radius:16px;overflow:hidden;
+    transform:perspective(1000px) rotateY(-14deg) rotateX(6deg);
+    box-shadow:0 34px 46px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);
+    animation:cr-float 6.5s ease-in-out infinite;}
+  .cr-hero-mower img{width:100%;height:170px;object-fit:cover;display:block;}
+  @keyframes cr-float{0%,100%{transform:perspective(1000px) rotateY(-14deg) rotateX(6deg) translateY(0)}50%{transform:perspective(1000px) rotateY(-14deg) rotateX(6deg) translateY(-16px)}}
+  .cr-grass{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:70px;z-index:1;display:block;}
+  .cr-blade{transform-origin:bottom center;animation:cr-sway 4.5s ease-in-out infinite;}
+  .cr-b2{animation-duration:5.6s;animation-delay:-1.2s}
+  .cr-b3{animation-duration:3.9s;animation-delay:-.6s}
+  @keyframes cr-sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+  .cr-section{margin-top:40px;}
+  .cr-sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+  .cr-sec-note{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--muted);}
+  .cr-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .cr-shot{position:relative;margin:0;border-radius:16px;overflow:hidden;aspect-ratio:3/4;
+    box-shadow:0 12px 26px -16px rgba(15,31,15,.5);transition:transform .25s ease,box-shadow .25s ease;}
+  .cr-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+  .cr-shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 11px;font-size:12.5px;font-weight:600;color:#fff;
+    background:linear-gradient(transparent,rgba(8,30,18,.82));}
+  .cr-shot:hover{transform:translateY(-5px);box-shadow:0 20px 36px -18px rgba(15,31,15,.6);}
+  .cr-shot:hover img{transform:scale(1.07);}
+  .cr-shot--1{margin-top:22px}.cr-shot--3{margin-top:22px}
+  .cr-offer{display:flex;gap:14px;align-items:flex-start;margin-top:30px;padding:18px 20px;border-radius:16px;font-size:14.5px;line-height:1.55;color:var(--ink-sub);
+    background:linear-gradient(135deg,var(--accent-soft),#fff);border:1px solid var(--border);}
+  .cr-offer-tag{flex:none;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;font-weight:700;color:#0a2c20;background:#7be8a3;border-radius:6px;padding:4px 8px;margin-top:2px;}
+  .cr-offer code{font-family:'JetBrains Mono',ui-monospace,monospace;background:#0c0c0c;color:#fff;padding:2px 8px;border-radius:6px;font-size:13px;}
+  .cr-prose{font-size:15.5px;color:var(--ink-sub);line-height:1.65;max-width:760px;margin:12px 0 0;}
+  .creator-topic{position:relative;overflow:hidden;}
+  .creator-topic::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--accent),var(--accent-deep));}
+  .creator-topic{padding-left:22px;transition:transform .18s ease,box-shadow .18s ease;}
+  .creator-topic:hover{transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(15,31,15,.5);}
+  .cr-topic-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--accent);font-weight:700;}
+  @media(max-width:760px){
+    .cr-hero-in{grid-template-columns:1fr;padding:32px 24px 92px;}
+    .cr-hero-logo{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;}
+    .cr-logo-tile{max-width:200px}.cr-hero-mower{max-width:180px}
+    .cr-gallery{grid-template-columns:repeat(2,1fr);}
+    .cr-shot--1,.cr-shot--3{margin-top:0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .cr-hero-mower,.cr-blade{animation:none!important}
+    .cr-shot,.cr-shot img,.creator-topic,.cr-links a{transition:none!important}
+  }
+</style>`;
 const creatorUrl = c => '/creators/' + c.slug;
 
 // Compact creator card used on /lawn-101 and the /creators hub.
@@ -1923,49 +2024,72 @@ function renderCreatorPage(c) {
     ogType: 'profile',
     ldjson: ld
   })}
+${creatorPageCSS}
 ${siteHeader()}
 
-<div class="page page--wide" style="max-width:980px">
+<div class="page page--wide" style="max-width:1040px">
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="/lawn-101">Lawn 101</a><span class="sep">›</span>
     <a href="/creators">Creators we rate</a><span class="sep">›</span>
     <span aria-current="page">${esc(c.name)}</span>
   </nav>
 
-  <section class="creator-hero">
-    <div class="creator-hero-logo">
-      <img src="${esc(c.logo)}" alt="${esc(c.name)} logo" width="200" height="167" fetchpriority="high"/>
-    </div>
-    <div class="creator-hero-text">
-      <div class="creator-eyebrow">${esc(c.tagline)} · ${esc(c.location)}</div>
-      <h1>${esc(c.name)}</h1>
-      <p class="creator-hero-by">by ${esc(c.person)} · ${esc(c.handle)}</p>
-      <p class="creator-hero-blurb">${esc(c.blurb)}</p>
-      <div class="creator-links creator-links--hero">
-        ${c.links.map(l => `<a href="${esc(l.href)}" rel="noopener nofollow" target="_blank">${esc(l.label)}</a>`).join('\n        ')}
+  <section class="cr-hero">
+    <div class="cr-hero-glow" aria-hidden="true"></div>
+    <div class="cr-hero-in">
+      <div class="cr-hero-text">
+        ${c.badge ? `<span class="cr-badge">🌱 ${esc(c.badge)}</span>` : ''}
+        <div class="cr-eyebrow">${esc(c.tagline)} · ${esc(c.location)}</div>
+        <h1 class="cr-h1">${esc(c.name)}</h1>
+        <p class="cr-by">by ${esc(c.person)} · ${esc(c.handle)}</p>
+        <p class="cr-blurb">${esc(c.blurb)}</p>
+        <div class="cr-links">
+          ${c.links.map(l => `<a href="${esc(l.href)}" rel="noopener nofollow" target="_blank">${esc(l.label.replace(/ \(.*\)$/, ''))}</a>`).join('\n          ')}
+        </div>
+      </div>
+      <div class="cr-hero-logo">
+        <div class="cr-logo-tile"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo" width="220" height="184" fetchpriority="high"/></div>
+        ${c.heroPhoto ? `<figure class="cr-hero-mower"><img src="${esc(uns(c.heroPhoto.id, 640))}" alt="${esc(c.heroPhoto.alt)}" loading="eager" decoding="async"/></figure>` : ''}
       </div>
     </div>
+    ${grassStrip}
   </section>
 
-  <div class="creator-offer creator-offer--wide"><strong>Their discount:</strong> use code <code>${esc(c.discount.code)}</code> ${c.discount.detail}. It is ${esc(c.person)}'s own code — MowRight takes no payment for this feature and earns nothing if you use it.</div>
+  ${c.gallery && c.gallery.length ? `
+  <section class="cr-section">
+    <div class="cr-sec-head">
+      <h2 class="section-h2" style="margin:0">Perfect grass, on repeat</h2>
+      <span class="cr-sec-note">The look ${esc(c.person.split(' ')[0])} chases all season</span>
+    </div>
+    <div class="cr-gallery">
+      ${c.gallery.map((g, i) => `
+      <figure class="cr-shot cr-shot--${i % 4}">
+        <img src="${esc(uns(g.id, 800))}" alt="${esc(g.cap)}" loading="lazy" decoding="async"/>
+        <figcaption>${esc(g.cap)}</figcaption>
+      </figure>`).join('')}
+    </div>
+  </section>` : ''}
 
-  <section style="margin-top:36px">
+  <div class="cr-offer"><span class="cr-offer-tag">DISCOUNT</span><div><strong>Use code <code>${esc(c.discount.code)}</code></strong> ${c.discount.detail}. It is ${esc(c.person)}'s own code — MowRight takes no payment for this feature and earns nothing if you use it.</div></div>
+
+  <section class="cr-section">
     <h2 class="section-h2">Why we rate them</h2>
-    ${c.about.map(p => `<p style="font-size:15.5px;color:var(--ink-sub);line-height:1.6;max-width:760px;margin:12px 0 0">${esc(p)}</p>`).join('\n    ')}
+    ${c.about.map(p => `<p class="cr-prose">${esc(p)}</p>`).join('\n    ')}
   </section>
 
-  <section style="margin-top:36px">
+  <section class="cr-section">
     <h2 class="section-h2">What to follow them for</h2>
     <div class="creator-topics">
-      ${c.topics.map(t => `
+      ${c.topics.map((t, i) => `
       <div class="creator-topic">
+        <span class="cr-topic-num">0${i + 1}</span>
         <h3>${t[0]}</h3>
         <p>${esc(t[1])}</p>
       </div>`).join('')}
     </div>
   </section>
 
-  <section style="margin-top:36px">
+  <section class="cr-section">
     <h2 class="section-h2">Find ${esc(c.name)}</h2>
     <div class="creator-links creator-links--big">
       ${c.links.map(l => `<a href="${esc(l.href)}" rel="noopener nofollow" target="_blank">${esc(l.label)} →</a>`).join('\n      ')}
