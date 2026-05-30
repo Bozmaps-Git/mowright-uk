@@ -1921,11 +1921,26 @@ const creatorPageCSS = `<style>
   .creator-topic:hover{transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(15,31,15,.5);}
   .cr-topic-num{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--accent);font-weight:700;}
   @media(max-width:760px){
-    .cr-hero-in{grid-template-columns:1fr;padding:32px 24px 92px;}
-    .cr-hero-logo{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;}
-    .cr-logo-tile{max-width:200px}.cr-hero-mower{max-width:180px}
-    .cr-gallery{grid-template-columns:repeat(2,1fr);}
+    .cr-hero{border-radius:20px;}
+    .cr-hero-in{grid-template-columns:1fr;gap:22px;padding:30px 22px 84px;text-align:center;}
+    .cr-badge,.cr-eyebrow,.cr-blurb{margin-left:auto;margin-right:auto;}
+    .cr-h1{font-size:clamp(34px,9vw,46px);}
+    .cr-links{justify-content:center;}
+    .cr-hero-logo{flex-direction:column;align-items:center;gap:16px;}
+    .cr-logo-tile{max-width:240px;transform:none;}
+    .cr-hero-mower{width:72%;max-width:230px;}
+    .cr-gallery{grid-template-columns:repeat(2,1fr);gap:12px;}
     .cr-shot--1,.cr-shot--3{margin-top:0}
+    .cr-sec-head{margin-bottom:14px;}
+    /* Touch targets >=44px for all tappable links on the page */
+    .cr-links a,.creator-links a,.creator-links--big a{min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+  }
+  @media(max-width:420px){
+    .cr-hero-in{padding:26px 16px 80px;}
+    .cr-h1{font-size:32px;}
+    .cr-offer{flex-direction:column;gap:10px;}
+    .creator-links--big{flex-direction:column;}
+    .creator-links--big a{width:100%;}
   }
   @media(prefers-reduced-motion:reduce){
     .cr-hero-mower,.cr-blade{animation:none!important}
