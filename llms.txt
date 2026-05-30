@@ -1,16 +1,16 @@
 # MowRight UK
 
-> Independent UK lawnmower price guide and comparison site. 192 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions. Plus 164 head-to-head comparison pages, 77 best-of category pages, 21 engine deep-dives, and 37 long-form blog and inspection guides.
+> Independent UK lawnmower price guide and comparison site. 204 lawnmower models across 38 brands, with three prices on every model: RRP, lowest UK retailer price, and Facebook Marketplace / eBay UK used average. No affiliate links, no sponsored reviews, no commissions. Plus 164 head-to-head comparison pages, 78 best-of category pages, 21 engine deep-dives, and 41 long-form blog and inspection guides.
 
 MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. It is published by Bozmaps Ltd and edited by Semir Kahrimanovic. The site covers every major mower type sold in the UK — petrol, electric corded, cordless battery, hover, robotic, ride-on, and manual cylinder — across mainstream brands (Honda, Mountfield, Hayter, Stihl, Bosch, Husqvarna, EGO, John Deere, Kubota, Flymo) and value brands (Hyundai, Cobra, Webb, Ferrex, Parkside, Mac Allister). Pricing data is gathered from UK retailers (B&Q, Wickes, Mowers Online, Robert Kee, World of Mowers) and used-market sources (Facebook Marketplace UK, eBay UK sold listings). Methodology documented at /editorial.
 
 ## Site sections
 
 - [Home](https://mowright.co.uk/): Featured picks, brand directory, best-of lists, common comparisons.
-- [Browse all 192 mowers](https://mowright.co.uk/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
+- [Browse all 204 mowers](https://mowright.co.uk/browse): Full catalogue with filters by type, brand, price, lawn size, and rating.
 - [Buying guide](https://mowright.co.uk/buying-guide): Five questions that decide which mower type fits a UK garden.
 - [Find my mower](https://mowright.co.uk/find-my-mower): 6-question quiz that recommends a specific model.
-- [Blog and how-tos](https://mowright.co.uk/blog): 37 long-form posts including pre-purchase inspection guides and maintenance how-tos.
+- [Blog and how-tos](https://mowright.co.uk/blog): 41 long-form posts including pre-purchase inspection guides and maintenance how-tos.
 - [Engine deep-dives](https://mowright.co.uk/engines): 21 engine families covered with reliability, service intervals, parts costs.
 - [Marketplace](https://mowright.co.uk/marketplace): Peer-to-peer used mower listings (UK-only, £2.99 flat listing fee).
 - [About](https://mowright.co.uk/about): Who we are, who funds us, and how we make money.
@@ -19,9 +19,9 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 ## Mower types
 
 - [Petrol mowers](https://mowright.co.uk/petrol) (51 models): Best for medium-to-large lawns and rough conditions. No cord, no battery limits. The category that still dominates UK gardens over 800m².
-- [Electric mowers](https://mowright.co.uk/electric) (15 models): Corded mains-powered mowers. Quiet, reliable, low maintenance — but tethered. Right for small-to-medium lawns near a power point.
-- [Cordless mowers](https://mowright.co.uk/cordless) (47 models): Battery-powered. Quiet and clean. Battery runtime is the deciding factor. The fastest-growing category in UK lawncare.
-- [Hover mowers](https://mowright.co.uk/hover) (3 models): Air-cushioned, no wheels. Brilliant on slopes and odd-shaped lawns. The British answer to awkward gardens.
+- [Electric mowers](https://mowright.co.uk/electric) (18 models): Corded mains-powered mowers. Quiet, reliable, low maintenance — but tethered. Right for small-to-medium lawns near a power point.
+- [Cordless mowers](https://mowright.co.uk/cordless) (55 models): Battery-powered. Quiet and clean. Battery runtime is the deciding factor. The fastest-growing category in UK lawncare.
+- [Hover mowers](https://mowright.co.uk/hover) (4 models): Air-cushioned, no wheels. Brilliant on slopes and odd-shaped lawns. The British answer to awkward gardens.
 - [Robotic mowers](https://mowright.co.uk/robotic) (28 models): Set it and forget it. Boundary-wire and wire-free RTK robots are mature; camera-based no-wire systems are improving fast.
 - [Ride-On mowers](https://mowright.co.uk/ride-on) (45 models): For gardens that take more than an hour to push-mow. A serious purchase. Engine hours matter more than years.
 - [Manual mowers](https://mowright.co.uk/manual) (3 models): Push-reel cylinder mowers. Silent, zero emissions, surprisingly satisfying. Best for small ornamental lawns.
@@ -49,6 +49,7 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 - [Best petrol lawn mowers 2026](https://mowright.co.uk/best/petrol-2026)
 - [Best ride-on mowers for large lawns](https://mowright.co.uk/best/ride-on-large)
 - [Best lawn mowers for small lawns](https://mowright.co.uk/best/small-lawns)
+- [Best lawn mower for a small garden (UK 2026)](https://mowright.co.uk/best/small-garden)
 - [Lightest lawn mowers](https://mowright.co.uk/best/lightest)
 - [Best used-market bargains](https://mowright.co.uk/best/used-bargain)
 - [Mowers with Honda engines](https://mowright.co.uk/best/honda-engined)
@@ -69,7 +70,6 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 - [Best corded electric lawn mowers](https://mowright.co.uk/best/electric-corded)
 - [Best robotic lawn mowers](https://mowright.co.uk/best/robotic)
 - [Best hover mowers](https://mowright.co.uk/best/hover-mowers)
-- [Best manual cylinder lawn mowers](https://mowright.co.uk/best/manual-cylinder)
 
 ## Brand directory
 
@@ -82,34 +82,34 @@ MowRight UK is a free, reader-supported research tool for UK lawnmower buyers. I
 - [Countax](https://mowright.co.uk/brand/countax) (2 models)
 - [Cub Cadet](https://mowright.co.uk/brand/cub-cadet) (2 models)
 - [EGO](https://mowright.co.uk/brand/ego) (8 models)
-- [Einhell](https://mowright.co.uk/brand/einhell) (4 models)
+- [Einhell](https://mowright.co.uk/brand/einhell) (5 models)
 - [Ferrex](https://mowright.co.uk/brand/ferrex) (2 models)
-- [Flymo](https://mowright.co.uk/brand/flymo) (7 models)
+- [Flymo](https://mowright.co.uk/brand/flymo) (9 models)
 - [Gardena](https://mowright.co.uk/brand/gardena) (3 models)
 - [Greenworks](https://mowright.co.uk/brand/greenworks) (4 models)
 - [Hayter](https://mowright.co.uk/brand/hayter) (6 models)
 - [Honda](https://mowright.co.uk/brand/honda) (9 models)
-- [Husqvarna](https://mowright.co.uk/brand/husqvarna) (10 models)
-- [Hyundai](https://mowright.co.uk/brand/hyundai) (6 models)
+- [Husqvarna](https://mowright.co.uk/brand/husqvarna) (11 models)
+- [Hyundai](https://mowright.co.uk/brand/hyundai) (7 models)
 - [John Deere](https://mowright.co.uk/brand/john-deere) (3 models)
 - [Kubota](https://mowright.co.uk/brand/kubota) (22 models)
 - [Lawnflite](https://mowright.co.uk/brand/lawnflite) (2 models)
 - [Mac Allister](https://mowright.co.uk/brand/mac-allister) (2 models)
-- [Makita](https://mowright.co.uk/brand/makita) (4 models)
+- [Makita](https://mowright.co.uk/brand/makita) (5 models)
 - [Mammotion](https://mowright.co.uk/brand/mammotion) (4 models)
-- [Mountfield](https://mowright.co.uk/brand/mountfield) (15 models)
+- [Mountfield](https://mowright.co.uk/brand/mountfield) (16 models)
 - [Murray](https://mowright.co.uk/brand/murray) (10 models)
 - [Parkside](https://mowright.co.uk/brand/parkside) (2 models)
 - [Qualcast](https://mowright.co.uk/brand/qualcast) (2 models)
-- [Ryobi](https://mowright.co.uk/brand/ryobi) (4 models)
+- [Ryobi](https://mowright.co.uk/brand/ryobi) (5 models)
 - [Segway](https://mowright.co.uk/brand/segway) (3 models)
 - [Spear & Jackson](https://mowright.co.uk/brand/spear-and-jackson) (2 models)
 - [Stiga](https://mowright.co.uk/brand/stiga) (5 models)
 - [Stihl](https://mowright.co.uk/brand/stihl) (9 models)
 - [Toro](https://mowright.co.uk/brand/toro) (2 models)
-- [Webb](https://mowright.co.uk/brand/webb) (4 models)
+- [Webb](https://mowright.co.uk/brand/webb) (5 models)
 - [Westwood](https://mowright.co.uk/brand/westwood) (2 models)
-- [Worx](https://mowright.co.uk/brand/worx) (6 models)
+- [Worx](https://mowright.co.uk/brand/worx) (7 models)
 - [Yard Force](https://mowright.co.uk/brand/yard-force) (2 models)
 
 ## Engine deep-dives

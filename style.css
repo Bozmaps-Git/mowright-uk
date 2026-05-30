@@ -2619,3 +2619,24 @@ a.creator-logo { cursor: pointer; }
   .creator-hero-logo { max-width: 200px; }
   .creator-hero-text h1 { font-size: 26px; }
 }
+
+/* ---- FAQ accordion (SEO landing pages) ---- */
+.faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 820px; }
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2px 16px;
+}
+.faq-item summary {
+  cursor: pointer; list-style: none; padding: 14px 24px 14px 0; position: relative;
+  font-weight: 600; font-size: 15px; color: var(--ink); line-height: 1.45;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; position: absolute; right: 0; top: 12px;
+  font-size: 20px; font-weight: 400; color: var(--accent); transition: transform .2s ease;
+}
+.faq-item[open] summary::after { content: "\2212"; }
+.faq-item p { margin: 0 0 14px; font-size: 14.5px; color: var(--ink-sub); line-height: 1.6; }
+.faq-item summary:hover { color: var(--accent-deep); }

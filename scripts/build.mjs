@@ -13,11 +13,12 @@ import { ENGINES as BASE_ENGINES } from './engines.mjs';
 import { ENGINES_EXTRA } from './engines-extras.mjs';
 import { COMPARISONS_EXTRA } from './comparisons-extras.mjs';
 import { BEST_OF_EXTRA } from './best-of-extras.mjs';
+import { SEO_BLOG_POSTS } from './seo-blog-posts.mjs';
 
 // Inspection guides are blog posts in their own right — concat into the
 // main BLOG_POSTS list so they appear in the index, the sitemap and the
-// blog index page automatically.
-const BLOG_POSTS = [...BASE_BLOG_POSTS, ...INSPECTION_GUIDES, ...INSPECTION_GUIDES_EXTRA];
+// blog index page automatically. SEO posts target high-intent Google queries.
+const BLOG_POSTS = [...BASE_BLOG_POSTS, ...INSPECTION_GUIDES, ...INSPECTION_GUIDES_EXTRA, ...SEO_BLOG_POSTS];
 const ENGINES = [...BASE_ENGINES, ...ENGINES_EXTRA];
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -746,6 +747,8 @@ const siteFooter = () => `
         <h4>Marketplace</h4>
         <ul>
           <li><a href="/marketplace">Browse listings</a></li>
+          <li><a href="/used-lawnmowers">Used lawnmowers</a></li>
+          <li><a href="/mowers-near-me">Mowers near me</a></li>
           <li><a href="/sell">Sell your mower</a></li>
           <li><a href="/account">My listings</a></li>
         </ul>
@@ -2143,6 +2146,133 @@ ${siteFooter()}
 </html>`;
 }
 
+// ---------- SEO landing: Mowers near me ----------
+function renderMowersNearMePage() {
+  const faqs = [
+    ['Where can I buy a lawnmower near me in the UK?', 'For a new mower, your nearest big-shed retailer (B&Q, Homebase, Argos) or a local garden machinery dealer will have stock for collection today, and most offer click-and-collect so you can reserve online and pick up nearby. For a used mower, the cheapest local supply is Facebook Marketplace and eBay UK with the "collection only" filter set to your postcode, plus Gumtree and Nextdoor. Local independent dealers also sell serviced, warrantied second-hand machines.'],
+    ['Are second-hand lawnmowers from nearby sellers worth it?', 'Usually yes, especially for petrol. A well-known petrol mower like a Honda HRX or Mountfield SP46 bought locally for half its new price is often the smartest buy on the market, because you can inspect it, hear it run and load it straight into the car. Always view before you pay, start it from cold, and check the deck underneath for rot.'],
+    ['How do I find a lawnmower that fits my garden?', 'Use our free Find My Mower quiz: six questions about your lawn size, terrain and budget and it matches you to the right type and specific models. Then check the three prices we list on every mower (new RRP, lowest UK retailer, and used average) so you know a fair local price before you go to view one.']
+  ];
+  const faqLD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) };
+  const breadcrumbLD = crumbsLD([['Marketplace', '/marketplace'], ['Mowers near me', null]]);
+  return `${head({
+    title: 'Lawnmowers near me — where to buy new & used mowers locally (UK)',
+    description: 'Where to find lawnmowers near you in the UK: our peer-to-peer marketplace, Facebook Marketplace, eBay UK collection-only, local dealers and click-and-collect. Plus how to spot a fair local price.',
+    canonical: '/mowers-near-me',
+    ldjson: [breadcrumbLD, faqLD]
+  })}
+${siteHeader('marketplace')}
+
+<div class="page page--wide" style="max-width:1000px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/marketplace">Marketplace</a><span class="sep">›</span>
+    <span aria-current="page">Mowers near me</span>
+  </nav>
+
+  <header style="margin:8px 0 6px">
+    <div class="brand-eyebrow">Buy local</div>
+    <h1 class="about-h1" style="margin-top:6px">Lawnmowers near me</h1>
+    <p class="lead" style="max-width:780px">Looking for a mower close to home so you can view it, collect it today and skip the courier? Here is every sensible way to find a new or used lawnmower near you in the UK, ranked roughly from cheapest to most convenient, plus how to know you are paying a fair local price.</p>
+  </header>
+
+  ${proseBox('', 'Know the price before you go', 'Every mower on MowRight lists three prices: new RRP, the lowest current UK retailer, and the used-market average. Check the model before you drive to view one locally, so you walk in knowing what is a deal and what is a chancer.')}
+
+  <h2 class="section-h2" style="margin-top:36px">Where to look, near you</h2>
+  <div class="hp-brands">
+    <a class="hp-brand" href="/marketplace"><h3>MowRight Marketplace</h3><p>Our own peer-to-peer listings from UK sellers. No buyer fees, share-to-sell built in, and every listing sits next to our price data so you can sanity-check it instantly.</p><div class="ms">Browse listings →</div></a>
+    <a class="hp-brand" href="https://www.facebook.com/marketplace/" rel="nofollow noopener" target="_blank"><h3>Facebook Marketplace</h3><p>The biggest pool of used mowers in the UK. Search your town, set a radius, and filter to collection. Best for petrol bargains from people clearing a garage.</p><div class="ms">Search locally →</div></a>
+    <a class="hp-brand" href="https://www.ebay.co.uk/b/Lawnmowers/177063" rel="nofollow noopener" target="_blank"><h3>eBay UK</h3><p>Use "Collection only" and sort by distance for local used mowers, or "Buy It Now" with free delivery for new and refurbished machines.</p><div class="ms">Browse eBay UK →</div></a>
+    <a class="hp-brand" href="https://www.gumtree.com/lawnmowers" rel="nofollow noopener" target="_blank"><h3>Gumtree</h3><p>Still strong for local garden machinery, especially older petrol mowers and ride-ons that never make it to the bigger sites.</p><div class="ms">Search Gumtree →</div></a>
+    <a class="hp-brand" href="/browse"><h3>Big-shed & click-and-collect</h3><p>B&Q, Homebase, Argos and Screwfix stock new mowers for same-day collection. Compare the model with our price data first, then reserve nearby.</p><div class="ms">Compare new prices →</div></a>
+    <a class="hp-brand" href="/best/used-bargain"><h3>Local independent dealers</h3><p>Garden machinery dealers sell serviced, warrantied used mowers and handle repairs. Dearer than private sales, but the safest used buy.</p><div class="ms">See best used value →</div></a>
+  </div>
+
+  <h2 class="section-h2" style="margin-top:40px">Before you go to view one</h2>
+  <p style="font-size:15px;color:var(--ink-sub);max-width:760px;margin:6px 0 0">Buying used and local is where the real savings are, but only if you check the machine. Start it from cold, look under the deck for rust and a worn blade, and on self-propelled models make sure the drive engages. We have model-by-model inspection guides for the common ones, for example <a href="/blog/inspect-used-honda-hrx" style="color:var(--accent);font-weight:600">used Honda HRX</a> and <a href="/blog/inspect-used-mountfield-sp46" style="color:var(--accent);font-weight:600">used Mountfield SP46</a>.</p>
+
+  <div style="margin-top:36px">
+    ${ctaStrip('Not sure what to look for?', 'Answer six quick questions about your lawn and budget and we will match you to the right mower type and specific models, so you know exactly what to search for locally.', 'Find my mower', '/find-my-mower')}
+  </div>
+
+  <section class="cr-section" style="margin-top:40px">
+    <h2 class="section-h2">Common questions</h2>
+    <div class="faq-list">
+      ${faqs.map(f => `<details class="faq-item"><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('\n      ')}
+    </div>
+  </section>
+</div>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
+// ---------- SEO landing: Used lawnmowers (the AutoTrader for mowers) ----------
+function renderUsedLawnmowersPage() {
+  const faqs = [
+    ['Is there an AutoTrader for lawnmowers?', 'Effectively, yes. MowRight UK does for mowers what AutoTrader does for cars: we list mowers for sale and we publish the data you need to value them. Every model carries three prices (new RRP, lowest UK retailer and used-market average), so you can see what any used mower is actually worth before you buy or sell. Browse our marketplace, or cross-check a private sale against our price data.'],
+    ['How much should I pay for a used lawnmower?', 'As a rough UK guide, used petrol mowers in good order sell for 40 to 55 percent of new RRP, cordless for 50 to 60 percent (battery health is the risk), corded electric for 40 to 50 percent, and robotic mowers for 60 to 70 percent. We list the actual used-market average on every single model so you do not have to guess.'],
+    ['Where can I sell my used lawnmower in the UK?', 'List it on the MowRight marketplace (a small flat fee, no commission), or use Facebook Marketplace and eBay UK for the biggest local audience. Price it against our used-market average, take clear photos including under the deck, and say honestly when it was last serviced. Honest listings sell fastest.'],
+    ['Are used lawnmowers reliable?', 'A good used mower from a quality brand is often more sensible than a cheap new one. A used Honda or Hayter petrol mower can have fifteen good years left in it. The key is inspecting before you buy: start it cold, check the deck and blade, and on robotic and cordless machines check the battery. We have model-specific inspection guides for the popular ones.']
+  ];
+  const faqLD = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) };
+  const breadcrumbLD = crumbsLD([['Marketplace', '/marketplace'], ['Used lawnmowers', null]]);
+  return `${head({
+    title: 'Used lawnmowers for sale UK — the AutoTrader for mowers | MowRight',
+    description: 'Buy and value used lawnmowers in the UK. Like AutoTrader for mowers: browse listings and see new, retail and used-market prices on every model so you never overpay. Petrol, cordless, electric, robotic and ride-on.',
+    canonical: '/used-lawnmowers',
+    ldjson: [breadcrumbLD, faqLD]
+  })}
+${siteHeader('marketplace')}
+
+<div class="page page--wide" style="max-width:1000px">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/marketplace">Marketplace</a><span class="sep">›</span>
+    <span aria-current="page">Used lawnmowers</span>
+  </nav>
+
+  <header style="margin:8px 0 6px">
+    <div class="brand-eyebrow">Used mowers</div>
+    <h1 class="about-h1" style="margin-top:6px">Used lawnmowers for sale, valued properly</h1>
+    <p class="lead" style="max-width:800px">Think of MowRight as the AutoTrader for lawnmowers. We list used mowers for sale and, just as importantly, we tell you what every model is actually worth, so you can buy with confidence and sell for a fair price. No commission, no affiliate spin, just the numbers.</p>
+  </header>
+
+  <div class="hp-statgrid" style="margin:18px 0 6px">
+    <div class="item"><div class="num">3</div><div class="lab">Prices on every model</div><div class="sub">new, retail, used average</div></div>
+    <div class="item"><div class="num">${mowers.length}</div><div class="lab">Models valued</div><div class="sub">across 38 brands</div></div>
+    <div class="item"><div class="num">£2.99</div><div class="lab">Flat fee to list</div><div class="sub">no commission, no buyer fees</div></div>
+    <div class="item"><div class="num">£0</div><div class="lab">To browse & value</div><div class="sub">free, always</div></div>
+  </div>
+
+  <h2 class="section-h2" style="margin-top:36px">Buy, sell and value used mowers</h2>
+  <div class="hp-brands">
+    <a class="hp-brand" href="/marketplace"><h3>Browse the marketplace</h3><p>Used mowers listed by UK sellers, each shown next to our price data so you can spot a genuine deal at a glance.</p><div class="ms">See listings →</div></a>
+    <a class="hp-brand" href="/sell"><h3>Sell your mower</h3><p>List in minutes for a single £2.99 flat fee. No commission, no cut of your sale, and built-in share buttons to shift it fast.</p><div class="ms">List a mower →</div></a>
+    <a class="hp-brand" href="/best/used-bargain"><h3>Best used bargains</h3><p>The models where used prices represent the strongest value against new. Where your money goes furthest second-hand.</p><div class="ms">See the list →</div></a>
+    <a class="hp-brand" href="/seasonality"><h3>When to buy used</h3><p>Used mower prices swing through the year. October and November are cheapest; spring is dearest. See the month-by-month breakdown.</p><div class="ms">Read seasonality →</div></a>
+    <a class="hp-brand" href="/mowers-near-me"><h3>Mowers near me</h3><p>Every way to find a used mower locally, from our marketplace to Facebook, eBay collection-only and local dealers.</p><div class="ms">Find local mowers →</div></a>
+    <a class="hp-brand" href="/browse"><h3>Compare all models</h3><p>The full catalogue with new, retail and used prices on every mower across all seven types.</p><div class="ms">Browse all ${mowers.length} →</div></a>
+  </div>
+
+  ${proseBox('', 'Inspect before you buy', 'A used mower is only a bargain if it works. Start it from cold, check under the deck for rust and a blunt or bent blade, and on cordless and robotic machines check the battery health. We publish model-by-model inspection checklists for the common ones, so you know exactly what to look at.')}
+
+  <div style="margin-top:36px">
+    ${ctaStrip('Know what it is worth in seconds', 'Search any mower to see its new, retail and used-market price before you buy or sell. Free, no sign-up.', 'Browse & value mowers', '/browse')}
+  </div>
+
+  <section class="cr-section" style="margin-top:40px">
+    <h2 class="section-h2">Common questions</h2>
+    <div class="faq-list">
+      ${faqs.map(f => `<details class="faq-item"><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('\n      ')}
+    </div>
+  </section>
+</div>
+
+${siteFooter()}
+</body>
+</html>`;
+}
+
 // ---------- Mower-vs-mower comparison ----------
 // Curated list of common UK buying-decision pairings. Each verdict is a short,
 // independent original paragraph (no copy from any source).
@@ -2406,6 +2536,9 @@ const BEST_OF = [
   { slug: 'small-lawns', title: 'Best lawn mowers for small lawns',
     intro: 'For lawns under 300m² — typical urban gardens. Cordless, manual cylinder, and small electric mowers are the right answers; petrol is overkill.',
     pick: m => m.lawnSize === 'Small', sortBy: m => m.valueScore, take: 10 },
+  { slug: 'small-garden', title: 'Best lawn mower for a small garden (UK 2026)',
+    intro: 'For a typical small UK garden you want compact, light, easy to store and cheap to run, not a big petrol beast. These are the best mowers for a small garden, all comfortably affordable and sized for lawns up to roughly 250m². Corded electric and cordless dominate here, and you almost never need self-propelled.',
+    pick: m => m.lawnSize === 'Small' && m.buyNow > 0 && m.buyNow <= 230, sortBy: m => m.valueScore, take: 10 },
   { slug: 'lightest', title: 'Lightest lawn mowers',
     intro: 'For lifting up steps, storing in tight spaces, or for users who can\'t push a heavy mower. These are all under 15kg.',
     pick: m => m.weight > 0 && m.weight <= 15, sortBy: m => -m.weight, take: 8 },
@@ -3427,6 +3560,8 @@ function renderSitemap() {
     { loc: '/about', priority: '0.5', changefreq: 'monthly' },
     { loc: '/buying-guide', priority: '0.8', changefreq: 'monthly' },
     { loc: '/lawn-101', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/mowers-near-me', priority: '0.8', changefreq: 'weekly' },
+    { loc: '/used-lawnmowers', priority: '0.85', changefreq: 'weekly' },
     { loc: '/creators', priority: '0.6', changefreq: 'monthly' },
     ...CREATORS.map(c => ({ loc: creatorUrl(c), priority: '0.5', changefreq: 'monthly' })),
     { loc: '/engines', priority: '0.7', changefreq: 'monthly' },
@@ -3624,6 +3759,8 @@ writeFileSync(join(ROOT, 'privacy.html'), renderPrivacyPage()); written++;
 writeFileSync(join(ROOT, 'cookies.html'), renderCookiesPage()); written++;
 writeFileSync(join(ROOT, 'terms.html'), renderTermsPage()); written++;
 writeFileSync(join(ROOT, 'find-my-mower.html'), renderFindMyMowerPage()); written++;
+writeFileSync(join(ROOT, 'mowers-near-me.html'), renderMowersNearMePage()); written++;
+writeFileSync(join(ROOT, 'used-lawnmowers.html'), renderUsedLawnmowersPage()); written++;
 
 clean(join(ROOT, 'creators'));
 ensureDir(join(ROOT, 'creators'));
